@@ -43,7 +43,7 @@ type ArchDesc struct {
 	AccessRestrict     []*FormattedNoteWithHead `xml:"accessrestrict" json:"accessrestrict,omitempty"`
 	Accruals           []*FormattedNoteWithHead `xml:"accruals" json:"accruals,omitempty"`
 	AcqInfo            []*FormattedNoteWithHead `xml:"acqinfo" json:"acqinfo,omitempty"`
-	AltFormatAvailable []*FormattedNoteWithHead `xml:"altformatavailable" json:"altformatavailable,omitempty"`
+	AltFormAvailable   []*FormattedNoteWithHead `xml:"altformavailable" json:"altformavailable,omitempty"`
 	Appraisal          []*FormattedNoteWithHead `xml:"appraisal" json:"appraisal,omitempty"`
 	Arrangement        []*FormattedNoteWithHead `xml:"arrangement" json:"arrangement,omitempty"`
 	Bibliography       []*Bibliography          `xml:"bibliography" json:"bibliography,omitempty"`
