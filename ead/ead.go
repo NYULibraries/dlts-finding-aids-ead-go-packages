@@ -92,6 +92,7 @@ type C struct {
 	AccessRestrict    []*FormattedNoteWithHead `xml:"accessrestrict,omitempty" json:"accessrestrict,omitempty"`
 	Accruals          []*FormattedNoteWithHead `xml:"accruals,omitempty" json:"accruals,omitempty"`
 	AcqInfo           []*FormattedNoteWithHead `xml:"acqinfo,omitempty" json:"acqinfo,omitempty"`
+	AltFormAvailable  []*FormattedNoteWithHead `xml:"altformavailable" json:"altformavailable,omitempty"`
 	Appraisal         []*FormattedNoteWithHead `xml:"appraisal,omitempty" json:"appraisal,omitempty"`
 	Arrangement       []*FormattedNoteWithHead `xml:"arrangement,omitempty" json:"arrangement,omitempty"`
 	BiogHist          []*FormattedNoteWithHead `xml:"bioghist,omitempty" json:"bioghist,omitempty"`
