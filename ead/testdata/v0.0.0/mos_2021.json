@@ -13,7 +13,35 @@
                 },
                 "p": [
                     {
-                        "value": "\u003cspan class=\"ead-chronlist\"\u003e           \u003cspan class=\"ead-head\"\u003eThe following chronology provides a backdrop for the Board of Higher Education of             the City of New York cases included within this collection:\u003c/span\u003e           \u003cspan class=\"ead-chronitem\"\u003e             \u003cspan class=\"ead-date\"\u003e1939\u003c/span\u003e             \u003cspan class=\"ead-eventgrp\"\u003e               \u003cspan class=\"ead-event\"\u003eThe \u003cspan class=\"ead-emph ead-emph-italic\"\u003eNew York State Legislature\u003c/span\u003e enacted Section                 12-a of the \u003cspan class=\"ead-title\"\u003eCivil Service Law\u003c/span\u003e which provided in substance that \"no                 person shall be appointed to or retained in the public service nor in any public                 educational institution who becomes a member of any organization which advocates the                 overthrow of government by force or violence, or by any unlawful means (L. 1939, Ch.                 547).\"\u003c/span\u003e             \u003c/span\u003e           \u003c/span\u003e         \u003c/span\u003e"
+                        "value": "\u003cspan class=\"ead-chronlist\"\u003e           \u003cspan class=\"ead-head\"\u003eThe following chronology provides a backdrop for the Board of Higher Education of             the City of New York cases included within this collection:\u003c/span\u003e           \u003cspan class=\"ead-chronitem\"\u003e             \u003cspan class=\"ead-date\"\u003e1939\u003c/span\u003e             \u003cspan class=\"ead-eventgrp\"\u003e               \u003cspan class=\"ead-event\"\u003eThe \u003cspan class=\"ead-emph ead-emph-italic\"\u003eNew York State Legislature\u003c/span\u003e enacted Section                 12-a of the \u003cspan class=\"ead-title\"\u003eCivil Service Law\u003c/span\u003e which provided in substance that \"no                 person shall be appointed to or retained in the public service nor in any public                 educational institution who becomes a member of any organization which advocates the                 overthrow of government by force or violence, or by any unlawful means (L. 1939, Ch.                 547).\"\u003c/span\u003e             \u003c/span\u003e           \u003c/span\u003e         \u003c/span\u003e",
+                        "chronlist": [
+                            {
+                                "head": {
+                                    "value": "The following chronology provides a backdrop for the Board of Higher Education of             the City of New York cases included within this collection:"
+                                },
+                                "chronitem": [
+                                    {
+                                        "value": "             \u003cspan class=\"ead-date\"\u003e1939\u003c/span\u003e             \u003cspan class=\"ead-eventgrp\"\u003e               \u003cspan class=\"ead-event\"\u003eThe \u003cspan class=\"ead-emph ead-emph-italic\"\u003eNew York State Legislature\u003c/span\u003e enacted Section                 12-a of the \u003cspan class=\"ead-title\"\u003eCivil Service Law\u003c/span\u003e which provided in substance that \"no                 person shall be appointed to or retained in the public service nor in any public                 educational institution who becomes a member of any organization which advocates the                 overthrow of government by force or violence, or by any unlawful means (L. 1939, Ch.                 547).\"\u003c/span\u003e             \u003c/span\u003e           ",
+                                        "date": {
+                                            "value": "1939",
+                                            "type": "publication"
+                                        },
+                                        "eventgrp": [
+                                            {
+                                                "event": [
+                                                    {
+                                                        "value": "The \u003cspan class=\"ead-emph ead-emph-italic\"\u003eNew York State Legislature\u003c/span\u003e enacted Section                 12-a of the \u003cspan class=\"ead-title\"\u003eCivil Service Law\u003c/span\u003e which provided in substance that \"no                 person shall be appointed to or retained in the public service nor in any public                 educational institution who becomes a member of any organization which advocates the                 overthrow of government by force or violence, or by any unlawful means (L. 1939, Ch.                 547).\"",
+                                                        "title": {
+                                                            "value": "Civil Service Law"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
                     },
                     {
                         "value": "\u003cspan class=\"ead-list\"\u003e           \u003cspan class=\"ead-listhead\"\u003e             \u003cspan class=\"ead-head01\"\u003eAbbreviation\u003c/span\u003e             \u003cspan class=\"ead-head02\"\u003eExpansion\u003c/span\u003e           \u003c/span\u003e           \u003cspan class=\"ead-defitem\"\u003e             \u003cspan class=\"ead-label\"\u003eMIT\u003c/span\u003e             \u003cspan class=\"ead-item\"\u003eMassachusetts Institute of Technology\u003c/span\u003e           \u003c/span\u003e           \u003cspan class=\"ead-defitem\"\u003e             \u003cspan class=\"ead-label\"\u003ePCV\u003c/span\u003e             \u003cspan class=\"ead-item\"\u003ePeace Corps Volunteer\u003c/span\u003e           \u003c/span\u003e         \u003c/span\u003e",

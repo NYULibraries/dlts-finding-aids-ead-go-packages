@@ -387,6 +387,7 @@ type P struct {
 	Address    []*Address            `xml:"address" json:"address,omitempty"`
 	ArchRef    []*ArchRef            `xml:"archref" json:"archref,omitempty"`
 	BibRef     []*BibRef             `xml:"bibref" json:"bibref,omitempty"`
+	ChronList  []*ChronList          `xml:"chronlist" json:"chronlist,omitempty"`
 	CorpName   []*AccessTermWithRole `xml:"corpname" json:"corpname,omitempty"`
 	Date       []*Date               `xml:"date" json:"date,omitempty"`
 	ExtRef     []*ExtRef             `xml:"extref" json:"extref,omitempty"`
