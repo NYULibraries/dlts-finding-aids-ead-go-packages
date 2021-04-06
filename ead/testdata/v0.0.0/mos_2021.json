@@ -211,7 +211,6 @@
                     }
                 }
             ],
-            "id": "aspace_12345",
             "abstract": [
                 {
                     "value": "This is the \u003cspan class=\"ead-emph ead-emph-italic\"\u003eabstract\u003c/span\u003e.\u003cbr\u003e It has a \u003cspan class=\"ead-title\"\u003etitle\u003c/span\u003e in it.",

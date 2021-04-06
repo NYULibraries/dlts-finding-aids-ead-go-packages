@@ -200,8 +200,6 @@ type DefItem struct {
 }
 
 type DID struct {
-	ID string `xml:"id,attr" json:"id,omitempty"`
-
 	Abstract     []*Abstract              `xml:"abstract" json:"abstract,omitempty"`
 	Container    []*Container             `xml:"container" json:"container,omitempty"`
 	DAO          []*DAO                   `xml:"dao" json:"dao,omitempty"`
