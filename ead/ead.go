@@ -383,8 +383,6 @@ type Origination struct {
 
 // TODO: <blockquote>
 type P struct {
-	ID string `xml:"id,attr" json:"id,omitempty"`
-
 	Abbr       []*string             `xml:"abbr" json:"abbr,omitempty"`
 	Address    []*Address            `xml:"address" json:"address,omitempty"`
 	ArchRef    []*ArchRef            `xml:"archref" json:"archref,omitempty"`
