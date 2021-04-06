@@ -192,7 +192,8 @@
                     "extent": [
                         {
                             "value": "25 Linear Feet",
-                            "altrender": "materialtype spaceoccupied"
+                            "altrender": "materialtype spaceoccupied",
+                            "unit": "feet"
                         },
                         {
                             "value": "in 24 record cartons, \u003cspan class=\"ead-emph ead-emph-\"\u003e1 manuscript box\u003c/span\u003e, and 1 flat file           folder\u003cbr\u003e",

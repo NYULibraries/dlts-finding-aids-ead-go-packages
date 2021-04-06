@@ -261,7 +261,7 @@ type EventGrp struct {
 type Extent struct {
 	AltRender string `xml:"altrender,attr" json:"altrender,omitempty"`
 
-	Unit string `xml:"unit" json:"unit,omitempty"`
+	Unit string `xml:"unit,attr" json:"unit,omitempty"`
 
 	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
 }
