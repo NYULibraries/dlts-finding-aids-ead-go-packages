@@ -274,6 +274,7 @@ type ExtPtr struct {
 }
 
 type ExtRef struct {
+	Actuate string `xml:"actuate,attr" json:"actuate,omitempty"`
 	Href  string `xml:"href,attr" json:"href,omitempty"`
 	Show  string `xml:"show,attr" json:"show,omitempty"`
 	Title string `xml:"title,attr" json:"title,omitempty"`
