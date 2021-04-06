@@ -84,6 +84,10 @@ type BibRef struct {
 	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
 }
 
+type BlockQuote struct {
+	P []*P `xml:"p" json:"p,omitempty"`
+}
+
 type C struct {
 	ID         string `xml:"id,attr" json:"id,omitempty"`
 	Level      string `xml:"level,attr" json:"level,omitempty"`
