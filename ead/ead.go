@@ -154,7 +154,7 @@ type ControlAccess struct {
 }
 
 type Creation struct {
-	Date Date `xml:"date" json:"date,omitempty"`
+	Date  Date   `xml:"date" json:"date,omitempty"`
 	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
 }
 
@@ -223,8 +223,8 @@ type Dimensions struct {
 }
 
 type DSC struct {
-	C    []*C  `xml:"c,omitempty" json:"c,omitempty"`
-	P    []*P  `xml:"p,omitempty" json:"p,omitempty"`
+	C []*C `xml:"c,omitempty" json:"c,omitempty"`
+	P []*P `xml:"p,omitempty" json:"p,omitempty"`
 }
 
 type EADHeader struct {
@@ -275,10 +275,10 @@ type ExtPtr struct {
 
 type ExtRef struct {
 	Actuate string `xml:"actuate,attr" json:"actuate,omitempty"`
-	Href  string `xml:"href,attr" json:"href,omitempty"`
-	Show  string `xml:"show,attr" json:"show,omitempty"`
-	Title string `xml:"title,attr" json:"title,omitempty"`
-	Type  string `xml:"type,attr" json:"type,omitempty"`
+	Href    string `xml:"href,attr" json:"href,omitempty"`
+	Show    string `xml:"show,attr" json:"show,omitempty"`
+	Title   string `xml:"title,attr" json:"title,omitempty"`
+	Type    string `xml:"type,attr" json:"type,omitempty"`
 }
 
 type FileDesc struct {
