@@ -948,15 +948,7 @@
             {
                 "id": "aspace_ede025697b8e5bd48a2e9752bb4eb634",
                 "head": {
-                    "value": "\u003cspan class=\"ead-emph ead-emph-\"\u003eProcessing Information\u003c/span\u003e\u003cspan class=\"ead-extptr\"\u003e\u003c/span\u003e",
-                    "extptr": [
-                        {
-                            "href": "http://library.nyu.edu/about/collections/special-collections-and-archives/special-collections/",
-                            "show": "new",
-                            "title": "http://library.nyu.edu/about/collections/special-collections-and-archives/special-collections/",
-                            "type": "simple"
-                        }
-                    ]
+                    "value": "\u003cspan class=\"ead-emph ead-emph-\"\u003eProcessing Information\u003c/span\u003e\u003cspan class=\"ead-extptr\"\u003e\u003c/span\u003e"
                 },
                 "p": [
                     {

@@ -300,8 +300,6 @@ type FormattedNoteWithHead struct {
 }
 
 type Head struct {
-	ExtPtr []*ExtPtr `xml:"extptr" json:"extptr,omitempty"`
-
 	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
 }
 
