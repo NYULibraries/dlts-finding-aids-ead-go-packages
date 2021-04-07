@@ -1,6 +1,7 @@
 # Changelog
 
 #### v0.3.0
+  - add RunInfo type to capture JSON-creation timestamp and EAD package version
   - add P.PersName
   - add P.GeogName
   - add P.ChronList
