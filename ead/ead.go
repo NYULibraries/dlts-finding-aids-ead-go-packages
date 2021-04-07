@@ -397,6 +397,7 @@ type P struct {
 	Name       []*AccessTermWithRole `xml:"name" json:"name,omitempty"`
 	Num        []*Num                `xml:"num" json:"num,omitempty"`
 	Occupation []*string             `xml:"occupation" json:"occupation,omitempty"`
+	PersName   []*AccessTermWithRole `xml:"persname" json:"persname,omitempty"`
 	Subject    []*string             `xml:"subject" json:"subject,omitempty"`
 	Title      []*Title              `xml:"title" json:"title,omitempty"`
 
