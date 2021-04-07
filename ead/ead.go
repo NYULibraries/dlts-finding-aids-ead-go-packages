@@ -2,10 +2,6 @@
 
 package ead
 
-import (
-	"time"
-)
-
 // Based on: "Data model for parsing EAD <archdesc> elements": https://jira.nyu.edu/jira/browse/FADESIGN-29.
 
 const (
@@ -488,8 +484,3 @@ type UnitTitle struct {
 	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
 }
 
-// info about the parsing/JSON generation process
-type RunInfo struct {
-	EADLibVersion string `json:"libversion"`
-	TimeStamp     time.Time `json:"timestamp"`
-}

@@ -1,12 +1,13 @@
 package ead
 
 import (
+	"bytes"
 	"encoding/json"
 	"encoding/xml"
-	"io/ioutil"
-	"bytes"
 	"fmt"
+	"io/ioutil"
 	"testing"
+	"time"
 )
 
 func assert(t *testing.T, want string, got string, label string) {
@@ -59,5 +60,33 @@ func TestJSONMarshaling(t *testing.T) {
 			t.Errorf(errMsg)
 			_ = ioutil.WriteFile(jsonFile, []byte(jsonData), 0644)
 		}
+	})
+}
+
+func TestUpdateRunInfo(t *testing.T) {
+	t.Run("JSON Marshaling", func(t *testing.T) {
+		var sut EAD
+
+		want := ""
+		got := sut.RunInfo.PkgVersion
+		assert(t, want, got, "Initial ead.RunInfo.PkgVersion")
+
+		want = "0001-01-01T00:00:00Z"
+		got = sut.RunInfo.TimeStamp.Format(time.RFC3339)
+		assert(t, want, got, "Initial ead.RunInfo.TimeStamp")
+
+		now := time.Now()
+		version := Version // from ead package constant
+
+		sut.RunInfo.SetRunInfo(version, now)
+
+		want = version
+		got = sut.RunInfo.PkgVersion
+		assert(t, want, got, "Post-assignment ead.RunInfo.PkgVersion")
+
+		want = now.Format(time.RFC3339)
+		got = sut.RunInfo.TimeStamp.Format(time.RFC3339)
+		assert(t, want, got, "Initial ead.RunInfo.TimeStamp")
+
 	})
 }
