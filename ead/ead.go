@@ -392,6 +392,7 @@ type P struct {
 	Date       []*Date               `xml:"date" json:"date,omitempty"`
 	ExtRef     []*ExtRef             `xml:"extref" json:"extref,omitempty"`
 	GenreForm  []*string             `xml:"genreform" json:"genreform,omitempty"`
+	GeogName   []*string             `xml:"geogname" json:"geogname,omitempty"`
 	List       []*List               `xml:"list" json:"list,omitempty"`
 	Name       []*AccessTermWithRole `xml:"name" json:"name,omitempty"`
 	Num        []*Num                `xml:"num" json:"num,omitempty"`
