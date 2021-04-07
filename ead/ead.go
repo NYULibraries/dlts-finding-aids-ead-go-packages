@@ -84,10 +84,6 @@ type BibRef struct {
 	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
 }
 
-type BlockQuote struct {
-	P []*P `xml:"p" json:"p,omitempty"`
-}
-
 type C struct {
 	ID         string `xml:"id,attr" json:"id,omitempty"`
 	Level      string `xml:"level,attr" json:"level,omitempty"`
@@ -381,7 +377,6 @@ type Origination struct {
 	PersName *AccessTermWithRole `xml:"persname" json:"persname,omitempty"`
 }
 
-// TODO: <blockquote>
 type P struct {
 	Abbr       []*string             `xml:"abbr" json:"abbr,omitempty"`
 	Address    []*Address            `xml:"address" json:"address,omitempty"`
