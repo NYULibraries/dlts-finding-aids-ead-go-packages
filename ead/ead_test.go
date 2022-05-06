@@ -12,7 +12,7 @@ import (
 )
 
 var testFixturePath string = filepath.Join(".", "testdata")
-var omegaTestFixturePath string = filepath.Join(testFixturePath, "omega", "v0.1.4")
+var omegaTestFixturePath string = filepath.Join(testFixturePath, "omega", "v0.1.5")
 var falesTestFixturePath string = filepath.Join(testFixturePath, "fales")
 var nyhsTestFixturePath string = filepath.Join(testFixturePath, "nyhs")
 
@@ -300,7 +300,7 @@ func TestJSONMarshalingWithDonorsAndImageAndImageSets(t *testing.T) {
 		failOnError(t, err, "Unexpected error reading reference file")
 
 		if !bytes.Equal(referenceFileContents, jsonData) {
-			jsonFile := "./testdata/tmp/failing-donor-marshal.json"
+			jsonFile := "./testdata/tmp/failing-donors-with-image-counts-marshal.json"
 			err = ioutil.WriteFile(jsonFile, []byte(jsonData), 0644)
 			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonFile))
 
