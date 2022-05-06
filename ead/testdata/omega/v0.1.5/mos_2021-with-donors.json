@@ -1523,8 +1523,6 @@
                                                         "href": "https://hdl.handle.net/2333.1/xgxd28gq",
                                                         "role": "image-service",
                                                         "show": "new",
-                                                        "do_type": "image_set",
-                                                        "count": 32,
                                                         "title": "This is a digital object",
                                                         "type": "simple",
                                                         "daodesc": {
@@ -2104,8 +2102,6 @@
                                                 "href": "https://hdl.handle.net/2333.1/m63xss7g",
                                                 "role": "image-service",
                                                 "show": "new",
-                                                "do_type": "image_set",
-                                                "count": 6,
                                                 "title": "This is a digital object",
                                                 "type": "simple",
                                                 "daodesc": {
@@ -4004,8 +4000,6 @@
                                         "href": "https://hdl.handle.net/2333.1/ttdz0j92",
                                         "role": "image-service",
                                         "show": "new",
-                                        "do_type": "image_set",
-                                        "count": 3,
                                         "title": "Envelope 1: Caven Point, NJ, 1984 w/Steve Brown",
                                         "type": "simple",
                                         "daodesc": {
