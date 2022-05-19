@@ -1,4 +1,4 @@
-package ead
+package validate
 
 import (
 	"io/ioutil"
@@ -24,7 +24,7 @@ func init() {
 		panic(err)
 	}
 
-	fixturesDirPath = filepath.Join(root, "ead", "testdata", "validate", "fixtures")
+	fixturesDirPath = filepath.Join(root, "validate", "testdata", "fixtures")
 	invalidEadDataFixturePath = filepath.Join(fixturesDirPath, "mc_100-invalid-eadid-repository-role-relator-codes-unpublished-material.xml")
 	invalidXMLFixturePath = filepath.Join(fixturesDirPath, "invalid-xml.xml")
 	missingRequiredElementsFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-repository-corpname.xml")
