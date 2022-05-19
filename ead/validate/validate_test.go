@@ -40,7 +40,7 @@ func TestValidateEADInvalidXML(t *testing.T) {
 		t.Errorf("Expected 1 error, got %d", numErrors)
 	}
 
-	if errors[0] != "The XML in this file is not valid.  Please check it using an XML validator." {
+	if errors[0] != expected {
 		t.Errorf(`Expected error \"%s\", got "%s\"`, expected, errors[0])
 	}
 }
