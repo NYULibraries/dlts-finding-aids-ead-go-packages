@@ -45,6 +45,25 @@ func TestValidateEADInvalidXML(t *testing.T) {
 	}
 }
 
+func TestValidateEADMissingRequiredElements(t *testing.T) {
+	var expected = []string{
+		makeMissingRequiredElementErrorMessage("<eadid>"),
+		makeMissingRequiredElementErrorMessage("<repository>/<corpname>"),
+	}
+
+	var errors = ValidateEAD(getEADXML(missingRequiredElementsFixturePath))
+	var numErrors = len(errors)
+	if len(errors) != len(expected) {
+		t.Errorf("Expected %d error(s), got %d", len(expected), numErrors)
+	}
+
+	for idx, err := range errors {
+		if err != expected[idx] {
+			t.Errorf(`Expected error %d to be "%s", got "%s"`, idx, expected[idx], err)
+		}
+	}
+}
+
 func getEADXML(filepath string) []byte {
 	EADXML, err := ioutil.ReadFile(filepath)
 	if err != nil {
