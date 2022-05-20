@@ -9,6 +9,10 @@ func ValidateEAD(ead []byte) []string {
 	}
 }
 
+func makeInvalidXMLErrorMessage() string {
+	return "The XML in this file is not valid.  Please check it using an XML validator."
+}
+
 func makeMissingRequiredElementErrorMessage(elementName string) string {
 	return fmt.Sprintf("Required element %s not found.", elementName)
 }

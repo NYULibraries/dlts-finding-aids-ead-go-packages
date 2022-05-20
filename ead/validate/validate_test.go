@@ -32,7 +32,7 @@ func init() {
 }
 
 func TestValidateEADInvalidXML(t *testing.T) {
-	const expected = "The XML in this file is not valid.  Please check it using an XML validator."
+	var expected = makeInvalidXMLErrorMessage()
 
 	var errors = ValidateEAD(getEADXML(invalidXMLFixturePath))
 	var numErrors = len(errors)
