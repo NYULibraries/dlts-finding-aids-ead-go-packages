@@ -6,6 +6,7 @@ func ValidateEAD(ead []byte) []string {
 	return []string{
 		"RED LIGHT #1",
 		"RED LIGHT #2",
+		"RED LIGHT #3",
 	}
 }
 
