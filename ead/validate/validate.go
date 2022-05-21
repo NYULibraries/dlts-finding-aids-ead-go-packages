@@ -14,6 +14,14 @@ func ValidateEAD(ead []byte) []string {
 	}
 }
 
+func makeAudienceInternalErrorMessage(elementsAudienceInternal []string) string {
+	return fmt.Sprintf(`Private data detected
+
+The EAD file contains unpublished material.  The following EAD elements have attribute audience="internal" and must be removed:
+
+%s`, strings.Join(elementsAudienceInternal, "\n"))
+}
+
 func makeInvalidXMLErrorMessage() string {
 	return "The XML in this file is not valid.  Please check it using an XML validator."
 }
