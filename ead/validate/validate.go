@@ -42,18 +42,18 @@ The following characters are not allowed in character groups: %s
 func makeInvalidRepositoryErrorMessage(repositoryName string) string {
 	return fmt.Sprintf(`Invalid <repository>
 
-	<repository> contains unknown repository name "%s".
-		The repository name must match a value from this list:
+<repository> contains unknown repository name "%s".
+The repository name must match a value from this list:
 
 Akkasah: Center for Photography (NYU Abu Dhabi)
-	New York University Archives
-	Center for Brooklyn History
-	Fales Library and Special Collections
-	Villa La Pietra
-	New-York Historical Society
-	NYU Abu Dhabi, Archives and Special Collections
-	Poly Archives at Bern Dibner Library of Science and Technology
-	Tamiment Library and Robert F. Wagner Labor Archives`, repositoryName)
+New York University Archives
+Center for Brooklyn History
+Fales Library and Special Collections
+Villa La Pietra
+New-York Historical Society
+NYU Abu Dhabi, Archives and Special Collections
+Poly Archives at Bern Dibner Library of Science and Technology
+Tamiment Library and Robert F. Wagner Labor Archives`, repositoryName)
 }
 
 func makeUnrecognizedRelatorCodesErrorMessage(unrecognizedRelatorCodes [][]string) string {
