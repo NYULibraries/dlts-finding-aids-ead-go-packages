@@ -1,11 +1,13 @@
 package validate
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path"
 	"path/filepath"
 	"runtime"
+	"strings"
 	"testing"
 )
 
@@ -53,9 +55,9 @@ func TestValidateEADInvalidData(t *testing.T) {
 	}
 
 	var errors = ValidateEAD(getEADXML(invalidEadDataFixturePath))
-	var numErrors = len(errors)
 	if len(errors) != len(expected) {
-		t.Fatalf("Expected %d error(s), got %d", len(expected), numErrors)
+		var message = getNumErrorsMismatchErrorMessage(expected, errors)
+		t.Fatalf(message)
 	}
 
 	for idx, err := range errors {
@@ -71,9 +73,9 @@ func TestValidateEADInvalidXML(t *testing.T) {
 	}
 
 	var errors = ValidateEAD(getEADXML(invalidXMLFixturePath))
-	var numErrors = len(errors)
 	if len(errors) != len(expected) {
-		t.Fatalf("Expected %d error(s), got %d", len(expected), numErrors)
+		var message = getNumErrorsMismatchErrorMessage(expected, errors)
+		t.Fatalf(message)
 	}
 
 	for idx, err := range errors {
@@ -90,9 +92,9 @@ func TestValidateEADMissingRequiredElements(t *testing.T) {
 	}
 
 	var errors = ValidateEAD(getEADXML(missingRequiredElementsFixturePath))
-	var numErrors = len(errors)
 	if len(errors) != len(expected) {
-		t.Fatalf("Expected %d error(s), got %d", len(expected), numErrors)
+		var message = getNumErrorsMismatchErrorMessage(expected, errors)
+		t.Fatalf(message)
 	}
 
 	for idx, err := range errors {
@@ -109,4 +111,19 @@ func getEADXML(filepath string) []byte {
 	}
 
 	return EADXML
+}
+
+func getNumErrorsMismatchErrorMessage(expected []string, errors []string) string {
+	return fmt.Sprintf(`Expected %d error(s):
+
+%s
+
+Got %d error(s):
+
+%s`,
+		len(expected),
+		strings.Join(expected, "\n"),
+		len(errors),
+		strings.Join(errors, "\n"),
+	)
 }
