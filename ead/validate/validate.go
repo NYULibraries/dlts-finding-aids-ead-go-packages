@@ -2,16 +2,17 @@ package validate
 
 import (
 	"bytes"
+	"encoding/xml"
 	"fmt"
 	"strings"
 )
 
-func ValidateEAD(ead []byte) []string {
-	return []string{
-		"RED LIGHT #1",
-		"RED LIGHT #2",
-		"RED LIGHT #3",
-	}
+func ValidateEAD(bytes []byte) []string {
+	var errors = []string{}
+
+	errors = append(errors, validateXML(bytes)...)
+
+	return errors
 }
 
 func makeAudienceInternalErrorMessage(elementsAudienceInternal []string) string {
@@ -68,4 +69,46 @@ func makeUnrecognizedRelatorCodesErrorMessage(unrecognizedRelatorCodes [][]strin
 The EAD file contains elements with role attributes containing unrecognized relator codes:
 
 %s`, strings.Join(unrecognizedRelatorCodeSlice, "\n"))
+}
+
+// This is not so straightforward: https://stackoverflow.com/questions/53476012/how-to-validate-a-xml:
+//
+// Note that the answer from GodsBoss given in
+//
+// func IsValid(input string) bool {
+//    decoder := xml.NewDecoder(strings.NewReader(input))
+//    for {
+//        err := decoder.Decode(new(interface{}))
+//        if err != nil {
+//            return err == io.EOF
+//        }
+//    }
+// }
+//
+// ...doesn't work for our fixture file containing simply:
+//
+// This is not XML!
+//
+// ...because the first err returned is io.EOF, perhaps because no open tag was ever encountered?
+
+// Note that the xml.Unmarshal solution we use below, from the same StackOverflow page,
+// will not detect invalid XML that occurs after the start element has closed.
+// e.g. <something>This is not XML!</something><<<
+// ...is not well-formed, but Unmarshal never deals with the "<<<" after
+// element <something>.
+
+// There are 3rd party libraries for validating against a schema, but they
+// require CGO, which we'd like to avoid for now.
+// * https://github.com/krolaw/xsd
+// * https://github.com/lestrrat-go/libxml2
+// * https://github.com/terminalstatic/go-xsd-validate/blob/master/libxml2.go
+func validateXML(bytes []byte) []string {
+	var errors = []string{}
+
+	// Not perfect, but maybe good enough for now.
+	if xml.Unmarshal(bytes, new(interface{})) != nil {
+		errors = append(errors, makeInvalidXMLErrorMessage())
+	}
+
+	return errors
 }
