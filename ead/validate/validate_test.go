@@ -66,16 +66,20 @@ func TestValidateEADInvalidData(t *testing.T) {
 }
 
 func TestValidateEADInvalidXML(t *testing.T) {
-	var expected = makeInvalidXMLErrorMessage()
+	var expected = []string{
+		makeInvalidXMLErrorMessage(),
+	}
 
 	var errors = ValidateEAD(getEADXML(invalidXMLFixturePath))
 	var numErrors = len(errors)
-	if len(errors) != 1 {
-		t.Errorf("Expected 1 error, got %d", numErrors)
+	if len(errors) != len(expected) {
+		t.Errorf("Expected %d error(s), got %d", len(expected), numErrors)
 	}
 
-	if errors[0] != expected {
-		t.Errorf(`Expected error \"%s\", got "%s\"`, expected, errors[0])
+	for idx, err := range errors {
+		if err != expected[idx] {
+			t.Errorf(`Expected error %d to be "%s", got "%s"`, idx, expected[idx], err)
+		}
 	}
 }
 
