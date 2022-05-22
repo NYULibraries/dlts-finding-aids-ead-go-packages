@@ -55,7 +55,7 @@ func TestValidateEADInvalidData(t *testing.T) {
 	var errors = ValidateEAD(getEADXML(invalidEadDataFixturePath))
 	var numErrors = len(errors)
 	if len(errors) != len(expected) {
-		t.Errorf("Expected %d error(s), got %d", len(expected), numErrors)
+		t.Fatalf("Expected %d error(s), got %d", len(expected), numErrors)
 	}
 
 	for idx, err := range errors {
@@ -73,7 +73,7 @@ func TestValidateEADInvalidXML(t *testing.T) {
 	var errors = ValidateEAD(getEADXML(invalidXMLFixturePath))
 	var numErrors = len(errors)
 	if len(errors) != len(expected) {
-		t.Errorf("Expected %d error(s), got %d", len(expected), numErrors)
+		t.Fatalf("Expected %d error(s), got %d", len(expected), numErrors)
 	}
 
 	for idx, err := range errors {
@@ -92,7 +92,7 @@ func TestValidateEADMissingRequiredElements(t *testing.T) {
 	var errors = ValidateEAD(getEADXML(missingRequiredElementsFixturePath))
 	var numErrors = len(errors)
 	if len(errors) != len(expected) {
-		t.Errorf("Expected %d error(s), got %d", len(expected), numErrors)
+		t.Fatalf("Expected %d error(s), got %d", len(expected), numErrors)
 	}
 
 	for idx, err := range errors {
