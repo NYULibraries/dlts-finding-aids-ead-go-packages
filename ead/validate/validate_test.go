@@ -54,17 +54,7 @@ func TestValidateEADInvalidData(t *testing.T) {
 		}),
 	}
 
-	var validationErrors = ValidateEAD(getEADXML(invalidEadDataFixturePath))
-	if len(validationErrors) != len(expected) {
-		var message = getNumErrorsMismatchErrorMessage(expected, validationErrors)
-		t.Fatalf(message)
-	}
-
-	for idx, err := range validationErrors {
-		if err != expected[idx] {
-			t.Errorf(`Expected error %d to be "%s", got "%s"`, idx, expected[idx], err)
-		}
-	}
+	doTest(invalidEadDataFixturePath, expected, t)
 }
 
 func TestValidateEADInvalidXML(t *testing.T) {
@@ -72,17 +62,7 @@ func TestValidateEADInvalidXML(t *testing.T) {
 		makeInvalidXMLErrorMessage(),
 	}
 
-	var validationErrors = ValidateEAD(getEADXML(invalidXMLFixturePath))
-	if len(validationErrors) != len(expected) {
-		var message = getNumErrorsMismatchErrorMessage(expected, validationErrors)
-		t.Fatalf(message)
-	}
-
-	for idx, err := range validationErrors {
-		if err != expected[idx] {
-			t.Errorf(`Expected error %d to be "%s", got "%s"`, idx, expected[idx], err)
-		}
-	}
+	doTest(invalidXMLFixturePath, expected, t)
 }
 
 func TestValidateEADMissingRequiredElements(t *testing.T) {
@@ -91,7 +71,11 @@ func TestValidateEADMissingRequiredElements(t *testing.T) {
 		makeMissingRequiredElementErrorMessage("<repository>/<corpname>"),
 	}
 
-	var validationErrors = ValidateEAD(getEADXML(missingRequiredElementsFixturePath))
+	doTest(missingRequiredElementsFixturePath, expected, t)
+}
+
+func doTest(file string, expected []string, t *testing.T) {
+	var validationErrors = ValidateEAD(getEADXML(file))
 	if len(validationErrors) != len(expected) {
 		var message = getNumErrorsMismatchErrorMessage(expected, validationErrors)
 		t.Fatalf(message)
