@@ -8,11 +8,11 @@ import (
 )
 
 func ValidateEAD(bytes []byte) []string {
-	var errors = []string{}
+	var validationErrors = []string{}
 
-	errors = append(errors, validateXML(bytes)...)
+	validationErrors = append(validationErrors, validateXML(bytes)...)
 
-	return errors
+	return validationErrors
 }
 
 func makeAudienceInternalErrorMessage(elementsAudienceInternal []string) string {
@@ -103,12 +103,12 @@ The EAD file contains elements with role attributes containing unrecognized rela
 // * https://github.com/lestrrat-go/libxml2
 // * https://github.com/terminalstatic/go-xsd-validate/blob/master/libxml2.go
 func validateXML(bytes []byte) []string {
-	var errors = []string{}
+	var validationErrors = []string{}
 
 	// Not perfect, but maybe good enough for now.
 	if xml.Unmarshal(bytes, new(interface{})) != nil {
-		errors = append(errors, makeInvalidXMLErrorMessage())
+		validationErrors = append(validationErrors, makeInvalidXMLErrorMessage())
 	}
 
-	return errors
+	return validationErrors
 }

@@ -54,13 +54,13 @@ func TestValidateEADInvalidData(t *testing.T) {
 		}),
 	}
 
-	var errors = ValidateEAD(getEADXML(invalidEadDataFixturePath))
-	if len(errors) != len(expected) {
-		var message = getNumErrorsMismatchErrorMessage(expected, errors)
+	var validationErrors = ValidateEAD(getEADXML(invalidEadDataFixturePath))
+	if len(validationErrors) != len(expected) {
+		var message = getNumErrorsMismatchErrorMessage(expected, validationErrors)
 		t.Fatalf(message)
 	}
 
-	for idx, err := range errors {
+	for idx, err := range validationErrors {
 		if err != expected[idx] {
 			t.Errorf(`Expected error %d to be "%s", got "%s"`, idx, expected[idx], err)
 		}
@@ -72,13 +72,13 @@ func TestValidateEADInvalidXML(t *testing.T) {
 		makeInvalidXMLErrorMessage(),
 	}
 
-	var errors = ValidateEAD(getEADXML(invalidXMLFixturePath))
-	if len(errors) != len(expected) {
-		var message = getNumErrorsMismatchErrorMessage(expected, errors)
+	var validationErrors = ValidateEAD(getEADXML(invalidXMLFixturePath))
+	if len(validationErrors) != len(expected) {
+		var message = getNumErrorsMismatchErrorMessage(expected, validationErrors)
 		t.Fatalf(message)
 	}
 
-	for idx, err := range errors {
+	for idx, err := range validationErrors {
 		if err != expected[idx] {
 			t.Errorf(`Expected error %d to be "%s", got "%s"`, idx, expected[idx], err)
 		}
@@ -91,13 +91,13 @@ func TestValidateEADMissingRequiredElements(t *testing.T) {
 		makeMissingRequiredElementErrorMessage("<repository>/<corpname>"),
 	}
 
-	var errors = ValidateEAD(getEADXML(missingRequiredElementsFixturePath))
-	if len(errors) != len(expected) {
-		var message = getNumErrorsMismatchErrorMessage(expected, errors)
+	var validationErrors = ValidateEAD(getEADXML(missingRequiredElementsFixturePath))
+	if len(validationErrors) != len(expected) {
+		var message = getNumErrorsMismatchErrorMessage(expected, validationErrors)
 		t.Fatalf(message)
 	}
 
-	for idx, err := range errors {
+	for idx, err := range validationErrors {
 		if err != expected[idx] {
 			t.Errorf(`Expected error %d to be "%s", got "%s"`, idx, expected[idx], err)
 		}
