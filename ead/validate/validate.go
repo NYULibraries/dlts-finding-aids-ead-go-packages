@@ -1,8 +1,10 @@
 package validate
 
 import (
+	"bytes"
 	"encoding/xml"
 	"fmt"
+	"io"
 	"regexp"
 	"strings"
 	"unicode"
@@ -52,7 +54,13 @@ func ValidateEAD(data []byte) ([]string, error) {
 	validationErrors = append(validationErrors, validateRequiredEADElements(ead)...)
 	validationErrors = append(validationErrors, validateRepository(ead)...)
 	validationErrors = append(validationErrors, validateEADID(ead)...)
-	validationErrors = append(validationErrors, validateNoUnpublishedMaterial(ead)...)
+
+	validateNoUnpublishedMaterialValidationErrors, err := validateNoUnpublishedMaterial(data)
+	if err != nil {
+		return validationErrors, err
+	}
+
+	validationErrors = append(validationErrors, validateNoUnpublishedMaterialValidationErrors...)
 	validationErrors = append(validationErrors, validateRoleAttributes(ead)...)
 
 	return validationErrors, err
@@ -130,10 +138,39 @@ func validateEADID(ead ead.EAD) []string {
 	return validationErrors
 }
 
-func validateNoUnpublishedMaterial(data []byte) []string {
+func validateNoUnpublishedMaterial(data []byte) ([]string, error) {
 	var validationErrors = []string{}
 
-	return validationErrors
+	decoder := xml.NewDecoder(bytes.NewReader(data))
+
+	audienceInternalElements := []string{}
+	for {
+		token, err := decoder.Token()
+		if token == nil || err == io.EOF {
+			break
+		} else if err != nil {
+			return []string{}, err
+		}
+
+		switch tokenType := token.(type) {
+		case xml.StartElement:
+			var elementName = tokenType.Name.Local
+			for _, attribute := range tokenType.Attr {
+				attributeName := attribute.Name.Local
+				attributeValue := attribute.Value
+
+				if attributeName == "audience" && attributeValue == "internal" {
+					audienceInternalElements = append(audienceInternalElements,
+						fmt.Sprintf("<%s>", elementName))
+				}
+			}
+		default:
+		}
+	}
+
+	validationErrors = append(validationErrors, makeAudienceInternalErrorMessage(audienceInternalElements))
+
+	return validationErrors, nil
 }
 
 func validateRepository(ead ead.EAD) []string {
