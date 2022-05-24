@@ -75,7 +75,11 @@ func TestValidateEADMissingRequiredElements(t *testing.T) {
 }
 
 func doTest(file string, expected []string, t *testing.T) {
-	var validationErrors = ValidateEAD(getEADXML(file))
+	var validationErrors, err = ValidateEAD(getEADXML(file))
+	if err != nil {
+		t.Fatalf(fmt.Sprintf(`Unexpected runtime error: %s`, err))
+	}
+
 	if len(validationErrors) != len(expected) {
 		var message = getNumErrorsMismatchErrorMessage(expected, validationErrors)
 		t.Fatalf(message)
