@@ -45,13 +45,13 @@ func makeMissingRequiredElementErrorMessage(elementName string) string {
 	return fmt.Sprintf("Required element %s not found.", elementName)
 }
 
-func makeInvalidEADIDErrorMessage(eadid string, invalidCharacters []byte) string {
+func makeInvalidEADIDErrorMessage(eadid string, invalidCharacters []rune) string {
 	return fmt.Sprintf(`Invalid <eadid>
 
 <eadid> value "%s" does not conform to the Finding Aids specification.
 There must be between 2 to 8 character groups joined by underscores.
 The following characters are not allowed in character groups: %s
-`, eadid, string(bytes.Join([][]byte{invalidCharacters}, []byte(" "))))
+`, eadid, string(invalidCharacters))
 }
 
 func makeInvalidRepositoryErrorMessage(repositoryName string) string {
