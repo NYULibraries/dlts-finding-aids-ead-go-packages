@@ -1,13 +1,42 @@
 package validate
 
 import (
-	"bytes"
 	"encoding/xml"
 	"fmt"
+	"regexp"
 	"strings"
+	"unicode"
 
 	"github.com/nyulibraries/dlts-finding-aids-ead-go-packages/ead"
 )
+
+const ValidEADIDRegexpString = "^[a-z0-9]+(?:_[a-z0-9]+){1,7}$"
+
+var ValidEADIDRegexp *regexp.Regexp
+
+var ValidRepositoryNames = []string{
+	"Akkasah: Center for Photography (NYU Abu Dhabi)",
+	"Center for Brooklyn History",
+	"Fales Library and Special Collections",
+	"NYU Abu Dhabi, Archives and Special Collections",
+	"New York University Archives",
+	"New-York Historical Society",
+	"Poly Archives at Bern Dibner Library of Science and Technology",
+	"Tamiment Library and Robert F. Wagner Labor Archives",
+	"Villa La Pietra",
+}
+
+func init() {
+	var err error
+	ValidEADIDRegexp, err = regexp.Compile(ValidEADIDRegexpString)
+	if err != nil {
+		// TODO: Figure out what to do here...in theory this can't ever fail because
+		// we're compiling a constant.  If it does fail, might want to avoid panic()
+		// calls because might be in use in the FAM API server, which in theory
+		// should be able to trap panic calls, but what if it (or whatever client)
+		// doesn't?
+	}
+}
 
 func ValidateEAD(bytes []byte) ([]string, error) {
 	var validationErrors = []string{}
@@ -60,15 +89,8 @@ func makeInvalidRepositoryErrorMessage(repositoryName string) string {
 <repository> contains unknown repository name "%s".
 The repository name must match a value from this list:
 
-Akkasah: Center for Photography (NYU Abu Dhabi)
-New York University Archives
-Center for Brooklyn History
-Fales Library and Special Collections
-Villa La Pietra
-New-York Historical Society
-NYU Abu Dhabi, Archives and Special Collections
-Poly Archives at Bern Dibner Library of Science and Technology
-Tamiment Library and Robert F. Wagner Labor Archives`, repositoryName)
+%s
+`, repositoryName, strings.Join(ValidRepositoryNames, "\n"))
 }
 
 func makeUnrecognizedRelatorCodesErrorMessage(unrecognizedRelatorCodes [][]string) string {
@@ -88,6 +110,23 @@ The EAD file contains elements with role attributes containing unrecognized rela
 func validateEADID(ead ead.EAD) []string {
 	var validationErrors = []string{}
 
+	var EADID = ead.EADHeader.EADID.Value
+
+	match := ValidEADIDRegexp.Match([]byte(EADID))
+	if !match {
+		var invalidCharacters = []rune{}
+		charMap := make(map[rune]uint, len(EADID))
+		for _, r := range EADID {
+			charMap[r]++
+		}
+		for char, _ := range charMap {
+			if !(unicode.IsLower(char) || unicode.IsDigit(char)) {
+				invalidCharacters = append(invalidCharacters, char)
+			}
+		}
+		validationErrors = append(validationErrors, makeInvalidEADIDErrorMessage(EADID, invalidCharacters))
+	}
+
 	return validationErrors
 }
 
@@ -99,6 +138,16 @@ func validateNoUnpublishedMaterial(ead ead.EAD) []string {
 
 func validateRepository(ead ead.EAD) []string {
 	var validationErrors = []string{}
+
+	var repositoryName = ead.ArchDesc.DID.Repository.CorpName[0].Value
+
+	for _, validRepository := range ValidRepositoryNames {
+		if repositoryName == validRepository {
+			return []string{}
+		}
+	}
+
+	validationErrors = append(validationErrors, makeInvalidRepositoryErrorMessage(repositoryName))
 
 	return validationErrors
 }
