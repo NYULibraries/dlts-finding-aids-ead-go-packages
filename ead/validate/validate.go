@@ -38,13 +38,13 @@ func init() {
 	}
 }
 
-func ValidateEAD(bytes []byte) ([]string, error) {
+func ValidateEAD(data []byte) ([]string, error) {
 	var validationErrors = []string{}
 
-	validationErrors = append(validationErrors, validateXML(bytes)...)
+	validationErrors = append(validationErrors, validateXML(data)...)
 
 	var ead ead.EAD
-	err := xml.Unmarshal(bytes, &ead)
+	err := xml.Unmarshal(data, &ead)
 	if err != nil {
 		return validationErrors, err
 	}
@@ -130,7 +130,7 @@ func validateEADID(ead ead.EAD) []string {
 	return validationErrors
 }
 
-func validateNoUnpublishedMaterial(ead ead.EAD) []string {
+func validateNoUnpublishedMaterial(data []byte) []string {
 	var validationErrors = []string{}
 
 	return validationErrors
@@ -218,11 +218,11 @@ func validateRoleAttributes(ead ead.EAD) []string {
 // * https://github.com/krolaw/xsd
 // * https://github.com/lestrrat-go/libxml2
 // * https://github.com/terminalstatic/go-xsd-validate/blob/master/libxml2.go
-func validateXML(bytes []byte) []string {
+func validateXML(data []byte) []string {
 	var validationErrors = []string{}
 
 	// Not perfect, but maybe good enough for now.
-	if xml.Unmarshal(bytes, new(interface{})) != nil {
+	if xml.Unmarshal(data, new(interface{})) != nil {
 		validationErrors = append(validationErrors, makeInvalidXMLErrorMessage())
 	}
 
