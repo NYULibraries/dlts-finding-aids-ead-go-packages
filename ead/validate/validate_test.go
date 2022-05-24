@@ -92,6 +92,10 @@ func TestValidateEADMissingRequiredElements(t *testing.T) {
 	doTest(missingRequiredElementsEADIDAndRepositoryCorpnameFixturePath, expected, t)
 }
 
+func TestValidateEADValidEADNoErrors(t *testing.T) {
+	doTest(validEADFixturePath, []string{}, t)
+}
+
 func doTest(file string, expected []string, t *testing.T) {
 	var validationErrors, err = ValidateEAD(getEADXML(file))
 	if err != nil {
