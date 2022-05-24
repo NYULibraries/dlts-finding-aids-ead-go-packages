@@ -5,14 +5,24 @@ import (
 	"encoding/xml"
 	"fmt"
 	"strings"
+
+	"github.com/nyulibraries/dlts-finding-aids-ead-go-packages/ead"
 )
 
-func ValidateEAD(bytes []byte) []string {
+func ValidateEAD(bytes []byte) ([]string, error) {
 	var validationErrors = []string{}
 
 	validationErrors = append(validationErrors, validateXML(bytes)...)
 
-	return validationErrors
+	var ead ead.EAD
+	err := xml.Unmarshal(bytes, &ead)
+	if err != nil {
+		return validationErrors, err
+	}
+
+	validationErrors = append(validationErrors, validateRequiredEADElements(ead)...)
+
+	return validationErrors, err
 }
 
 func makeAudienceInternalErrorMessage(elementsAudienceInternal []string) string {
@@ -69,6 +79,35 @@ func makeUnrecognizedRelatorCodesErrorMessage(unrecognizedRelatorCodes [][]strin
 The EAD file contains elements with role attributes containing unrecognized relator codes:
 
 %s`, strings.Join(unrecognizedRelatorCodeSlice, "\n"))
+}
+
+func validateRequiredEADElements(ead ead.EAD) []string {
+	var validationErrors = []string{}
+
+	// Even if the file contains only "<ead></ead>", ead.EADHeader.EADID.Value will
+	// be non-nil.  Test for empty string.
+	if ead.EADHeader.EADID.Value == "" {
+		validationErrors = append(validationErrors,
+			makeMissingRequiredElementErrorMessage("<eadid>"))
+	}
+
+	if ead.ArchDesc != nil {
+		// If ead.ArchDesc exists, DID will be non-nil, so can move on to testing Repository.
+		if ead.ArchDesc.DID.Repository != nil {
+			if ead.ArchDesc.DID.Repository.CorpName == nil {
+				validationErrors = append(validationErrors,
+					makeMissingRequiredElementErrorMessage("<archdesc>/<did>/<repository>/<corpname>"))
+			}
+		} else {
+			validationErrors = append(validationErrors,
+				makeMissingRequiredElementErrorMessage("<archdesc>/<did>/<repository>"))
+		}
+	} else {
+		validationErrors = append(validationErrors,
+			makeMissingRequiredElementErrorMessage("<archdesc>"))
+	}
+
+	return validationErrors
 }
 
 // This is not so straightforward: https://stackoverflow.com/questions/53476012/how-to-validate-a-xml:

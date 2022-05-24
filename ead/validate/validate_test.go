@@ -14,7 +14,9 @@ import (
 var fixturesDirPath string
 var invalidEadDataFixturePath string
 var invalidXMLFixturePath string
-var missingRequiredElementsFixturePath string
+var missingRequiredElementsEADIDAndArchDescFixturePath string
+var missingRequiredElementsEADIDAndRepositoryFixturePath string
+var missingRequiredElementsEADIDAndRepositoryCorpnameFixturePath string
 var validEADFixturePath string
 
 // Source: https://intellij-support.jetbrains.com/hc/en-us/community/posts/360009685279-Go-test-working-directory-keeps-changing-to-dir-of-the-test-file-instead-of-value-in-template?page=1#community_comment_360002183640
@@ -29,7 +31,9 @@ func init() {
 	fixturesDirPath = filepath.Join(root, "validate", "testdata", "fixtures")
 	invalidEadDataFixturePath = filepath.Join(fixturesDirPath, "mc_100-invalid-eadid-repository-role-relator-codes-unpublished-material.xml")
 	invalidXMLFixturePath = filepath.Join(fixturesDirPath, "invalid-xml.xml")
-	missingRequiredElementsFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-repository-corpname.xml")
+	missingRequiredElementsEADIDAndArchDescFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-archdesc.xml")
+	missingRequiredElementsEADIDAndRepositoryFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-repository.xml")
+	missingRequiredElementsEADIDAndRepositoryCorpnameFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-repository-corpname.xml")
 	validEADFixturePath = filepath.Join(fixturesDirPath, "mc_100.xml")
 }
 
@@ -68,10 +72,24 @@ func TestValidateEADInvalidXML(t *testing.T) {
 func TestValidateEADMissingRequiredElements(t *testing.T) {
 	var expected = []string{
 		makeMissingRequiredElementErrorMessage("<eadid>"),
-		makeMissingRequiredElementErrorMessage("<repository>/<corpname>"),
+		makeMissingRequiredElementErrorMessage("<archdesc>"),
 	}
 
-	doTest(missingRequiredElementsFixturePath, expected, t)
+	doTest(missingRequiredElementsEADIDAndArchDescFixturePath, expected, t)
+
+	expected = []string{
+		makeMissingRequiredElementErrorMessage("<eadid>"),
+		makeMissingRequiredElementErrorMessage("<archdesc>/<did>/<repository>"),
+	}
+
+	doTest(missingRequiredElementsEADIDAndRepositoryFixturePath, expected, t)
+
+	expected = []string{
+		makeMissingRequiredElementErrorMessage("<eadid>"),
+		makeMissingRequiredElementErrorMessage("<archdesc>/<did>/<repository>/<corpname>"),
+	}
+
+	doTest(missingRequiredElementsEADIDAndRepositoryCorpnameFixturePath, expected, t)
 }
 
 func doTest(file string, expected []string, t *testing.T) {
