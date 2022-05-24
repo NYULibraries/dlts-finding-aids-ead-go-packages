@@ -21,6 +21,10 @@ func ValidateEAD(bytes []byte) ([]string, error) {
 	}
 
 	validationErrors = append(validationErrors, validateRequiredEADElements(ead)...)
+	validationErrors = append(validationErrors, validateRepository(ead)...)
+	validationErrors = append(validationErrors, validateEADID(ead)...)
+	validationErrors = append(validationErrors, validateNoUnpublishedMaterial(ead)...)
+	validationErrors = append(validationErrors, validateRoleAttributes(ead)...)
 
 	return validationErrors, err
 }
@@ -81,6 +85,24 @@ The EAD file contains elements with role attributes containing unrecognized rela
 %s`, strings.Join(unrecognizedRelatorCodeSlice, "\n"))
 }
 
+func validateEADID(ead ead.EAD) []string {
+	var validationErrors = []string{}
+
+	return validationErrors
+}
+
+func validateNoUnpublishedMaterial(ead ead.EAD) []string {
+	var validationErrors = []string{}
+
+	return validationErrors
+}
+
+func validateRepository(ead ead.EAD) []string {
+	var validationErrors = []string{}
+
+	return validationErrors
+}
+
 func validateRequiredEADElements(ead ead.EAD) []string {
 	var validationErrors = []string{}
 
@@ -106,6 +128,12 @@ func validateRequiredEADElements(ead ead.EAD) []string {
 		validationErrors = append(validationErrors,
 			makeMissingRequiredElementErrorMessage("<archdesc>"))
 	}
+
+	return validationErrors
+}
+
+func validateRoleAttributes(ead ead.EAD) []string {
+	var validationErrors = []string{}
 
 	return validationErrors
 }
