@@ -128,7 +128,7 @@ func validateEADID(ead ead.EAD) []string {
 			charMap[r]++
 		}
 		for char, _ := range charMap {
-			if !(unicode.IsLower(char) || unicode.IsDigit(char)) {
+			if !(unicode.IsLower(char) || unicode.IsDigit(char) || char == '_') {
 				invalidCharacters = append(invalidCharacters, char)
 			}
 		}
