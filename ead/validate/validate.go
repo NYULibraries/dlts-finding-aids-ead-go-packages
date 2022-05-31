@@ -9,6 +9,11 @@ import (
 	"strings"
 	"unicode"
 
+	// Originally was trying to write this package without using 3rd party modules,
+	// but decided to use this xmlquery module for role attribute validation.
+	// See https://jira.nyu.edu/browse/FADESIGN-491?focusedCommentId=1945424&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-1945424.
+	"github.com/antchfx/xmlquery"
+
 	"github.com/nyulibraries/dlts-finding-aids-ead-go-packages/ead"
 )
 
@@ -61,7 +66,12 @@ func ValidateEAD(data []byte) ([]string, error) {
 	}
 
 	validationErrors = append(validationErrors, validateNoUnpublishedMaterialValidationErrors...)
-	validationErrors = append(validationErrors, validateRoleAttributes(ead)...)
+
+	validateRoleAttributesValidationErrors, err := validateRoleAttributes(data)
+	if err != nil {
+		return validationErrors, err
+	}
+	validationErrors = append(validationErrors, validateRoleAttributesValidationErrors...)
 
 	return validationErrors, err
 }
@@ -218,10 +228,70 @@ func validateRequiredEADElements(ead ead.EAD) []string {
 	return validationErrors
 }
 
-func validateRoleAttributes(ead ead.EAD) []string {
+func validateRoleAttributes(data []byte) ([]string, error) {
 	var validationErrors = []string{}
 
-	return validationErrors
+	const controlAccessElementName = "controlaccess"
+	const originationElementName = "origination"
+	const repositoryElementName = "repository"
+
+	const corpnameElementName = "corpname"
+	const famnameElementName = "famname"
+	const persnameElementName = "persname"
+
+	var elementsToTest = [][]string{
+		{controlAccessElementName, corpnameElementName},
+		{controlAccessElementName, famnameElementName},
+		{controlAccessElementName, persnameElementName},
+
+		{originationElementName, corpnameElementName},
+		{originationElementName, famnameElementName},
+		{originationElementName, persnameElementName},
+
+		{repositoryElementName, corpnameElementName},
+	}
+
+	doc, err := xmlquery.Parse(strings.NewReader(string(data)))
+	if err != nil {
+		return validationErrors, err
+	}
+
+	// Slice of string slices, where an inner slice element is of the form:
+	// {"<repository><corpname>NYU Archives</corpname></repository>", "grt"}
+	var unrecognizedRelatorCodes [][]string
+	for _, elementToTest := range elementsToTest {
+		var parentElementName = elementToTest[0]
+		var childElementName = elementToTest[1]
+
+		roleAttributes, err := xmlquery.QueryAll(doc, fmt.Sprintf("//%s/%s/@role", parentElementName, childElementName))
+		if err != nil {
+			return validationErrors, err
+		}
+
+		for _, roleAttribute := range roleAttributes {
+			relatorCode := roleAttribute.FirstChild.Data
+			_, ok := ead.RelatorAuthoritativeLabelMap[relatorCode]
+			if !ok {
+				// Example: "<repository><corpname>NYU Archives</corpname></repository>"
+				elementDescription := fmt.Sprintf("<%s><%s>%s</%s></%s>",
+					parentElementName,
+					childElementName,
+					roleAttribute.Parent.FirstChild.Data,
+					childElementName,
+					parentElementName,
+				)
+
+				unrecognizedRelatorCodes = append(unrecognizedRelatorCodes, []string{
+					elementDescription,
+					relatorCode,
+				})
+			}
+		}
+	}
+
+	validationErrors = append(validationErrors, makeUnrecognizedRelatorCodesErrorMessage(unrecognizedRelatorCodes))
+
+	return validationErrors, nil
 }
 
 // This is not so straightforward: https://stackoverflow.com/questions/53476012/how-to-validate-a-xml:
