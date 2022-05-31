@@ -49,6 +49,10 @@ func ValidateEAD(data []byte) ([]string, error) {
 	var validationErrors = []string{}
 
 	validationErrors = append(validationErrors, validateXML(data)...)
+	// If the data is not valid XML there is no point doing any more checks.
+	if len(validationErrors) > 0 {
+		return validationErrors, nil
+	}
 
 	var ead ead.EAD
 	err := xml.Unmarshal(data, &ead)
