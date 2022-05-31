@@ -87,14 +87,6 @@ The EAD file contains unpublished material.  The following EAD elements have att
 %s`, strings.Join(elementsAudienceInternal, "\n"))
 }
 
-func makeInvalidXMLErrorMessage() string {
-	return "The XML in this file is not valid.  Please check it using an XML validator."
-}
-
-func makeMissingRequiredElementErrorMessage(elementName string) string {
-	return fmt.Sprintf("Required element %s not found.", elementName)
-}
-
 func makeInvalidEADIDErrorMessage(eadid string, invalidCharacters []rune) string {
 	return fmt.Sprintf(`Invalid <eadid>
 
@@ -112,6 +104,14 @@ The repository name must match a value from this list:
 
 %s
 `, repositoryName, strings.Join(ValidRepositoryNames, "\n"))
+}
+
+func makeInvalidXMLErrorMessage() string {
+	return "The XML in this file is not valid.  Please check it using an XML validator."
+}
+
+func makeMissingRequiredElementErrorMessage(elementName string) string {
+	return fmt.Sprintf("Required element %s not found.", elementName)
 }
 
 func makeUnrecognizedRelatorCodesErrorMessage(unrecognizedRelatorCodes [][]string) string {
