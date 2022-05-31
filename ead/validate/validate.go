@@ -228,6 +228,7 @@ func validateRequiredEADElements(ead ead.EAD) []string {
 	return validationErrors
 }
 
+// See https://jira.nyu.edu/browse/FADESIGN-171.
 func validateRoleAttributes(data []byte) ([]string, error) {
 	var validationErrors = []string{}
 
