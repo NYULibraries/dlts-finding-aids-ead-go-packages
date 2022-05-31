@@ -231,14 +231,19 @@ func validateRepository(ead ead.EAD) []string {
 func validateRoleAttributes(data []byte) ([]string, error) {
 	var validationErrors = []string{}
 
+	// Parent elements
 	const controlAccessElementName = "controlaccess"
 	const originationElementName = "origination"
 	const repositoryElementName = "repository"
 
+	// Child elements with `role` attributes that we need to test (within the
+	// context of the above parent elements).
 	const corpnameElementName = "corpname"
 	const famnameElementName = "famname"
 	const persnameElementName = "persname"
 
+	// Note that we are testing role attributes only for very specific occurrences of
+	// the child elements, hence the need for this 2-dimensional slice of slices.
 	var elementsToTest = [][]string{
 		{controlAccessElementName, corpnameElementName},
 		{controlAccessElementName, famnameElementName},
@@ -257,7 +262,7 @@ func validateRoleAttributes(data []byte) ([]string, error) {
 	}
 
 	// Slice of string slices, where an inner slice element is of the form:
-	// {"<repository><corpname>NYU Archives</corpname></repository>", "grt"}
+	// {"<repository><corpname>NYU Archives</corpname></repository>", "grt"}.
 	var unrecognizedRelatorCodes [][]string
 	for _, elementToTest := range elementsToTest {
 		var parentElementName = elementToTest[0]
