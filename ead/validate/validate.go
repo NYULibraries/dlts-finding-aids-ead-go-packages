@@ -60,9 +60,8 @@ func ValidateEAD(data []byte) ([]string, error) {
 		return validationErrors, err
 	}
 
-	validationErrors = append(validationErrors, validateRequiredEADElements(ead)...)
-	validationErrors = append(validationErrors, validateRepository(ead)...)
 	validationErrors = append(validationErrors, validateEADID(ead)...)
+	validationErrors = append(validationErrors, validateRepository(ead)...)
 
 	validateNoUnpublishedMaterialValidationErrors, err := validateNoUnpublishedMaterial(data)
 	if err != nil {
@@ -134,19 +133,26 @@ func validateEADID(ead ead.EAD) []string {
 
 	var EADID = ead.EADHeader.EADID.Value
 
-	match := ValidEADIDRegexp.Match([]byte(EADID))
-	if !match {
-		var invalidCharacters = []rune{}
-		charMap := make(map[rune]uint, len(EADID))
-		for _, r := range EADID {
-			charMap[r]++
-		}
-		for char, _ := range charMap {
-			if !(unicode.IsLower(char) || unicode.IsDigit(char) || char == '_') {
-				invalidCharacters = append(invalidCharacters, char)
+	// Even if the file contains only "<ead></ead>", ead.EADHeader.EADID.Value will
+	// be non-nil.  Test for empty string.
+	if EADID != "" {
+		match := ValidEADIDRegexp.Match([]byte(EADID))
+		if !match {
+			var invalidCharacters = []rune{}
+			charMap := make(map[rune]uint, len(EADID))
+			for _, r := range EADID {
+				charMap[r]++
 			}
+			for char, _ := range charMap {
+				if !(unicode.IsLower(char) || unicode.IsDigit(char) || char == '_') {
+					invalidCharacters = append(invalidCharacters, char)
+				}
+			}
+			validationErrors = append(validationErrors, makeInvalidEADIDErrorMessage(EADID, invalidCharacters))
 		}
-		validationErrors = append(validationErrors, makeInvalidEADIDErrorMessage(EADID, invalidCharacters))
+	} else {
+		validationErrors = append(validationErrors,
+			makeMissingRequiredElementErrorMessage("<eadid>"))
 	}
 
 	return validationErrors
@@ -192,35 +198,22 @@ func validateNoUnpublishedMaterial(data []byte) ([]string, error) {
 func validateRepository(ead ead.EAD) []string {
 	var validationErrors = []string{}
 
-	var repositoryName = ead.ArchDesc.DID.Repository.CorpName[0].Value
-
-	for _, validRepository := range ValidRepositoryNames {
-		if repositoryName == validRepository {
-			return []string{}
-		}
-	}
-
-	validationErrors = append(validationErrors, makeInvalidRepositoryErrorMessage(repositoryName))
-
-	return validationErrors
-}
-
-func validateRequiredEADElements(ead ead.EAD) []string {
-	var validationErrors = []string{}
-
-	// Even if the file contains only "<ead></ead>", ead.EADHeader.EADID.Value will
-	// be non-nil.  Test for empty string.
-	if ead.EADHeader.EADID.Value == "" {
-		validationErrors = append(validationErrors,
-			makeMissingRequiredElementErrorMessage("<eadid>"))
-	}
-
 	if ead.ArchDesc != nil {
 		// If ead.ArchDesc exists, DID will be non-nil, so can move on to testing Repository.
 		if ead.ArchDesc.DID.Repository != nil {
 			if ead.ArchDesc.DID.Repository.CorpName == nil {
 				validationErrors = append(validationErrors,
 					makeMissingRequiredElementErrorMessage("<archdesc>/<did>/<repository>/<corpname>"))
+			} else {
+				var repositoryName = ead.ArchDesc.DID.Repository.CorpName[0].Value
+
+				for _, validRepository := range ValidRepositoryNames {
+					if repositoryName == validRepository {
+						return []string{}
+					}
+				}
+
+				validationErrors = append(validationErrors, makeInvalidRepositoryErrorMessage(repositoryName))
 			}
 		} else {
 			validationErrors = append(validationErrors,

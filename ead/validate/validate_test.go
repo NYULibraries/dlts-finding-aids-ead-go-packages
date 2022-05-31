@@ -39,8 +39,8 @@ func init() {
 
 func TestValidateEADInvalidData(t *testing.T) {
 	var expected = []string{
-		makeInvalidRepositoryErrorMessage("NYU Archives"),
 		makeInvalidEADIDErrorMessage("mc.100", []rune{'.'}),
+		makeInvalidRepositoryErrorMessage("NYU Archives"),
 		makeAudienceInternalErrorMessage([]string{"<bioghist>", "<processinfo>"}),
 		makeUnrecognizedRelatorCodesErrorMessage([][]string{
 			{"<controlaccess><corpname>Columbia University</corpname></controlaccess>", "orz"},
