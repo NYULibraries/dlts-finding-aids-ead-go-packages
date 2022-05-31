@@ -182,7 +182,9 @@ func validateNoUnpublishedMaterial(data []byte) ([]string, error) {
 		}
 	}
 
-	validationErrors = append(validationErrors, makeAudienceInternalErrorMessage(audienceInternalElements))
+	if len(audienceInternalElements) > 0 {
+		validationErrors = append(validationErrors, makeAudienceInternalErrorMessage(audienceInternalElements))
+	}
 
 	return validationErrors, nil
 }
