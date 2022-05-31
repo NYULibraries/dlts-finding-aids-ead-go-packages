@@ -296,7 +296,9 @@ func validateRoleAttributes(data []byte) ([]string, error) {
 		}
 	}
 
-	validationErrors = append(validationErrors, makeUnrecognizedRelatorCodesErrorMessage(unrecognizedRelatorCodes))
+	if len(unrecognizedRelatorCodes) > 0 {
+		validationErrors = append(validationErrors, makeUnrecognizedRelatorCodesErrorMessage(unrecognizedRelatorCodes))
+	}
 
 	return validationErrors, nil
 }
