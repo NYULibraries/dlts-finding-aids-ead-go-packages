@@ -127,7 +127,8 @@ func validateEADID(ead ead.EAD) ([]string, error) {
 	// Even if the file contains only "<ead></ead>", ead.EADHeader.EADID.Value will
 	// be not empty.  Test for empty string.
 	if EADID != "" {
-		match, err := regexp.Match(ValidEADIDRegexpString, []byte(EADID))
+		trimmedEADID := strings.TrimSpace(EADID)
+		match, err := regexp.Match(ValidEADIDRegexpString, []byte(trimmedEADID))
 		if err != nil {
 			return validationErrors, err
 		}
