@@ -19,8 +19,6 @@ import (
 
 const ValidEADIDRegexpString = "^[a-z0-9]+(?:_[a-z0-9]+){1,7}$"
 
-var ValidEADIDRegexp *regexp.Regexp
-
 var ValidRepositoryNames = []string{
 	"Akkasah: Center for Photography (NYU Abu Dhabi)",
 	"Center for Brooklyn History",
@@ -31,18 +29,6 @@ var ValidRepositoryNames = []string{
 	"Poly Archives at Bern Dibner Library of Science and Technology",
 	"Tamiment Library and Robert F. Wagner Labor Archives",
 	"Villa La Pietra",
-}
-
-func init() {
-	var err error
-	ValidEADIDRegexp, err = regexp.Compile(ValidEADIDRegexpString)
-	if err != nil {
-		// TODO: Figure out what to do here...in theory this can't ever fail because
-		// we're compiling a constant.  If it does fail, might want to avoid panic()
-		// calls because might be in use in the FAM API server, which in theory
-		// should be able to trap panic calls, but what if it (or whatever client)
-		// doesn't?
-	}
 }
 
 func ValidateEAD(data []byte) ([]string, error) {
@@ -60,7 +46,12 @@ func ValidateEAD(data []byte) ([]string, error) {
 		return validationErrors, err
 	}
 
-	validationErrors = append(validationErrors, validateEADID(ead)...)
+	validateEADIDValidationErrors, err := validateEADID(ead)
+	if err != nil {
+		return validationErrors, err
+	}
+	validationErrors = append(validationErrors, validateEADIDValidationErrors...)
+
 	validationErrors = append(validationErrors, validateRepository(ead)...)
 
 	validateNoUnpublishedMaterialValidationErrors, err := validateNoUnpublishedMaterial(data)
@@ -128,7 +119,7 @@ The EAD file contains elements with role attributes containing unrecognized rela
 %s`, strings.Join(unrecognizedRelatorCodeSlice, "\n"))
 }
 
-func validateEADID(ead ead.EAD) []string {
+func validateEADID(ead ead.EAD) ([]string, error) {
 	var validationErrors = []string{}
 
 	var EADID = ead.EADHeader.EADID.Value
@@ -136,7 +127,11 @@ func validateEADID(ead ead.EAD) []string {
 	// Even if the file contains only "<ead></ead>", ead.EADHeader.EADID.Value will
 	// be not empty.  Test for empty string.
 	if EADID != "" {
-		match := ValidEADIDRegexp.Match([]byte(EADID))
+		match, err := regexp.Match(ValidEADIDRegexpString, []byte(EADID))
+		if err != nil {
+			return validationErrors, err
+		}
+
 		if !match {
 			var invalidCharacters = []rune{}
 			charMap := make(map[rune]uint, len(EADID))
@@ -155,7 +150,7 @@ func validateEADID(ead ead.EAD) []string {
 			makeMissingRequiredElementErrorMessage("<eadid>"))
 	}
 
-	return validationErrors
+	return validationErrors, nil
 }
 
 func validateNoUnpublishedMaterial(data []byte) ([]string, error) {
