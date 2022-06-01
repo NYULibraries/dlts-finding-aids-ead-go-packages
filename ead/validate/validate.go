@@ -323,11 +323,9 @@ func validateRoleAttributes(data []byte) ([]string, error) {
 // ...is not well-formed, but Unmarshal never deals with the "<<<" after
 // element <something>.
 
-// There are 3rd party libraries for validating against a schema, but they
-// require CGO, which we'd like to avoid for now.
-// * https://github.com/krolaw/xsd
-// * https://github.com/lestrrat-go/libxml2
-// * https://github.com/terminalstatic/go-xsd-validate/blob/master/libxml2.go
+// I did a quick search for some 3rd party libraries for validating against a schema,
+// which would allow for validation against https://www.loc.gov/ead/eadschema.html, but
+// I have some reservations about using them -- see https://jira.nyu.edu/browse/FADESIGN-491.
 func validateXML(data []byte) []string {
 	var validationErrors = []string{}
 
