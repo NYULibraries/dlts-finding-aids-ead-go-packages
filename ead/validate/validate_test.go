@@ -18,6 +18,7 @@ var missingRequiredElementsEADIDAndArchDescFixturePath string
 var missingRequiredElementsEADIDAndRepositoryFixturePath string
 var missingRequiredElementsEADIDAndRepositoryCorpnameFixturePath string
 var validEADFixturePath string
+var validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath string
 
 // Source: https://intellij-support.jetbrains.com/hc/en-us/community/posts/360009685279-Go-test-working-directory-keeps-changing-to-dir-of-the-test-file-instead-of-value-in-template?page=1#community_comment_360002183640
 func init() {
@@ -35,6 +36,7 @@ func init() {
 	missingRequiredElementsEADIDAndRepositoryFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-repository.xml")
 	missingRequiredElementsEADIDAndRepositoryCorpnameFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-repository-corpname.xml")
 	validEADFixturePath = filepath.Join(fixturesDirPath, "mc_100.xml")
+	validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath = filepath.Join(fixturesDirPath, "mc_100-valid-eadid-with-leading-and-trailing-spaces.xml")
 }
 
 func TestValidateEADInvalidData(t *testing.T) {
@@ -94,6 +96,7 @@ func TestValidateEADMissingRequiredElements(t *testing.T) {
 
 func TestValidateEADValidEADNoErrors(t *testing.T) {
 	doTest(validEADFixturePath, []string{}, t)
+	doTest(validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath, []string{}, t)
 }
 
 func doTest(file string, expected []string, t *testing.T) {
