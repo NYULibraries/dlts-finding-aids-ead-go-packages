@@ -6,6 +6,7 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+	"regexp"
 	"runtime"
 	"strings"
 	"testing"
@@ -37,6 +38,97 @@ func init() {
 	missingRequiredElementsEADIDAndRepositoryCorpnameFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-repository-corpname.xml")
 	validEADFixturePath = filepath.Join(fixturesDirPath, "mc_100.xml")
 	validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath = filepath.Join(fixturesDirPath, "mc_100-valid-eadid-with-leading-and-trailing-spaces.xml")
+}
+
+func TestValidEADIDRegexpString(t *testing.T) {
+	validEADIDRegexp, err := regexp.Compile(ValidEADIDRegexpString)
+	if err != nil {
+		t.Fatalf(
+			"regexp.Compile error for ValidEADIDRegexpString \"%s\": %s",
+			ValidEADIDRegexpString,
+			err,
+		)
+	}
+
+	var validEADIDs = []string{
+		"a_b",
+		"a_b_c",
+		"a_b_c_d",
+		"a_b_c_d_e",
+		"a_b_c_d_e_f",
+		"a_b_c_d_e_f_g",
+		"a_b_c_d_e_f_g_h",
+		"0_1_2_3_4_5_6_7",
+		"abcdefghijklmnopqrstuvwzyz_0123456789_abcdefghijklmnopqrstuvwzyz_0123456789_abcdefghijklmnopqrstuvwzyz_0123456789_abcdefghijklmnopqrstuvwzyz_0123456789",
+		"1_abcdefghijklmnopqrstuvwzyz_0123456789_a",
+		"mss_417",
+		"photos_220",
+		"rg_2_2_7",
+		"rg_38_0_1_2",
+	}
+
+	var invalidEADIDs = []string{
+		"a",
+		"1",
+		"a1",
+		"1a",
+		"abcdefghijklmnopqrstuvwzyz",
+		"0123456789",
+		"_",
+		"A",
+		"à",
+		"â",
+		"é",
+		"è",
+		"ê",
+		"ë",
+		"î",
+		"ô",
+		"中文",
+		"руссиан",
+		"aA",
+		"A1",
+		"1A",
+		"A_B_C_D_E_F_G_H",
+		"a_",
+		"a_b_",
+		"_a",
+		"_a_b",
+		"a__b__c",
+		"a-b",
+		"a.b",
+		"a_b_c_d_e_f_g_h_i",
+		"a b c",
+		"a,b,c",
+		"a,b,c_abc",
+		"a|b|c",
+		"a|b|c_abc",
+		"a&b&c",
+		"a&b&c_abc",
+		"a-b-c",
+		"a-b-c_abc",
+		"a.b.c",
+		"a.b.c_abc",
+		"",
+		"mss.417",
+		"PHOTOS_220",
+		"rg-2-2-7",
+		"Rg_38_0_1_2",
+	}
+
+	for _, eadid := range validEADIDs {
+		match := validEADIDRegexp.Match([]byte(eadid))
+		if !match {
+			t.Errorf("regexp fails to match valid <eadid> \"%s\"", eadid)
+		}
+	}
+
+	for _, eadid := range invalidEADIDs {
+		match := validEADIDRegexp.Match([]byte(eadid))
+		if match {
+			t.Errorf("regexp incorrectly matches invalid <eadid> \"%s\"", eadid)
+		}
+	}
 }
 
 func TestValidateEADInvalidData(t *testing.T) {
