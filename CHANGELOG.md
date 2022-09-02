@@ -1,5 +1,9 @@
 # Changelog
 
+#### v0.15.0
+  - add in EAD validation functionality against both project-specific
+    criteria and the EAD 2002 schema
+
 #### v0.14.0
   - update to use Go modules
 
