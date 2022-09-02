@@ -2,13 +2,17 @@ package validate
 
 import (
 	"bytes"
+	"embed"
+	_ "embed"
 	"encoding/xml"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"regexp"
 	"strings"
 	"unicode"
 
+	"github.com/lestrrat-go/libxml2/xsd"
 	// Originally was trying to write this package without using 3rd party modules,
 	// but decided to use this xmlquery module for role attribute validation.
 	// See https://jira.nyu.edu/browse/FADESIGN-491?focusedCommentId=1945424&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-1945424.
@@ -16,6 +20,9 @@ import (
 
 	"github.com/nyulibraries/dlts-finding-aids-ead-go-packages/ead"
 )
+
+//go:embed schema
+var schemas embed.FS
 
 const ValidEADIDRegexpString = "^[a-z0-9]+(?:_[a-z0-9]+){1,7}$"
 
@@ -335,4 +342,24 @@ func validateXML(data []byte) []string {
 	}
 
 	return validationErrors
+}
+
+
+func ValidateEADAgainstSchema(fa []byte) error {
+	schema, err := schemas.ReadFile("schema/ead.xsd")
+	if err != nil {
+		return err
+	}
+	eadxsd, err := xsd.Parse(schema)
+	if err != nil {
+		return err
+	}
+	doc, err := p.Parse(fa)
+	if err != nil {
+		return err
+	}
+	if err := eadxsd.Validate(doc); err != nil {
+		return err
+	}
+	return nil
 }
