@@ -42,7 +42,7 @@ var ValidRepositoryNames = []string{
 func ValidateEAD(data []byte) ([]string, error) {
 	var validationErrors = []string{}
 
-	validationErrors = append(validationErrors, validateXML(data)...)
+	validationErrors = append(validationErrors, validateEADAgainstSchema(data)...)
 	// If the data is not valid XML there is no point doing any more checks.
 	if len(validationErrors) > 0 {
 		return validationErrors, nil
@@ -347,23 +347,43 @@ func validateXML(data []byte) []string {
 
 // This function is largely borrowed from Don Mennerich's go-aspace package
 // https://github.com/nyudlts/go-aspace
-func ValidateEADAgainstSchema(fa []byte) error {
+func validateEADAgainstSchema(data []byte) []string {
+	var validationErrors = []string{}
+
+	// initialize with a default error message
+	validationErrors = append(validationErrors, makeInvalidXMLErrorMessage())
+	
 	schema, err := schemas.ReadFile("schema/ead-2002-20210412.xsd")
 	if err != nil {
-		return err
+		return append(validationErrors, err.Error())
 	}
 	eadxsd, err := xsd.Parse(schema)
 	if err != nil {
-		return err
+		return append(validationErrors, err.Error())
 	}
 
 	p := parser.New()
-	doc, err := p.Parse(fa)
+	doc, err := p.Parse(data)
 	if err != nil {
-		return err
+		validationErrors = append(validationErrors, "Unable to parse XML file")
+		return append(validationErrors, err.Error())
 	}
-	if err := eadxsd.Validate(doc); err != nil {
-		return err
+
+	err = eadxsd.Validate(doc)
+	if err != nil {
+		fmt.Printf("SVE: %T %v\n", err, err.(xsd.SchemaValidationError).Errors())
+		// capture the high-level error message
+		validationErrors = append(validationErrors, err.Error())
+
+		// capture the detailed error info:
+		// the Validate function returns an xsd.SchemaValidationError that
+		// has an underlying Errors() method with more detailed errors
+		for _, e := range err.(xsd.SchemaValidationError).Errors() {
+			validationErrors = append(validationErrors, e.Error())
+		}
+		return validationErrors
 	}
-	return nil
+
+	// all ok, return empty slice
+	return []string{}
 }
