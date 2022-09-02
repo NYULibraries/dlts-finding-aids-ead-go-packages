@@ -158,6 +158,8 @@ func TestValidateEADInvalidData(t *testing.T) {
 func TestValidateEADInvalidXML(t *testing.T) {
 	var expected = []string{
 		makeInvalidXMLErrorMessage(),
+		"Unable to parse XML file",
+		"failed to create parse input: failed to read document from memory: Entity: line 1: parser error : Start tag expected, '<' not found",
 	}
 
 	doTest(invalidXMLFixturePath, expected, t)
@@ -165,22 +167,26 @@ func TestValidateEADInvalidXML(t *testing.T) {
 
 func TestValidateEADMissingRequiredElements(t *testing.T) {
 	var expected = []string{
-		makeMissingRequiredElementErrorMessage("<eadid>"),
-		makeMissingRequiredElementErrorMessage("<archdesc>"),
+		makeInvalidXMLErrorMessage(),
+		"schema validation failed",
+		"Element '{urn:isbn:1-931666-22-9}filedesc': This element is not expected. Expected is ( {urn:isbn:1-931666-22-9}eadid ).",
+		"Element '{urn:isbn:1-931666-22-9}ead': Missing child element(s). Expected is one of ( {urn:isbn:1-931666-22-9}frontmatter, {urn:isbn:1-931666-22-9}archdesc ).",
 	}
 
 	doTest(missingRequiredElementsEADIDAndArchDescFixturePath, expected, t)
 
 	expected = []string{
-		makeMissingRequiredElementErrorMessage("<eadid>"),
-		makeMissingRequiredElementErrorMessage("<archdesc>/<did>/<repository>"),
+		makeInvalidXMLErrorMessage(),
+		"schema validation failed",
+		"Element '{urn:isbn:1-931666-22-9}filedesc': This element is not expected. Expected is ( {urn:isbn:1-931666-22-9}eadid ).",
 	}
 
 	doTest(missingRequiredElementsEADIDAndRepositoryFixturePath, expected, t)
 
 	expected = []string{
-		makeMissingRequiredElementErrorMessage("<eadid>"),
-		makeMissingRequiredElementErrorMessage("<archdesc>/<did>/<repository>/<corpname>"),
+		makeInvalidXMLErrorMessage(),
+		"schema validation failed",
+		"Element '{urn:isbn:1-931666-22-9}filedesc': This element is not expected. Expected is ( {urn:isbn:1-931666-22-9}eadid ).",
 	}
 
 	doTest(missingRequiredElementsEADIDAndRepositoryCorpnameFixturePath, expected, t)
