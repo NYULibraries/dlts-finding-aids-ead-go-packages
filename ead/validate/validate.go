@@ -7,11 +7,12 @@ import (
 	"encoding/xml"
 	"fmt"
 	"io"
-	"io/ioutil"
+	//	"io/ioutil"
 	"regexp"
 	"strings"
 	"unicode"
 
+	"github.com/lestrrat-go/libxml2/parser"
 	"github.com/lestrrat-go/libxml2/xsd"
 	// Originally was trying to write this package without using 3rd party modules,
 	// but decided to use this xmlquery module for role attribute validation.
@@ -344,9 +345,10 @@ func validateXML(data []byte) []string {
 	return validationErrors
 }
 
-
+// This function is largely borrowed from Don Mennerich's go-aspace package
+// https://github.com/nyudlts/go-aspace
 func ValidateEADAgainstSchema(fa []byte) error {
-	schema, err := schemas.ReadFile("schema/ead.xsd")
+	schema, err := schemas.ReadFile("schema/ead-2002-20210412.xsd")
 	if err != nil {
 		return err
 	}
@@ -354,6 +356,8 @@ func ValidateEADAgainstSchema(fa []byte) error {
 	if err != nil {
 		return err
 	}
+
+	p := parser.New()
 	doc, err := p.Parse(fa)
 	if err != nil {
 		return err
