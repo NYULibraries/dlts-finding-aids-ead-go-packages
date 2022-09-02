@@ -7,16 +7,12 @@ import (
 	"encoding/xml"
 	"fmt"
 	"io"
-	//	"io/ioutil"
 	"regexp"
 	"strings"
 	"unicode"
 
 	"github.com/lestrrat-go/libxml2/parser"
 	"github.com/lestrrat-go/libxml2/xsd"
-	// Originally was trying to write this package without using 3rd party modules,
-	// but decided to use this xmlquery module for role attribute validation.
-	// See https://jira.nyu.edu/browse/FADESIGN-491?focusedCommentId=1945424&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-1945424.
 	"github.com/antchfx/xmlquery"
 
 	"github.com/nyulibraries/dlts-finding-aids-ead-go-packages/ead"
@@ -303,46 +299,6 @@ func validateRoleAttributes(data []byte) ([]string, error) {
 	}
 
 	return validationErrors, nil
-}
-
-// This is not so straightforward: https://stackoverflow.com/questions/53476012/how-to-validate-a-xml:
-//
-// Note that the answer from GodsBoss given in
-//
-// func IsValid(input string) bool {
-//    decoder := xml.NewDecoder(strings.NewReader(input))
-//    for {
-//        err := decoder.Decode(new(interface{}))
-//        if err != nil {
-//            return err == io.EOF
-//        }
-//    }
-// }
-//
-// ...doesn't work for our fixture file containing simply:
-//
-// This is not XML!
-//
-// ...because the first err returned is io.EOF, perhaps because no open tag was ever encountered?
-
-// Note that the xml.Unmarshal solution we use below, from the same StackOverflow page,
-// will not detect invalid XML that occurs after the start element has closed.
-// e.g. <something>This is not XML!</something><<<
-// ...is not well-formed, but Unmarshal never deals with the "<<<" after
-// element <something>.
-
-// I did a quick search for some 3rd party libraries for validating against a schema,
-// which would allow for validation against https://www.loc.gov/ead/eadschema.html, but
-// I have some reservations about using them -- see https://jira.nyu.edu/browse/FADESIGN-491.
-func validateXML(data []byte) []string {
-	var validationErrors = []string{}
-
-	// Not perfect, but maybe good enough for now.
-	if xml.Unmarshal(data, new(interface{})) != nil {
-		validationErrors = append(validationErrors, makeInvalidXMLErrorMessage())
-	}
-
-	return validationErrors
 }
 
 // This function is largely borrowed from Don Mennerich's go-aspace package
