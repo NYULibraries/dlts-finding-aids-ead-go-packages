@@ -11,9 +11,9 @@ import (
 	"strings"
 	"unicode"
 
+	"github.com/antchfx/xmlquery"
 	"github.com/lestrrat-go/libxml2/parser"
 	"github.com/lestrrat-go/libxml2/xsd"
-	"github.com/antchfx/xmlquery"
 
 	"github.com/nyulibraries/dlts-finding-aids-ead-go-packages/ead"
 )
@@ -37,6 +37,18 @@ var ValidRepositoryNames = []string{
 
 func ValidateEAD(data []byte) ([]string, error) {
 	var validationErrors = []string{}
+
+	// Performing a two stage validation here:
+	// 1.) validateXML is just making sure that we have a valid XML document
+	// 2.) validateEADAgainstSchema is confirming that the document conforms
+	//     to the EAD schema
+	//
+	// This approach avoids unwanted libxml2 output when the data is not XML
+	validationErrors = append(validationErrors, validateXML(data)...)
+	// If the data is not valid XML there is no point doing any more checks.
+	if len(validationErrors) > 0 {
+		return validationErrors, nil
+	}
 
 	validationErrors = append(validationErrors, validateEADAgainstSchema(data)...)
 	// If the data is not valid XML there is no point doing any more checks.
@@ -301,6 +313,47 @@ func validateRoleAttributes(data []byte) ([]string, error) {
 	return validationErrors, nil
 }
 
+// The following comment and function validateXML() are from David Arjanik:
+// This is not so straightforward: https://stackoverflow.com/questions/53476012/how-to-validate-a-xml:
+//
+// Note that the answer from GodsBoss given in
+//
+// func IsValid(input string) bool {
+//    decoder := xml.NewDecoder(strings.NewReader(input))
+//    for {
+//        err := decoder.Decode(new(interface{}))
+//        if err != nil {
+//            return err == io.EOF
+//        }
+//    }
+// }
+//
+// ...doesn't work for our fixture file containing simply:
+//
+// This is not XML!
+//
+// ...because the first err returned is io.EOF, perhaps because no open tag was ever encountered?
+
+// Note that the xml.Unmarshal solution we use below, from the same StackOverflow page,
+// will not detect invalid XML that occurs after the start element has closed.
+// e.g. <something>This is not XML!</something><<<
+// ...is not well-formed, but Unmarshal never deals with the "<<<" after
+// element <something>.
+
+// I did a quick search for some 3rd party libraries for validating against a schema,
+// which would allow for validation against https://www.loc.gov/ead/eadschema.html, but
+// I have some reservations about using them -- see https://jira.nyu.edu/browse/FADESIGN-491.
+func validateXML(data []byte) []string {
+	var validationErrors = []string{}
+
+	// Not perfect, but maybe good enough for now.
+	if xml.Unmarshal(data, new(interface{})) != nil {
+		validationErrors = append(validationErrors, makeInvalidXMLErrorMessage())
+	}
+
+	return validationErrors
+}
+
 // This function is largely borrowed from Don Mennerich's go-aspace package
 // https://github.com/nyudlts/go-aspace
 func validateEADAgainstSchema(data []byte) []string {
@@ -308,7 +361,7 @@ func validateEADAgainstSchema(data []byte) []string {
 
 	// initialize with a default error message
 	validationErrors = append(validationErrors, makeInvalidXMLErrorMessage())
-	
+
 	schema, err := schemas.ReadFile("schema/ead-2002-20210412.xsd")
 	if err != nil {
 		return append(validationErrors, err.Error())
