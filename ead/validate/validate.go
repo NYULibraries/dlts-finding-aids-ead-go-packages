@@ -327,7 +327,6 @@ func validateEADAgainstSchema(data []byte) []string {
 
 	err = eadxsd.Validate(doc)
 	if err != nil {
-		fmt.Printf("SVE: %T %v\n", err, err.(xsd.SchemaValidationError).Errors())
 		// capture the high-level error message
 		validationErrors = append(validationErrors, err.Error())
 
