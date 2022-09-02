@@ -15,6 +15,7 @@ import (
 var fixturesDirPath string
 var invalidEadDataFixturePath string
 var invalidXMLFixturePath string
+var invalidEADFixturePath string
 var missingRequiredElementsEADIDAndArchDescFixturePath string
 var missingRequiredElementsEADIDAndRepositoryFixturePath string
 var missingRequiredElementsEADIDAndRepositoryCorpnameFixturePath string
@@ -33,6 +34,7 @@ func init() {
 	fixturesDirPath = filepath.Join(root, "validate", "testdata", "fixtures")
 	invalidEadDataFixturePath = filepath.Join(fixturesDirPath, "mc_100-invalid-eadid-repository-role-relator-codes-unpublished-material.xml")
 	invalidXMLFixturePath = filepath.Join(fixturesDirPath, "invalid-xml.xml")
+	invalidEADFixturePath = filepath.Join(fixturesDirPath, "ad_rg_009_3_2_1.xml")
 	missingRequiredElementsEADIDAndArchDescFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-archdesc.xml")
 	missingRequiredElementsEADIDAndRepositoryFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-repository.xml")
 	missingRequiredElementsEADIDAndRepositoryCorpnameFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-repository-corpname.xml")
@@ -163,27 +165,75 @@ func TestValidateEADInvalidXML(t *testing.T) {
 	doTest(invalidXMLFixturePath, expected, t)
 }
 
+func TestValidateEADInvalidEAD(t *testing.T) {
+	var expected = []string{
+		makeInvalidXMLErrorMessage(),
+		"schema validation failed",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+		"Element '{urn:isbn:1-931666-22-9}container', attribute 'type': '' is not a valid value of the atomic type 'xs:NMTOKEN'.",
+	}
+
+	doTest(invalidEADFixturePath, expected, t)
+}
+
 func TestValidateEADMissingRequiredElements(t *testing.T) {
 	var expected = []string{
-		makeMissingRequiredElementErrorMessage("<eadid>"),
-		makeMissingRequiredElementErrorMessage("<archdesc>"),
+		makeInvalidXMLErrorMessage(),
+		"schema validation failed",
+		"Element '{urn:isbn:1-931666-22-9}filedesc': This element is not expected. Expected is ( {urn:isbn:1-931666-22-9}eadid ).",
+		"Element '{urn:isbn:1-931666-22-9}ead': Missing child element(s). Expected is one of ( {urn:isbn:1-931666-22-9}frontmatter, {urn:isbn:1-931666-22-9}archdesc ).",
 	}
 
 	doTest(missingRequiredElementsEADIDAndArchDescFixturePath, expected, t)
 
 	expected = []string{
-		makeMissingRequiredElementErrorMessage("<eadid>"),
-		makeMissingRequiredElementErrorMessage("<archdesc>/<did>/<repository>"),
+		makeInvalidXMLErrorMessage(),
+		"schema validation failed",
+		"Element '{urn:isbn:1-931666-22-9}filedesc': This element is not expected. Expected is ( {urn:isbn:1-931666-22-9}eadid ).",
 	}
 
 	doTest(missingRequiredElementsEADIDAndRepositoryFixturePath, expected, t)
 
 	expected = []string{
-		makeMissingRequiredElementErrorMessage("<eadid>"),
-		makeMissingRequiredElementErrorMessage("<archdesc>/<did>/<repository>/<corpname>"),
+		makeInvalidXMLErrorMessage(),
+		"schema validation failed",
+		"Element '{urn:isbn:1-931666-22-9}filedesc': This element is not expected. Expected is ( {urn:isbn:1-931666-22-9}eadid ).",
 	}
 
 	doTest(missingRequiredElementsEADIDAndRepositoryCorpnameFixturePath, expected, t)
+}
+
+func TestValidateEADInvalidEADActual(t *testing.T) {
+	doTest(validEADFixturePath, []string{}, t)
+	doTest(validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath, []string{}, t)
 }
 
 func TestValidateEADValidEADNoErrors(t *testing.T) {

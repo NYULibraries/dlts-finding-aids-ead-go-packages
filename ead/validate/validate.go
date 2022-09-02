@@ -2,6 +2,8 @@ package validate
 
 import (
 	"bytes"
+	"embed"
+	_ "embed"
 	"encoding/xml"
 	"fmt"
 	"io"
@@ -9,13 +11,15 @@ import (
 	"strings"
 	"unicode"
 
-	// Originally was trying to write this package without using 3rd party modules,
-	// but decided to use this xmlquery module for role attribute validation.
-	// See https://jira.nyu.edu/browse/FADESIGN-491?focusedCommentId=1945424&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-1945424.
 	"github.com/antchfx/xmlquery"
+	"github.com/lestrrat-go/libxml2/parser"
+	"github.com/lestrrat-go/libxml2/xsd"
 
 	"github.com/nyulibraries/dlts-finding-aids-ead-go-packages/ead"
 )
+
+//go:embed schema
+var schemas embed.FS
 
 const ValidEADIDRegexpString = "^[a-z0-9]+(?:_[a-z0-9]+){1,7}$"
 
@@ -34,7 +38,19 @@ var ValidRepositoryNames = []string{
 func ValidateEAD(data []byte) ([]string, error) {
 	var validationErrors = []string{}
 
+	// Performing a two stage validation here:
+	// 1.) validateXML is just making sure that we have a valid XML document
+	// 2.) validateEADAgainstSchema is confirming that the document conforms
+	//     to the EAD schema
+	//
+	// This approach avoids unwanted libxml2 output when the data is not XML
 	validationErrors = append(validationErrors, validateXML(data)...)
+	// If the data is not valid XML there is no point doing any more checks.
+	if len(validationErrors) > 0 {
+		return validationErrors, nil
+	}
+
+	validationErrors = append(validationErrors, validateEADAgainstSchema(data)...)
 	// If the data is not valid XML there is no point doing any more checks.
 	if len(validationErrors) > 0 {
 		return validationErrors, nil
@@ -297,6 +313,7 @@ func validateRoleAttributes(data []byte) ([]string, error) {
 	return validationErrors, nil
 }
 
+// The following comment and function validateXML() are from David Arjanik:
 // This is not so straightforward: https://stackoverflow.com/questions/53476012/how-to-validate-a-xml:
 //
 // Note that the answer from GodsBoss given in
@@ -335,4 +352,46 @@ func validateXML(data []byte) []string {
 	}
 
 	return validationErrors
+}
+
+// This function is largely borrowed from Don Mennerich's go-aspace package
+// https://github.com/nyudlts/go-aspace
+func validateEADAgainstSchema(data []byte) []string {
+	var validationErrors = []string{}
+
+	// initialize with a default error message
+	validationErrors = append(validationErrors, makeInvalidXMLErrorMessage())
+
+	schema, err := schemas.ReadFile("schema/ead-2002-20210412.xsd")
+	if err != nil {
+		return append(validationErrors, err.Error())
+	}
+	eadxsd, err := xsd.Parse(schema)
+	if err != nil {
+		return append(validationErrors, err.Error())
+	}
+
+	p := parser.New()
+	doc, err := p.Parse(data)
+	if err != nil {
+		validationErrors = append(validationErrors, "Unable to parse XML file")
+		return append(validationErrors, err.Error())
+	}
+
+	err = eadxsd.Validate(doc)
+	if err != nil {
+		// capture the high-level error message
+		validationErrors = append(validationErrors, err.Error())
+
+		// capture the detailed error info:
+		// the Validate function returns an xsd.SchemaValidationError that
+		// has an underlying Errors() method with more detailed errors
+		for _, e := range err.(xsd.SchemaValidationError).Errors() {
+			validationErrors = append(validationErrors, e.Error())
+		}
+		return validationErrors
+	}
+
+	// all ok, return empty slice
+	return []string{}
 }
