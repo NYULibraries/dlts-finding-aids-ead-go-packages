@@ -366,10 +366,12 @@ func validateEADAgainstSchema(data []byte) []string {
 	if err != nil {
 		return append(validationErrors, err.Error())
 	}
+
 	eadxsd, err := xsd.Parse(schema)
 	if err != nil {
 		return append(validationErrors, err.Error())
 	}
+	defer eadxsd.Free()
 
 	p := parser.New()
 	doc, err := p.Parse(data)
@@ -377,6 +379,7 @@ func validateEADAgainstSchema(data []byte) []string {
 		validationErrors = append(validationErrors, "Unable to parse XML file")
 		return append(validationErrors, err.Error())
 	}
+	defer doc.Free()
 
 	err = eadxsd.Validate(doc)
 	if err != nil {
