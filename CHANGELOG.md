@@ -1,5 +1,11 @@
 # Changelog
 
+#### v0.15.2
+  - change the xlink.xsd `schemaLocation` in the local EAD 2002 schema
+    to use a DLTS URL to avoid rate-limiting behavior observed when
+    pulling the `xlink.xsd` schema from the Library of Congress
+    server (https://www.loc.gov/standards/xlink/xlink.xsd).
+
 #### v0.15.1
   - add in Free() calls to validation functions
 
