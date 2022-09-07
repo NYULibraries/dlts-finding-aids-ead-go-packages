@@ -362,7 +362,7 @@ func validateEADAgainstSchema(data []byte) []string {
 	// initialize with a default error message
 	validationErrors = append(validationErrors, makeInvalidXMLErrorMessage())
 
-	schema, err := schemas.ReadFile("schema/ead-2002-20210412.xsd")
+	schema, err := schemas.ReadFile("schema/ead-2002-20210412-dlts.xsd")
 	if err != nil {
 		return append(validationErrors, err.Error())
 	}
