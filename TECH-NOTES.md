@@ -1,5 +1,10 @@
 ## Technical Notes
 
+#### The EAD validation functionality in this package requires that  
+     the following URL is online and serves the xlink.xsd file :  
+	 http://ead-publisher.dlib.nyu.edu/support/xsd/xlink.xsd  
+
+
 #### Code layout:
 * `ead.go` : contains EAD types
 * `generate.go` : generation code
