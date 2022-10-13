@@ -5,7 +5,7 @@ package ead
 // Based on: "Data model for parsing EAD <archdesc> elements": https://jira.nyu.edu/jira/browse/FADESIGN-29.
 
 const (
-	Version = "0.15.2"
+	Version = "0.15.2-with-dmnyu-ordering"
 )
 
 type EAD struct {
@@ -293,14 +293,11 @@ type FileDesc struct {
 }
 
 type FormattedNoteWithHead struct {
-	ID FilteredString `xml:"id,attr" json:"id,omitempty"`
+	ID       FilteredString `xml:"id,attr" json:"id,omitempty"`
+	Head     *Head          `xml:"head" json:"head,omitempty"`
 
-	ChronList   []*ChronList `xml:"chronlist" json:"chronlist,omitempty"`
-	DefItem     []*DefItem   `xml:"defitem,omitemtpy" json:"defitem,omitempty"`
-	Head        *Head        `xml:"head,omitemtpy" json:"head,omitempty"`
-	LegalStatus *LegalStatus `xml:"legalstatus,omitemtpy" json:"legalstatus,omitempty"`
-	List        []*List      `xml:"list,omitemtpy" json:"list,omitempty"`
-	P           []*P         `xml:"p,omitempty" json:"p,omitempty"`
+	// adding Don Mennerich's approach here...
+	Children []*EADChild    `xml:",any" json:"children,omitempty"`
 }
 
 type Head struct {
