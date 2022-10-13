@@ -5,7 +5,7 @@ package ead
 // Based on: "Data model for parsing EAD <archdesc> elements": https://jira.nyu.edu/jira/browse/FADESIGN-29.
 
 const (
-	Version = "0.15.2-with-dmnyu-ordering"
+	Version = "0.15.2-stream-parsing-2022-10-13T15:33"
 )
 
 type EAD struct {
@@ -77,8 +77,9 @@ type Bibliography struct {
 	ID FilteredString `xml:"id,attr" json:"id,omitempty"`
 
 	Head   *Head     `xml:"head,omitemtpy" json:"head,omitempty"`
-	BibRef []*BibRef `xml:"bibref,omitempty" json:"bibref,omitempty"`
-	P      []*P      `xml:"p,omitempty" json:"p,omitempty"`
+
+	// adding Don Mennerich's approach here...
+	Children []*EADChild    `xml:",any" json:"children,omitempty"`
 }
 
 type BibRef struct {
