@@ -206,34 +206,47 @@
                 "head": {
                     "value": "Bibliography"
                 },
-                "bibref": [
+                "children": [
                     {
-                        "value": "Adler, Jerry. \u003cspan class=\"ead-title\"\u003eHigh \u003cspan class=\"ead-emph ead-emph-italic\"\u003eRise\u003c/span\u003e.\u003c/span\u003eNew York: \u003cbr\u003e \u003cspan class=\"ead-corpname\"\u003eHarper Collins,\u003c/span\u003e 1993.",
-                        "title": [
-                            {
-                                "value": "High \u003cspan class=\"ead-emph ead-emph-italic\"\u003eRise\u003c/span\u003e."
-                            }
-                        ]
+                        "name": "p",
+                        "value": {
+                            "value": "This is the Bibliography."
+                        }
                     },
                     {
-                        "value": "Corruption and Racketeering in the \u003cspan class=\"ead-name\"\u003eNew York City\u003c/span\u003e Construction Industry. Interim Report by the New York State Organized Crime Task Force. Ithaca, NY: ILR Press, New York State School of Industrial and Labor Relations, Cornell University, 1988."
+                        "name": "bibref",
+                        "value": {
+                            "value": "Adler, Jerry. \u003cspan class=\"ead-title\"\u003eHigh \u003cspan class=\"ead-emph ead-emph-italic\"\u003eRise\u003c/span\u003e.\u003c/span\u003eNew York: \u003cbr\u003e \u003cspan class=\"ead-corpname\"\u003eHarper Collins,\u003c/span\u003e 1993.",
+                            "title": [
+                                {
+                                    "value": "High \u003cspan class=\"ead-emph ead-emph-italic\"\u003eRise\u003c/span\u003e."
+                                }
+                            ]
+                        }
                     },
                     {
-                        "value": "Corruption and Racketeering in the New York City Construction Industry. Final Report to \u003cspan class=\"ead-persname\"\u003eGovernor Mario M. Cuomo\u003c/span\u003e. Ronald Goldstock, Director, New York State Organized Crime Task Force. December 1989."
+                        "name": "bibref",
+                        "value": {
+                            "value": "Corruption and Racketeering in the \u003cspan class=\"ead-name\"\u003eNew York City\u003c/span\u003e Construction Industry. Interim Report by the New York State Organized Crime Task Force. Ithaca, NY: ILR Press, New York State School of Industrial and Labor Relations, Cornell University, 1988."
+                        }
                     },
                     {
-                        "value": "\u003cspan class=\"ead-emph ead-emph-bold\"\u003eArdouin, Charles Nicholas Celigny\u003c/span\u003e. \u003cspan class=\"ead-title\"\u003eEssais sur l'histoire d'Haiti\u003c/span\u003e. Port-au-Prince, 1865.",
-                        "title": [
-                            {
-                                "value": "Essais sur l'histoire d'Haiti",
-                                "render": "italic"
-                            }
-                        ]
-                    }
-                ],
-                "p": [
+                        "name": "bibref",
+                        "value": {
+                            "value": "Corruption and Racketeering in the New York City Construction Industry. Final Report to \u003cspan class=\"ead-persname\"\u003eGovernor Mario M. Cuomo\u003c/span\u003e. Ronald Goldstock, Director, New York State Organized Crime Task Force. December 1989."
+                        }
+                    },
                     {
-                        "value": "This is the Bibliography."
+                        "name": "bibref",
+                        "value": {
+                            "value": "\u003cspan class=\"ead-emph ead-emph-bold\"\u003eArdouin, Charles Nicholas Celigny\u003c/span\u003e. \u003cspan class=\"ead-title\"\u003eEssais sur l'histoire d'Haiti\u003c/span\u003e. Port-au-Prince, 1865.",
+                            "title": [
+                                {
+                                    "value": "Essais sur l'histoire d'Haiti",
+                                    "render": "italic"
+                                }
+                            ]
+                        }
                     }
                 ]
             }
