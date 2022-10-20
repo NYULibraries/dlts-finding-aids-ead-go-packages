@@ -266,31 +266,77 @@
                     }
                 ],
                 "genreform": [
-                    "Annual reports.",
-                    "Capes (outerwear)",
-                    "Compact discs.",
-                    "DVDs.",
-                    "Baptismal registers",
-                    "Birth certificates",
-                    "Clippings (information artifacts)",
-                    "Employees' manuals",
-                    "Letters (correspondence)",
-                    "Minutes (administrative records)",
-                    "Newsletters.",
-                    "Pamphlets.",
-                    "Periodicals.",
-                    "Photographic prints.",
-                    "Registers (lists)",
-                    "Reports.",
-                    "School yearbooks",
-                    "VHS."
+                    {
+                        "value": "Annual reports."
+                    },
+                    {
+                        "value": "Capes (outerwear)"
+                    },
+                    {
+                        "value": "Compact discs."
+                    },
+                    {
+                        "value": "DVDs."
+                    },
+                    {
+                        "value": "Baptismal registers"
+                    },
+                    {
+                        "value": "Birth certificates"
+                    },
+                    {
+                        "value": "Clippings (information artifacts)"
+                    },
+                    {
+                        "value": "Employees' manuals"
+                    },
+                    {
+                        "value": "Letters (correspondence)"
+                    },
+                    {
+                        "value": "Minutes (administrative records)"
+                    },
+                    {
+                        "value": "Newsletters."
+                    },
+                    {
+                        "value": "Pamphlets."
+                    },
+                    {
+                        "value": "Periodicals."
+                    },
+                    {
+                        "value": "Photographic prints."
+                    },
+                    {
+                        "value": "Registers (lists)"
+                    },
+                    {
+                        "value": "Reports."
+                    },
+                    {
+                        "value": "School yearbooks"
+                    },
+                    {
+                        "value": "VHS."
+                    }
                 ],
                 "geogname": [
-                    "Nanuet (N.Y.)",
-                    "New York (N.Y.)",
-                    "Puerto Rico",
-                    "Rockland County (N.Y.)",
-                    "Staten Island (New York, N.Y.)"
+                    {
+                        "value": "Nanuet (N.Y.)"
+                    },
+                    {
+                        "value": "New York (N.Y.)"
+                    },
+                    {
+                        "value": "Puerto Rico"
+                    },
+                    {
+                        "value": "Rockland County (N.Y.)"
+                    },
+                    {
+                        "value": "Staten Island (New York, N.Y.)"
+                    }
                 ],
                 "persname": [
                     {
@@ -354,37 +400,99 @@
                     }
                 ],
                 "subject": [
-                    "Abandoned children -- New York (State) -- New York.",
-                    "Adoption -- United States.",
-                    "Charities -- New York (State) -- New York.",
-                    "Child abuse -- Prevention",
-                    "Children -- Hospitals -- New York (State) -- New York.",
-                    "Children -- New York (State) -- New York -- History.",
-                    "Children with disabilities -- New York (State) -- Nanuet.",
-                    "Children with disabilities -- New York (State) -- New York.",
-                    "Developmental disabilities -- Treatment",
-                    "Drug abuse counseling -- New York (State) -- New York.",
-                    "Fresh-air charity -- United States.",
-                    "Foster children -- United States -- History.",
-                    "Group homes -- New York (State).",
-                    "Group homes for people with disabilities -- New York (State).",
-                    "Health facility-based child care",
-                    "Homeless youth -- New York (State) -- New York.",
-                    "Hospitals -- Maternity services -- New York (State) -- New York.",
-                    "Hospitals, Convalescent -- New York (State) -- New York.",
-                    "Nuns -- New York (State) -- New York -- History.",
-                    "Nursery schools -- New York (State) -- New York -- History.",
-                    "Nursing -- Study and teaching -- New York (State) -- New York.",
-                    "Nursing schools -- New York (State) -- New York -- History.",
-                    "Orphans -- New York (State) -- New York.",
-                    "Orphanages -- New York (State) -- New York.",
-                    "Social service -- New York (State) -- New York.",
-                    "Social work administration -- New York (State) -- New York.",
-                    "Social work with children -- New York (State) -- New York -- History.",
-                    "Social work with youth -- New York (State) -- New York -- History.",
-                    "Orphan trains",
-                    "Unmarried mothers -- New York (State) -- New York.",
-                    "Women's shelters -- New York (State) -- New York."
+                    {
+                        "value": "Abandoned children -- New York (State) -- New York."
+                    },
+                    {
+                        "value": "Adoption -- United States."
+                    },
+                    {
+                        "value": "Charities -- New York (State) -- New York."
+                    },
+                    {
+                        "value": "Child abuse -- Prevention"
+                    },
+                    {
+                        "value": "Children -- Hospitals -- New York (State) -- New York."
+                    },
+                    {
+                        "value": "Children -- New York (State) -- New York -- History."
+                    },
+                    {
+                        "value": "Children with disabilities -- New York (State) -- Nanuet."
+                    },
+                    {
+                        "value": "Children with disabilities -- New York (State) -- New York."
+                    },
+                    {
+                        "value": "Developmental disabilities -- Treatment"
+                    },
+                    {
+                        "value": "Drug abuse counseling -- New York (State) -- New York."
+                    },
+                    {
+                        "value": "Fresh-air charity -- United States."
+                    },
+                    {
+                        "value": "Foster children -- United States -- History."
+                    },
+                    {
+                        "value": "Group homes -- New York (State)."
+                    },
+                    {
+                        "value": "Group homes for people with disabilities -- New York (State)."
+                    },
+                    {
+                        "value": "Health facility-based child care"
+                    },
+                    {
+                        "value": "Homeless youth -- New York (State) -- New York."
+                    },
+                    {
+                        "value": "Hospitals -- Maternity services -- New York (State) -- New York."
+                    },
+                    {
+                        "value": "Hospitals, Convalescent -- New York (State) -- New York."
+                    },
+                    {
+                        "value": "Nuns -- New York (State) -- New York -- History."
+                    },
+                    {
+                        "value": "Nursery schools -- New York (State) -- New York -- History."
+                    },
+                    {
+                        "value": "Nursing -- Study and teaching -- New York (State) -- New York."
+                    },
+                    {
+                        "value": "Nursing schools -- New York (State) -- New York -- History."
+                    },
+                    {
+                        "value": "Orphans -- New York (State) -- New York."
+                    },
+                    {
+                        "value": "Orphanages -- New York (State) -- New York."
+                    },
+                    {
+                        "value": "Social service -- New York (State) -- New York."
+                    },
+                    {
+                        "value": "Social work administration -- New York (State) -- New York."
+                    },
+                    {
+                        "value": "Social work with children -- New York (State) -- New York -- History."
+                    },
+                    {
+                        "value": "Social work with youth -- New York (State) -- New York -- History."
+                    },
+                    {
+                        "value": "Orphan trains"
+                    },
+                    {
+                        "value": "Unmarried mothers -- New York (State) -- New York."
+                    },
+                    {
+                        "value": "Women's shelters -- New York (State) -- New York."
+                    }
                 ]
             }
         ],

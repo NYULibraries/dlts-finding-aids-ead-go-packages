@@ -276,16 +276,24 @@
                     }
                 ],
                 "function": [
-                    "War Powers Conference"
+                    {
+                        "value": "War Powers Conference"
+                    }
                 ],
                 "genreform": [
-                    "Oral histories (literary works)"
+                    {
+                        "value": "Oral histories (literary works)"
+                    }
                 ],
                 "geogname": [
-                    "Boston (Mass.) -- Intellectual life -- 20th century."
+                    {
+                        "value": "Boston (Mass.) -- Intellectual life -- 20th century."
+                    }
                 ],
                 "occupation": [
-                    "Fulbright scholars."
+                    {
+                        "value": "Fulbright scholars."
+                    }
                 ],
                 "persname": [
                     {
@@ -294,12 +302,13 @@
                     }
                 ],
                 "subject": [
-                    "Irish American women -- History -- 19th century."
+                    {
+                        "value": "Irish American women -- History -- 19th century."
+                    }
                 ],
                 "title": [
                     {
-                        "value": "New York Nichibei.",
-                        "source": "local"
+                        "value": "New York Nichibei."
                     }
                 ]
             }
@@ -974,19 +983,29 @@
                                                                 }
                                                             ],
                                                             "function": [
-                                                                "War Powers Conference"
+                                                                {
+                                                                    "value": "War Powers Conference"
+                                                                }
                                                             ],
                                                             "genreform": [
-                                                                "Oral histories (literary works)"
+                                                                {
+                                                                    "value": "Oral histories (literary works)"
+                                                                }
                                                             ],
                                                             "geogname": [
-                                                                "Boston (Mass.) -- Intellectual life -- 20th century."
+                                                                {
+                                                                    "value": "Boston (Mass.) -- Intellectual life -- 20th century."
+                                                                }
                                                             ],
                                                             "occupation": [
-                                                                "Fulbright scholars."
+                                                                {
+                                                                    "value": "Fulbright scholars."
+                                                                }
                                                             ],
                                                             "subject": [
-                                                                "Irish American women -- History -- 19th century."
+                                                                {
+                                                                    "value": "Irish American women -- History -- 19th century."
+                                                                }
                                                             ]
                                                         }
                                                     ],
@@ -1596,19 +1615,29 @@
                                                         }
                                                     ],
                                                     "function": [
-                                                        "War Powers Conference"
+                                                        {
+                                                            "value": "War Powers Conference"
+                                                        }
                                                     ],
                                                     "genreform": [
-                                                        "Oral histories (literary works)"
+                                                        {
+                                                            "value": "Oral histories (literary works)"
+                                                        }
                                                     ],
                                                     "geogname": [
-                                                        "Boston (Mass.) -- Intellectual life -- 20th century."
+                                                        {
+                                                            "value": "Boston (Mass.) -- Intellectual life -- 20th century."
+                                                        }
                                                     ],
                                                     "occupation": [
-                                                        "Fulbright scholars."
+                                                        {
+                                                            "value": "Fulbright scholars."
+                                                        }
                                                     ],
                                                     "subject": [
-                                                        "Irish American women -- History -- 19th century."
+                                                        {
+                                                            "value": "Irish American women -- History -- 19th century."
+                                                        }
                                                     ]
                                                 }
                                             ],
@@ -2218,19 +2247,29 @@
                                                 }
                                             ],
                                             "function": [
-                                                "War Powers Conference"
+                                                {
+                                                    "value": "War Powers Conference"
+                                                }
                                             ],
                                             "genreform": [
-                                                "Oral histories (literary works)"
+                                                {
+                                                    "value": "Oral histories (literary works)"
+                                                }
                                             ],
                                             "geogname": [
-                                                "Boston (Mass.) -- Intellectual life -- 20th century."
+                                                {
+                                                    "value": "Boston (Mass.) -- Intellectual life -- 20th century."
+                                                }
                                             ],
                                             "occupation": [
-                                                "Fulbright scholars."
+                                                {
+                                                    "value": "Fulbright scholars."
+                                                }
                                             ],
                                             "subject": [
-                                                "Irish American women -- History -- 19th century."
+                                                {
+                                                    "value": "Irish American women -- History -- 19th century."
+                                                }
                                             ]
                                         }
                                     ],
@@ -2840,19 +2879,29 @@
                                         }
                                     ],
                                     "function": [
-                                        "War Powers Conference"
+                                        {
+                                            "value": "War Powers Conference"
+                                        }
                                     ],
                                     "genreform": [
-                                        "Oral histories (literary works)"
+                                        {
+                                            "value": "Oral histories (literary works)"
+                                        }
                                     ],
                                     "geogname": [
-                                        "Boston (Mass.) -- Intellectual life -- 20th century."
+                                        {
+                                            "value": "Boston (Mass.) -- Intellectual life -- 20th century."
+                                        }
                                     ],
                                     "occupation": [
-                                        "Fulbright scholars."
+                                        {
+                                            "value": "Fulbright scholars."
+                                        }
                                     ],
                                     "subject": [
-                                        "Irish American women -- History -- 19th century."
+                                        {
+                                            "value": "Irish American women -- History -- 19th century."
+                                        }
                                     ]
                                 }
                             ],
@@ -3613,19 +3662,29 @@
                                 }
                             ],
                             "function": [
-                                "War Powers Conference"
+                                {
+                                    "value": "War Powers Conference"
+                                }
                             ],
                             "genreform": [
-                                "Oral histories (literary works)"
+                                {
+                                    "value": "Oral histories (literary works)"
+                                }
                             ],
                             "geogname": [
-                                "Boston (Mass.) -- Intellectual life -- 20th century."
+                                {
+                                    "value": "Boston (Mass.) -- Intellectual life -- 20th century."
+                                }
                             ],
                             "occupation": [
-                                "Fulbright scholars."
+                                {
+                                    "value": "Fulbright scholars."
+                                }
                             ],
                             "subject": [
-                                "Irish American women -- History -- 19th century."
+                                {
+                                    "value": "Irish American women -- History -- 19th century."
+                                }
                             ]
                         }
                     ],

@@ -5,7 +5,7 @@ package ead
 // Based on: "Data model for parsing EAD <archdesc> elements": https://jira.nyu.edu/jira/browse/FADESIGN-29.
 
 const (
-	Version = "0.15.2-stream-parsing-2022-10-13T16:04"
+	Version = "0.15.2-stream-parsing-2022-10-20T15:44"
 )
 
 type EAD struct {
@@ -76,10 +76,10 @@ type ArchRef struct {
 type Bibliography struct {
 	ID FilteredString `xml:"id,attr" json:"id,omitempty"`
 
-	Head   *Head     `xml:"head,omitemtpy" json:"head,omitempty"`
+	Head *Head `xml:"head,omitemtpy" json:"head,omitempty"`
 
 	// adding Don Mennerich's approach here...
-	Children []*EADChild    `xml:",any" json:"children,omitempty"`
+	Children []*EADChild `xml:",any" json:"children,omitempty"`
 }
 
 type BibRef struct {
@@ -148,13 +148,13 @@ type Container struct {
 type ControlAccess struct {
 	CorpName   []*AccessTermWithRole `xml:"corpname" json:"corpname,omitempty"`
 	FamName    []*AccessTermWithRole `xml:"famname" json:"famname,omitempty"`
-	Function   []*FilteredString     `xml:"function" json:"function,omitempty"`
-	GenreForm  []*FilteredString     `xml:"genreform" json:"genreform,omitempty"`
-	GeogName   []*FilteredString     `xml:"geogname" json:"geogname,omitempty"`
-	Occupation []*FilteredString     `xml:"occupation" json:"occupation,omitempty"`
+	Function   []*AccessTermWithRole `xml:"function" json:"function,omitempty"`
+	GenreForm  []*AccessTermWithRole `xml:"genreform" json:"genreform,omitempty"`
+	GeogName   []*AccessTermWithRole `xml:"geogname" json:"geogname,omitempty"`
+	Occupation []*AccessTermWithRole `xml:"occupation" json:"occupation,omitempty"`
 	PersName   []*AccessTermWithRole `xml:"persname" json:"persname,omitempty"`
-	Subject    []*FilteredString     `xml:"subject" json:"subject,omitempty"`
-	Title      []*Title              `xml:"title" json:"title,omitempty"`
+	Subject    []*AccessTermWithRole `xml:"subject" json:"subject,omitempty"`
+	Title      []*AccessTermWithRole `xml:"title" json:"title,omitempty"`
 }
 
 type Creation struct {
@@ -294,11 +294,11 @@ type FileDesc struct {
 }
 
 type FormattedNoteWithHead struct {
-	ID       FilteredString `xml:"id,attr" json:"id,omitempty"`
-	Head     *Head          `xml:"head" json:"head,omitempty"`
+	ID   FilteredString `xml:"id,attr" json:"id,omitempty"`
+	Head *Head          `xml:"head" json:"head,omitempty"`
 
 	// adding Don Mennerich's approach here...
-	Children []*EADChild    `xml:",any" json:"children,omitempty"`
+	Children []*EADChild `xml:",any" json:"children,omitempty"`
 }
 
 type Head struct {

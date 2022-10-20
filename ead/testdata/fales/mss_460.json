@@ -111,15 +111,29 @@
                     }
                 ],
                 "genreform": [
-                    "Video recordings."
+                    {
+                        "value": "Video recordings."
+                    }
                 ],
                 "subject": [
-                    "Composition (Music) -- 21st century.",
-                    "Electronic music.",
-                    "Music -- Peru -- 20th century.",
-                    "Women musicians -- Interviews.",
-                    "Music -- Germany -- 20th century.",
-                    "Music -- New York (State) -- New York -- 20th century."
+                    {
+                        "value": "Composition (Music) -- 21st century."
+                    },
+                    {
+                        "value": "Electronic music."
+                    },
+                    {
+                        "value": "Music -- Peru -- 20th century."
+                    },
+                    {
+                        "value": "Women musicians -- Interviews."
+                    },
+                    {
+                        "value": "Music -- Germany -- 20th century."
+                    },
+                    {
+                        "value": "Music -- New York (State) -- New York -- 20th century."
+                    }
                 ]
             }
         ],
