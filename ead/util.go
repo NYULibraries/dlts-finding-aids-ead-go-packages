@@ -297,6 +297,7 @@ func _getConvertedTextWithTags(text string, convertLBTags bool) ([]byte, error) 
 
 	var result string
 	needClosingTag := true
+	unit := ""
 	for {
 		token, err := decoder.Token()
 
@@ -331,9 +332,31 @@ func _getConvertedTextWithTags(text string, convertLBTags bool) ([]byte, error) 
 						result += _getConvertedTextWithTagsDefault(token.Name.Local)
 					}
 				}
+			case "extent":
+				{
+					// if there is a "unit" attribute, save the
+					// unit attribute value to append to the result
+					for i := range token.Attr {
+						if token.Attr[i].Name.Local == "unit" {
+							unit = token.Attr[i].Value
+						}
+
+					}
+					// default processing of opening tag
+					result += _getConvertedTextWithTagsDefault(token.Name.Local)
+				}
 			}
 
 		case xml.EndElement:
+			// Add "unit" attribute value to extent if present
+			if token.Name.Local == "extent" {
+				if unit != "" {
+					result += fmt.Sprintf(" %s", unit)
+				}
+				// reset unit
+				unit = ""
+			}
+
 			if needClosingTag {
 				result += "</span>"
 			} else {
