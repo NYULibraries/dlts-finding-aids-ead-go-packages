@@ -227,28 +227,6 @@ func (event *Event) MarshalJSON() ([]byte, error) {
 	return jsonData, nil
 }
 
-func (extent *Extent) MarshalJSON() ([]byte, error) {
-	type ExtentWithTags Extent
-
-	result, err := getConvertedTextWithTags(extent.Value)
-	if err != nil {
-		return nil, err
-	}
-
-	jsonData, err := json.Marshal(&struct {
-		Value string `json:"value,chardata,omitempty"`
-		*ExtentWithTags
-	}{
-		Value:          string(result),
-		ExtentWithTags: (*ExtentWithTags)(extent),
-	})
-	if err != nil {
-		return nil, err
-	}
-
-	return jsonData, nil
-}
-
 func (head *Head) MarshalJSON() ([]byte, error) {
 	type HeadWithTags Head
 

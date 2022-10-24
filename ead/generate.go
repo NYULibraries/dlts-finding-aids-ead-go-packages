@@ -118,7 +118,7 @@ func writeConvertTextWithTagsCodeToBuffer(w *bytes.Buffer) {
 		"Date" : "getConvertedTextWithTags",
 		"Dimensions" : "getConvertedTextWithTags",
 		"Event" : "getConvertedTextWithTags",
-		"Extent" : "getConvertedTextWithTags",
+		// Extent has custom marshaling requirements and is therefore not generated.
 		"Head" : "getConvertedTextWithTags",
 		"Item" : "getConvertedTextWithTags",
 		"LangMaterial" : "getConvertedTextWithTags",

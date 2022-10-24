@@ -137,3 +137,35 @@ func (dao *DAO) MarshalJSON() ([]byte, error) {
 		DAOAlias: (*DAOAlias)(dao),
 	})
 }
+
+func (extent *Extent) MarshalJSON() ([]byte, error) {
+	type ExtentWithTags Extent
+
+	// this code tempararily adds the unit string, if present
+	// to the extent.Value for Marshaling
+	valueSave := extent.Value
+	if extent.Unit != "" {
+		extent.Value = extent.Value + " " + extent.Unit.String()
+	}
+
+	result, err := getConvertedTextWithTags(extent.Value)
+	if err != nil {
+		return nil, err
+	}
+
+	jsonData, err := json.Marshal(&struct {
+		Value string `json:"value,chardata,omitempty"`
+		*ExtentWithTags
+	}{
+		Value:          string(result),
+		ExtentWithTags: (*ExtentWithTags)(extent),
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	// restore the saved extent.Value
+	extent.Value = valueSave
+
+	return jsonData, nil
+}
