@@ -402,13 +402,12 @@ type P struct {
 }
 
 type PhysDesc struct {
-	AltRender FilteredString      `xml:"altrender,attr" json:"altrender,omitempty"`
-	ID        FilteredString      `xml:"id,attr" json:"id,omitempty"`
-	Label     FilteredLabelString `xml:"label,attr" json:"label,omitempty"`
-
-	Extent     []*Extent   `xml:"extent" json:"extent,omitempty"`
-	Dimensions *Dimensions `xml:"dimensions" json:"dimensions,omitempty"`
-	PhysFacet  *PhysFacet  `xml:"physfacet" json:"physfacet,omitempty"`
+	AltRender  FilteredString      `xml:"altrender,attr" json:"altrender,omitempty"`
+	ID         FilteredString      `xml:"id,attr" json:"id,omitempty"`
+	Label      FilteredLabelString `xml:"label,attr" json:"label,omitempty"`
+	Extent     []*Extent           `xml:"extent" json:"extent,omitempty"`
+	Dimensions *Dimensions         `xml:"dimensions" json:"dimensions,omitempty"`
+	PhysFacet  *PhysFacet          `xml:"physfacet" json:"physfacet,omitempty"`
 
 	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
 }
