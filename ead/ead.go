@@ -310,6 +310,7 @@ type Index struct {
 
 	Head       *Head         `xml:"head,omitemtpy" json:"head,omitempty"`
 	IndexEntry []*IndexEntry `xml:"indexentry" json:"indexentry,omitempty"`
+	P          []*P          `xml:"p" json:"p,omitempty"`
 }
 
 type IndexEntry struct {
