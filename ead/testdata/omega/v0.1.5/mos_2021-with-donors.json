@@ -1244,6 +1244,11 @@
                                                                         }
                                                                     ]
                                                                 }
+                                                            ],
+                                                            "p": [
+                                                                {
+                                                                    "value": "Level 6 This is the Index."
+                                                                }
                                                             ]
                                                         }
                                                     ],
@@ -1875,6 +1880,11 @@
                                                                     "value": "Level 5 Index Item"
                                                                 }
                                                             ]
+                                                        }
+                                                    ],
+                                                    "p": [
+                                                        {
+                                                            "value": "Level 5 This is the Index."
                                                         }
                                                     ]
                                                 }
@@ -2508,6 +2518,11 @@
                                                         }
                                                     ]
                                                 }
+                                            ],
+                                            "p": [
+                                                {
+                                                    "value": "Level 4 This is the Index."
+                                                }
                                             ]
                                         }
                                     ],
@@ -3136,6 +3151,11 @@
                                                     "value": "Level 3 Index item"
                                                 }
                                             ]
+                                        }
+                                    ],
+                                    "p": [
+                                        {
+                                            "value": "Level 3 This is the Index."
                                         }
                                     ]
                                 }
@@ -3926,6 +3946,11 @@
                                     "subject": [
                                         "Level 2 Index term 3"
                                     ]
+                                }
+                            ],
+                            "p": [
+                                {
+                                    "value": "Level 2 This is the Index."
                                 }
                             ]
                         }
