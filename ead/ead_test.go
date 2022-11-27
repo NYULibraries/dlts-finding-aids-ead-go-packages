@@ -330,3 +330,14 @@ func TestTitleProper(t *testing.T) {
 	})
 }
 
+func TestThemeID(t *testing.T) {
+	t.Run("Get ThemeID", func(t *testing.T) {
+		sut := getOmegaEAD(t)
+		themeid := "cdf80c84-2655-4a01-895d-fbf9a374c1df"
+		sut.PubInfo.SetPubInfo(themeid)
+
+		want := themeid
+		got := sut.ThemeID()
+		assertEqual(t, want, got, "TestThemeID")
+	})
+}

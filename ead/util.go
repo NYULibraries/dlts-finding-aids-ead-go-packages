@@ -497,3 +497,8 @@ func (e *EAD) TitleProper() string {
 	flattenedTitleProper, _ := flattenTitleProper(e.EADHeader.FileDesc.TitleStmt.TitleProper)
 	return string(flattenedTitleProper)
 }
+
+func (e *EAD) ThemeID() string {
+	return e.PubInfo.ThemeID
+}
+
