@@ -309,3 +309,14 @@ func TestJSONMarshalingWithDonorsAndImageAndImageSets(t *testing.T) {
 		}
 	})
 }
+
+func TestGetGuideTitle(t *testing.T) {
+	t.Run("Get Guide Title", func(t *testing.T) {
+		sut := getOmegaEAD(t)
+
+		want := "Megan O'Shea's One Resource to Rule Them All"
+		got := sut.GuideTitle()
+		assertEqual(t, want, got, "TestGetGuideTitle")
+	})
+}
+

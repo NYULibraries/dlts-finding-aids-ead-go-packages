@@ -488,3 +488,7 @@ func flattenTitleProper(titleProper []*TitleProper) ([]byte, error) {
 
 	return getConvertedTextWithTagsNoLBConversion(titleToFlatten.Value)
 }
+
+func (e *EAD) GuideTitle() string {
+	return e.ArchDesc.DID.UnitTitle.Value
+}
