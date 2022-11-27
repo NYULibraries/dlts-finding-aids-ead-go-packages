@@ -310,13 +310,23 @@ func TestJSONMarshalingWithDonorsAndImageAndImageSets(t *testing.T) {
 	})
 }
 
-func TestGetGuideTitle(t *testing.T) {
+func TestGuideTitle(t *testing.T) {
 	t.Run("Get Guide Title", func(t *testing.T) {
 		sut := getOmegaEAD(t)
 
 		want := "Megan O'Shea's One Resource to Rule Them All"
 		got := sut.GuideTitle()
-		assertEqual(t, want, got, "TestGetGuideTitle")
+		assertEqual(t, want, got, "TestGuideTitle")
+	})
+}
+
+func TestTitleProper(t *testing.T) {
+	t.Run("Get Title Proper", func(t *testing.T) {
+		sut := getOmegaEAD(t)
+
+		want := "Guide to Megan O'Shea's \u003cspan class=\"ead-emph ead-emph-italic\"\u003eOne\u003c/span\u003e Resource to \u003cspan class=\"ead-lb\"\u003e\u003c/span\u003e Rule Them All \u003cspan class=\"ead-num\"\u003eMOS.2021\u003c/span\u003e"
+		got := sut.TitleProper()
+		assertEqual(t, want, got, "TestTitleProper")
 	})
 }
 

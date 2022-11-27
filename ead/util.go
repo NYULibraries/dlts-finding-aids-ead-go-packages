@@ -492,3 +492,8 @@ func flattenTitleProper(titleProper []*TitleProper) ([]byte, error) {
 func (e *EAD) GuideTitle() string {
 	return e.ArchDesc.DID.UnitTitle.Value
 }
+
+func (e *EAD) TitleProper() string {
+	flattenedTitleProper, _ := flattenTitleProper(e.EADHeader.FileDesc.TitleStmt.TitleProper)
+	return string(flattenedTitleProper)
+}
