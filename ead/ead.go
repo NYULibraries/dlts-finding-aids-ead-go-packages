@@ -10,6 +10,7 @@ const (
 
 type EAD struct {
 	RunInfo   RunInfo   `json:"runinfo"`
+	DAOInfo   DAOInfo   `json:"-"`
 	PubInfo   PubInfo   `json:"pubinfo"`
 	Donors    Donors    `json:"donors,omitempty"`
 	ArchDesc  *ArchDesc `xml:"archdesc" json:"archdesc,omitempty"`

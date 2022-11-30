@@ -417,6 +417,14 @@ func (r *RunInfo) SetRunInfo(version string, t time.Time, sourceFile string) {
 	r.SourceFile = sourceFile
 }
 
+// RunInfo stores data related to the parsing/JSON generation process
+type DAOInfo struct {
+	imageCount        uint32
+	audioCount        uint32
+	videoCount        uint32
+	externalLinkCount uint32
+}
+
 // Donors is slice containing Donor names
 type Donors []FilteredString
 
@@ -501,4 +509,3 @@ func (e *EAD) TitleProper() string {
 func (e *EAD) ThemeID() string {
 	return e.PubInfo.ThemeID
 }
-
