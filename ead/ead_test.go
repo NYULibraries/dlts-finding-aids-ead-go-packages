@@ -54,6 +54,12 @@ func assertEqual(t *testing.T, want string, got string, label string) {
 	}
 }
 
+func assertEqualUint32(t *testing.T, want uint32, got uint32, label string) {
+	if want != got {
+		t.Errorf("%s Mismatch: want: %d, got: %d", label, want, got)
+	}
+}
+
 func assertFilteredStringSlicesEqual(t *testing.T, want []FilteredString, got []FilteredString, label string) {
 	if len(want) != len(got) {
 		t.Errorf("%s Mismatch: want: %v, got: %v", label, want, got)
@@ -342,14 +348,17 @@ func TestThemeID(t *testing.T) {
 	})
 }
 
-func TestDAOCounts(t *testing.T) {
-	t.Run("AudioCount()", func(t *testing.T) {
+func TestInitDAOCounts(t *testing.T) {
+	t.Run("InitDAOCounts()", func(t *testing.T) {
 		sut := getOmegaEAD(t)
-		themeid := "cdf80c84-2655-4a01-895d-fbf9a374c1df"
-		sut.PubInfo.SetPubInfo(themeid)
+		sut.InitDAOCounts()
 
-		want := themeid
-		got := sut.ThemeID()
-		assertEqual(t, want, got, "TestThemeID")
+		assertEqualUint32(t, 0, sut.DAOInfo.AudioCount, "AudioCount")
+		assertEqualUint32(t, 0, sut.DAOInfo.VideoCount, "VideoCount")
+		assertEqualUint32(t, 0, sut.DAOInfo.ImageCount, "ImageCount")
+		assertEqualUint32(t, 0, sut.DAOInfo.ExternalLinkCount, "ExternalLinkCount")
+		assertEqualUint32(t, 0, sut.DAOInfo.ElectronicRecordsReadingRoomCount, "ElectronicRecordsReadingRoomCount")
+		assertEqualUint32(t, 0, sut.DAOInfo.AudioReadingRoomCount, "AudioReadingRoomCount")
+		assertEqualUint32(t, 0, sut.DAOInfo.VideoReadingRoomCount, "VideoReadingRoomCount")
 	})
 }

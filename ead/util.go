@@ -418,11 +418,15 @@ func (r *RunInfo) SetRunInfo(version string, t time.Time, sourceFile string) {
 }
 
 // DAOInfo stores data related to the digital objects in the parsed EAD
+// https://jira.nyu.edu/browse/FADESIGN-138
 type DAOInfo struct {
-	imageCount        uint32
-	audioCount        uint32
-	videoCount        uint32
-	externalLinkCount uint32
+	AudioCount                        uint32
+	VideoCount                        uint32
+	ImageCount                        uint32
+	ExternalLinkCount                 uint32
+	ElectronicRecordsReadingRoomCount uint32
+	AudioReadingRoomCount             uint32
+	VideoReadingRoomCount             uint32
 }
 
 // Donors is slice containing Donor names
@@ -508,4 +512,34 @@ func (e *EAD) TitleProper() string {
 
 func (e *EAD) ThemeID() string {
 	return e.PubInfo.ThemeID
+}
+
+func (e *EAD) InitDAOCounts() {
+	countArchDescDAOs(e)
+}
+
+func countArchDescDAOs(e *EAD) {
+	countDAOs(e.ArchDesc.DID.DAO, &e.DAOInfo)
+}
+
+func countDAOs(daos []*DAO, daoInfo *DAOInfo) {
+	// https://jira.nyu.edu/browse/FADESIGN-138
+	for _, dao := range daos {
+		switch dao.Role {
+		case "audio-service":
+			daoInfo.AudioCount += 1
+		case "video-service":
+			daoInfo.VideoCount += 1
+		case "image-service":
+			daoInfo.ImageCount += 1
+		case "external-link":
+			daoInfo.ExternalLinkCount += 1
+		case "electronic-records-reading-room":
+			daoInfo.ElectronicRecordsReadingRoomCount += 1
+		case "audio-reading-room":
+			daoInfo.AudioReadingRoomCount += 1
+		case "video-reading-room":
+			daoInfo.AudioReadingRoomCount += 1
+		}
+	}
 }
