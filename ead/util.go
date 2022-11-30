@@ -515,10 +515,6 @@ func (e *EAD) ThemeID() string {
 }
 
 func (e *EAD) InitDAOCounts() {
-	countArchDescDAOs(e)
-}
-
-func countArchDescDAOs(e *EAD) {
 	countDAOs(e.ArchDesc.DID.DAO, &e.DAOInfo)
 }
 
