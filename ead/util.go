@@ -516,7 +516,22 @@ func (e *EAD) ThemeID() string {
 
 func (e *EAD) InitDAOCounts() {
 	countDAOs(e.ArchDesc.DID.DAO, &e.DAOInfo)
+	countCsDAOs(e.ArchDesc.DSC.C, &e.DAOInfo)
 }
+
+// process an array of containers
+func countCsDAOs(cs []*C, daoInfo *DAOInfo) {
+	for _, c := range cs {
+		countCDAOs(c, daoInfo)
+	}
+}
+
+// process a container
+func countCDAOs(c *C, daoInfo *DAOInfo) {
+	countCsDAOs(c.C, daoInfo)
+	countDAOs(c.DID.DAO, daoInfo)
+}
+
 
 func countDAOs(daos []*DAO, daoInfo *DAOInfo) {
 	// https://jira.nyu.edu/browse/FADESIGN-138
@@ -535,7 +550,7 @@ func countDAOs(daos []*DAO, daoInfo *DAOInfo) {
 		case "audio-reading-room":
 			daoInfo.AudioReadingRoomCount += 1
 		case "video-reading-room":
-			daoInfo.AudioReadingRoomCount += 1
+			daoInfo.VideoReadingRoomCount += 1
 		}
 	}
 }
