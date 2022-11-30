@@ -417,7 +417,7 @@ func (r *RunInfo) SetRunInfo(version string, t time.Time, sourceFile string) {
 	r.SourceFile = sourceFile
 }
 
-// RunInfo stores data related to the parsing/JSON generation process
+// DAOInfo stores data related to the digital objects in the parsed EAD
 type DAOInfo struct {
 	imageCount        uint32
 	audioCount        uint32
