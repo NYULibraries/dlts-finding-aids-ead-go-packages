@@ -311,7 +311,7 @@ func TestJSONMarshalingWithDonorsAndImageAndImageSets(t *testing.T) {
 }
 
 func TestGuideTitle(t *testing.T) {
-	t.Run("Get Guide Title", func(t *testing.T) {
+	t.Run("GuideTitle()", func(t *testing.T) {
 		sut := getOmegaEAD(t)
 
 		want := "Megan O'Shea's One Resource to Rule Them All"
@@ -321,7 +321,7 @@ func TestGuideTitle(t *testing.T) {
 }
 
 func TestTitleProper(t *testing.T) {
-	t.Run("Get Title Proper", func(t *testing.T) {
+	t.Run("TitleProper()", func(t *testing.T) {
 		sut := getOmegaEAD(t)
 
 		want := "Guide to Megan O'Shea's \u003cspan class=\"ead-emph ead-emph-italic\"\u003eOne\u003c/span\u003e Resource to \u003cspan class=\"ead-lb\"\u003e\u003c/span\u003e Rule Them All \u003cspan class=\"ead-num\"\u003eMOS.2021\u003c/span\u003e"
@@ -331,7 +331,19 @@ func TestTitleProper(t *testing.T) {
 }
 
 func TestThemeID(t *testing.T) {
-	t.Run("Get ThemeID", func(t *testing.T) {
+	t.Run("ThemeID()", func(t *testing.T) {
+		sut := getOmegaEAD(t)
+		themeid := "cdf80c84-2655-4a01-895d-fbf9a374c1df"
+		sut.PubInfo.SetPubInfo(themeid)
+
+		want := themeid
+		got := sut.ThemeID()
+		assertEqual(t, want, got, "TestThemeID")
+	})
+}
+
+func TestDAOCounts(t *testing.T) {
+	t.Run("AudioCount()", func(t *testing.T) {
 		sut := getOmegaEAD(t)
 		themeid := "cdf80c84-2655-4a01-895d-fbf9a374c1df"
 		sut.PubInfo.SetPubInfo(themeid)
