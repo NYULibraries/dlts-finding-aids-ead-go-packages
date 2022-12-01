@@ -356,7 +356,7 @@ func TestInitDAOCounts(t *testing.T) {
 		assertEqualUint32(t, 3, sut.DAOInfo.AudioCount, "AudioCount")
 		assertEqualUint32(t, 2, sut.DAOInfo.VideoCount, "VideoCount")
 		assertEqualUint32(t, 4, sut.DAOInfo.ImageCount, "ImageCount")
-		assertEqualUint32(t, 1, sut.DAOInfo.ExternalLinkCount, "ExternalLinkCount")
+		assertEqualUint32(t, 2, sut.DAOInfo.ExternalLinkCount, "ExternalLinkCount")
 		assertEqualUint32(t, 1, sut.DAOInfo.ElectronicRecordsReadingRoomCount, "ElectronicRecordsReadingRoomCount")
 		assertEqualUint32(t, 1, sut.DAOInfo.AudioReadingRoomCount, "AudioReadingRoomCount")
 		assertEqualUint32(t, 1, sut.DAOInfo.VideoReadingRoomCount, "VideoReadingRoomCount")
