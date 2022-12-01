@@ -532,7 +532,6 @@ func countCDAOs(c *C, daoInfo *DAOInfo) {
 	countDAOs(c.DID.DAO, daoInfo)
 }
 
-
 func countDAOs(daos []*DAO, daoInfo *DAOInfo) {
 	// https://jira.nyu.edu/browse/FADESIGN-138
 	for _, dao := range daos {
@@ -551,6 +550,11 @@ func countDAOs(daos []*DAO, daoInfo *DAOInfo) {
 			daoInfo.AudioReadingRoomCount += 1
 		case "video-reading-room":
 			daoInfo.VideoReadingRoomCount += 1
+		default:
+			// the strategy for DAOs without roles is to treat them as external links
+			if len(strings.TrimSpace(string(dao.Role))) == 0 {
+				daoInfo.ExternalLinkCount += 1
+			}
 		}
 	}
 }
