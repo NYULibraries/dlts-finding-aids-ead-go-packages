@@ -370,3 +370,19 @@ func TestEADID(t *testing.T) {
 		assertEqual(t, "mos_2021", sut.EADID(), "EADID()")
 	})
 }
+
+func TestDAOCountFunctions(t *testing.T) {
+	t.Run("InitDAOCounts()", func(t *testing.T) {
+		sut := getOmegaEAD(t)
+		sut.InitDAOCounts()
+
+		assertEqualUint32(t, 3, sut.AudioDAOCount(), "AudioDAOCount")
+		assertEqualUint32(t, 2, sut.VideoDAOCount(), "VideoDAOCount")
+		assertEqualUint32(t, 4, sut.ImageDAOCount(), "ImageDAOCount")
+		assertEqualUint32(t, 2, sut.ExternalLinkDAOCount(), "ExternalLinkDAOCount")
+		assertEqualUint32(t, 1, sut.ElectronicRecordsReadingRoomDAOCount(), "ElectronicRecordsReadingRoomDAOCount")
+		assertEqualUint32(t, 1, sut.AudioReadingRoomDAOCount(), "AudioReadingRoomDAOCount")
+		assertEqualUint32(t, 1, sut.VideoReadingRoomDAOCount(), "VideoReadingRoomDAOCount")
+	})
+}
+

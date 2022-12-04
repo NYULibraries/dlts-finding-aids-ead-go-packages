@@ -562,3 +562,31 @@ func countDAOs(daos []*DAO, daoInfo *DAOInfo) {
 		}
 	}
 }
+
+func (e *EAD) AudioDAOCount() uint32 {
+	return e.DAOInfo.AudioCount
+}
+
+func (e *EAD) VideoDAOCount() uint32 {
+	return e.DAOInfo.VideoCount
+}
+
+func (e *EAD) ImageDAOCount() uint32 {
+	return e.DAOInfo.ImageCount
+}
+
+func (e *EAD) ExternalLinkDAOCount() uint32 {
+	return e.DAOInfo.ExternalLinkCount
+}
+
+func (e *EAD) ElectronicRecordsReadingRoomDAOCount() uint32 {
+	return e.DAOInfo.ElectronicRecordsReadingRoomCount
+}
+
+func (e *EAD) AudioReadingRoomDAOCount() uint32 {
+	return e.DAOInfo.AudioReadingRoomCount
+}
+
+func (e *EAD) VideoReadingRoomDAOCount() uint32 {
+	return e.DAOInfo.VideoReadingRoomCount
+}
