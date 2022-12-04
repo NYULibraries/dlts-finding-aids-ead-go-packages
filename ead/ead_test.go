@@ -362,3 +362,11 @@ func TestInitDAOCounts(t *testing.T) {
 		assertEqualUint32(t, 1, sut.DAOInfo.VideoReadingRoomCount, "VideoReadingRoomCount")
 	})
 }
+
+func TestEADID(t *testing.T) {
+	t.Run("EADID()", func(t *testing.T) {
+		sut := getOmegaEAD(t)
+
+		assertEqual(t, "mos_2021", sut.EADID(), "EADID()")
+	})
+}

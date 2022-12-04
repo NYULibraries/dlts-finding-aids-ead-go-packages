@@ -519,6 +519,10 @@ func (e *EAD) InitDAOCounts() {
 	countCsDAOs(e.ArchDesc.DSC.C, &e.DAOInfo)
 }
 
+func (e *EAD) EADID() string {
+	return e.EADHeader.EADID.Value
+}
+
 // process an array of containers
 func countCsDAOs(cs []*C, daoInfo *DAOInfo) {
 	for _, c := range cs {
