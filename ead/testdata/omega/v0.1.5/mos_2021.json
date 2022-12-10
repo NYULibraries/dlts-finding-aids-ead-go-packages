@@ -1604,6 +1604,22 @@
                                                                 }
                                                             ]
                                                         }
+                                                    ],
+                                                    "userestrict": [
+                                                        {
+                                                            "id": "aspace_4178d83cc644ca0b095ad5d7aefded35",
+                                                            "head": {
+                                                                "value": "Conditions Governing Use"
+                                                            },
+                                                            "children": [
+                                                                {
+                                                                    "name": "p",
+                                                                    "value": {
+                                                                        "value": "Level 6 This is the Conditions Governing Use note."
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
                                                     ]
                                                 }
                                             ],
@@ -2237,6 +2253,22 @@
                                                                         ]
                                                                     }
                                                                 ]
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "userestrict": [
+                                                {
+                                                    "id": "aspace_3b4710103c1ea86472fd2ba940d2bc34",
+                                                    "head": {
+                                                        "value": "Conditions Governing Use"
+                                                    },
+                                                    "children": [
+                                                        {
+                                                            "name": "p",
+                                                            "value": {
+                                                                "value": "Level 5 This is the Conditions Governing Use note."
                                                             }
                                                         }
                                                     ]
@@ -2878,6 +2910,22 @@
                                                 }
                                             ]
                                         }
+                                    ],
+                                    "userestrict": [
+                                        {
+                                            "id": "aspace_2f463c22696e1024a8eda0a1f251b16f",
+                                            "head": {
+                                                "value": "Conditions Governing Use"
+                                            },
+                                            "children": [
+                                                {
+                                                    "name": "p",
+                                                    "value": {
+                                                        "value": "Level 4 This is the Conditions Governing Use note."
+                                                    }
+                                                }
+                                            ]
+                                        }
                                     ]
                                 }
                             ],
@@ -3508,6 +3556,22 @@
                                                         ]
                                                     }
                                                 ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            ],
+                            "userestrict": [
+                                {
+                                    "id": "aspace_17b8b10cf5a81a95c0b8cf6e7eefb11c",
+                                    "head": {
+                                        "value": "Conditions Governing Use"
+                                    },
+                                    "children": [
+                                        {
+                                            "name": "p",
+                                            "value": {
+                                                "value": "Level 3 This is the Conditions Governing Use note."
                                             }
                                         }
                                     ]
@@ -4303,6 +4367,22 @@
                                                 ]
                                             }
                                         ]
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    "userestrict": [
+                        {
+                            "id": "aspace_2a50b40dffc6e51c474e021a377e8d5c",
+                            "head": {
+                                "value": "Conditions Governing Use"
+                            },
+                            "children": [
+                                {
+                                    "name": "p",
+                                    "value": {
+                                        "value": "Level 2 This is the Conditions Governing Use note."
                                     }
                                 }
                             ]
