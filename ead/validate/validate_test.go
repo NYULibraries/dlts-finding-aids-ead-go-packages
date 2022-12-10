@@ -42,6 +42,48 @@ func init() {
 	validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath = filepath.Join(fixturesDirPath, "mc_100-valid-eadid-with-leading-and-trailing-spaces.xml")
 }
 
+func doTest(file string, expected []string, t *testing.T) {
+	var validationErrors, err = ValidateEAD(getEADXML(file))
+	if err != nil {
+		t.Fatalf(fmt.Sprintf(`Unexpected runtime error: %s`, err))
+	}
+
+	if len(validationErrors) != len(expected) {
+		var message = getNumErrorsMismatchErrorMessage(expected, validationErrors)
+		t.Fatalf(message)
+	}
+
+	for idx, err := range validationErrors {
+		if err != expected[idx] {
+			t.Errorf(`Expected error %d to be "%s", got "%s"`, idx, expected[idx], err)
+		}
+	}
+}
+
+func getEADXML(filepath string) []byte {
+	EADXML, err := ioutil.ReadFile(filepath)
+	if err != nil {
+		panic(err)
+	}
+
+	return EADXML
+}
+
+func getNumErrorsMismatchErrorMessage(expected []string, errors []string) string {
+	return fmt.Sprintf(`Expected %d error(s):
+
+%s
+
+Got %d error(s):
+
+%s`,
+		len(expected),
+		strings.Join(expected, "\n"),
+		len(errors),
+		strings.Join(errors, "\n"),
+	)
+}
+
 func TestValidEADIDRegexpString(t *testing.T) {
 	validEADIDRegexp, err := regexp.Compile(ValidEADIDRegexpString)
 	if err != nil {
@@ -241,44 +283,3 @@ func TestValidateEADValidEADNoErrors(t *testing.T) {
 	doTest(validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath, []string{}, t)
 }
 
-func doTest(file string, expected []string, t *testing.T) {
-	var validationErrors, err = ValidateEAD(getEADXML(file))
-	if err != nil {
-		t.Fatalf(fmt.Sprintf(`Unexpected runtime error: %s`, err))
-	}
-
-	if len(validationErrors) != len(expected) {
-		var message = getNumErrorsMismatchErrorMessage(expected, validationErrors)
-		t.Fatalf(message)
-	}
-
-	for idx, err := range validationErrors {
-		if err != expected[idx] {
-			t.Errorf(`Expected error %d to be "%s", got "%s"`, idx, expected[idx], err)
-		}
-	}
-}
-
-func getEADXML(filepath string) []byte {
-	EADXML, err := ioutil.ReadFile(filepath)
-	if err != nil {
-		panic(err)
-	}
-
-	return EADXML
-}
-
-func getNumErrorsMismatchErrorMessage(expected []string, errors []string) string {
-	return fmt.Sprintf(`Expected %d error(s):
-
-%s
-
-Got %d error(s):
-
-%s`,
-		len(expected),
-		strings.Join(expected, "\n"),
-		len(errors),
-		strings.Join(errors, "\n"),
-	)
-}
