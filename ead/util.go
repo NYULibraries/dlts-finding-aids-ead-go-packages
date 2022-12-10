@@ -571,6 +571,7 @@ func countDAOs(daos []*DAO, daoInfo *DAOInfo) {
 			appendDAO(dao, &daoInfo.AudioReadingRoomDAOs)
 		case "video-reading-room":
 			daoInfo.VideoReadingRoomCount += 1
+			appendDAO(dao, &daoInfo.VideoReadingRoomDAOs)
 		default:
 			// the strategy for DAOs without roles is to treat them as external links
 			if len(strings.TrimSpace(string(dao.Role))) == 0 {
