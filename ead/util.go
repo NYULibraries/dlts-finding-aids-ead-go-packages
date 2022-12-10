@@ -547,11 +547,14 @@ func countCDAOs(c *C, daoInfo *DAOInfo) {
 func countDAOs(daos []*DAO, daoInfo *DAOInfo) {
 	// https://jira.nyu.edu/browse/FADESIGN-138
 	for _, dao := range daos {
+		// collect all DAOs
 		appendDAO(dao, &daoInfo.AllDAOs)
+
 		switch dao.Role {
 		case "audio-service":
 			daoInfo.AudioCount += 1
-			daoInfo.AudioDAOs = append(daoInfo.AudioDAOs, dao)
+			appendDAO(dao, &daoInfo.AudioDAOs)
+//			daoInfo.AudioDAOs = append(daoInfo.AudioDAOs, dao)
 		case "video-service":
 			daoInfo.VideoCount += 1
 		case "image-service":
