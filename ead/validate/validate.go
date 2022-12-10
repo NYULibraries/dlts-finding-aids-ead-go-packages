@@ -412,7 +412,7 @@ func validateHREFs(ead ead.EAD) []string {
 		// https://golang.cafe/blog/how-to-validate-url-in-go.html
 		_, err := url.ParseRequestURI(string(dao.Href))
 		if err != nil {
-			validationErrors = append(validationErrors, fmt.Sprintf("Invalid HREF detected: '%s', Title: '%s'", dao.Href, dao.Title))
+			validationErrors = append(validationErrors, fmt.Sprintf("Invalid HREF detected: '%s', Title: '%s'", []byte(dao.Href), dao.Title))
 		}
 	}
 
