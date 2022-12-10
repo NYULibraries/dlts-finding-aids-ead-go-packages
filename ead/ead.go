@@ -5,7 +5,7 @@ package ead
 // Based on: "Data model for parsing EAD <archdesc> elements": https://jira.nyu.edu/jira/browse/FADESIGN-29.
 
 const (
-	Version = "0.15.2-stream-parsing-2022-12-09T22:23"
+	Version = "0.15.2-stream-parsing-2022-12-10T13:00"
 )
 
 type EAD struct {
@@ -65,7 +65,7 @@ type ArchDesc struct {
 	RelatedMaterial   []*FormattedNoteWithHead `xml:"relatedmaterial" json:"relatedmaterial,omitempty"`
 	ScopeContent      []*FormattedNoteWithHead `xml:"scopecontent" json:"scopecontent,omitempty"`
 	SeparatedMaterial []*FormattedNoteWithHead `xml:"separatedmaterial" json:"separatedmaterial,omitempty"`
-	UserRestrict      []*FormattedNoteWithHead `xml:"userestrict" json:"userestrict,omitempty"`
+	Userestrict       []*FormattedNoteWithHead `xml:"userestrict" json:"userestrict,omitempty"`
 }
 
 type ArchRef struct {
@@ -116,7 +116,7 @@ type C struct {
 	RelatedMaterial   []*FormattedNoteWithHead `xml:"relatedmaterial,omitempty" json:"relatedmaterial,omitempty"`
 	ScopeContent      []*FormattedNoteWithHead `xml:"scopecontent,omitempty" json:"scopecontent,omitempty"`
 	SeparatedMaterial []*FormattedNoteWithHead `xml:"separatedmaterial" json:"separatedmaterial,omitempty"`
-	UserRestrict      []*FormattedNoteWithHead `xml:"userrestrict,omitempty" json:"userrestrict,omitempty"`
+	Userestrict       []*FormattedNoteWithHead `xml:"userestrict,omitempty" json:"userestrict,omitempty"`
 }
 
 type Change struct {
