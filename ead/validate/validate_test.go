@@ -296,7 +296,8 @@ func TestValidateEADInvalidHREFs(t *testing.T) {
 		"Invalid HREF detected: 'RG 6.0.ref3026.1', Title: 'Letter from Marcel Breuer to Werner A. Baum'",
 		"Invalid HREF detected: 'RG 6.0.ref3027.1', Title: 'Letter from Hamilton P. Smith to Martin L. Beck'",
 		"Invalid HREF detected: 'RG 6.0.ref3028.1', Title: 'Letter from Chancellor Russell D. Niles to Hamilton P. Smith'",
-		"Invalid HREF detected: 'RG 6.0.ref3029.1', Title: 'Letter from Hamilton P. Smith to Chancellor Russell D. Niles'",
+		// the following line tests that the hrefs are not being filtered/stripped of blank space
+		"Invalid HREF detected: ' RG 6.0.ref3029.1 ', Title: 'Letter from Hamilton P. Smith to Chancellor Russell D. Niles'", 
 		"Invalid HREF detected: 'RG 6.0.ref3030.1', Title: 'Letter from Hamilton P. Smith to Martin L. Beck'",
 		"Invalid HREF detected: 'RG 6.0.ref3031.1', Title: 'Letter from Hamilton P. Smith to Martin L. Beck'",
 		"Invalid HREF detected: 'RG 6.0.ref3032.1', Title: 'Letter from Russell D. Niles to Hamilton P. Smith'",
