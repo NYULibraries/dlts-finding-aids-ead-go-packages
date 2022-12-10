@@ -427,6 +427,14 @@ type DAOInfo struct {
 	ElectronicRecordsReadingRoomCount uint32
 	AudioReadingRoomCount             uint32
 	VideoReadingRoomCount             uint32
+	AllDAOs                           []*DAO
+	AudioDAOs                         []*DAO
+	VideoDAOs                         []*DAO
+	ImageDAOs                         []*DAO
+	ExternalLinkDAOs                  []*DAO
+	ElectronicRecordsReadingRoomDAOs  []*DAO
+	AudioReadingRoomDAOs              []*DAO
+	VideoReadingRoomDAOs              []*DAO
 }
 
 // Donors is slice containing Donor names
@@ -539,9 +547,11 @@ func countCDAOs(c *C, daoInfo *DAOInfo) {
 func countDAOs(daos []*DAO, daoInfo *DAOInfo) {
 	// https://jira.nyu.edu/browse/FADESIGN-138
 	for _, dao := range daos {
+		appendDAO(dao, &daoInfo.AllDAOs)
 		switch dao.Role {
 		case "audio-service":
 			daoInfo.AudioCount += 1
+			daoInfo.AudioDAOs = append(daoInfo.AudioDAOs, dao)
 		case "video-service":
 			daoInfo.VideoCount += 1
 		case "image-service":
@@ -561,6 +571,10 @@ func countDAOs(daos []*DAO, daoInfo *DAOInfo) {
 			}
 		}
 	}
+}
+
+func appendDAO(dao *DAO, daoSlice *[]*DAO) {
+	*daoSlice = append(*daoSlice, dao)
 }
 
 func (e *EAD) AudioDAOCount() uint32 {
