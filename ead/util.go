@@ -420,6 +420,7 @@ func (r *RunInfo) SetRunInfo(version string, t time.Time, sourceFile string) {
 // DAOInfo stores data related to the digital objects in the parsed EAD
 // https://jira.nyu.edu/browse/FADESIGN-138
 type DAOInfo struct {
+	AllDAOCount                       uint32
 	AudioCount                        uint32
 	VideoCount                        uint32
 	ImageCount                        uint32
@@ -548,6 +549,7 @@ func countDAOs(daos []*DAO, daoInfo *DAOInfo) {
 	// https://jira.nyu.edu/browse/FADESIGN-138
 	for _, dao := range daos {
 		// collect all DAOs
+		daoInfo.AllDAOCount += 1
 		appendDAO(dao, &daoInfo.AllDAOs)
 
 		switch dao.Role {
@@ -584,6 +586,10 @@ func countDAOs(daos []*DAO, daoInfo *DAOInfo) {
 
 func appendDAO(dao *DAO, daoSlice *[]*DAO) {
 	*daoSlice = append(*daoSlice, dao)
+}
+
+func (e *EAD) AllDAOCount() uint32 {
+	return e.DAOInfo.AllDAOCount
 }
 
 func (e *EAD) AudioDAOCount() uint32 {

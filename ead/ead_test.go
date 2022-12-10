@@ -376,6 +376,7 @@ func TestDAOCountFunctions(t *testing.T) {
 		sut := getOmegaEAD(t)
 		sut.InitDAOCounts()
 
+		assertEqualUint32(t, 14, sut.AllDAOCount(), "AllDAOCount")
 		assertEqualUint32(t, 3, sut.AudioDAOCount(), "AudioDAOCount")
 		assertEqualUint32(t, 2, sut.VideoDAOCount(), "VideoDAOCount")
 		assertEqualUint32(t, 4, sut.ImageDAOCount(), "ImageDAOCount")
