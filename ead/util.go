@@ -568,6 +568,7 @@ func countDAOs(daos []*DAO, daoInfo *DAOInfo) {
 			appendDAO(dao, &daoInfo.ElectronicRecordsReadingRoomDAOs)
 		case "audio-reading-room":
 			daoInfo.AudioReadingRoomCount += 1
+			appendDAO(dao, &daoInfo.AudioReadingRoomDAOs)
 		case "video-reading-room":
 			daoInfo.VideoReadingRoomCount += 1
 		default:
