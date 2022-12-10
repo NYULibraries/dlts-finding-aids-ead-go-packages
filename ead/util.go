@@ -565,6 +565,7 @@ func countDAOs(daos []*DAO, daoInfo *DAOInfo) {
 			appendDAO(dao, &daoInfo.ExternalLinkDAOs)
 		case "electronic-records-reading-room":
 			daoInfo.ElectronicRecordsReadingRoomCount += 1
+			appendDAO(dao, &daoInfo.ElectronicRecordsReadingRoomDAOs)
 		case "audio-reading-room":
 			daoInfo.AudioReadingRoomCount += 1
 		case "video-reading-room":
