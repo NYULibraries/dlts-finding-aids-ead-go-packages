@@ -562,6 +562,7 @@ func countDAOs(daos []*DAO, daoInfo *DAOInfo) {
 			appendDAO(dao, &daoInfo.ImageDAOs)
 		case "external-link":
 			daoInfo.ExternalLinkCount += 1
+			appendDAO(dao, &daoInfo.ExternalLinkDAOs)
 		case "electronic-records-reading-room":
 			daoInfo.ElectronicRecordsReadingRoomCount += 1
 		case "audio-reading-room":
@@ -572,6 +573,7 @@ func countDAOs(daos []*DAO, daoInfo *DAOInfo) {
 			// the strategy for DAOs without roles is to treat them as external links
 			if len(strings.TrimSpace(string(dao.Role))) == 0 {
 				daoInfo.ExternalLinkCount += 1
+				appendDAO(dao, &daoInfo.ExternalLinkDAOs)
 			}
 		}
 	}
