@@ -559,6 +559,7 @@ func countDAOs(daos []*DAO, daoInfo *DAOInfo) {
 			appendDAO(dao, &daoInfo.VideoDAOs)
 		case "image-service":
 			daoInfo.ImageCount += 1
+			appendDAO(dao, &daoInfo.ImageDAOs)
 		case "external-link":
 			daoInfo.ExternalLinkCount += 1
 		case "electronic-records-reading-room":
