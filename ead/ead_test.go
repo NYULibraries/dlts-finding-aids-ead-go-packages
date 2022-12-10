@@ -383,6 +383,8 @@ func TestDAOCountFunctions(t *testing.T) {
 		assertEqualUint32(t, 1, sut.ElectronicRecordsReadingRoomDAOCount(), "ElectronicRecordsReadingRoomDAOCount")
 		assertEqualUint32(t, 1, sut.AudioReadingRoomDAOCount(), "AudioReadingRoomDAOCount")
 		assertEqualUint32(t, 1, sut.VideoReadingRoomDAOCount(), "VideoReadingRoomDAOCount")
+
+		assertEqualUint32(t, 14, uint32(len(sut.DAOInfo.AllDAOs)), "AllDAOCount")
 	})
 }
 
