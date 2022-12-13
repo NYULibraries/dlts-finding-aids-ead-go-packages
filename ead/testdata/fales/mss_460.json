@@ -5,7 +5,8 @@
         "sourcefile": ""
     },
     "pubinfo": {
-        "themeid": ""
+        "themeid": "",
+        "reposidentifier": ""
     },
     "archdesc": {
         "level": "collection",
