@@ -444,10 +444,12 @@ type Donors []FilteredString
 // PubInfo stores data used by the publication system
 type PubInfo struct {
 	ThemeID string `json:"themeid"`
+	RepoID  string `json:"reposidentifier"`
 }
 
-func (p *PubInfo) SetPubInfo(themeid string) {
+func (p *PubInfo) SetPubInfo(themeid string, repoid string) {
 	p.ThemeID = themeid
+	p.RepoID = repoid
 }
 
 // FilteredString provides a centralized string cleanup mechanism
@@ -521,6 +523,10 @@ func (e *EAD) TitleProper() string {
 
 func (e *EAD) ThemeID() string {
 	return e.PubInfo.ThemeID
+}
+
+func (e *EAD) RepoID() string {
+	return e.PubInfo.RepoID
 }
 
 func (e *EAD) InitDAOCounts() {

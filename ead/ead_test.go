@@ -175,17 +175,27 @@ func TestUpdateRunInfo(t *testing.T) {
 func TestUpdatePubInfo(t *testing.T) {
 	t.Run("Update PubInfo", func(t *testing.T) {
 		var sut EAD
+		var want, got string
 
-		want := ""
-		got := sut.PubInfo.ThemeID
+		want = ""
+		got = sut.PubInfo.ThemeID
 		assertEqual(t, want, got, "Initial ead.PubInfo.ThemeID")
 
+		want = ""
+		got = sut.PubInfo.RepoID
+		assertEqual(t, want, got, "Initial ead.PubInfo.RepoID")
+
 		themeid := "cdf80c84-2655-4a01-895d-fbf9a374c1df"
-		sut.PubInfo.SetPubInfo(themeid)
+		repoid := "9d396ffa-1b3e-41f0-8bc9-e101a5a828bc"
+		sut.PubInfo.SetPubInfo(themeid, repoid)
 
 		want = themeid
 		got = sut.PubInfo.ThemeID
 		assertEqual(t, want, got, "Post-assignment ead.PubInfo.ThemeID")
+
+		want = repoid
+		got = sut.PubInfo.RepoID
+		assertEqual(t, want, got, "Post-assignment ead.PubInfo.RepoID")
 
 	})
 }
@@ -336,15 +346,21 @@ func TestTitleProper(t *testing.T) {
 	})
 }
 
-func TestThemeID(t *testing.T) {
+func TestThemeIDAndRepoIDFunctions(t *testing.T) {
 	t.Run("ThemeID()", func(t *testing.T) {
+		var want, got string
 		sut := getOmegaEAD(t)
 		themeid := "cdf80c84-2655-4a01-895d-fbf9a374c1df"
-		sut.PubInfo.SetPubInfo(themeid)
+		repoid := "9d396ffa-1b3e-41f0-8bc9-e101a5a828bc"
+		sut.PubInfo.SetPubInfo(themeid, repoid)
 
-		want := themeid
-		got := sut.ThemeID()
-		assertEqual(t, want, got, "TestThemeID")
+		want = themeid
+		got = sut.ThemeID()
+		assertEqual(t, want, got, "TestThemeID()")
+
+		want = repoid
+		got = sut.RepoID()
+		assertEqual(t, want, got, "TestRepoID()")
 	})
 }
 
