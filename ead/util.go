@@ -438,6 +438,11 @@ type DAOInfo struct {
 	VideoReadingRoomDAOs              []*DAO
 }
 
+type DAOGrpInfo struct {
+	AllDAOGrpCount uint32
+	AllDAOGrpss    []*DAOGrp
+}
+
 // Donors is slice containing Donor names
 type Donors []FilteredString
 

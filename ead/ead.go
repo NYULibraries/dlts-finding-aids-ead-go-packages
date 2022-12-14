@@ -9,12 +9,13 @@ const (
 )
 
 type EAD struct {
-	RunInfo   RunInfo   `json:"runinfo"`
-	DAOInfo   DAOInfo   `json:"-"`
-	PubInfo   PubInfo   `json:"pubinfo"`
-	Donors    Donors    `json:"donors,omitempty"`
-	ArchDesc  *ArchDesc `xml:"archdesc" json:"archdesc,omitempty"`
-	EADHeader EADHeader `xml:"eadheader" json:"eadheader,omitempty"`
+	RunInfo    RunInfo    `json:"runinfo"`
+	DAOInfo    DAOInfo    `json:"-"`
+	DAOGrpInfo DAOGrpInfo `json:"-"`
+	PubInfo    PubInfo    `json:"pubinfo"`
+	Donors     Donors     `json:"donors,omitempty"`
+	ArchDesc   *ArchDesc  `xml:"archdesc" json:"archdesc,omitempty"`
+	EADHeader  EADHeader  `xml:"eadheader" json:"eadheader,omitempty"`
 }
 
 type Abstract struct {
