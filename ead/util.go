@@ -440,7 +440,7 @@ type DAOInfo struct {
 
 type DAOGrpInfo struct {
 	AllDAOGrpCount uint32
-	AllDAOGrpss    []*DAOGrp
+	AllDAOGrps     []*DAOGrp
 }
 
 // Donors is slice containing Donor names
@@ -629,4 +629,37 @@ func (e *EAD) AudioReadingRoomDAOCount() uint32 {
 
 func (e *EAD) VideoReadingRoomDAOCount() uint32 {
 	return e.DAOInfo.VideoReadingRoomCount
+}
+
+func (e *EAD) InitDAOGrpCount() {
+	countDAOGrps(e.ArchDesc.DID.DAOGrp, &e.DAOGrpInfo)
+	countCsDAOGrps(e.ArchDesc.DSC.C, &e.DAOGrpInfo)
+}
+
+func countDAOGrps(daoGrps []*DAOGrp, daoGrpInfo *DAOGrpInfo) {
+	for _, daoGrp := range daoGrps {
+		daoGrpInfo.AllDAOGrpCount += 1
+		appendDAOGrp(daoGrp, &daoGrpInfo.AllDAOGrps)
+	}
+}
+
+// process an array of containers
+func countCsDAOGrps(cs []*C, daoGrpInfo *DAOGrpInfo) {
+	for _, c := range cs {
+		countCDAOGrps(c, daoGrpInfo)
+	}
+}
+
+// process a container
+func countCDAOGrps(c *C, daoGrpInfo *DAOGrpInfo) {
+	countCsDAOGrps(c.C, daoGrpInfo)
+	countDAOGrps(c.DID.DAOGrp, daoGrpInfo)
+}
+
+func appendDAOGrp(daoGrp *DAOGrp, daoGrpSlice *[]*DAOGrp) {
+	*daoGrpSlice = append(*daoGrpSlice, daoGrp)
+}
+
+func (e *EAD) AllDAOGrpCount() uint32 {
+	return e.DAOGrpInfo.AllDAOGrpCount
 }
