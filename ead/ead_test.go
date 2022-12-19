@@ -411,3 +411,12 @@ func TestDAOCountFunctions(t *testing.T) {
 		assertEqualUint32(t, 1, uint32(len(sut.DAOInfo.VideoReadingRoomDAOs)), "VideoReadingRoomDAOs")
 	})
 }
+
+func TestDAOGrpCountFunction(t *testing.T) {
+	t.Run("InitDAOGrpCount()", func(t *testing.T) {
+		sut := getOmegaEAD(t)
+		sut.InitDAOGrpCount()
+
+		assertEqualUint32(t, 7, sut.AllDAOGrpCount(), "AllDAOGrpCount")
+	})
+}
