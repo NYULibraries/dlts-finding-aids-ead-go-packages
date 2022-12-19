@@ -1,5 +1,41 @@
 # Changelog
 
+#### v0.15.2-stream-parsing-2022-12-19T15_48
+  - WIP: 
+	- correct XML and JSON tag errors: `userrestrict` --> `userestrict`
+	- implement stream parsing for the following types:
+	  - `Bibliography`
+	  - `FormattedNoteWithHead`
+    - add units, if present, to `Extent` during `JSON` marshaling
+	- add `ReposID` to `PubInfo` type
+	- add valid-HREF assertion to `ValidateEAD()`
+	- accessor functions:
+	  - `GuideTitle()`
+	  - `TitleProper()`
+	  - `ThemeID()`
+	  - `RepoID()`
+	  - `EADID()`
+	- add `DAOInfo` type, `InitDAOInfo()` and accessor functions:
+	  - `AllDAOCount()`
+	  - `AudioDAOCount()`
+	  - `VideioDAOCount()`
+	  - `ImageDAOCount()`
+	  - `ExternalLinkDAOCount()`
+	  - `ElectronicRecordsReadingRoomDAOCount()`
+	  - `AudioReadingRoomDAOCount()`
+	  - `VideoReadingRoomDAOCount()`
+    - add `DAOGrpInfo` type, `InitDAOGrpInfo()` and accessor functions:
+	  - `AllDAOGrpCount()`
+    - update `SetPubInfo()` to accept `themeID` and `repoID` arguments
+	- update `ControlAccess` type, change the following members to `[]*AccessTermWithRole`:
+	  - `Function`
+	  - `GenreForm`
+	  - `GeogName`
+	  - `Occupation`
+	  - `Subject`
+	  - `Title`
+	- update `Index` type, add member `P []*P` 
+
 #### v0.15.2
   - change the xlink.xsd `schemaLocation` in the local EAD 2002 schema
     to use a DLTS URL to avoid rate-limiting behavior observed when
