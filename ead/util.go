@@ -535,8 +535,8 @@ func (e *EAD) RepoID() string {
 }
 
 func (e *EAD) InitDAOCounts() {
-	countDAOs(e.ArchDesc.DID.DAO, &e.DAOInfo)
-	countCsDAOs(e.ArchDesc.DSC.C, &e.DAOInfo)
+	CountDAOs(e.ArchDesc.DID.DAO, &e.DAOInfo)
+	CountCsDAOs(e.ArchDesc.DSC.C, &e.DAOInfo)
 }
 
 func (e *EAD) EADID() string {
@@ -544,19 +544,19 @@ func (e *EAD) EADID() string {
 }
 
 // process an array of containers
-func countCsDAOs(cs []*C, daoInfo *DAOInfo) {
+func CountCsDAOs(cs []*C, daoInfo *DAOInfo) {
 	for _, c := range cs {
-		countCDAOs(c, daoInfo)
+		CountCDAOs(c, daoInfo)
 	}
 }
 
 // process a container
-func countCDAOs(c *C, daoInfo *DAOInfo) {
-	countCsDAOs(c.C, daoInfo)
-	countDAOs(c.DID.DAO, daoInfo)
+func CountCDAOs(c *C, daoInfo *DAOInfo) {
+	CountCsDAOs(c.C, daoInfo)
+	CountDAOs(c.DID.DAO, daoInfo)
 }
 
-func countDAOs(daos []*DAO, daoInfo *DAOInfo) {
+func CountDAOs(daos []*DAO, daoInfo *DAOInfo) {
 	// https://jira.nyu.edu/browse/FADESIGN-138
 	for _, dao := range daos {
 		// collect all DAOs
@@ -632,11 +632,11 @@ func (e *EAD) VideoReadingRoomDAOCount() uint32 {
 }
 
 func (e *EAD) InitDAOGrpCount() {
-	countDAOGrps(e.ArchDesc.DID.DAOGrp, &e.DAOGrpInfo)
-	countCsDAOGrps(e.ArchDesc.DSC.C, &e.DAOGrpInfo)
+	CountDAOGrps(e.ArchDesc.DID.DAOGrp, &e.DAOGrpInfo)
+	CountCsDAOGrps(e.ArchDesc.DSC.C, &e.DAOGrpInfo)
 }
 
-func countDAOGrps(daoGrps []*DAOGrp, daoGrpInfo *DAOGrpInfo) {
+func CountDAOGrps(daoGrps []*DAOGrp, daoGrpInfo *DAOGrpInfo) {
 	for _, daoGrp := range daoGrps {
 		daoGrpInfo.AllDAOGrpCount += 1
 		appendDAOGrp(daoGrp, &daoGrpInfo.AllDAOGrps)
@@ -644,7 +644,7 @@ func countDAOGrps(daoGrps []*DAOGrp, daoGrpInfo *DAOGrpInfo) {
 }
 
 // process an array of containers
-func countCsDAOGrps(cs []*C, daoGrpInfo *DAOGrpInfo) {
+func CountCsDAOGrps(cs []*C, daoGrpInfo *DAOGrpInfo) {
 	for _, c := range cs {
 		countCDAOGrps(c, daoGrpInfo)
 	}
@@ -652,8 +652,8 @@ func countCsDAOGrps(cs []*C, daoGrpInfo *DAOGrpInfo) {
 
 // process a container
 func countCDAOGrps(c *C, daoGrpInfo *DAOGrpInfo) {
-	countCsDAOGrps(c.C, daoGrpInfo)
-	countDAOGrps(c.DID.DAOGrp, daoGrpInfo)
+	CountCsDAOGrps(c.C, daoGrpInfo)
+	CountDAOGrps(c.DID.DAOGrp, daoGrpInfo)
 }
 
 func appendDAOGrp(daoGrp *DAOGrp, daoGrpSlice *[]*DAOGrp) {
