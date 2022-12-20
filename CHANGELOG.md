@@ -35,6 +35,7 @@
 	  - `Subject`
 	  - `Title`
 	- update `Index` type, add member `P []*P` 
+	- make `CountDAO*` and `CountDAOGrp*` functions public
 
 #### v0.15.2
   - change the xlink.xsd `schemaLocation` in the local EAD 2002 schema
