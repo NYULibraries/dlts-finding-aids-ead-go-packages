@@ -663,3 +663,22 @@ func appendDAOGrp(daoGrp *DAOGrp, daoGrpSlice *[]*DAOGrp) {
 func (e *EAD) AllDAOGrpCount() uint32 {
 	return e.DAOGrpInfo.AllDAOGrpCount
 }
+
+func (di *DAOInfo) Clear() {
+	di.AllDAOCount = 0
+	di.AudioCount = 0
+	di.VideoCount = 0
+	di.ImageCount = 0
+	di.ExternalLinkCount = 0
+	di.ElectronicRecordsReadingRoomCount = 0
+	di.AudioReadingRoomCount = 0
+	di.VideoReadingRoomCount = 0
+	di.AllDAOs = nil
+	di.AudioDAOs = nil
+	di.VideoDAOs = nil
+	di.ImageDAOs = nil
+	di.ExternalLinkDAOs = nil
+	di.ElectronicRecordsReadingRoomDAOs = nil
+	di.AudioReadingRoomDAOs = nil
+	di.VideoReadingRoomDAOs = nil
+}

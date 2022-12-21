@@ -420,3 +420,48 @@ func TestDAOGrpCountFunction(t *testing.T) {
 		assertEqualUint32(t, 7, sut.AllDAOGrpCount(), "AllDAOGrpCount")
 	})
 }
+
+func TestDAOInfoClearFunction(t *testing.T) {
+	t.Run("DAOInfo.Clear()", func(t *testing.T) {
+		sut := getOmegaEAD(t)
+		sut.InitDAOCounts()
+
+		assertEqualUint32(t, 14, sut.AllDAOCount(), "AllDAOCount")
+		assertEqualUint32(t, 3, sut.AudioDAOCount(), "AudioDAOCount")
+		assertEqualUint32(t, 2, sut.VideoDAOCount(), "VideoDAOCount")
+		assertEqualUint32(t, 4, sut.ImageDAOCount(), "ImageDAOCount")
+		assertEqualUint32(t, 2, sut.ExternalLinkDAOCount(), "ExternalLinkDAOCount")
+		assertEqualUint32(t, 1, sut.ElectronicRecordsReadingRoomDAOCount(), "ElectronicRecordsReadingRoomDAOCount")
+		assertEqualUint32(t, 1, sut.AudioReadingRoomDAOCount(), "AudioReadingRoomDAOCount")
+		assertEqualUint32(t, 1, sut.VideoReadingRoomDAOCount(), "VideoReadingRoomDAOCount")
+
+		assertEqualUint32(t, 14, uint32(len(sut.DAOInfo.AllDAOs)), "AllDAOs")
+		assertEqualUint32(t, 3, uint32(len(sut.DAOInfo.AudioDAOs)), "AudioDAOs")
+		assertEqualUint32(t, 2, uint32(len(sut.DAOInfo.VideoDAOs)), "VideoDAOs")
+		assertEqualUint32(t, 4, uint32(len(sut.DAOInfo.ImageDAOs)), "ImageDAOs")
+		assertEqualUint32(t, 2, uint32(len(sut.DAOInfo.ExternalLinkDAOs)), "ExternalLinkDAOs")
+		assertEqualUint32(t, 1, uint32(len(sut.DAOInfo.ElectronicRecordsReadingRoomDAOs)), "ElectronicRecordsReadingRoomDAOs")
+		assertEqualUint32(t, 1, uint32(len(sut.DAOInfo.AudioReadingRoomDAOs)), "AudioReadingRoomDAOs")
+		assertEqualUint32(t, 1, uint32(len(sut.DAOInfo.VideoReadingRoomDAOs)), "VideoReadingRoomDAOs")
+
+		sut.DAOInfo.Clear()
+
+		assertEqualUint32(t, 0, sut.AllDAOCount(), "AllDAOCount")
+		assertEqualUint32(t, 0, sut.AudioDAOCount(), "AudioDAOCount")
+		assertEqualUint32(t, 0, sut.VideoDAOCount(), "VideoDAOCount")
+		assertEqualUint32(t, 0, sut.ImageDAOCount(), "ImageDAOCount")
+		assertEqualUint32(t, 0, sut.ExternalLinkDAOCount(), "ExternalLinkDAOCount")
+		assertEqualUint32(t, 0, sut.ElectronicRecordsReadingRoomDAOCount(), "ElectronicRecordsReadingRoomDAOCount")
+		assertEqualUint32(t, 0, sut.AudioReadingRoomDAOCount(), "AudioReadingRoomDAOCount")
+		assertEqualUint32(t, 0, sut.VideoReadingRoomDAOCount(), "VideoReadingRoomDAOCount")
+
+		assertEqualUint32(t, 0, uint32(len(sut.DAOInfo.AllDAOs)), "AllDAOs")
+		assertEqualUint32(t, 0, uint32(len(sut.DAOInfo.AudioDAOs)), "AudioDAOs")
+		assertEqualUint32(t, 0, uint32(len(sut.DAOInfo.VideoDAOs)), "VideoDAOs")
+		assertEqualUint32(t, 0, uint32(len(sut.DAOInfo.ImageDAOs)), "ImageDAOs")
+		assertEqualUint32(t, 0, uint32(len(sut.DAOInfo.ExternalLinkDAOs)), "ExternalLinkDAOs")
+		assertEqualUint32(t, 0, uint32(len(sut.DAOInfo.ElectronicRecordsReadingRoomDAOs)), "ElectronicRecordsReadingRoomDAOs")
+		assertEqualUint32(t, 0, uint32(len(sut.DAOInfo.AudioReadingRoomDAOs)), "AudioReadingRoomDAOs")
+		assertEqualUint32(t, 0, uint32(len(sut.DAOInfo.VideoReadingRoomDAOs)), "VideoReadingRoomDAOs")
+	})
+}
