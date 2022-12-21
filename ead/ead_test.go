@@ -412,15 +412,6 @@ func TestDAOCountFunctions(t *testing.T) {
 	})
 }
 
-func TestDAOGrpCountFunction(t *testing.T) {
-	t.Run("InitDAOGrpCount()", func(t *testing.T) {
-		sut := getOmegaEAD(t)
-		sut.InitDAOGrpCount()
-
-		assertEqualUint32(t, 7, sut.AllDAOGrpCount(), "AllDAOGrpCount")
-	})
-}
-
 func TestDAOInfoClearFunction(t *testing.T) {
 	t.Run("DAOInfo.Clear()", func(t *testing.T) {
 		sut := getOmegaEAD(t)
@@ -463,5 +454,30 @@ func TestDAOInfoClearFunction(t *testing.T) {
 		assertEqualUint32(t, 0, uint32(len(sut.DAOInfo.ElectronicRecordsReadingRoomDAOs)), "ElectronicRecordsReadingRoomDAOs")
 		assertEqualUint32(t, 0, uint32(len(sut.DAOInfo.AudioReadingRoomDAOs)), "AudioReadingRoomDAOs")
 		assertEqualUint32(t, 0, uint32(len(sut.DAOInfo.VideoReadingRoomDAOs)), "VideoReadingRoomDAOs")
+	})
+}
+
+func TestDAOGrpCountFunction(t *testing.T) {
+	t.Run("InitDAOGrpCount()", func(t *testing.T) {
+		sut := getOmegaEAD(t)
+		sut.InitDAOGrpCount()
+
+		assertEqualUint32(t, 7, sut.AllDAOGrpCount(), "AllDAOGrpCount")
+		assertEqualUint32(t, 7, uint32(len(sut.DAOGrpInfo.AllDAOGrps)), "AllDAOGrps length")
+	})
+}
+
+func TestDAOGrpInfoClearFunction(t *testing.T) {
+	t.Run("DAOGrpInfo.Clear()", func(t *testing.T) {
+		sut := getOmegaEAD(t)
+		sut.InitDAOGrpCount()
+
+		assertEqualUint32(t, 7, sut.AllDAOGrpCount(), "AllDAOGrpCount")
+		assertEqualUint32(t, 7, uint32(len(sut.DAOGrpInfo.AllDAOGrps)), "AllDAOGrps length")
+
+		sut.DAOGrpInfo.Clear()
+		
+		assertEqualUint32(t, 0, sut.AllDAOGrpCount(), "AllDAOGrpCount")
+		assertEqualUint32(t, 0, uint32(len(sut.DAOGrpInfo.AllDAOGrps)), "AllDAOGrps length")
 	})
 }

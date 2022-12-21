@@ -682,3 +682,8 @@ func (di *DAOInfo) Clear() {
 	di.AudioReadingRoomDAOs = nil
 	di.VideoReadingRoomDAOs = nil
 }
+
+func (dgi *DAOGrpInfo) Clear() {
+	dgi.AllDAOGrpCount = 0
+	dgi.AllDAOGrps = nil
+}
