@@ -1,6 +1,6 @@
 # Changelog
 
-#### v0.15.2-stream-parsing-2022-12-19T15_48
+#### 0.15.2-stream-parsing-2022-12-21T10_11
   - WIP: 
 	- correct XML and JSON tag errors: `userrestrict` --> `userestrict`
 	- implement stream parsing for the following types:
@@ -36,6 +36,7 @@
 	  - `Title`
 	- update `Index` type, add member `P []*P` 
 	- make `CountDAO*` and `CountDAOGrp*` functions public
+	- add functions `DAOInfo.Clear()` and `DAOGrpInfo.Clear()` 
 
 #### v0.15.2
   - change the xlink.xsd `schemaLocation` in the local EAD 2002 schema
