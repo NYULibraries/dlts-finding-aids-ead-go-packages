@@ -1,6 +1,6 @@
 # Changelog
 
-#### 0.15.2-stream-parsing-2022-12-21T10_11
+#### 0.15.2-stream-parsing-2022-12-23T17_20
   - WIP: 
 	- correct XML and JSON tag errors: `userrestrict` --> `userestrict`
 	- implement stream parsing for the following types:
@@ -35,7 +35,7 @@
 	  - `Subject`
 	  - `Title`
 	- update `Index` type, add member `P []*P` 
-	- make `CountDAO*` and `CountDAOGrp*` functions public
+	- make `CountDIDDAO*` and `CountDAOGrp*` functions public
 	- add functions `DAOInfo.Clear()` and `DAOGrpInfo.Clear()` 
 
 #### v0.15.2
