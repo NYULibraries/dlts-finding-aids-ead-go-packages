@@ -173,7 +173,8 @@ type DAO struct {
 	Title   FilteredString `xml:"title,attr" json:"title,omitempty"`
 	Type    FilteredString `xml:"type,attr" json:"type,omitempty"`
 
-	DAODesc DAODesc `xml:"daodesc" json:"daodesc,omitempty"`
+	ParentDID *DID    `xml:"-" json:"-"`
+	DAODesc   DAODesc `xml:"daodesc" json:"daodesc,omitempty"`
 }
 
 type DAODesc struct {
