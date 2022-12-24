@@ -535,7 +535,7 @@ func (e *EAD) RepoID() string {
 }
 
 func (e *EAD) InitDAOCounts() {
-	CountDAOs(e.ArchDesc.DID.DAO, &e.DAOInfo)
+	CountDIDDAOs(&e.ArchDesc.DID, &e.DAOInfo)
 	CountCsDAOs(e.ArchDesc.DSC.C, &e.DAOInfo)
 }
 
@@ -552,13 +552,21 @@ func CountCsDAOs(cs []*C, daoInfo *DAOInfo) {
 
 // process a container
 func CountCDAOs(c *C, daoInfo *DAOInfo) {
+	// configured to perform a breadth-first aggregation.
+	// switch the CountDIDDAOs/CountCsDAOs order if you want to do
+	//   a depth-first aggregation.
+	CountDIDDAOs(&c.DID, daoInfo)
 	CountCsDAOs(c.C, daoInfo)
-	CountDAOs(c.DID.DAO, daoInfo)
 }
 
-func CountDAOs(daos []*DAO, daoInfo *DAOInfo) {
+func CountDIDDAOs(did *DID, daoInfo *DAOInfo) {
+	daos := did.DAO
+
 	// https://jira.nyu.edu/browse/FADESIGN-138
 	for _, dao := range daos {
+		// init parent pointer
+		dao.ParentDID = did
+
 		// collect all DAOs
 		daoInfo.AllDAOCount += 1
 		appendDAO(dao, &daoInfo.AllDAOs)
