@@ -481,3 +481,14 @@ func TestDAOGrpInfoClearFunction(t *testing.T) {
 		assertEqualUint32(t, 0, uint32(len(sut.DAOGrpInfo.AllDAOGrps)), "AllDAOGrps length")
 	})
 }
+
+func TestDAOParentDID(t *testing.T) {
+	t.Run("Test DAO Parent DID", func(t *testing.T) {
+		sut := getOmegaEAD(t)
+		sut.InitDAOCounts()
+
+		assertEqual(t, "mos_2021_2", string(sut.DAOInfo.AllDAOs[0].ParentDID.UnitID), "Test DAO ParentDID UnitID Level 2")
+		assertEqual(t, "mos_2021_3", string(sut.DAOInfo.AllDAOs[1].ParentDID.UnitID), "Test DAO ParentDID UnitID Level 3")
+	})
+}
+
