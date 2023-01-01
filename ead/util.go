@@ -5,6 +5,7 @@ import (
 	"encoding/xml"
 	"errors"
 	"fmt"
+	"html"
 	"io"
 	"regexp"
 	"strings"
@@ -468,7 +469,9 @@ func (s FilteredString) MarshalJSON() ([]byte, error) {
 	return json.Marshal(s.String())
 }
 
-func cleanupWhitespace(s string) string {
+func cleanupWhitespace(inputString string) string {
+	s := html.UnescapeString(inputString)
+
 	// find occurrences of one or more consecutive \r, \n, \t, " "
 	re := regexp.MustCompile(`\r+|\n+|\t+|( )+`)
 	// replace occurences with a single space

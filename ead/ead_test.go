@@ -492,3 +492,11 @@ func TestDAOParentDID(t *testing.T) {
 	})
 }
 
+func TestFilteredStringStringFunction(t *testing.T) {
+	t.Run("Test Filtered String String()", func(t *testing.T) {
+		sut := FilteredString("Gilded Youth &#10;| Actors in Image: Nagah Salem")
+
+		assertEqual(t, "Gilded Youth | Actors in Image: Nagah Salem", sut.String(), "Test FilteredString.String()")
+	})
+}
+
