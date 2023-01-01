@@ -5,7 +5,7 @@ package ead
 // Based on: "Data model for parsing EAD <archdesc> elements": https://jira.nyu.edu/jira/browse/FADESIGN-29.
 
 const (
-	Version = "0.15.2-stream-parsing-2022-12-23T17_20"
+	Version = "0.15.2-stream-parsing-2023-01-01T18_38"
 )
 
 type EAD struct {
