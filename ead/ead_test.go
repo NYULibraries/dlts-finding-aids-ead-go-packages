@@ -476,7 +476,7 @@ func TestDAOGrpInfoClearFunction(t *testing.T) {
 		assertEqualUint32(t, 7, uint32(len(sut.DAOGrpInfo.AllDAOGrps)), "AllDAOGrps length")
 
 		sut.DAOGrpInfo.Clear()
-		
+
 		assertEqualUint32(t, 0, sut.AllDAOGrpCount(), "AllDAOGrpCount")
 		assertEqualUint32(t, 0, uint32(len(sut.DAOGrpInfo.AllDAOGrps)), "AllDAOGrps length")
 	})
@@ -500,3 +500,22 @@ func TestFilteredStringStringFunction(t *testing.T) {
 	})
 }
 
+func TestGetConvertedTextWithTags(t *testing.T) {
+	t.Run("Test GetConvertedTextWithTags()", func(t *testing.T) {
+		sut, _ := GetConvertedTextWithTags(`The Young Devil 
+| Actors in Image: Ahmad Ramzy, Amal Farid, Hussein Riad, Zinat Sedki, Ragaa Youssef: 1958-`)
+
+		assertEqual(t, "The Young Devil | Actors in Image: Ahmad Ramzy, Amal Farid, Hussein Riad, Zinat Sedki, Ragaa Youssef: 1958-", string(sut), "Test TestGetConvertedTextWithTags()")
+	})
+}
+
+func TestGetConvertedTextWithTagsNoLBConversion(t *testing.T) {
+	input := `Some materials may be restricted. Permission to publish materials must be obtained in writing from the:<lb/>
+New York University Archives<lb/> Elmer Holmes Bobst Library<lb/> 70 Washington Square South<lb/> New York, NY 10012<lb/> Phone: (212) 998-2641<lb/>Fax: (212) 995-4225<lb/>E-mail: university-archives@nyu.edu<lb/>`
+	want := `Some materials may be restricted. Permission to publish materials must be obtained in writing from the:<span class="ead-lb"></span> New York University Archives<span class="ead-lb"></span> Elmer Holmes Bobst Library<span class="ead-lb"></span> 70 Washington Square South<span class="ead-lb"></span> New York, NY 10012<span class="ead-lb"></span> Phone: (212) 998-2641<span class="ead-lb"></span>Fax: (212) 995-4225<span class="ead-lb"></span>E-mail: university-archives@nyu.edu<span class="ead-lb"></span>`
+
+	t.Run("Test GetConvertedTextWithTagsNoLBConversion()", func(t *testing.T) {
+		sut, _ := GetConvertedTextWithTagsNoLBConversion(input)
+		assertEqual(t, want, string(sut), "Test TestGetConvertedTextWithTagsNoLBConversion()")
+	})
+}

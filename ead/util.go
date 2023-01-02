@@ -285,10 +285,16 @@ var RelatorAuthoritativeLabelMap = map[string]string{
 	"wst": "Writer of supplementary textual content",
 }
 
+func GetConvertedTextWithTags(text string) ([]byte, error) {
+	return getConvertedTextWithTags(text)
+}
 func getConvertedTextWithTags(text string) ([]byte, error) {
 	return _getConvertedTextWithTags(text, true)
 }
 
+func GetConvertedTextWithTagsNoLBConversion(text string) ([]byte, error) {
+	return getConvertedTextWithTagsNoLBConversion(text)
+}
 func getConvertedTextWithTagsNoLBConversion(text string) ([]byte, error) {
 	return _getConvertedTextWithTags(text, false)
 }
