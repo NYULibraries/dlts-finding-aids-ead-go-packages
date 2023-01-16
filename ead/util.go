@@ -704,3 +704,92 @@ func (dgi *DAOGrpInfo) Clear() {
 	dgi.AllDAOGrpCount = 0
 	dgi.AllDAOGrps = nil
 }
+
+// !!x
+func addPresentationContainers(cs []*C) {
+
+	// capture address of backing array
+	collapsedCs := cs[:0]
+
+	// inRun            : currently in a run of Cs to collapse
+	// persistentIdx    : the loop index value, needed outside of the range loop
+	// pcCount          : presentation container count, used to init the presentation container IDs
+	// keepStartIdx     : the starting index of elements to keep
+	// collapseStartIdx : the starting index of elements to collapse
+	// collapseEndIdx   : the ending   index of elements to collapse
+
+	inRun := false
+	persistentIdx := 0
+	keepStartIdx := -1
+	collapseStartIdx := 0
+	collapseEndIdx := 0
+	pcCount := 0
+
+	for idx, c := range cs {
+		persistentIdx = idx
+		// is this a container to collapse?
+		if shouldCollapseContainer(c) {
+			// are we already in a run of containers to collapse?
+			if !inRun {
+				// now we're in a run
+				inRun = true
+				collapseStartIdx = idx
+				// if this run comes after some containers to keep...
+				if keepStartIdx != -1 {
+					// need to append all of the known Cs since the last collapse
+					collapsedCs = append(collapsedCs, cs[keepStartIdx:collapseStartIdx]...)
+				}
+			}
+
+		} else { // this is a container to keep
+			// have we already seen a container to keep?
+			if keepStartIdx == -1 {
+				// if not, store the index
+				keepStartIdx = idx
+			}
+
+			// if we're currently in a run, then we have found the end of it
+			if inRun {
+				inRun = false
+				collapseEndIdx = idx
+				pc := new(C)
+				pc.Level = "dl-presentation"
+				pcCount += 1
+				pc.ID = FilteredString(fmt.Sprintf("items%03d", pcCount))
+				// set pc.DID.Unittitle
+				pc.C = cs[collapseStartIdx:collapseEndIdx]
+				keepStartIdx = collapseEndIdx
+				collapsedCs = append(collapsedCs, pc)
+			}
+		}
+	} // end of container loop
+
+	if inRun {
+		// if we ended on a run, then we need to finish the collapse operation
+		inRun = false
+		collapseEndIdx = persistentIdx
+		pc := new(C)
+		pc.Level = "dl-presentation"
+		pcCount += 1
+		pc.ID = FilteredString(fmt.Sprintf("items%03d", pcCount))
+		//set  pc.DID.Unittitle
+		pc.C = cs[collapseStartIdx:collapseEndIdx]
+		keepStartIdx = collapseEndIdx
+		collapsedCs = append(collapsedCs, pc)
+	} else {
+		// did NOT end in a run, so we need to append the remaining known Cs to the collapsedCs
+		// need to append all of the known Cs since the last collapse
+		collapsedCs = append(collapsedCs, cs[keepStartIdx:persistentIdx]...)
+	}
+
+	// update original slice
+	cs = collapsedCs
+}
+
+func shouldCollapseContainer(c *C) bool {
+	switch c.Level {
+	case "series", "otherlevel", "recordgrp", "dl-presentation":
+		return false
+	}
+	return true
+}
