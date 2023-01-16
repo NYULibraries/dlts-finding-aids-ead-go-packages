@@ -705,7 +705,10 @@ func (dgi *DAOGrpInfo) Clear() {
 	dgi.AllDAOGrps = nil
 }
 
-// !!x
+func (e *EAD) InitPresentationContainers() {
+	addPresentationContainers(e.ArchDesc.DSC.C)
+}
+
 func addPresentationContainers(cs []*C) {
 
 	// capture address of backing array
