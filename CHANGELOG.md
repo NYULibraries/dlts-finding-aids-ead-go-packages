@@ -37,6 +37,7 @@
 	- update `Index` type, add member `P []*P` 
 	- make `CountDIDDAO*` and `CountDAOGrp*` functions public
 	- add functions `DAOInfo.Clear()` and `DAOGrpInfo.Clear()` 
+	- add presentation container functionality via `InitPresentationContainers()`
 
 #### v0.15.2
   - change the xlink.xsd `schemaLocation` in the local EAD 2002 schema
