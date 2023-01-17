@@ -727,25 +727,26 @@ func addPresentationContainers(cs []*C) []*C {
 
 	for idx, c := range cs {
 
-		fmt.Printf("idx: %03d, len: %03d\n", idx, len(collapsedCs))
+		//DEBUG fmt.Printf("idx: %03d, len: %03d\n", idx, len(collapsedCs))
 		// is this a container to collapse?
 		if shouldCollapseContainer(c) {
-			fmt.Println("we shouldCollapseContainer")
+			//DEBUG fmt.Println("we shouldCollapseContainer")
 			// are we already in a run of containers to collapse?
 			if !inRun {
-				fmt.Println("---> not in a run")
+				//DEBUG fmt.Println("---> not in a run")
 				// now we're in a run
 				inRun = true
 				collapseStartIdx = idx
 				// if this run comes after some containers to keep...
 				if keepStartIdx != -1 {
-					fmt.Printf("------> keepStartIdx != -1")
+					//DEBUG fmt.Printf("------> keepStartIdx != -1")
 					// need to append all of the known Cs since the last collapse
 					collapsedCs = append(collapsedCs, cs[keepStartIdx:collapseStartIdx]...)
 				}
 			}
 
-		} else { // this is a container to keep
+		} else {
+			// this is a container to keep
 			// have we already seen a container to keep?
 			if keepStartIdx == -1 {
 				// if not, store the index
@@ -775,12 +776,12 @@ func addPresentationContainers(cs []*C) []*C {
 		pc.Level = "dl-presentation"
 		pcCount += 1
 		pc.ID = FilteredString(fmt.Sprintf("items%03d", pcCount))
-		//set  pc.DID.Unittitle
+		pc.DID.UnitTitle = &UnitTitle{ Value: "View Items" }
 		pc.C = cs[collapseStartIdx:] // to the end of the slice because we ended on a run
 		collapsedCs = append(collapsedCs, pc)
 	} else {
-		// did NOT end in a run, so we need to append the remaining known Cs to the collapsedCs
-		// need to append all of the known Cs since the last collapse
+		// did NOT end in a run, so we need to append the remaining "keep" Cs to the collapsedCs
+		// need to append all of the "keep" Cs since the last collapse
 		collapsedCs = append(collapsedCs, cs[keepStartIdx:]...)
 	}
 
