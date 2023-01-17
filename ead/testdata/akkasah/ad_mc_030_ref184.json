@@ -171,11 +171,6 @@
               {
                 "id": "items001",
                 "level": "dl-presentation",
-                "did": {
-                  "unittitle": {
-                    "value": "View Items"
-                  }
-                },
                 "c":[
                 {
                     "id": "aspace_2db7eb09b12a8d9512f1e08e16c858a0",
@@ -3892,7 +3887,12 @@
                         }
                     }
                 }
-                ]
+                ],
+                "did": {
+                    "unittitle": {
+                      "value": "View Items"
+                    }
+                  }   
               }
             ]
         },
