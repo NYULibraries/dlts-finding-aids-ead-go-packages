@@ -706,10 +706,12 @@ func (dgi *DAOGrpInfo) Clear() {
 }
 
 func (e *EAD) InitPresentationContainers() {
-	e.ArchDesc.DSC.C = addPresentationContainers(e.ArchDesc.DSC.C)
+	e.ArchDesc.DSC.C = addPresentationContainers(&e.ArchDesc.DSC.C)
 }
 
-func addPresentationContainers(cs []*C) []*C {
+func addPresentationContainers(csp *[]*C) []*C {
+
+	cs := *csp
 
 	var collapsedCs []*C
 
@@ -776,7 +778,7 @@ func addPresentationContainers(cs []*C) []*C {
 		pc.Level = "dl-presentation"
 		pcCount += 1
 		pc.ID = FilteredString(fmt.Sprintf("items%03d", pcCount))
-		pc.DID.UnitTitle = &UnitTitle{ Value: "View Items" }
+		pc.DID.UnitTitle = &UnitTitle{Value: "View Items"}
 		pc.C = cs[collapseStartIdx:] // to the end of the slice because we ended on a run
 		collapsedCs = append(collapsedCs, pc)
 	} else {
