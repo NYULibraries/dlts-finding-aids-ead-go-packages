@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
-	"io/ioutil"
+	"os"
 	"path/filepath"
 	"testing"
 	"time"
@@ -73,7 +73,7 @@ func assertFilteredStringSlicesEqual(t *testing.T, want []FilteredString, got []
 }
 
 func getOmegaEAD(t *testing.T) EAD {
-	EADXML, err := ioutil.ReadFile(omegaTestFixturePath + "/" + "Omega-EAD.xml")
+	EADXML, err := os.ReadFile(omegaTestFixturePath + "/" + "Omega-EAD.xml")
 	failOnError(t, err, "Unexpected error")
 
 	var ead EAD
@@ -84,7 +84,7 @@ func getOmegaEAD(t *testing.T) EAD {
 }
 
 func getFalesMSS460EAD(t *testing.T) EAD {
-	EADXML, err := ioutil.ReadFile(falesTestFixturePath + "/" + "mss_460.xml")
+	EADXML, err := os.ReadFile(falesTestFixturePath + "/" + "mss_460.xml")
 	failOnError(t, err, "Unexpected error")
 
 	var ead EAD
@@ -95,7 +95,7 @@ func getFalesMSS460EAD(t *testing.T) EAD {
 }
 
 func getNYHSFoundling(t *testing.T) EAD {
-	EADXML, err := ioutil.ReadFile(nyhsTestFixturePath + "/" + "nyhs_foundling.xml")
+	EADXML, err := os.ReadFile(nyhsTestFixturePath + "/" + "nyhs_foundling.xml")
 	failOnError(t, err, "Unexpected error")
 
 	var ead EAD
@@ -106,7 +106,7 @@ func getNYHSFoundling(t *testing.T) EAD {
 }
 
 func getAkkasahADMC030REF184EAD(t *testing.T) EAD {
-	EADXML, err := ioutil.ReadFile(akkasahTestFixturePath + "/" + "ad_mc_030_ref184.xml")
+	EADXML, err := os.ReadFile(akkasahTestFixturePath + "/" + "ad_mc_030_ref184.xml")
 	failOnError(t, err, "Unexpected error")
 
 	var ead EAD
@@ -138,12 +138,12 @@ func TestJSONMarshaling(t *testing.T) {
 		jsonData = append(jsonData, '\n')
 
 		referenceFile := omegaTestFixturePath + "/" + "mos_2021.json"
-		referenceFileContents, err := ioutil.ReadFile(referenceFile)
+		referenceFileContents, err := os.ReadFile(referenceFile)
 		failOnError(t, err, "Unexpected error reading reference file")
 
 		if !bytes.Equal(referenceFileContents, jsonData) {
 			jsonFile := "./testdata/tmp/failing-marshal.json"
-			err = ioutil.WriteFile(jsonFile, []byte(jsonData), 0644)
+			err = os.WriteFile(jsonFile, []byte(jsonData), 0644)
 			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonFile))
 
 			errMsg := fmt.Sprintf("JSON Data does not match reference file.\ndiff %s %s", jsonFile, referenceFile)
@@ -224,12 +224,12 @@ func TestBarcodeRemovalFromLabels(t *testing.T) {
 		jsonData = append(jsonData, '\n')
 
 		referenceFile := falesTestFixturePath + "/mss_460.json"
-		referenceFileContents, err := ioutil.ReadFile(referenceFile)
+		referenceFileContents, err := os.ReadFile(referenceFile)
 		failOnError(t, err, "Unexpected error reading reference file")
 
 		if !bytes.Equal(referenceFileContents, jsonData) {
 			jsonFile := "./testdata/tmp/failing-test-barcode-removal.json"
-			err = ioutil.WriteFile(jsonFile, []byte(jsonData), 0644)
+			err = os.WriteFile(jsonFile, []byte(jsonData), 0644)
 			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonFile))
 
 			errMsg := fmt.Sprintf("JSON Data does not match reference file.\ndiff %s %s", jsonFile, referenceFile)
@@ -267,12 +267,12 @@ func TestJSONMarshalingWithDonors(t *testing.T) {
 		jsonData = append(jsonData, '\n')
 
 		referenceFile := omegaTestFixturePath + "/" + "mos_2021-with-donors.json"
-		referenceFileContents, err := ioutil.ReadFile(referenceFile)
+		referenceFileContents, err := os.ReadFile(referenceFile)
 		failOnError(t, err, "Unexpected error reading reference file")
 
 		if !bytes.Equal(referenceFileContents, jsonData) {
 			jsonFile := "./testdata/tmp/failing-donor-marshal.json"
-			err = ioutil.WriteFile(jsonFile, []byte(jsonData), 0644)
+			err = os.WriteFile(jsonFile, []byte(jsonData), 0644)
 			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonFile))
 
 			errMsg := fmt.Sprintf("JSON Data does not match reference file.\ndiff %s %s", jsonFile, referenceFile)
@@ -293,12 +293,12 @@ func TestJSONMarshalingWithEmptyDAORoles(t *testing.T) {
 		jsonData = append(jsonData, '\n')
 
 		referenceFile := nyhsTestFixturePath + "/" + "nyhs_foundling.json"
-		referenceFileContents, err := ioutil.ReadFile(referenceFile)
+		referenceFileContents, err := os.ReadFile(referenceFile)
 		failOnError(t, err, "Unexpected error reading reference file")
 
 		if !bytes.Equal(referenceFileContents, jsonData) {
 			jsonFile := "./testdata/tmp/failing-empty-role-marshal.json"
-			err = ioutil.WriteFile(jsonFile, []byte(jsonData), 0644)
+			err = os.WriteFile(jsonFile, []byte(jsonData), 0644)
 			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonFile))
 
 			errMsg := fmt.Sprintf("JSON Data does not match reference file.\ndiff %s %s", jsonFile, referenceFile)
@@ -324,12 +324,12 @@ func TestJSONMarshalingWithDonorsAndImageAndImageSets(t *testing.T) {
 		jsonData = append(jsonData, '\n')
 
 		referenceFile := omegaTestFixturePath + "/" + "mos_2021-with-donors-with-image-counts.json"
-		referenceFileContents, err := ioutil.ReadFile(referenceFile)
+		referenceFileContents, err := os.ReadFile(referenceFile)
 		failOnError(t, err, "Unexpected error reading reference file")
 
 		if !bytes.Equal(referenceFileContents, jsonData) {
 			jsonFile := "./testdata/tmp/failing-donors-with-image-counts-marshal.json"
-			err = ioutil.WriteFile(jsonFile, []byte(jsonData), 0644)
+			err = os.WriteFile(jsonFile, []byte(jsonData), 0644)
 			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonFile))
 
 			errMsg := fmt.Sprintf("JSON Data does not match reference file.\ndiff %s %s", jsonFile, referenceFile)
@@ -532,7 +532,6 @@ New York University Archives<lb/> Elmer Holmes Bobst Library<lb/> 70 Washington 
 	})
 }
 
-
 func TestJSONMarshalingInitPresentationContainersNOOP(t *testing.T) {
 	t.Run("JSON Marshaling with call to InitPresentationContainers() NOOP", func(t *testing.T) {
 		ead := getOmegaEAD(t)
@@ -547,12 +546,12 @@ func TestJSONMarshalingInitPresentationContainersNOOP(t *testing.T) {
 		jsonData = append(jsonData, '\n')
 
 		referenceFile := omegaTestFixturePath + "/" + "mos_2021.json"
-		referenceFileContents, err := ioutil.ReadFile(referenceFile)
+		referenceFileContents, err := os.ReadFile(referenceFile)
 		failOnError(t, err, "Unexpected error reading reference file")
 
 		if !bytes.Equal(referenceFileContents, jsonData) {
 			jsonFile := "./testdata/tmp/failing-marshal-with-presentation-containers-noop.json"
-			err = ioutil.WriteFile(jsonFile, []byte(jsonData), 0644)
+			err = os.WriteFile(jsonFile, []byte(jsonData), 0644)
 			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonFile))
 
 			errMsg := fmt.Sprintf("JSON Data does not match reference file.\ndiff %s %s", jsonFile, referenceFile)
@@ -575,12 +574,12 @@ func TestJSONMarshalingInitPresentationContainers(t *testing.T) {
 		jsonData = append(jsonData, '\n')
 
 		referenceFile := akkasahTestFixturePath + "/" + "ad_mc_030_ref184.json"
-		referenceFileContents, err := ioutil.ReadFile(referenceFile)
+		referenceFileContents, err := os.ReadFile(referenceFile)
 		failOnError(t, err, "Unexpected error reading reference file")
 
 		if !bytes.Equal(referenceFileContents, jsonData) {
 			jsonFile := "./testdata/tmp/failing-marshal-with-presentation-containers.json"
-			err = ioutil.WriteFile(jsonFile, []byte(jsonData), 0644)
+			err = os.WriteFile(jsonFile, []byte(jsonData), 0644)
 			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonFile))
 
 			errMsg := fmt.Sprintf("JSON Data does not match reference file.\ndiff %s %s", jsonFile, referenceFile)
