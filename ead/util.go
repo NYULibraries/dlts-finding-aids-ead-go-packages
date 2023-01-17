@@ -3,7 +3,6 @@ package ead
 import (
 	"encoding/json"
 	"encoding/xml"
-	"errors"
 	"fmt"
 	"html"
 	"io"
@@ -386,22 +385,23 @@ func getRelatorAuthoritativeLabel(relatorID string) (string, error) {
 	if authoritativeLabel, ok := RelatorAuthoritativeLabelMap[relatorID]; ok {
 		return authoritativeLabel, nil
 	} else {
-		return "", errors.New(fmt.Sprintf("Unknown relator code \"%s\"", relatorID))
+		return "", fmt.Errorf("unknown relator code \"%s\"", relatorID)
 	}
 }
 
-func regexpReplaceAllLiteralStringInAccessTermSourceSlice(accessTermWithRoleSlice []AccessTermWithRole, re *regexp.Regexp, replacementString string) {
-	accessTermWithRoleSliceWithSubfieldDelimitersConverted := accessTermWithRoleSlice[:0]
-	for _, accessTermWithRole := range accessTermWithRoleSlice {
-		accessTermWithRole.Value = re.ReplaceAllLiteralString(accessTermWithRole.Value, replacementString)
-		accessTermWithRoleSliceWithSubfieldDelimitersConverted = append(
-			accessTermWithRoleSliceWithSubfieldDelimitersConverted,
-			accessTermWithRole,
-		)
+/*
+	 func regexpReplaceAllLiteralStringInAccessTermSourceSlice(accessTermWithRoleSlice []AccessTermWithRole, re *regexp.Regexp, replacementString string) {
+		accessTermWithRoleSliceWithSubfieldDelimitersConverted := accessTermWithRoleSlice[:0]
+		for _, accessTermWithRole := range accessTermWithRoleSlice {
+			accessTermWithRole.Value = re.ReplaceAllLiteralString(accessTermWithRole.Value, replacementString)
+			accessTermWithRoleSliceWithSubfieldDelimitersConverted = append(
+				accessTermWithRoleSliceWithSubfieldDelimitersConverted,
+				accessTermWithRole,
+			)
+		}
 	}
-}
 
-func regexpReplaceAllLiteralStringInTextSlice(textSlice []string, re *regexp.Regexp, replacementString string) {
+	func regexpReplaceAllLiteralStringInTextSlice(textSlice []string, re *regexp.Regexp, replacementString string) {
 	accessTermSWithRoleliceWithSubfieldDelimitersConverted := textSlice[:0]
 	for _, text := range textSlice {
 		accessTermSWithRoleliceWithSubfieldDelimitersConverted = append(
@@ -410,6 +410,7 @@ func regexpReplaceAllLiteralStringInTextSlice(textSlice []string, re *regexp.Reg
 		)
 	}
 }
+*/
 
 // RunInfo stores data related to the parsing/JSON generation process
 type RunInfo struct {
@@ -520,7 +521,7 @@ func flattenTitleProper(titleProper []*TitleProper) ([]byte, error) {
 
 	// we only found the "filing" title. This is a problem!
 	if titleToFlatten.Type == "filing" {
-		return nil, fmt.Errorf("Unable to find correct title\n")
+		return nil, fmt.Errorf("unable to find correct title")
 	}
 
 	return getConvertedTextWithTagsNoLBConversion(titleToFlatten.Value)
