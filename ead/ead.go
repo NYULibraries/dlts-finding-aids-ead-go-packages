@@ -43,7 +43,7 @@ type AddressLine struct {
 }
 
 type ArchDesc struct {
-	Level FilteredString `xml:"level,attr" json:"level,attr,omitempty"`
+	Level FilteredString `xml:"level,attr" json:"level,omitempty"`
 
 	AccessRestrict    []*FormattedNoteWithHead `xml:"accessrestrict" json:"accessrestrict,omitempty"`
 	Accruals          []*FormattedNoteWithHead `xml:"accruals" json:"accruals,omitempty"`
