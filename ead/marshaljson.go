@@ -93,7 +93,7 @@ func (titleproper *TitleProper) MarshalJSON() ([]byte, error) {
 	}
 
 	jsonData, err := json.Marshal(&struct {
-		Value string `json:"value,chardata,omitempty"`
+		Value string `json:"value,omitempty"`
 		*TitleProperWithTags
 	}{
 		Value:               string(result),
@@ -154,7 +154,7 @@ func (extent *Extent) MarshalJSON() ([]byte, error) {
 	}
 
 	jsonData, err := json.Marshal(&struct {
-		Value string `json:"value,chardata,omitempty"`
+		Value string `json:"value,omitempty"`
 		*ExtentWithTags
 	}{
 		Value:          string(result),

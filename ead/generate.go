@@ -1,3 +1,4 @@
+//go:build ignore
 // +build ignore
 
 package main
@@ -22,8 +23,8 @@ const convertTextWithTagsMarshalJSONCodeTemplate = `func ({{.VarName}} *{{.TypeN
 	}
 
 	jsonData, err := json.Marshal(&struct {
-		Value string ` + "`" + `json:"value,chardata,omitempty"` + "`\n" +
-`		*{{.TypeName}}WithTags
+		Value string ` + "`" + `json:"value,omitempty"` + "`\n" +
+	`		*{{.TypeName}}WithTags
 	}{
 		Value:             string(result),
 		{{.TypeName}}WithTags: (*{{.TypeName}}WithTags)({{.VarName}}),
@@ -56,7 +57,7 @@ const omitWhitespaceOnlyValueFieldsAndConvertTextWithTagsMarshalJSONCodeTemplate
 	}
 
 	jsonData, err := json.Marshal(&struct {
-		Value string ` + "`" + `json:"value,chardata,omitempty"` + "`" + `
+		Value string ` + "`" + `json:"value,omitempty"` + "`" + `
 		*{{.TypeName}}WithNoWhitespaceOnlyValues
 	}{
 		Value: value,
@@ -97,44 +98,44 @@ import (
 }
 
 func writeConvertTextWithTagsCodeToBuffer(w *bytes.Buffer) {
-	type templateData struct{
+	type templateData struct {
 		ConversionFunction string
-		TypeName string
-		VarName string
+		TypeName           string
+		VarName            string
 	}
 
 	t := template.Must(template.New("").Parse(convertTextWithTagsMarshalJSONCodeTemplate))
 
 	conversionFunctionsForTypes := map[string]string{
-		"Abstract" : "getConvertedTextWithTags",
+		"Abstract": "getConvertedTextWithTags",
 		// Do not add AccessTermWithRole because it has a unique MarshalJSON method
 		// already defined which does relator code translation.
-		"AddressLine" : "getConvertedTextWithTags",
-		"ArchRef" : "getConvertedTextWithTags",
-		"BibRef" : "getConvertedTextWithTags",
-		"ChronItem" : "getConvertedTextWithTags",
-		"Container" : "getConvertedTextWithTags",
-		"Creation" : "getConvertedTextWithTags",
-		"Date" : "getConvertedTextWithTags",
-		"Dimensions" : "getConvertedTextWithTags",
-		"Event" : "getConvertedTextWithTags",
+		"AddressLine": "getConvertedTextWithTags",
+		"ArchRef":     "getConvertedTextWithTags",
+		"BibRef":      "getConvertedTextWithTags",
+		"ChronItem":   "getConvertedTextWithTags",
+		"Container":   "getConvertedTextWithTags",
+		"Creation":    "getConvertedTextWithTags",
+		"Date":        "getConvertedTextWithTags",
+		"Dimensions":  "getConvertedTextWithTags",
+		"Event":       "getConvertedTextWithTags",
 		// Extent has custom marshaling requirements and is therefore not generated.
-		"Head" : "getConvertedTextWithTags",
-		"Item" : "getConvertedTextWithTags",
-		"LangMaterial" : "getConvertedTextWithTags",
-		"LangUsage" : "getConvertedTextWithTags",
-		"LegalStatus" : "getConvertedTextWithTags",
-		"Num" : "getConvertedTextWithTags",
-		"P" : "getConvertedTextWithTags",
-		"PhysFacet" : "getConvertedTextWithTags",
+		"Head":         "getConvertedTextWithTags",
+		"Item":         "getConvertedTextWithTags",
+		"LangMaterial": "getConvertedTextWithTags",
+		"LangUsage":    "getConvertedTextWithTags",
+		"LegalStatus":  "getConvertedTextWithTags",
+		"Num":          "getConvertedTextWithTags",
+		"P":            "getConvertedTextWithTags",
+		"PhysFacet":    "getConvertedTextWithTags",
 		// Do not add PhysDesc, whose MarshalJSON is created by generator
 		// writeOmitWhitespaceOnlyValueFieldsAndConvertTextWithTagsCodeToBuffer.
-		"PhysLoc" : "getConvertedTextWithTags",
-		"Repository" : "getConvertedTextWithTags",
-		"Title" : "getConvertedTextWithTagsNoLBConversion",
+		"PhysLoc":    "getConvertedTextWithTags",
+		"Repository": "getConvertedTextWithTags",
+		"Title":      "getConvertedTextWithTagsNoLBConversion",
 		// Do not add TitleProper because it requires custom marshaling.
-		"UnitDate" : "getConvertedTextWithTags",
-		"UnitTitle" : "getConvertedTextWithTags",
+		"UnitDate":  "getConvertedTextWithTags",
+		"UnitTitle": "getConvertedTextWithTags",
 	}
 
 	sortedTypes := make([]string, len(conversionFunctionsForTypes))
@@ -150,9 +151,9 @@ func writeConvertTextWithTagsCodeToBuffer(w *bytes.Buffer) {
 		w.WriteString("\n\n")
 
 		err := t.Execute(w, templateData{
-			ConversionFunction : conversionFunction,
-			TypeName: typeName,
-			VarName:  strings.ToLower(typeName),
+			ConversionFunction: conversionFunction,
+			TypeName:           typeName,
+			VarName:            strings.ToLower(typeName),
 		})
 		if err != nil {
 			panic(err)
@@ -161,16 +162,16 @@ func writeConvertTextWithTagsCodeToBuffer(w *bytes.Buffer) {
 }
 
 func writeOmitWhitespaceOnlyValueFieldsAndConvertTextWithTagsCodeToBuffer(w *bytes.Buffer) {
-	type templateData struct{
+	type templateData struct {
 		ConversionFunction string
-		TypeName string
-		VarName string
+		TypeName           string
+		VarName            string
 	}
 
 	t := template.Must(template.New("").Parse(omitWhitespaceOnlyValueFieldsAndConvertTextWithTagsMarshalJSONCodeTemplate))
 
 	conversionFunctionsForTypes := map[string]string{
-		"PhysDesc" : "getConvertedTextWithTags",
+		"PhysDesc": "getConvertedTextWithTags",
 	}
 
 	sortedTypes := make([]string, len(conversionFunctionsForTypes))
@@ -187,9 +188,9 @@ func writeOmitWhitespaceOnlyValueFieldsAndConvertTextWithTagsCodeToBuffer(w *byt
 		w.WriteString("\n\n")
 
 		err := t.Execute(w, templateData{
-			ConversionFunction : conversionFunction,
-			TypeName: typeName,
-			VarName:  strings.ToLower(typeName),
+			ConversionFunction: conversionFunction,
+			TypeName:           typeName,
+			VarName:            strings.ToLower(typeName),
 		})
 		if err != nil {
 			panic(err)

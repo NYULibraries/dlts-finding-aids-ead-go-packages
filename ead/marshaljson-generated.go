@@ -16,7 +16,7 @@ func (abstract *Abstract) MarshalJSON() ([]byte, error) {
 	}
 
 	jsonData, err := json.Marshal(&struct {
-		Value string `json:"value,chardata,omitempty"`
+		Value string `json:"value,omitempty"`
 		*AbstractWithTags
 	}{
 		Value:            string(result),
@@ -38,7 +38,7 @@ func (addressline *AddressLine) MarshalJSON() ([]byte, error) {
 	}
 
 	jsonData, err := json.Marshal(&struct {
-		Value string `json:"value,chardata,omitempty"`
+		Value string `json:"value,omitempty"`
 		*AddressLineWithTags
 	}{
 		Value:               string(result),
@@ -60,7 +60,7 @@ func (archref *ArchRef) MarshalJSON() ([]byte, error) {
 	}
 
 	jsonData, err := json.Marshal(&struct {
-		Value string `json:"value,chardata,omitempty"`
+		Value string `json:"value,omitempty"`
 		*ArchRefWithTags
 	}{
 		Value:           string(result),
@@ -82,7 +82,7 @@ func (bibref *BibRef) MarshalJSON() ([]byte, error) {
 	}
 
 	jsonData, err := json.Marshal(&struct {
-		Value string `json:"value,chardata,omitempty"`
+		Value string `json:"value,omitempty"`
 		*BibRefWithTags
 	}{
 		Value:          string(result),
@@ -104,7 +104,7 @@ func (chronitem *ChronItem) MarshalJSON() ([]byte, error) {
 	}
 
 	jsonData, err := json.Marshal(&struct {
-		Value string `json:"value,chardata,omitempty"`
+		Value string `json:"value,omitempty"`
 		*ChronItemWithTags
 	}{
 		Value:             string(result),
@@ -126,7 +126,7 @@ func (container *Container) MarshalJSON() ([]byte, error) {
 	}
 
 	jsonData, err := json.Marshal(&struct {
-		Value string `json:"value,chardata,omitempty"`
+		Value string `json:"value,omitempty"`
 		*ContainerWithTags
 	}{
 		Value:             string(result),
@@ -148,7 +148,7 @@ func (creation *Creation) MarshalJSON() ([]byte, error) {
 	}
 
 	jsonData, err := json.Marshal(&struct {
-		Value string `json:"value,chardata,omitempty"`
+		Value string `json:"value,omitempty"`
 		*CreationWithTags
 	}{
 		Value:            string(result),
@@ -170,7 +170,7 @@ func (date *Date) MarshalJSON() ([]byte, error) {
 	}
 
 	jsonData, err := json.Marshal(&struct {
-		Value string `json:"value,chardata,omitempty"`
+		Value string `json:"value,omitempty"`
 		*DateWithTags
 	}{
 		Value:        string(result),
@@ -192,7 +192,7 @@ func (dimensions *Dimensions) MarshalJSON() ([]byte, error) {
 	}
 
 	jsonData, err := json.Marshal(&struct {
-		Value string `json:"value,chardata,omitempty"`
+		Value string `json:"value,omitempty"`
 		*DimensionsWithTags
 	}{
 		Value:              string(result),
@@ -214,7 +214,7 @@ func (event *Event) MarshalJSON() ([]byte, error) {
 	}
 
 	jsonData, err := json.Marshal(&struct {
-		Value string `json:"value,chardata,omitempty"`
+		Value string `json:"value,omitempty"`
 		*EventWithTags
 	}{
 		Value:         string(result),
@@ -236,7 +236,7 @@ func (head *Head) MarshalJSON() ([]byte, error) {
 	}
 
 	jsonData, err := json.Marshal(&struct {
-		Value string `json:"value,chardata,omitempty"`
+		Value string `json:"value,omitempty"`
 		*HeadWithTags
 	}{
 		Value:        string(result),
@@ -258,7 +258,7 @@ func (item *Item) MarshalJSON() ([]byte, error) {
 	}
 
 	jsonData, err := json.Marshal(&struct {
-		Value string `json:"value,chardata,omitempty"`
+		Value string `json:"value,omitempty"`
 		*ItemWithTags
 	}{
 		Value:        string(result),
@@ -280,7 +280,7 @@ func (langmaterial *LangMaterial) MarshalJSON() ([]byte, error) {
 	}
 
 	jsonData, err := json.Marshal(&struct {
-		Value string `json:"value,chardata,omitempty"`
+		Value string `json:"value,omitempty"`
 		*LangMaterialWithTags
 	}{
 		Value:                string(result),
@@ -302,7 +302,7 @@ func (langusage *LangUsage) MarshalJSON() ([]byte, error) {
 	}
 
 	jsonData, err := json.Marshal(&struct {
-		Value string `json:"value,chardata,omitempty"`
+		Value string `json:"value,omitempty"`
 		*LangUsageWithTags
 	}{
 		Value:             string(result),
@@ -324,7 +324,7 @@ func (legalstatus *LegalStatus) MarshalJSON() ([]byte, error) {
 	}
 
 	jsonData, err := json.Marshal(&struct {
-		Value string `json:"value,chardata,omitempty"`
+		Value string `json:"value,omitempty"`
 		*LegalStatusWithTags
 	}{
 		Value:               string(result),
@@ -346,7 +346,7 @@ func (num *Num) MarshalJSON() ([]byte, error) {
 	}
 
 	jsonData, err := json.Marshal(&struct {
-		Value string `json:"value,chardata,omitempty"`
+		Value string `json:"value,omitempty"`
 		*NumWithTags
 	}{
 		Value:       string(result),
@@ -368,7 +368,7 @@ func (p *P) MarshalJSON() ([]byte, error) {
 	}
 
 	jsonData, err := json.Marshal(&struct {
-		Value string `json:"value,chardata,omitempty"`
+		Value string `json:"value,omitempty"`
 		*PWithTags
 	}{
 		Value:     string(result),
@@ -390,7 +390,7 @@ func (physfacet *PhysFacet) MarshalJSON() ([]byte, error) {
 	}
 
 	jsonData, err := json.Marshal(&struct {
-		Value string `json:"value,chardata,omitempty"`
+		Value string `json:"value,omitempty"`
 		*PhysFacetWithTags
 	}{
 		Value:             string(result),
@@ -412,7 +412,7 @@ func (physloc *PhysLoc) MarshalJSON() ([]byte, error) {
 	}
 
 	jsonData, err := json.Marshal(&struct {
-		Value string `json:"value,chardata,omitempty"`
+		Value string `json:"value,omitempty"`
 		*PhysLocWithTags
 	}{
 		Value:           string(result),
@@ -434,7 +434,7 @@ func (repository *Repository) MarshalJSON() ([]byte, error) {
 	}
 
 	jsonData, err := json.Marshal(&struct {
-		Value string `json:"value,chardata,omitempty"`
+		Value string `json:"value,omitempty"`
 		*RepositoryWithTags
 	}{
 		Value:              string(result),
@@ -456,7 +456,7 @@ func (title *Title) MarshalJSON() ([]byte, error) {
 	}
 
 	jsonData, err := json.Marshal(&struct {
-		Value string `json:"value,chardata,omitempty"`
+		Value string `json:"value,omitempty"`
 		*TitleWithTags
 	}{
 		Value:         string(result),
@@ -478,7 +478,7 @@ func (unitdate *UnitDate) MarshalJSON() ([]byte, error) {
 	}
 
 	jsonData, err := json.Marshal(&struct {
-		Value string `json:"value,chardata,omitempty"`
+		Value string `json:"value,omitempty"`
 		*UnitDateWithTags
 	}{
 		Value:            string(result),
@@ -500,7 +500,7 @@ func (unittitle *UnitTitle) MarshalJSON() ([]byte, error) {
 	}
 
 	jsonData, err := json.Marshal(&struct {
-		Value string `json:"value,chardata,omitempty"`
+		Value string `json:"value,omitempty"`
 		*UnitTitleWithTags
 	}{
 		Value:             string(result),
@@ -534,7 +534,7 @@ func (physdesc *PhysDesc) MarshalJSON() ([]byte, error) {
 	}
 
 	jsonData, err := json.Marshal(&struct {
-		Value string `json:"value,chardata,omitempty"`
+		Value string `json:"value,omitempty"`
 		*PhysDescWithNoWhitespaceOnlyValues
 	}{
 		Value:                              value,
