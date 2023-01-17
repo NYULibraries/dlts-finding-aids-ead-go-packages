@@ -78,7 +78,7 @@ type ArchRef struct {
 type Bibliography struct {
 	ID FilteredString `xml:"id,attr" json:"id,omitempty"`
 
-	Head *Head `xml:"head,omitemtpy" json:"head,omitempty"`
+	Head *Head `xml:"head,omitempty" json:"head,omitempty"`
 
 	// adding Don Mennerich's approach here...
 	Children []*EADChild `xml:",any" json:"children,omitempty"`
@@ -133,7 +133,7 @@ type ChronItem struct {
 }
 
 type ChronList struct {
-	Head      *Head        `xml:"head,omitemtpy" json:"head,omitempty"`
+	Head      *Head        `xml:"head,omitempty" json:"head,omitempty"`
 	ChronItem []*ChronItem `xml:"chronitem,omitempty" json:"chronitem,omitempty"`
 }
 
@@ -311,7 +311,7 @@ type Head struct {
 type Index struct {
 	ID FilteredString `xml:"id,attr" json:"id,omitempty"`
 
-	Head       *Head         `xml:"head,omitemtpy" json:"head,omitempty"`
+	Head       *Head         `xml:"head,omitempty" json:"head,omitempty"`
 	IndexEntry []*IndexEntry `xml:"indexentry" json:"indexentry,omitempty"`
 	P          []*P          `xml:"p" json:"p,omitempty"`
 }
