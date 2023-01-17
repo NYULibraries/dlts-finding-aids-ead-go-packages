@@ -1,6 +1,6 @@
 # Changelog
 
-#### 0.15.2-stream-parsing-2022-12-23T17_20
+#### 0.15.2-stream-parsing-2022-12-17T17_50
   - WIP: 
 	- correct XML and JSON tag errors: `userrestrict` --> `userestrict`
 	- implement stream parsing for the following types:
