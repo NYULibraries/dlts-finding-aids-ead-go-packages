@@ -11,8 +11,8 @@ type EADChild struct {
 }
 
 func (eadChild *EADChild) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
-	name := start.Name.Local 
-	switch  name {
+	name := start.Name.Local
+	switch name {
 	case "accessrestrict", "accruals", "acqinfo", "altformavail", "appraisal", "arrangement", "bioghist",
 		"custodhist", "odd", "otherfindaid", "originalsloc", "phystech", "prefercite",
 		"processinfo", "relatedmaterial", "scopecontent", "separatedmaterial", "userestrict":
@@ -52,7 +52,7 @@ func (eadChild *EADChild) UnmarshalXML(d *xml.Decoder, start xml.StartElement) e
 		e := P{}
 		return decodeElement(eadChild, &e, d, start)
 	default:
-		return fmt.Errorf("Unsupported Element Error: %s", name)
+		return fmt.Errorf("unsupported element error: %s", name)
 	}
 }
 
