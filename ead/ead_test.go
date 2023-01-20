@@ -621,6 +621,7 @@ func TestInitPresentationContainersC(t *testing.T) {
 		assertEqual(t, "file-005", string(ead.ArchDesc.DSC.C[0].C[4].ID), "collapsed container ID")
 		assertEqual(t, "file-006", string(ead.ArchDesc.DSC.C[0].C[5].ID), "collapsed container ID")
 		assertEqual(t, "View Items", string(ead.ArchDesc.DSC.C[0].DID.UnitTitle.Value), "presentation container ID")
+		assertEqual(t, "dl-presentation", string(ead.ArchDesc.DSC.C[0].Level), "presentation container ID")
 	})
 }
 
@@ -645,6 +646,7 @@ func TestInitPresentationContainersCK(t *testing.T) {
 		assertEqual(t, "otherlevel-001", string(ead.ArchDesc.DSC.C[2].ID), "collapsed container ID")
 		assertEqual(t, "recordgrp-001", string(ead.ArchDesc.DSC.C[3].ID), "collapsed container ID")
 		assertEqual(t, "View Items", string(ead.ArchDesc.DSC.C[0].DID.UnitTitle.Value), "presentation container ID")
+		assertEqual(t, "dl-presentation", string(ead.ArchDesc.DSC.C[0].Level), "presentation container ID")
 	})
 }
 
@@ -669,5 +671,6 @@ func TestInitPresentationContainersKC(t *testing.T) {
 		assertEqual(t, "file-002", string(ead.ArchDesc.DSC.C[3].C[1].ID), "collapsed container ID")
 		assertEqual(t, "file-003", string(ead.ArchDesc.DSC.C[3].C[2].ID), "collapsed container ID")
 		assertEqual(t, "View Items", string(ead.ArchDesc.DSC.C[3].DID.UnitTitle.Value), "presentation container ID")
+		assertEqual(t, "dl-presentation", string(ead.ArchDesc.DSC.C[3].Level), "presentation container ID")
 	})
 }
