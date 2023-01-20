@@ -622,3 +622,26 @@ func TestInitPresentationContainersC(t *testing.T) {
 		assertEqual(t, "file-006", string(ead.ArchDesc.DSC.C[0].C[5].ID), "collapsed container ID")
 	})
 }
+
+func TestInitPresentationContainersCK(t *testing.T) {
+	t.Run("InitPresentationContainers() Collapse First Containers", func(t *testing.T) {
+		ead := getPresentationContainerEAD(t, "pc-c-k.xml")
+
+		assertEqual(t, "file-001", string(ead.ArchDesc.DSC.C[0].ID), "initial container ID")
+		assertEqual(t, "file-002", string(ead.ArchDesc.DSC.C[1].ID), "initial container ID")
+		assertEqual(t, "file-003", string(ead.ArchDesc.DSC.C[2].ID), "initial container ID")
+		assertEqual(t, "series-001", string(ead.ArchDesc.DSC.C[3].ID), "initial container ID")
+		assertEqual(t, "otherlevel-001", string(ead.ArchDesc.DSC.C[4].ID), "initial container ID")
+		assertEqual(t, "recordgrp-001", string(ead.ArchDesc.DSC.C[5].ID), "initial container ID")
+
+		ead.InitPresentationContainers()
+
+		assertEqual(t, "items001", string(ead.ArchDesc.DSC.C[0].ID), "presentation container ID")
+		assertEqual(t, "file-001", string(ead.ArchDesc.DSC.C[0].C[0].ID), "collapsed container ID")
+		assertEqual(t, "file-002", string(ead.ArchDesc.DSC.C[0].C[1].ID), "collapsed container ID")
+		assertEqual(t, "file-003", string(ead.ArchDesc.DSC.C[0].C[2].ID), "collapsed container ID")
+		assertEqual(t, "series-001", string(ead.ArchDesc.DSC.C[1].ID), "collapsed container ID")
+		assertEqual(t, "otherlevel-001", string(ead.ArchDesc.DSC.C[2].ID), "collapsed container ID")
+		assertEqual(t, "recordgrp-001", string(ead.ArchDesc.DSC.C[3].ID), "collapsed container ID")
+	})
+}
