@@ -16,6 +16,7 @@ var omegaTestFixturePath string = filepath.Join(testFixturePath, "omega", "v0.1.
 var falesTestFixturePath string = filepath.Join(testFixturePath, "fales")
 var nyhsTestFixturePath string = filepath.Join(testFixturePath, "nyhs")
 var akkasahTestFixturePath string = filepath.Join(testFixturePath, "akkasah")
+var presentationContainerPath string = filepath.Join(testFixturePath, "presentation-containers")
 
 func testProcessDID(did *DID) {
 	daos := did.DAO
@@ -107,6 +108,17 @@ func getNYHSFoundling(t *testing.T) EAD {
 
 func getAkkasahADMC030REF184EAD(t *testing.T) EAD {
 	EADXML, err := os.ReadFile(akkasahTestFixturePath + "/" + "ad_mc_030_ref184.xml")
+	failOnError(t, err, "Unexpected error")
+
+	var ead EAD
+	err = xml.Unmarshal([]byte(EADXML), &ead)
+	failOnError(t, err, "Unexpected error")
+
+	return ead
+}
+
+func getPresentationContainerEAD(t *testing.T, filename string) EAD {
+	EADXML, err := os.ReadFile(presentationContainerPath + "/" + filename)
 	failOnError(t, err, "Unexpected error")
 
 	var ead EAD
@@ -585,5 +597,28 @@ func TestJSONMarshalingInitPresentationContainers(t *testing.T) {
 			errMsg := fmt.Sprintf("JSON Data does not match reference file.\ndiff %s %s", jsonFile, referenceFile)
 			t.Errorf(errMsg)
 		}
+	})
+}
+
+func TestInitPresentationContainersC(t *testing.T) {
+	t.Run("InitPresentationContainers() Collapse All Containers", func(t *testing.T) {
+		ead := getPresentationContainerEAD(t, "pc-c.xml")
+
+		assertEqual(t, "file-001", string(ead.ArchDesc.DSC.C[0].ID), "initial container ID")
+		assertEqual(t, "file-002", string(ead.ArchDesc.DSC.C[1].ID), "initial container ID")
+		assertEqual(t, "file-003", string(ead.ArchDesc.DSC.C[2].ID), "initial container ID")
+		assertEqual(t, "file-004", string(ead.ArchDesc.DSC.C[3].ID), "initial container ID")
+		assertEqual(t, "file-005", string(ead.ArchDesc.DSC.C[4].ID), "initial container ID")
+		assertEqual(t, "file-006", string(ead.ArchDesc.DSC.C[5].ID), "initial container ID")
+
+		ead.InitPresentationContainers()
+
+		assertEqual(t, "items001", string(ead.ArchDesc.DSC.C[0].ID), "presentation container ID")
+		assertEqual(t, "file-001", string(ead.ArchDesc.DSC.C[0].C[0].ID), "collapsed container ID")
+		assertEqual(t, "file-002", string(ead.ArchDesc.DSC.C[0].C[1].ID), "collapsed container ID")
+		assertEqual(t, "file-003", string(ead.ArchDesc.DSC.C[0].C[2].ID), "collapsed container ID")
+		assertEqual(t, "file-004", string(ead.ArchDesc.DSC.C[0].C[3].ID), "collapsed container ID")
+		assertEqual(t, "file-005", string(ead.ArchDesc.DSC.C[0].C[4].ID), "collapsed container ID")
+		assertEqual(t, "file-006", string(ead.ArchDesc.DSC.C[0].C[5].ID), "collapsed container ID")
 	})
 }
