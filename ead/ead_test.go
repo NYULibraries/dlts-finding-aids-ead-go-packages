@@ -620,6 +620,7 @@ func TestInitPresentationContainersC(t *testing.T) {
 		assertEqual(t, "file-004", string(ead.ArchDesc.DSC.C[0].C[3].ID), "collapsed container ID")
 		assertEqual(t, "file-005", string(ead.ArchDesc.DSC.C[0].C[4].ID), "collapsed container ID")
 		assertEqual(t, "file-006", string(ead.ArchDesc.DSC.C[0].C[5].ID), "collapsed container ID")
+
 		assertEqual(t, "View Items", string(ead.ArchDesc.DSC.C[0].DID.UnitTitle.Value), "presentation container ID")
 		assertEqual(t, "dl-presentation", string(ead.ArchDesc.DSC.C[0].Level), "presentation container ID")
 	})
@@ -645,6 +646,7 @@ func TestInitPresentationContainersCK(t *testing.T) {
 		assertEqual(t, "series-001", string(ead.ArchDesc.DSC.C[1].ID), "collapsed container ID")
 		assertEqual(t, "otherlevel-001", string(ead.ArchDesc.DSC.C[2].ID), "collapsed container ID")
 		assertEqual(t, "recordgrp-001", string(ead.ArchDesc.DSC.C[3].ID), "collapsed container ID")
+
 		assertEqual(t, "View Items", string(ead.ArchDesc.DSC.C[0].DID.UnitTitle.Value), "presentation container ID")
 		assertEqual(t, "dl-presentation", string(ead.ArchDesc.DSC.C[0].Level), "presentation container ID")
 	})
@@ -670,7 +672,44 @@ func TestInitPresentationContainersKC(t *testing.T) {
 		assertEqual(t, "file-001", string(ead.ArchDesc.DSC.C[3].C[0].ID), "collapsed container ID")
 		assertEqual(t, "file-002", string(ead.ArchDesc.DSC.C[3].C[1].ID), "collapsed container ID")
 		assertEqual(t, "file-003", string(ead.ArchDesc.DSC.C[3].C[2].ID), "collapsed container ID")
+
 		assertEqual(t, "View Items", string(ead.ArchDesc.DSC.C[3].DID.UnitTitle.Value), "presentation container ID")
 		assertEqual(t, "dl-presentation", string(ead.ArchDesc.DSC.C[3].Level), "presentation container ID")
+	})
+}
+
+func TestInitPresentationContainersCKC(t *testing.T) {
+	t.Run("InitPresentationContainers() Collapse First and Last Containers", func(t *testing.T) {
+		ead := getPresentationContainerEAD(t, "pc-c-k-c.xml")
+
+		assertEqual(t, "file-001", string(ead.ArchDesc.DSC.C[0].ID), "initial container ID")
+		assertEqual(t, "file-002", string(ead.ArchDesc.DSC.C[1].ID), "initial container ID")
+		assertEqual(t, "file-003", string(ead.ArchDesc.DSC.C[2].ID), "initial container ID")
+		assertEqual(t, "series-001", string(ead.ArchDesc.DSC.C[3].ID), "initial container ID")
+		assertEqual(t, "otherlevel-001", string(ead.ArchDesc.DSC.C[4].ID), "initial container ID")
+		assertEqual(t, "recordgrp-001", string(ead.ArchDesc.DSC.C[5].ID), "initial container ID")
+		assertEqual(t, "file-004", string(ead.ArchDesc.DSC.C[6].ID), "initial container ID")
+		assertEqual(t, "file-005", string(ead.ArchDesc.DSC.C[7].ID), "initial container ID")
+		assertEqual(t, "file-006", string(ead.ArchDesc.DSC.C[8].ID), "initial container ID")
+
+		ead.InitPresentationContainers()
+
+		assertEqual(t, "items001", string(ead.ArchDesc.DSC.C[0].ID), "presentation container ID")
+		assertEqual(t, "file-001", string(ead.ArchDesc.DSC.C[0].C[0].ID), "collapsed container ID")
+		assertEqual(t, "file-002", string(ead.ArchDesc.DSC.C[0].C[1].ID), "collapsed container ID")
+		assertEqual(t, "file-003", string(ead.ArchDesc.DSC.C[0].C[2].ID), "collapsed container ID")
+		assertEqual(t, "series-001", string(ead.ArchDesc.DSC.C[1].ID), "collapsed container ID")
+		assertEqual(t, "otherlevel-001", string(ead.ArchDesc.DSC.C[2].ID), "collapsed container ID")
+		assertEqual(t, "recordgrp-001", string(ead.ArchDesc.DSC.C[3].ID), "collapsed container ID")
+		assertEqual(t, "items002", string(ead.ArchDesc.DSC.C[4].ID), "presentation container ID")
+		assertEqual(t, "file-004", string(ead.ArchDesc.DSC.C[4].C[0].ID), "collapsed container ID")
+		assertEqual(t, "file-005", string(ead.ArchDesc.DSC.C[4].C[1].ID), "collapsed container ID")
+		assertEqual(t, "file-006", string(ead.ArchDesc.DSC.C[4].C[2].ID), "collapsed container ID")
+
+		assertEqual(t, "View Items", string(ead.ArchDesc.DSC.C[0].DID.UnitTitle.Value), "presentation container ID")
+		assertEqual(t, "dl-presentation", string(ead.ArchDesc.DSC.C[0].Level), "presentation container ID")
+
+		assertEqual(t, "View Items", string(ead.ArchDesc.DSC.C[4].DID.UnitTitle.Value), "presentation container ID")
+		assertEqual(t, "dl-presentation", string(ead.ArchDesc.DSC.C[4].Level), "presentation container ID")
 	})
 }
