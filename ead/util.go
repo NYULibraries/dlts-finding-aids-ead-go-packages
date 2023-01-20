@@ -764,7 +764,7 @@ func addPresentationContainers(csp *[]*C) []*C {
 				pc.Level = "dl-presentation"
 				pcCount += 1
 				pc.ID = FilteredString(fmt.Sprintf("items%03d", pcCount))
-				// set pc.DID.Unittitle
+				pc.DID.UnitTitle = &UnitTitle{Value: "View Items"}
 				pc.C = cs[collapseStartIdx:collapseEndIdx]
 				keepStartIdx = collapseEndIdx
 				collapsedCs = append(collapsedCs, pc)
