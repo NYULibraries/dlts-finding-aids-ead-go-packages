@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ead xmlns="urn:isbn:1-931666-22-9" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="urn:isbn:1-931666-22-9 http://www.loc.gov/ead/ead.xsd">
+  <eadheader countryencoding="iso3166-1" dateencoding="iso8601" findaidstatus="completed"
+    langencoding="iso639-2b" repositoryencoding="iso15511">
+    <eadid url="http://dlib.nyu.edu/findingaids/html/tamwag/mos_2021">mos_2021</eadid>
+    <filedesc>
+      <titlestmt>
+        <titleproper>Presentation Container Test: Collapse-Keep-Collapse</titleproper>
+      </titlestmt>
+    </filedesc>
+  </eadheader>
+  <archdesc level="collection">
+    <did>
+      <unitid>PC-C-K-C</unitid>
+    </did>
+    <dsc>
+      <c id="file-001" level="file">
+        <did>
+          <unittitle>file-001</unittitle>
+        </did>
+      </c>
+      <c id="file-002" level="file">
+        <did>
+          <unittitle>file-002</unittitle>
+        </did>
+      </c>
+      <c id="file-003" level="file">
+        <did>
+          <unittitle>file-003</unittitle>
+        </did>
+      </c>
+      <c id="series-001" level="series">
+        <did>
+          <unittitle>series-001</unittitle>
+        </did>
+      </c>
+      <c id="otherlevel-001" level="otherlevel">
+        <did>
+          <unittitle>otherlevel-001</unittitle>
+        </did>
+      </c>
+      <c id="recordgrp-001" level="recordgrp">
+        <did>
+          <unittitle>recordgrp-001</unittitle>
+        </did>
+      </c>
+      <c id="file-004" level="file">
+        <did>
+          <unittitle>file-004</unittitle>
+        </did>
+      </c>
+      <c id="file-005" level="file">
+        <did>
+          <unittitle>file-005</unittitle>
+        </did>
+      </c>
+      <c id="file-006" level="file">
+        <did>
+          <unittitle>file-006</unittitle>
+        </did>
+      </c>
+    </dsc>
+  </archdesc>
+</ead>
