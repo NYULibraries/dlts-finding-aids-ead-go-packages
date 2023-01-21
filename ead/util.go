@@ -714,6 +714,11 @@ func addPresentationContainers(csp *[]*C) []*C {
 
 	cs := *csp
 
+	// return immediately if there aren't any containers
+	if len(cs) == 0 {
+		return cs
+	}
+
 	var collapsedCs []*C
 
 	// inRun            : currently in a run of Cs to collapse
