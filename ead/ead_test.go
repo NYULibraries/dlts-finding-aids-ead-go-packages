@@ -745,3 +745,19 @@ func TestInitPresentationContainersKCK(t *testing.T) {
 		assertEqual(t, "dl-presentation", string(ead.ArchDesc.DSC.C[3].Level), "presentation container Level")
 	})
 }
+
+func TestInitPresentationContainersNoContainers(t *testing.T) {
+	t.Run("InitPresentationContainers() Collapse All Containers", func(t *testing.T) {
+		ead := getPresentationContainerEAD(t, "pc-no-containers.xml")
+
+		if nil != ead.ArchDesc.DSC.C {
+			t.Errorf("expected initial container list to be empty")
+		}
+
+		ead.InitPresentationContainers()
+
+		if nil != ead.ArchDesc.DSC.C {
+			t.Errorf("expected container list to still be empty after InitPresentationContainers()")
+		}
+	})
+}
