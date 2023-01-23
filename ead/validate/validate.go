@@ -7,6 +7,7 @@ import (
 	"encoding/xml"
 	"fmt"
 	"io"
+	"net/url"
 	"regexp"
 	"strings"
 	"unicode"
@@ -82,6 +83,8 @@ func ValidateEAD(data []byte) ([]string, error) {
 		return validationErrors, err
 	}
 	validationErrors = append(validationErrors, validateRoleAttributesValidationErrors...)
+
+	validationErrors = append(validationErrors, validateHREFs(ead)...)
 
 	return validationErrors, err
 }
@@ -397,4 +400,21 @@ func validateEADAgainstSchema(data []byte) []string {
 
 	// all ok, return empty slice
 	return []string{}
+}
+
+func validateHREFs(ead ead.EAD) []string {
+	var validationErrors = []string{}
+
+	// REQUIRED!
+	ead.InitDAOCounts()
+
+	for _, dao := range ead.DAOInfo.AllDAOs {
+		// https://golang.cafe/blog/how-to-validate-url-in-go.html
+		_, err := url.ParseRequestURI(string(dao.Href))
+		if err != nil {
+			validationErrors = append(validationErrors, fmt.Sprintf("Invalid HREF detected: '%s', Title: '%s'", []byte(dao.Href), dao.Title))
+		}
+	}
+
+	return validationErrors
 }

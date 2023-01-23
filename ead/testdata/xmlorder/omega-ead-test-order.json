@@ -3596,7 +3596,7 @@
                                     {
                                         "actuate": "onRequest",
                                         "href": "https://aeon.library.nyu.edu/remoteauth/aeon.dll?Logon\u0026Action=10\u0026Form=31\u0026Value=http://dlib.nyu.edu/findingaids/ead/tamwag/mos_2021.xml\u0026view=xml",
-                                        "role": "external-link",
+                                        "role": "electronic-records-service",
                                         "show": "new",
                                         "title": "This is a digital object",
                                         "type": "simple",
@@ -4573,32 +4573,6 @@
                                 ],
                                 "unittitle": {
                                     "value": "Electronic-Records-Reading-Room"
-                                }
-                            }
-                        },
-                        {
-                            "id": "aspace_7c4d41e52826eec1ee0f21625ae73961",
-                            "level": "file",
-                            "did": {
-                                "dao": [
-                                    {
-                                        "actuate": "onRequest",
-                                        "href": "https://hdl.handle.net/2333.1/dfn2z8sk",
-                                        "role": "image-service",
-                                        "show": "new",
-                                        "title": "Three children in the Japanese Gardens: 1984",
-                                        "type": "simple",
-                                        "daodesc": {
-                                            "p": [
-                                                {
-                                                    "value": "Three children in the Japanese Gardens: 1984"
-                                                }
-                                            ]
-                                        }
-                                    }
-                                ],
-                                "unittitle": {
-                                    "value": "Image-Service"
                                 }
                             }
                         }

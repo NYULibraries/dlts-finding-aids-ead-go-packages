@@ -1432,7 +1432,8 @@
               label="mixed materials" type="box">1</container>
             <dao xlink:actuate="onRequest"
               xlink:href="https://aeon.library.nyu.edu/remoteauth/aeon.dll?Logon&amp;Action=10&amp;Form=31&amp;Value=http://dlib.nyu.edu/findingaids/ead/tamwag/mos_2021.xml&amp;view=xml"
-              xlink:show="new" xlink:title="This is a digital object" xlink:type="simple">
+              xlink:role="electronic-records-service" xlink:show="new"
+              xlink:title="This is a digital object" xlink:type="simple">
               <daodesc>
                 <p>This is a digital object</p>
               </daodesc>
@@ -1574,18 +1575,6 @@
               xlink:title="Digital Duets Langland La MaMa" xlink:type="simple">
               <daodesc>
                 <p>Digital Duets Langland La MaMa: 2012-</p>
-              </daodesc>
-            </dao>
-          </did>
-        </c>
-        <c id="aspace_7c4d41e52826eec1ee0f21625ae73961" level="file">
-          <did>
-            <unittitle>Image-Service</unittitle>
-            <dao xlink:actuate="onRequest" xlink:href="https://hdl.handle.net/2333.1/dfn2z8sk"
-              xlink:role="image-service" xlink:show="new"
-              xlink:title="Three children in the Japanese Gardens: 1984" xlink:type="simple">
-              <daodesc>
-                <p>Three children in the Japanese Gardens: 1984</p>
               </daodesc>
             </dao>
           </did>

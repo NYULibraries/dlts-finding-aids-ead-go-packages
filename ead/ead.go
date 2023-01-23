@@ -5,15 +5,17 @@ package ead
 // Based on: "Data model for parsing EAD <archdesc> elements": https://jira.nyu.edu/jira/browse/FADESIGN-29.
 
 const (
-	Version = "0.15.2"
+	Version = "v0.16.0"
 )
 
 type EAD struct {
-	RunInfo   RunInfo   `json:"runinfo"`
-	PubInfo   PubInfo   `json:"pubinfo"`
-	Donors    Donors    `json:"donors,omitempty"`
-	ArchDesc  *ArchDesc `xml:"archdesc" json:"archdesc,omitempty"`
-	EADHeader EADHeader `xml:"eadheader" json:"eadheader,omitempty"`
+	RunInfo    RunInfo    `json:"runinfo"`
+	DAOInfo    DAOInfo    `json:"-"`
+	DAOGrpInfo DAOGrpInfo `json:"-"`
+	PubInfo    PubInfo    `json:"pubinfo"`
+	Donors     Donors     `json:"donors,omitempty"`
+	ArchDesc   *ArchDesc  `xml:"archdesc" json:"archdesc,omitempty"`
+	EADHeader  EADHeader  `xml:"eadheader" json:"eadheader,omitempty"`
 }
 
 type Abstract struct {
@@ -21,13 +23,13 @@ type Abstract struct {
 
 	Title []*Title `xml:"title" json:"title,omitempty"`
 
-	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type AccessTermWithRole struct {
 	Role string `xml:"role,attr" json:"role,omitempty"`
 
-	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type Address struct {
@@ -37,11 +39,11 @@ type Address struct {
 type AddressLine struct {
 	ExtPtr []*ExtPtr `xml:"extptr" json:"extptr,omitempty"`
 
-	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type ArchDesc struct {
-	Level FilteredString `xml:"level,attr" json:"level,attr,omitempty"`
+	Level FilteredString `xml:"level,attr" json:"level,omitempty"`
 
 	AccessRestrict    []*FormattedNoteWithHead `xml:"accessrestrict" json:"accessrestrict,omitempty"`
 	Accruals          []*FormattedNoteWithHead `xml:"accruals" json:"accruals,omitempty"`
@@ -64,27 +66,28 @@ type ArchDesc struct {
 	RelatedMaterial   []*FormattedNoteWithHead `xml:"relatedmaterial" json:"relatedmaterial,omitempty"`
 	ScopeContent      []*FormattedNoteWithHead `xml:"scopecontent" json:"scopecontent,omitempty"`
 	SeparatedMaterial []*FormattedNoteWithHead `xml:"separatedmaterial" json:"separatedmaterial,omitempty"`
-	UserRestrict      []*FormattedNoteWithHead `xml:"userestrict" json:"userestrict,omitempty"`
+	UseRestrict       []*FormattedNoteWithHead `xml:"userestrict" json:"userestrict,omitempty"`
 }
 
 type ArchRef struct {
 	PhysLoc []*PhysLoc `xml:"physloc" json:"physloc,omitempty"`
 
-	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type Bibliography struct {
 	ID FilteredString `xml:"id,attr" json:"id,omitempty"`
 
-	Head   *Head     `xml:"head,omitemtpy" json:"head,omitempty"`
-	BibRef []*BibRef `xml:"bibref,omitempty" json:"bibref,omitempty"`
-	P      []*P      `xml:"p,omitempty" json:"p,omitempty"`
+	Head *Head `xml:"head,omitempty" json:"head,omitempty"`
+
+	// adding Don Mennerich's approach here...
+	Children []*EADChild `xml:",any" json:"children,omitempty"`
 }
 
 type BibRef struct {
 	Title []*Title `xml:"title" json:"title,omitempty"`
 
-	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type C struct {
@@ -114,7 +117,7 @@ type C struct {
 	RelatedMaterial   []*FormattedNoteWithHead `xml:"relatedmaterial,omitempty" json:"relatedmaterial,omitempty"`
 	ScopeContent      []*FormattedNoteWithHead `xml:"scopecontent,omitempty" json:"scopecontent,omitempty"`
 	SeparatedMaterial []*FormattedNoteWithHead `xml:"separatedmaterial" json:"separatedmaterial,omitempty"`
-	UserRestrict      []*FormattedNoteWithHead `xml:"userrestrict,omitempty" json:"userrestrict,omitempty"`
+	UseRestrict       []*FormattedNoteWithHead `xml:"userestrict,omitempty" json:"userestrict,omitempty"`
 }
 
 type Change struct {
@@ -126,11 +129,11 @@ type ChronItem struct {
 	Date     []*Date     `xml:"date" json:"date,omitempty"`
 	EventGrp []*EventGrp `xml:"eventgrp,omitempty" json:"eventgrp,omitempty"`
 
-	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type ChronList struct {
-	Head      *Head        `xml:"head,omitemtpy" json:"head,omitempty"`
+	Head      *Head        `xml:"head,omitempty" json:"head,omitempty"`
 	ChronItem []*ChronItem `xml:"chronitem,omitempty" json:"chronitem,omitempty"`
 }
 
@@ -141,23 +144,23 @@ type Container struct {
 	Parent    FilteredString      `xml:"parent,attr" json:"parent,omitempty"`
 	Type      FilteredString      `xml:"type,attr" json:"type,omitempty"`
 
-	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type ControlAccess struct {
 	CorpName   []*AccessTermWithRole `xml:"corpname" json:"corpname,omitempty"`
 	FamName    []*AccessTermWithRole `xml:"famname" json:"famname,omitempty"`
-	Function   []*FilteredString     `xml:"function" json:"function,omitempty"`
-	GenreForm  []*FilteredString     `xml:"genreform" json:"genreform,omitempty"`
-	GeogName   []*FilteredString     `xml:"geogname" json:"geogname,omitempty"`
-	Occupation []*FilteredString     `xml:"occupation" json:"occupation,omitempty"`
+	Function   []*AccessTermWithRole `xml:"function" json:"function,omitempty"`
+	GenreForm  []*AccessTermWithRole `xml:"genreform" json:"genreform,omitempty"`
+	GeogName   []*AccessTermWithRole `xml:"geogname" json:"geogname,omitempty"`
+	Occupation []*AccessTermWithRole `xml:"occupation" json:"occupation,omitempty"`
 	PersName   []*AccessTermWithRole `xml:"persname" json:"persname,omitempty"`
-	Subject    []*FilteredString     `xml:"subject" json:"subject,omitempty"`
-	Title      []*Title              `xml:"title" json:"title,omitempty"`
+	Subject    []*AccessTermWithRole `xml:"subject" json:"subject,omitempty"`
+	Title      []*AccessTermWithRole `xml:"title" json:"title,omitempty"`
 }
 
 type Creation struct {
-	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type DAO struct {
@@ -170,7 +173,8 @@ type DAO struct {
 	Title   FilteredString `xml:"title,attr" json:"title,omitempty"`
 	Type    FilteredString `xml:"type,attr" json:"type,omitempty"`
 
-	DAODesc DAODesc `xml:"daodesc" json:"daodesc,omitempty"`
+	ParentDID *DID    `xml:"-" json:"-"`
+	DAODesc   DAODesc `xml:"daodesc" json:"daodesc,omitempty"`
 }
 
 type DAODesc struct {
@@ -195,7 +199,7 @@ type DAOLoc struct {
 type Date struct {
 	Type FilteredString `xml:"type,attr" json:"type,omitempty"`
 
-	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type DefItem struct {
@@ -223,7 +227,7 @@ type Dimensions struct {
 	ID    FilteredString      `xml:"id,attr" json:"id,omitempty"`
 	Label FilteredLabelString `xml:"label,attr" json:"label,omitempty"`
 
-	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type DSC struct {
@@ -245,7 +249,7 @@ type EADHeader struct {
 type EADID struct {
 	URL FilteredString `xml:"url,attr" json:"url,omitempty"`
 
-	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type EditionStmt struct {
@@ -255,7 +259,7 @@ type EditionStmt struct {
 type Event struct {
 	Title []*Title `xml:"title" json:"title,omitempty"`
 
-	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type EventGrp struct {
@@ -267,7 +271,7 @@ type Extent struct {
 
 	Unit FilteredString `xml:"unit,attr" json:"unit,omitempty"`
 
-	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type ExtPtr struct {
@@ -293,25 +297,23 @@ type FileDesc struct {
 }
 
 type FormattedNoteWithHead struct {
-	ID FilteredString `xml:"id,attr" json:"id,omitempty"`
+	ID   FilteredString `xml:"id,attr" json:"id,omitempty"`
+	Head *Head          `xml:"head" json:"head,omitempty"`
 
-	ChronList   []*ChronList `xml:"chronlist" json:"chronlist,omitempty"`
-	DefItem     []*DefItem   `xml:"defitem,omitemtpy" json:"defitem,omitempty"`
-	Head        *Head        `xml:"head,omitemtpy" json:"head,omitempty"`
-	LegalStatus *LegalStatus `xml:"legalstatus,omitemtpy" json:"legalstatus,omitempty"`
-	List        []*List      `xml:"list,omitemtpy" json:"list,omitempty"`
-	P           []*P         `xml:"p,omitempty" json:"p,omitempty"`
+	// adding Don Mennerich's approach here...
+	Children []*EADChild `xml:",any" json:"children,omitempty"`
 }
 
 type Head struct {
-	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type Index struct {
 	ID FilteredString `xml:"id,attr" json:"id,omitempty"`
 
-	Head       *Head         `xml:"head,omitemtpy" json:"head,omitempty"`
+	Head       *Head         `xml:"head,omitempty" json:"head,omitempty"`
 	IndexEntry []*IndexEntry `xml:"indexentry" json:"indexentry,omitempty"`
+	P          []*P          `xml:"p" json:"p,omitempty"`
 }
 
 type IndexEntry struct {
@@ -327,7 +329,7 @@ type Item struct {
 	PersName []*AccessTermWithRole `xml:"persname" json:"persname,omitempty"`
 	Title    []*Title              `xml:"title" json:"title,omitempty"`
 
-	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type LangMaterial struct {
@@ -335,19 +337,19 @@ type LangMaterial struct {
 
 	Language *FilteredString `xml:"language" json:"language,omitempty"`
 
-	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type LangUsage struct {
 	Language FilteredString `xml:"language" json:"language,omitempty"`
 
-	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type LegalStatus struct {
 	ID FilteredString `xml:"id,attr" json:"id,omitempty"`
 
-	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type List struct {
@@ -370,7 +372,7 @@ type NoteStmt struct {
 type Num struct {
 	Type FilteredString `xml:"type,attr" json:"type,omitempty"`
 
-	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type Origination struct {
@@ -400,32 +402,31 @@ type P struct {
 	Subject    []*FilteredString     `xml:"subject" json:"subject,omitempty"`
 	Title      []*Title              `xml:"title" json:"title,omitempty"`
 
-	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type PhysDesc struct {
-	AltRender FilteredString      `xml:"altrender,attr" json:"altrender,omitempty"`
-	ID        FilteredString      `xml:"id,attr" json:"id,omitempty"`
-	Label     FilteredLabelString `xml:"label,attr" json:"label,omitempty"`
+	AltRender  FilteredString      `xml:"altrender,attr" json:"altrender,omitempty"`
+	ID         FilteredString      `xml:"id,attr" json:"id,omitempty"`
+	Label      FilteredLabelString `xml:"label,attr" json:"label,omitempty"`
+	Extent     []*Extent           `xml:"extent" json:"extent,omitempty"`
+	Dimensions *Dimensions         `xml:"dimensions" json:"dimensions,omitempty"`
+	PhysFacet  *PhysFacet          `xml:"physfacet" json:"physfacet,omitempty"`
 
-	Extent     []*Extent   `xml:"extent" json:"extent,omitempty"`
-	Dimensions *Dimensions `xml:"dimensions" json:"dimensions,omitempty"`
-	PhysFacet  *PhysFacet  `xml:"physfacet" json:"physfacet,omitempty"`
-
-	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type PhysFacet struct {
 	ID    FilteredString      `xml:"id,attr" json:"id,omitempty"`
 	Label FilteredLabelString `xml:"label,attr" json:"label,omitempty"`
 
-	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type PhysLoc struct {
 	ID FilteredString `xml:"id,attr" json:"id,omitempty"`
 
-	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type ProfileDesc struct {
@@ -443,7 +444,7 @@ type PublicationStmt struct {
 type Repository struct {
 	CorpName []*AccessTermWithRole `xml:"corpname" json:"corpname,omitempty"`
 
-	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type RevisionDesc struct {
@@ -455,7 +456,7 @@ type Title struct {
 	Source FilteredString `xml:"source,attr" json:"source,omitempty"`
 	Type   FilteredString `xml:"type,attr" json:"type,omitempty"`
 
-	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type TitleProper struct {
@@ -463,7 +464,7 @@ type TitleProper struct {
 
 	Num []*Num `xml:"num" json:"num,omitempty"`
 
-	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type TitleStmt struct {
@@ -477,7 +478,7 @@ type TitleStmt struct {
 type UnitDate struct {
 	Type FilteredString `xml:"type,attr" json:"type,omitempty"`
 
-	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type UnitTitle struct {
@@ -486,5 +487,5 @@ type UnitTitle struct {
 	PersName []*AccessTermWithRole `xml:"persname" json:"persname,omitempty"`
 	Title    []*Title              `xml:"title" json:"title,omitempty"`
 
-	Value string `xml:",innerxml" json:"value,chardata,omitempty"`
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
