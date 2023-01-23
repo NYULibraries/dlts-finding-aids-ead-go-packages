@@ -21,6 +21,7 @@ var missingRequiredElementsEADIDAndRepositoryFixturePath string
 var missingRequiredElementsEADIDAndRepositoryCorpnameFixturePath string
 var validEADFixturePath string
 var validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath string
+var invalidHREFFixturePath string
 
 // Source: https://intellij-support.jetbrains.com/hc/en-us/community/posts/360009685279-Go-test-working-directory-keeps-changing-to-dir-of-the-test-file-instead-of-value-in-template?page=1#community_comment_360002183640
 func init() {
@@ -35,11 +36,54 @@ func init() {
 	invalidEadDataFixturePath = filepath.Join(fixturesDirPath, "mc_100-invalid-eadid-repository-role-relator-codes-unpublished-material.xml")
 	invalidXMLFixturePath = filepath.Join(fixturesDirPath, "invalid-xml.xml")
 	invalidEADFixturePath = filepath.Join(fixturesDirPath, "ad_rg_009_3_2_1.xml")
+	invalidHREFFixturePath = filepath.Join(fixturesDirPath, "rg_6_0.xml")
 	missingRequiredElementsEADIDAndArchDescFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-archdesc.xml")
 	missingRequiredElementsEADIDAndRepositoryFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-repository.xml")
 	missingRequiredElementsEADIDAndRepositoryCorpnameFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-repository-corpname.xml")
 	validEADFixturePath = filepath.Join(fixturesDirPath, "mc_100.xml")
 	validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath = filepath.Join(fixturesDirPath, "mc_100-valid-eadid-with-leading-and-trailing-spaces.xml")
+}
+
+func doTest(file string, expected []string, t *testing.T) {
+	var validationErrors, err = ValidateEAD(getEADXML(file))
+	if err != nil {
+		t.Fatalf(fmt.Sprintf(`Unexpected runtime error: %s`, err))
+	}
+
+	if len(validationErrors) != len(expected) {
+		var message = getNumErrorsMismatchErrorMessage(expected, validationErrors)
+		t.Fatalf(message)
+	}
+
+	for idx, err := range validationErrors {
+		if err != expected[idx] {
+			t.Errorf(`Expected error %d to be "%s", got "%s"`, idx, expected[idx], err)
+		}
+	}
+}
+
+func getEADXML(filepath string) []byte {
+	EADXML, err := ioutil.ReadFile(filepath)
+	if err != nil {
+		panic(err)
+	}
+
+	return EADXML
+}
+
+func getNumErrorsMismatchErrorMessage(expected []string, errors []string) string {
+	return fmt.Sprintf(`Expected %d error(s):
+
+%s
+
+Got %d error(s):
+
+%s`,
+		len(expected),
+		strings.Join(expected, "\n"),
+		len(errors),
+		strings.Join(errors, "\n"),
+	)
 }
 
 func TestValidEADIDRegexpString(t *testing.T) {
@@ -241,44 +285,31 @@ func TestValidateEADValidEADNoErrors(t *testing.T) {
 	doTest(validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath, []string{}, t)
 }
 
-func doTest(file string, expected []string, t *testing.T) {
-	var validationErrors, err = ValidateEAD(getEADXML(file))
-	if err != nil {
-		t.Fatalf(fmt.Sprintf(`Unexpected runtime error: %s`, err))
+func TestValidateEADInvalidHREFs(t *testing.T) {
+	var expected = []string{
+		"Invalid HREF detected: 'RG 6.0.ref3020.1', Title: 'Letter from Martin L. Beck to Marcel Breuer'",
+		"Invalid HREF detected: 'RG 6.0.ref3021.1', Title: 'Letter from Martin L. Beck to Hamilton Smith'",
+		"Invalid HREF detected: 'RG 6.0.ref3022.1', Title: 'Letter from Martin L. Beck to Hamilton P. Smith'",
+		"Invalid HREF detected: 'RG 6.0.ref3023.1', Title: 'Letter from Martin L. Beck to Marcel Breuer'",
+		"Invalid HREF detected: 'RG 6.0.ref3024.1', Title: 'Letter from Marel Breuer to Chancellor Niles'",
+		"Invalid HREF detected: 'RG 6.0.ref3025.1', Title: 'Letter from Werner A. Baum to Marcel Breuer'",
+		"Invalid HREF detected: 'RG 6.0.ref3026.1', Title: 'Letter from Marcel Breuer to Werner A. Baum'",
+		"Invalid HREF detected: 'RG 6.0.ref3027.1', Title: 'Letter from Hamilton P. Smith to Martin L. Beck'",
+		"Invalid HREF detected: 'RG 6.0.ref3028.1', Title: 'Letter from Chancellor Russell D. Niles to Hamilton P. Smith'",
+		// the following line tests that the hrefs are not being filtered/stripped of blank space
+		"Invalid HREF detected: ' RG 6.0.ref3029.1 ', Title: 'Letter from Hamilton P. Smith to Chancellor Russell D. Niles'", 
+		"Invalid HREF detected: 'RG 6.0.ref3030.1', Title: 'Letter from Hamilton P. Smith to Martin L. Beck'",
+		"Invalid HREF detected: 'RG 6.0.ref3031.1', Title: 'Letter from Hamilton P. Smith to Martin L. Beck'",
+		"Invalid HREF detected: 'RG 6.0.ref3032.1', Title: 'Letter from Russell D. Niles to Hamilton P. Smith'",
+		"Invalid HREF detected: 'RG 6.0.ref3033.1', Title: 'Letter from Hamilton P. Smith to Russell D. Niles'",
+		"Invalid HREF detected: 'RG 6.0.ref3034.1', Title: 'Photostat of Letter from Hamilton P. Smith to Martin L. Beck'",
+		"Invalid HREF detected: 'RG 6.0.ref3035.1', Title: 'Letter from John M. O'Mara to Hamilton Smith'",
+		"Invalid HREF detected: 'RG 6.0.ref3036.1', Title: 'Letter from Hamilton P. Smith to John O'Mara'",
+		"Invalid HREF detected: 'RG 6.0.ref3037.1', Title: 'Letter from Hamilton P. Smith to Russell D. Niles'",
+		"Invalid HREF detected: 'RG 6.0.ref3038.1', Title: 'Letter from Hamilton P. Smith to Russell D. Niles'",
+		"Invalid HREF detected: 'RG 6.0.ref3039.1', Title: 'Letter from Russell D. Niles to Hamilton P. Smith'",
+		"Invalid HREF detected: 'RG 6.0.ref3040.1', Title: 'Photostat of Letter from Hamilton P. Smith to Martin L. Beck'",
 	}
 
-	if len(validationErrors) != len(expected) {
-		var message = getNumErrorsMismatchErrorMessage(expected, validationErrors)
-		t.Fatalf(message)
-	}
-
-	for idx, err := range validationErrors {
-		if err != expected[idx] {
-			t.Errorf(`Expected error %d to be "%s", got "%s"`, idx, expected[idx], err)
-		}
-	}
-}
-
-func getEADXML(filepath string) []byte {
-	EADXML, err := ioutil.ReadFile(filepath)
-	if err != nil {
-		panic(err)
-	}
-
-	return EADXML
-}
-
-func getNumErrorsMismatchErrorMessage(expected []string, errors []string) string {
-	return fmt.Sprintf(`Expected %d error(s):
-
-%s
-
-Got %d error(s):
-
-%s`,
-		len(expected),
-		strings.Join(expected, "\n"),
-		len(errors),
-		strings.Join(errors, "\n"),
-	)
+	doTest(invalidHREFFixturePath, expected, t)
 }
