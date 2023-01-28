@@ -3,7 +3,6 @@ package validate
 import (
 	"bytes"
 	"embed"
-	_ "embed"
 	"encoding/xml"
 	"fmt"
 	"io"
@@ -158,7 +157,7 @@ func validateEADID(ead ead.EAD) ([]string, error) {
 			for _, r := range EADID {
 				charMap[r]++
 			}
-			for char, _ := range charMap {
+			for char := range charMap {
 				if !(unicode.IsLower(char) || unicode.IsDigit(char) || char == '_') {
 					invalidCharacters = append(invalidCharacters, char)
 				}
