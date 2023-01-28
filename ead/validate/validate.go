@@ -24,7 +24,7 @@ var schemas embed.FS
 const ValidEADIDRegexpString = "^[a-z0-9]+(?:_[a-z0-9]+){1,7}$"
 
 var ValidRepositoryNames = []string{
-	"Akkasah: Center for Photography (NYU Abu Dhabi)",
+	"Akkasah: Photography Archive (NYU Abu Dhabi)",
 	"Center for Brooklyn History",
 	"Fales Library and Special Collections",
 	"NYU Abu Dhabi, Archives and Special Collections",
