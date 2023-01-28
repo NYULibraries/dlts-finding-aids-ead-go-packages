@@ -286,6 +286,10 @@ func TestValidateEADValidEADNoErrors(t *testing.T) {
 	doTest(validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath, []string{}, t)
 }
 
+func TestValidateEADAkkasahTitleEADNoErrors(t *testing.T) {
+	doTest(akkasahIncorrectRepositoryNameFixturePath, []string{}, t)
+}
+
 func TestValidateEADInvalidHREFs(t *testing.T) {
 	var expected = []string{
 		"Invalid HREF detected: 'RG 6.0.ref3020.1', Title: 'Letter from Martin L. Beck to Marcel Breuer'",
