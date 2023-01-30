@@ -351,6 +351,21 @@ func _getConvertedTextWithTags(text string, convertLBTags bool) ([]byte, error) 
 					// default processing of opening tag
 					result += _getConvertedTextWithTagsDefault(token.Name.Local)
 				}
+			case "extref":
+				{
+					var href string
+					var target string
+
+					for i := range token.Attr {
+						if token.Attr[i].Name.Local == "href" {
+							href = token.Attr[i].Value
+						}
+						if token.Attr[i].Name.Local == "show" {
+							target = token.Attr[i].Value
+						}
+					}
+					result += fmt.Sprintf("<a class=\"%s\" href=\"%s\" target=\"%s\">", "ead-extref", href, target)
+				}
 			}
 
 		case xml.EndElement:
@@ -363,12 +378,18 @@ func _getConvertedTextWithTags(text string, convertLBTags bool) ([]byte, error) 
 				unit = ""
 			}
 
+			if token.Name.Local == "extref" {
+				result += "</a>"
+				needClosingTag = false
+			}
+
 			if needClosingTag {
 				result += "</span>"
 			} else {
 				// Reset
 				needClosingTag = true
 			}
+
 		case xml.CharData:
 			result += strings.ReplaceAll(string(token), "\n", " ")
 		}
