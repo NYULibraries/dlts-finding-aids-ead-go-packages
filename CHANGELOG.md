@@ -1,4 +1,10 @@
-# Changelog
+# CHANGELOG
+
+#### v0.16.0-FADESIGN-644-2023-01-30T15_25
+  - change `<extref>` element stringification so that instead of a
+	`<span class="ead-extref"...>` element (that is later escaped) the
+	`<extref>` is converted to `<a class="ead-extref" href="..." target="...">`
+
 
 #### v0.16.0
   - correct XML and JSON tag errors: `userrestrict` --> `userestrict`
