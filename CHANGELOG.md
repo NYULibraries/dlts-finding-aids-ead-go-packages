@@ -1,10 +1,15 @@
 # CHANGELOG
 
-#### v0.16.0-FADESIGN-644-2023-01-30T15_25
+#### v0.16.0-FADESIGN-644-2023-02-01T15_40
   - change `<extref>` element stringification so that instead of a
 	`<span class="ead-extref"...>` element (that is later escaped) the
 	`<extref>` is converted to `<a class="ead-extref" href="..." target="...">`
 
+  - Add `ExtRef` to the following types to conform with the [FADESIGN data model](https://github.com/nyudlts/fadesign_29-data-model/blob/main/models.csv):
+    - `FormattedNoteWithHead`
+    - `Item`
+    - `PhysFacet`
+    - `PhysLoc`
 
 #### v0.16.0
   - correct XML and JSON tag errors: `userrestrict` --> `userestrict`
