@@ -3,7 +3,6 @@ package validate
 import (
 	"bytes"
 	"embed"
-	_ "embed"
 	"encoding/xml"
 	"fmt"
 	"io"
@@ -25,7 +24,7 @@ var schemas embed.FS
 const ValidEADIDRegexpString = "^[a-z0-9]+(?:_[a-z0-9]+){1,7}$"
 
 var ValidRepositoryNames = []string{
-	"Akkasah: Center for Photography (NYU Abu Dhabi)",
+	"Akkasah: Photography Archive (NYU Abu Dhabi)",
 	"Center for Brooklyn History",
 	"Fales Library and Special Collections",
 	"NYU Abu Dhabi, Archives and Special Collections",
@@ -158,7 +157,7 @@ func validateEADID(ead ead.EAD) ([]string, error) {
 			for _, r := range EADID {
 				charMap[r]++
 			}
-			for char, _ := range charMap {
+			for char := range charMap {
 				if !(unicode.IsLower(char) || unicode.IsDigit(char) || char == '_') {
 					invalidCharacters = append(invalidCharacters, char)
 				}

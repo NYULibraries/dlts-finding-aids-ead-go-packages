@@ -5,7 +5,7 @@ package ead
 // Based on: "Data model for parsing EAD <archdesc> elements": https://jira.nyu.edu/jira/browse/FADESIGN-29.
 
 const (
-	Version = "v0.16.0"
+	Version = "v0.17.0"
 )
 
 type EAD struct {
@@ -48,7 +48,7 @@ type ArchDesc struct {
 	AccessRestrict    []*FormattedNoteWithHead `xml:"accessrestrict" json:"accessrestrict,omitempty"`
 	Accruals          []*FormattedNoteWithHead `xml:"accruals" json:"accruals,omitempty"`
 	AcqInfo           []*FormattedNoteWithHead `xml:"acqinfo" json:"acqinfo,omitempty"`
-	AltFormAvailable  []*FormattedNoteWithHead `xml:"altformavailable" json:"altformavailable,omitempty"`
+	AltFormAvail      []*FormattedNoteWithHead `xml:"altformavail" json:"altformavail,omitempty"`
 	Appraisal         []*FormattedNoteWithHead `xml:"appraisal" json:"appraisal,omitempty"`
 	Arrangement       []*FormattedNoteWithHead `xml:"arrangement" json:"arrangement,omitempty"`
 	Bibliography      []*Bibliography          `xml:"bibliography" json:"bibliography,omitempty"`
@@ -98,7 +98,7 @@ type C struct {
 	AccessRestrict    []*FormattedNoteWithHead `xml:"accessrestrict,omitempty" json:"accessrestrict,omitempty"`
 	Accruals          []*FormattedNoteWithHead `xml:"accruals,omitempty" json:"accruals,omitempty"`
 	AcqInfo           []*FormattedNoteWithHead `xml:"acqinfo,omitempty" json:"acqinfo,omitempty"`
-	AltFormAvailable  []*FormattedNoteWithHead `xml:"altformavailable" json:"altformavailable,omitempty"`
+	AltFormAvail      []*FormattedNoteWithHead `xml:"altformavail" json:"altformavail,omitempty"`
 	Appraisal         []*FormattedNoteWithHead `xml:"appraisal,omitempty" json:"appraisal,omitempty"`
 	Arrangement       []*FormattedNoteWithHead `xml:"arrangement,omitempty" json:"arrangement,omitempty"`
 	BiogHist          []*FormattedNoteWithHead `xml:"bioghist,omitempty" json:"bioghist,omitempty"`
@@ -297,8 +297,9 @@ type FileDesc struct {
 }
 
 type FormattedNoteWithHead struct {
-	ID   FilteredString `xml:"id,attr" json:"id,omitempty"`
-	Head *Head          `xml:"head" json:"head,omitempty"`
+	ID     FilteredString `xml:"id,attr" json:"id,omitempty"`
+	ExtRef []*ExtRef      `xml:"extref" json:"extref,omitempty"`
+	Head   *Head          `xml:"head" json:"head,omitempty"`
 
 	// adding Don Mennerich's approach here...
 	Children []*EADChild `xml:",any" json:"children,omitempty"`
@@ -325,6 +326,7 @@ type IndexEntry struct {
 type Item struct {
 	BibRef   []*BibRef             `xml:"bibref" json:"bibref,omitempty"`
 	CorpName []*AccessTermWithRole `xml:"corpname" json:"corpname,omitempty"`
+	ExtRef   []*ExtRef             `xml:"extref" json:"extref,omitempty"`
 	Name     []*AccessTermWithRole `xml:"name" json:"name,omitempty"`
 	PersName []*AccessTermWithRole `xml:"persname" json:"persname,omitempty"`
 	Title    []*Title              `xml:"title" json:"title,omitempty"`
@@ -417,14 +419,16 @@ type PhysDesc struct {
 }
 
 type PhysFacet struct {
-	ID    FilteredString      `xml:"id,attr" json:"id,omitempty"`
-	Label FilteredLabelString `xml:"label,attr" json:"label,omitempty"`
+	ID     FilteredString      `xml:"id,attr" json:"id,omitempty"`
+	ExtRef []*ExtRef           `xml:"extref" json:"extref,omitempty"`
+	Label  FilteredLabelString `xml:"label,attr" json:"label,omitempty"`
 
 	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type PhysLoc struct {
-	ID FilteredString `xml:"id,attr" json:"id,omitempty"`
+	ID     FilteredString `xml:"id,attr" json:"id,omitempty"`
+	ExtRef []*ExtRef      `xml:"extref" json:"extref,omitempty"`
 
 	Value string `xml:",innerxml" json:"value,omitempty"`
 }
