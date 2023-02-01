@@ -1,6 +1,6 @@
 # CHANGELOG
 
-#### v0.16.0-FADESIGN-644-2023-02-01T16_30
+#### v0.17.0
   - change `<extref>` element stringification so that instead of a
 	`<span class="ead-extref"...>` element (that is later escaped) the
 	`<extref>` is converted to `<a class="ead-extref" href="..." target="...">`
