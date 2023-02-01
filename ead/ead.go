@@ -326,6 +326,7 @@ type IndexEntry struct {
 type Item struct {
 	BibRef   []*BibRef             `xml:"bibref" json:"bibref,omitempty"`
 	CorpName []*AccessTermWithRole `xml:"corpname" json:"corpname,omitempty"`
+	ExtRef   []*ExtRef             `xml:"extref" json:"extref,omitempty"`
 	Name     []*AccessTermWithRole `xml:"name" json:"name,omitempty"`
 	PersName []*AccessTermWithRole `xml:"persname" json:"persname,omitempty"`
 	Title    []*Title              `xml:"title" json:"title,omitempty"`
