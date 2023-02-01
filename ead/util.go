@@ -442,12 +442,6 @@ type RunInfo struct {
 	SourceFileHash string    `json:"sourcefilehash,omitempty"`
 }
 
-func (r *RunInfo) SetRunInfo(version string, t time.Time, sourceFile string) {
-	r.PkgVersion = version
-	r.TimeStamp = t
-	r.SourceFile = sourceFile
-}
-
 // DAOInfo stores data related to the digital objects in the parsed EAD
 // https://jira.nyu.edu/browse/FADESIGN-138
 type DAOInfo struct {
