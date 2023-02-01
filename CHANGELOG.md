@@ -1,4 +1,27 @@
-# Changelog
+# CHANGELOG
+
+#### v0.17.0
+  - change `<extref>` element stringification so that instead of a
+	`<span class="ead-extref"...>` element (that is later escaped) the
+	`<extref>` is converted to `<a class="ead-extref" href="..." target="...">`
+
+  - Add `ExtRef` to the following types to conform with the [FADESIGN data model](https://github.com/nyudlts/fadesign_29-data-model/blob/main/models.csv):
+	- `FormattedNoteWithHead`
+	- `Item`
+	- `PhysFacet`
+	- `PhysLoc`
+
+  - Correct typo:
+	- change
+	  ```
+	  AltFormAvailable  []*FormattedNoteWithHead `xml:"altformavailable" json:"altformavailable,omitempty"`
+	  ```
+	  to
+	  ```
+		AltFormAvail  []*FormattedNoteWithHead `xml:"altformavail" json:"altformavail,omitempty"`
+	  ```
+  - Add `AppVersion` and `SourceFileHash` to `RunInfo` type
+  - Remove `SetRunInfo()`
 
 #### v0.16.0
   - correct XML and JSON tag errors: `userrestrict` --> `userestrict`
@@ -33,23 +56,23 @@
 	- `Occupation`
 	- `Subject`
 	- `Title`
-  - update `Index` type, add member `P []*P` 
+  - update `Index` type, add member `P []*P`
   - make `CountDIDDAO*` and `CountDAOGrp*` functions public
-  - add functions `DAOInfo.Clear()` and `DAOGrpInfo.Clear()` 
+  - add functions `DAOInfo.Clear()` and `DAOGrpInfo.Clear()`
   - add presentation container functionality via `InitPresentationContainers()`
 
 #### v0.15.2
   - change the xlink.xsd `schemaLocation` in the local EAD 2002 schema
-    to use a DLTS URL to avoid rate-limiting behavior observed when
-    pulling the `xlink.xsd` schema from the Library of Congress
-    server (https://www.loc.gov/standards/xlink/xlink.xsd).
+	to use a DLTS URL to avoid rate-limiting behavior observed when
+	pulling the `xlink.xsd` schema from the Library of Congress
+	server (https://www.loc.gov/standards/xlink/xlink.xsd).
 
 #### v0.15.1
   - add in Free() calls to validation functions
 
 #### v0.15.0
   - add in EAD validation functionality against both project-specific
-    criteria and the EAD 2002 schema
+	criteria and the EAD 2002 schema
 
 #### v0.14.0
   - update to use Go modules
@@ -100,7 +123,7 @@
 
 #### v0.5.0
   - replace all instances of \r, \t, \n, and consecutive spaces in
-    EAD element values with a single space
+	EAD element values with a single space
 
 #### v0.4.0
   - add RunInfo.SourceFile to record the source EAD file path
@@ -125,4 +148,3 @@
 
 #### v0.2.0
   - replace instances of `\n` with spaces in `value` fields processed by `_getConvertedTextWithTags`
-  

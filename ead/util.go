@@ -351,6 +351,21 @@ func _getConvertedTextWithTags(text string, convertLBTags bool) ([]byte, error) 
 					// default processing of opening tag
 					result += _getConvertedTextWithTagsDefault(token.Name.Local)
 				}
+			case "extref":
+				{
+					var href string
+					var target string
+
+					for i := range token.Attr {
+						if token.Attr[i].Name.Local == "href" {
+							href = token.Attr[i].Value
+						}
+						if token.Attr[i].Name.Local == "show" {
+							target = token.Attr[i].Value
+						}
+					}
+					result += fmt.Sprintf("<a class=\"%s\" href=\"%s\" target=\"%s\">", "ead-extref", href, target)
+				}
 			}
 
 		case xml.EndElement:
@@ -363,12 +378,18 @@ func _getConvertedTextWithTags(text string, convertLBTags bool) ([]byte, error) 
 				unit = ""
 			}
 
+			if token.Name.Local == "extref" {
+				result += "</a>"
+				needClosingTag = false
+			}
+
 			if needClosingTag {
 				result += "</span>"
 			} else {
 				// Reset
 				needClosingTag = true
 			}
+
 		case xml.CharData:
 			result += strings.ReplaceAll(string(token), "\n", " ")
 		}
@@ -414,15 +435,11 @@ func getRelatorAuthoritativeLabel(relatorID string) (string, error) {
 
 // RunInfo stores data related to the parsing/JSON generation process
 type RunInfo struct {
-	PkgVersion string    `json:"libversion"`
-	TimeStamp  time.Time `json:"timestamp"`
-	SourceFile string    `json:"sourcefile"`
-}
-
-func (r *RunInfo) SetRunInfo(version string, t time.Time, sourceFile string) {
-	r.PkgVersion = version
-	r.TimeStamp = t
-	r.SourceFile = sourceFile
+	PkgVersion     string    `json:"libversion"`
+	AppVersion     string    `json:"appversion,omitempty"`
+	TimeStamp      time.Time `json:"timestamp"`
+	SourceFile     string    `json:"sourcefile"`
+	SourceFileHash string    `json:"sourcefilehash,omitempty"`
 }
 
 // DAOInfo stores data related to the digital objects in the parsed EAD

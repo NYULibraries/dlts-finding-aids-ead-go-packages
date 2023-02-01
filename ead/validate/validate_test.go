@@ -2,7 +2,6 @@ package validate
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path"
 	"path/filepath"
@@ -22,6 +21,7 @@ var missingRequiredElementsEADIDAndRepositoryCorpnameFixturePath string
 var validEADFixturePath string
 var validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath string
 var invalidHREFFixturePath string
+var akkasahIncorrectRepositoryNameFixturePath string
 
 // Source: https://intellij-support.jetbrains.com/hc/en-us/community/posts/360009685279-Go-test-working-directory-keeps-changing-to-dir-of-the-test-file-instead-of-value-in-template?page=1#community_comment_360002183640
 func init() {
@@ -42,6 +42,7 @@ func init() {
 	missingRequiredElementsEADIDAndRepositoryCorpnameFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-repository-corpname.xml")
 	validEADFixturePath = filepath.Join(fixturesDirPath, "mc_100.xml")
 	validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath = filepath.Join(fixturesDirPath, "mc_100-valid-eadid-with-leading-and-trailing-spaces.xml")
+	akkasahIncorrectRepositoryNameFixturePath = filepath.Join(fixturesDirPath, "ad_mc_030_ref160.xml")
 }
 
 func doTest(file string, expected []string, t *testing.T) {
@@ -63,7 +64,7 @@ func doTest(file string, expected []string, t *testing.T) {
 }
 
 func getEADXML(filepath string) []byte {
-	EADXML, err := ioutil.ReadFile(filepath)
+	EADXML, err := os.ReadFile(filepath)
 	if err != nil {
 		panic(err)
 	}
@@ -285,6 +286,10 @@ func TestValidateEADValidEADNoErrors(t *testing.T) {
 	doTest(validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath, []string{}, t)
 }
 
+func TestValidateEADAkkasahTitleEADNoErrors(t *testing.T) {
+	doTest(akkasahIncorrectRepositoryNameFixturePath, []string{}, t)
+}
+
 func TestValidateEADInvalidHREFs(t *testing.T) {
 	var expected = []string{
 		"Invalid HREF detected: 'RG 6.0.ref3020.1', Title: 'Letter from Martin L. Beck to Marcel Breuer'",
@@ -297,7 +302,7 @@ func TestValidateEADInvalidHREFs(t *testing.T) {
 		"Invalid HREF detected: 'RG 6.0.ref3027.1', Title: 'Letter from Hamilton P. Smith to Martin L. Beck'",
 		"Invalid HREF detected: 'RG 6.0.ref3028.1', Title: 'Letter from Chancellor Russell D. Niles to Hamilton P. Smith'",
 		// the following line tests that the hrefs are not being filtered/stripped of blank space
-		"Invalid HREF detected: ' RG 6.0.ref3029.1 ', Title: 'Letter from Hamilton P. Smith to Chancellor Russell D. Niles'", 
+		"Invalid HREF detected: ' RG 6.0.ref3029.1 ', Title: 'Letter from Hamilton P. Smith to Chancellor Russell D. Niles'",
 		"Invalid HREF detected: 'RG 6.0.ref3030.1', Title: 'Letter from Hamilton P. Smith to Martin L. Beck'",
 		"Invalid HREF detected: 'RG 6.0.ref3031.1', Title: 'Letter from Hamilton P. Smith to Martin L. Beck'",
 		"Invalid HREF detected: 'RG 6.0.ref3032.1', Title: 'Letter from Russell D. Niles to Hamilton P. Smith'",

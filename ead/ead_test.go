@@ -168,23 +168,29 @@ func TestUpdateRunInfo(t *testing.T) {
 	t.Run("Update RunInfo", func(t *testing.T) {
 		var sut EAD
 
-		want := ""
-		got := sut.RunInfo.PkgVersion
-		assertEqual(t, want, got, "Initial ead.RunInfo.PkgVersion")
-
-		want = "0001-01-01T00:00:00Z"
-		got = sut.RunInfo.TimeStamp.Format(time.RFC3339)
+		want := "0001-01-01T00:00:00Z"
+		got := sut.RunInfo.TimeStamp.Format(time.RFC3339)
 		assertEqual(t, want, got, "Initial ead.RunInfo.TimeStamp")
 
 		now := time.Now()
-		version := Version // from ead package constant
+		pkgVersion := Version // from ead package constant
+		appVersion := "v0.17.0"
 		sourceFile := "/a/very/fine/path/to/an/ead.xml"
+		sourceFileHash := "md5:9cacfec48461900f3170f3b5d69af527"
 
-		sut.RunInfo.SetRunInfo(version, now, sourceFile)
+		sut.RunInfo.PkgVersion = pkgVersion
+		sut.RunInfo.AppVersion = appVersion
+		sut.RunInfo.TimeStamp = now
+		sut.RunInfo.SourceFile = sourceFile
+		sut.RunInfo.SourceFileHash = sourceFileHash
 
-		want = version
+		want = pkgVersion
 		got = sut.RunInfo.PkgVersion
 		assertEqual(t, want, got, "Post-assignment ead.RunInfo.PkgVersion")
+
+		want = appVersion
+		got = sut.RunInfo.AppVersion
+		assertEqual(t, want, got, "Post-assignment ead.RunInfo.AppVersion")
 
 		want = now.Format(time.RFC3339)
 		got = sut.RunInfo.TimeStamp.Format(time.RFC3339)
@@ -193,6 +199,10 @@ func TestUpdateRunInfo(t *testing.T) {
 		want = sourceFile
 		got = sut.RunInfo.SourceFile
 		assertEqual(t, want, got, "set ead.RunInfo.SourceFile")
+
+		want = sourceFileHash
+		got = sut.RunInfo.SourceFileHash
+		assertEqual(t, want, got, "set ead.RunInfo.SourceFileHash")
 	})
 }
 
