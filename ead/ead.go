@@ -48,7 +48,7 @@ type ArchDesc struct {
 	AccessRestrict    []*FormattedNoteWithHead `xml:"accessrestrict" json:"accessrestrict,omitempty"`
 	Accruals          []*FormattedNoteWithHead `xml:"accruals" json:"accruals,omitempty"`
 	AcqInfo           []*FormattedNoteWithHead `xml:"acqinfo" json:"acqinfo,omitempty"`
-	AltFormAvailable  []*FormattedNoteWithHead `xml:"altformavailable" json:"altformavailable,omitempty"`
+	AltFormAvail      []*FormattedNoteWithHead `xml:"altformavail" json:"altformavail,omitempty"`
 	Appraisal         []*FormattedNoteWithHead `xml:"appraisal" json:"appraisal,omitempty"`
 	Arrangement       []*FormattedNoteWithHead `xml:"arrangement" json:"arrangement,omitempty"`
 	Bibliography      []*Bibliography          `xml:"bibliography" json:"bibliography,omitempty"`
@@ -98,7 +98,7 @@ type C struct {
 	AccessRestrict    []*FormattedNoteWithHead `xml:"accessrestrict,omitempty" json:"accessrestrict,omitempty"`
 	Accruals          []*FormattedNoteWithHead `xml:"accruals,omitempty" json:"accruals,omitempty"`
 	AcqInfo           []*FormattedNoteWithHead `xml:"acqinfo,omitempty" json:"acqinfo,omitempty"`
-	AltFormAvailable  []*FormattedNoteWithHead `xml:"altformavailable" json:"altformavailable,omitempty"`
+	AltFormAvail      []*FormattedNoteWithHead `xml:"altformavail" json:"altformavail,omitempty"`
 	Appraisal         []*FormattedNoteWithHead `xml:"appraisal,omitempty" json:"appraisal,omitempty"`
 	Arrangement       []*FormattedNoteWithHead `xml:"arrangement,omitempty" json:"arrangement,omitempty"`
 	BiogHist          []*FormattedNoteWithHead `xml:"bioghist,omitempty" json:"bioghist,omitempty"`
