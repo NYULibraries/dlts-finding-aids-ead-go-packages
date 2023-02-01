@@ -435,9 +435,11 @@ func getRelatorAuthoritativeLabel(relatorID string) (string, error) {
 
 // RunInfo stores data related to the parsing/JSON generation process
 type RunInfo struct {
-	PkgVersion string    `json:"libversion"`
-	TimeStamp  time.Time `json:"timestamp"`
-	SourceFile string    `json:"sourcefile"`
+	PkgVersion     string    `json:"libversion"`
+	AppVersion     string    `json:"appversion,omitempty"`
+	TimeStamp      time.Time `json:"timestamp"`
+	SourceFile     string    `json:"sourcefile"`
+	SourceFileHash string    `json:"sourcefilehash,omitempty"`
 }
 
 func (r *RunInfo) SetRunInfo(version string, t time.Time, sourceFile string) {
