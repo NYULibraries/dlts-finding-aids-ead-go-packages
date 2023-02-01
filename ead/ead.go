@@ -427,7 +427,8 @@ type PhysFacet struct {
 }
 
 type PhysLoc struct {
-	ID FilteredString `xml:"id,attr" json:"id,omitempty"`
+	ID     FilteredString `xml:"id,attr" json:"id,omitempty"`
+	ExtRef []*ExtRef      `xml:"extref" json:"extref,omitempty"`
 
 	Value string `xml:",innerxml" json:"value,omitempty"`
 }
