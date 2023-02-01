@@ -297,8 +297,9 @@ type FileDesc struct {
 }
 
 type FormattedNoteWithHead struct {
-	ID   FilteredString `xml:"id,attr" json:"id,omitempty"`
-	Head *Head          `xml:"head" json:"head,omitempty"`
+	ID     FilteredString `xml:"id,attr" json:"id,omitempty"`
+	ExtRef []*ExtRef      `xml:"extref" json:"extref,omitempty"`
+	Head   *Head          `xml:"head" json:"head,omitempty"`
 
 	// adding Don Mennerich's approach here...
 	Children []*EADChild `xml:",any" json:"children,omitempty"`
