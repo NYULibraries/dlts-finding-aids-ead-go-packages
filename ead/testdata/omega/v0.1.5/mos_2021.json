@@ -169,6 +169,22 @@
                 ]
             }
         ],
+        "altformavail": [
+            {
+                "id": "aspace_3c14dd8815fd455800c71570138316c6",
+                "head": {
+                    "value": "Existence and Location of Copies"
+                },
+                "children": [
+                    {
+                        "name": "p",
+                        "value": {
+                            "value": "This is the Existence and Location of Copies note."
+                        }
+                    }
+                ]
+            }
+        ],
         "appraisal": [
             {
                 "id": "aspace_45cf36d965d0f038d67621dbebb9ebf1",
