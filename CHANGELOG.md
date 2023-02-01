@@ -1,6 +1,6 @@
 # CHANGELOG
 
-#### v0.16.0-FADESIGN-644-2023-02-01T15_55
+#### v0.16.0-FADESIGN-644-2023-02-01T16_30
   - change `<extref>` element stringification so that instead of a
 	`<span class="ead-extref"...>` element (that is later escaped) the
 	`<extref>` is converted to `<a class="ead-extref" href="..." target="...">`
@@ -20,6 +20,8 @@
 	  ```
 		AltFormAvail  []*FormattedNoteWithHead `xml:"altformavail" json:"altformavail,omitempty"`
 	  ```
+  - Add `AppVersion` and `SourceFileHash` to `RunInfo` type
+  - Remove `SetRunInfo()`
 
 #### v0.16.0
   - correct XML and JSON tag errors: `userrestrict` --> `userestrict`
