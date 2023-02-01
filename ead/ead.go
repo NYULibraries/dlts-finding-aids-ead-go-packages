@@ -419,8 +419,9 @@ type PhysDesc struct {
 }
 
 type PhysFacet struct {
-	ID    FilteredString      `xml:"id,attr" json:"id,omitempty"`
-	Label FilteredLabelString `xml:"label,attr" json:"label,omitempty"`
+	ID     FilteredString      `xml:"id,attr" json:"id,omitempty"`
+	ExtRef []*ExtRef           `xml:"extref" json:"extref,omitempty"`
+	Label  FilteredLabelString `xml:"label,attr" json:"label,omitempty"`
 
 	Value string `xml:",innerxml" json:"value,omitempty"`
 }
