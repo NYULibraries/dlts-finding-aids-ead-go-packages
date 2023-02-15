@@ -5,7 +5,7 @@ package ead
 // Based on: "Data model for parsing EAD <archdesc> elements": https://jira.nyu.edu/jira/browse/FADESIGN-29.
 
 const (
-	Version = "v0.17.0"
+	Version = "v0.17.0-20230215T12_40"
 )
 
 type EAD struct {
@@ -170,6 +170,8 @@ type DAO struct {
 	Show    FilteredString `xml:"show,attr" json:"show,omitempty"`
 	DOType  FilteredString `json:"do_type,omitempty"`
 	Count   uint64         `json:"count,omitempty"`
+	Width   uint32         `json:"width,omitempty"`
+	Height  uint32         `json:"height,omitempty"`
 	Title   FilteredString `xml:"title,attr" json:"title,omitempty"`
 	Type    FilteredString `xml:"type,attr" json:"type,omitempty"`
 
