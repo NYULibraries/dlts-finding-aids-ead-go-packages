@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### v0.17.0-20230215T12_40
+  - add `DAO.Width` and `DAO.Height`
+
 #### v0.17.0
   - change `<extref>` element stringification so that instead of a
 	`<span class="ead-extref"...>` element (that is later escaped) the
