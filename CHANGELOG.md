@@ -1,6 +1,6 @@
 # CHANGELOG
 
-#### v0.17.0-20230215T12_40
+#### v0.18.0
   - add `DAO.Width` and `DAO.Height`
 
 #### v0.17.0
