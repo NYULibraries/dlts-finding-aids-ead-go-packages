@@ -22,6 +22,7 @@ var validEADFixturePath string
 var validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath string
 var invalidHREFFixturePath string
 var akkasahIncorrectRepositoryNameFixturePath string
+var eadIDTooLongFixturePath string
 
 // Source: https://intellij-support.jetbrains.com/hc/en-us/community/posts/360009685279-Go-test-working-directory-keeps-changing-to-dir-of-the-test-file-instead-of-value-in-template?page=1#community_comment_360002183640
 func init() {
@@ -43,6 +44,7 @@ func init() {
 	validEADFixturePath = filepath.Join(fixturesDirPath, "mc_100.xml")
 	validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath = filepath.Join(fixturesDirPath, "mc_100-valid-eadid-with-leading-and-trailing-spaces.xml")
 	akkasahIncorrectRepositoryNameFixturePath = filepath.Join(fixturesDirPath, "ad_mc_030_ref160.xml")
+	eadIDTooLongFixturePath = filepath.Join(fixturesDirPath, "tam_647-eadid-too-long.xml")
 }
 
 func doTest(file string, expected []string, t *testing.T) {
@@ -279,6 +281,13 @@ func TestValidateEADMissingRequiredElements(t *testing.T) {
 func TestValidateEADInvalidEADActual(t *testing.T) {
 	doTest(validEADFixturePath, []string{}, t)
 	doTest(validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath, []string{}, t)
+}
+func TestValidateEADIDTooLong(t *testing.T) {
+	expected := []string{
+		makeEADIDTooLongErrorMessage("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii_iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"),
+	}
+
+	doTest(eadIDTooLongFixturePath, expected, t)
 }
 
 func TestValidateEADValidEADNoErrors(t *testing.T) {

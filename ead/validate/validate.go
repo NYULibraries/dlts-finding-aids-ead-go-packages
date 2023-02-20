@@ -22,6 +22,7 @@ import (
 var schemas embed.FS
 
 const ValidEADIDRegexpString = "^[a-z0-9]+(?:_[a-z0-9]+){1,}$"
+const MAXIMUM_EADID_LENGTH = 251
 
 var ValidRepositoryNames = []string{
 	"Akkasah: Photography Archive (NYU Abu Dhabi)",
@@ -100,9 +101,15 @@ func makeInvalidEADIDErrorMessage(eadid string, invalidCharacters []rune) string
 	return fmt.Sprintf(`Invalid <eadid>
 
 <eadid> value "%s" does not conform to the Finding Aids specification.
-There must be between 2 to 8 character groups joined by underscores.
+There must be a minimum of 2 character groups joined by an underscore.
+There is no maximum number of character groups, however, the <eadid>
+value must have at most "%d" characters.
 The following characters are not allowed in character groups: %s
-`, eadid, string(invalidCharacters))
+`, eadid, MAXIMUM_EADID_LENGTH, string(invalidCharacters))
+}
+
+func makeEADIDTooLongErrorMessage(eadid string) string {
+	return fmt.Sprintf(`The <eadid> value in this EAD "%s" is %d characters.  This exceeds the maximum allowed length of %d characters.`, eadid, len(eadid), MAXIMUM_EADID_LENGTH)
 }
 
 func makeInvalidRepositoryErrorMessage(repositoryName string) string {
@@ -163,6 +170,10 @@ func validateEADID(ead ead.EAD) ([]string, error) {
 				}
 			}
 			validationErrors = append(validationErrors, makeInvalidEADIDErrorMessage(EADID, invalidCharacters))
+		}
+
+		if len(trimmedEADID) > MAXIMUM_EADID_LENGTH {
+			validationErrors = append(validationErrors, makeEADIDTooLongErrorMessage(trimmedEADID))
 		}
 	} else {
 		validationErrors = append(validationErrors,
