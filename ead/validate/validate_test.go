@@ -20,7 +20,6 @@ var missingRequiredElementsEADIDAndRepositoryFixturePath string
 var missingRequiredElementsEADIDAndRepositoryCorpnameFixturePath string
 var validEADFixturePath string
 var validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath string
-var invalidHREFFixturePath string
 var akkasahIncorrectRepositoryNameFixturePath string
 var eadIDTooLongFixturePath string
 
@@ -37,7 +36,6 @@ func init() {
 	invalidEadDataFixturePath = filepath.Join(fixturesDirPath, "mc_100-invalid-eadid-repository-role-relator-codes-unpublished-material.xml")
 	invalidXMLFixturePath = filepath.Join(fixturesDirPath, "invalid-xml.xml")
 	invalidEADFixturePath = filepath.Join(fixturesDirPath, "ad_rg_009_3_2_1.xml")
-	invalidHREFFixturePath = filepath.Join(fixturesDirPath, "rg_6_0.xml")
 	missingRequiredElementsEADIDAndArchDescFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-archdesc.xml")
 	missingRequiredElementsEADIDAndRepositoryFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-repository.xml")
 	missingRequiredElementsEADIDAndRepositoryCorpnameFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-repository-corpname.xml")
@@ -285,6 +283,14 @@ func TestValidateEADAkkasahTitleEADNoErrors(t *testing.T) {
 	doTest(akkasahIncorrectRepositoryNameFixturePath, []string{}, t)
 }
 
+/*
+The InvalidHREF-related code was commented out because the valid-HREF criterion was
+removed from the EAD validation criteria as of 2023-02-17.
+
+var invalidHREFFixturePath string
+invalidHREFFixturePath = filepath.Join(fixturesDirPath, "rg_6_0.xml")
+
+
 func TestValidateEADInvalidHREFs(t *testing.T) {
 	var expected = []string{
 		"Invalid HREF detected: 'RG 6.0.ref3020.1', Title: 'Letter from Martin L. Beck to Marcel Breuer'",
@@ -313,3 +319,4 @@ func TestValidateEADInvalidHREFs(t *testing.T) {
 
 	doTest(invalidHREFFixturePath, expected, t)
 }
+*/

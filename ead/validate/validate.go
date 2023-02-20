@@ -6,7 +6,6 @@ import (
 	"encoding/xml"
 	"fmt"
 	"io"
-	"net/url"
 	"regexp"
 	"strings"
 	"unicode"
@@ -76,8 +75,6 @@ func ValidateEAD(data []byte) ([]string, error) {
 	}
 
 	validationErrors = append(validationErrors, validateNoUnpublishedMaterialValidationErrors...)
-
-	validationErrors = append(validationErrors, validateHREFs(ead)...)
 
 	return validationErrors, err
 }
@@ -411,6 +408,10 @@ func validateEADAgainstSchema(data []byte) []string {
 	return []string{}
 }
 
+/*
+The validateHREF-related code was commented out because the valid-HREF
+criterion was removed from the EAD validation criteria as of 2023-02-17.
+
 func validateHREFs(ead ead.EAD) []string {
 	var validationErrors = []string{}
 
@@ -427,3 +428,4 @@ func validateHREFs(ead ead.EAD) []string {
 
 	return validationErrors
 }
+*/
