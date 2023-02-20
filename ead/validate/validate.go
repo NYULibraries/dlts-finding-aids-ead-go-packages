@@ -21,6 +21,7 @@ var schemas embed.FS
 
 const ValidEADIDRegexpString = "^[a-z0-9]+(?:_[a-z0-9]+){1,}$"
 const MAXIMUM_EADID_LENGTH = 251
+const ARCHDESC_REQUIRED_LEVEL = "collection"
 
 var ValidRepositoryNames = []string{
 	"Akkasah: Photography Archive (NYU Abu Dhabi)",
@@ -66,8 +67,8 @@ func ValidateEAD(data []byte) ([]string, error) {
 		return validationErrors, err
 	}
 	validationErrors = append(validationErrors, validateEADIDValidationErrors...)
-
 	validationErrors = append(validationErrors, validateRepository(ead)...)
+	validationErrors = append(validationErrors, validateArchDescLevel(ead)...)
 
 	validateNoUnpublishedMaterialValidationErrors, err := validateNoUnpublishedMaterial(data)
 	if err != nil {
@@ -99,7 +100,11 @@ The following characters are not allowed in character groups: %s
 }
 
 func makeEADIDTooLongErrorMessage(eadid string) string {
-	return fmt.Sprintf(`The <eadid> value in this EAD "%s" is %d characters.  This exceeds the maximum allowed length of %d characters.`, eadid, len(eadid), MAXIMUM_EADID_LENGTH)
+	return fmt.Sprintf(`<eadid> length too long
+
+	The <eadid> value in this EAD "%s" is %d characters.
+	This exceeds the maximum allowed length of %d characters.`,
+		eadid, len(eadid), MAXIMUM_EADID_LENGTH)
 }
 
 func makeInvalidRepositoryErrorMessage(repositoryName string) string {
@@ -118,6 +123,14 @@ func makeInvalidXMLErrorMessage() string {
 
 func makeMissingRequiredElementErrorMessage(elementName string) string {
 	return fmt.Sprintf("Required element %s not found.", elementName)
+}
+
+func makeInvalidArchDescLevelErrorMessage(level string) string {
+	return fmt.Sprintf(`Invalid <archdesc> level
+
+	The archdesc level attribute must be set to "%s".
+	This EAD's archdesc level attribute is set to "%s"`,
+		ARCHDESC_REQUIRED_LEVEL, level)
 }
 
 func validateEADID(ead ead.EAD) ([]string, error) {
@@ -225,6 +238,18 @@ func validateRepository(ead ead.EAD) []string {
 			makeMissingRequiredElementErrorMessage("<archdesc>"))
 	}
 
+	return validationErrors
+}
+
+func validateArchDescLevel(ead ead.EAD) []string {
+	var validationErrors = []string{}
+
+	if ead.ArchDesc != nil {
+		level := string(ead.ArchDesc.Level)
+		if level != ARCHDESC_REQUIRED_LEVEL {
+			return append(validationErrors, makeInvalidArchDescLevelErrorMessage(level))
+		}
+	}
 	return validationErrors
 }
 

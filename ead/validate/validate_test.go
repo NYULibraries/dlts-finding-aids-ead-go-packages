@@ -20,8 +20,9 @@ var missingRequiredElementsEADIDAndRepositoryFixturePath string
 var missingRequiredElementsEADIDAndRepositoryCorpnameFixturePath string
 var validEADFixturePath string
 var validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath string
-var akkasahIncorrectRepositoryNameFixturePath string
+var akkasahRepositoryNameFixturePath string
 var eadIDTooLongFixturePath string
+var invalidArchDescLevelFixturePath string
 
 // Source: https://intellij-support.jetbrains.com/hc/en-us/community/posts/360009685279-Go-test-working-directory-keeps-changing-to-dir-of-the-test-file-instead-of-value-in-template?page=1#community_comment_360002183640
 func init() {
@@ -41,8 +42,9 @@ func init() {
 	missingRequiredElementsEADIDAndRepositoryCorpnameFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-repository-corpname.xml")
 	validEADFixturePath = filepath.Join(fixturesDirPath, "mc_100.xml")
 	validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath = filepath.Join(fixturesDirPath, "mc_100-valid-eadid-with-leading-and-trailing-spaces.xml")
-	akkasahIncorrectRepositoryNameFixturePath = filepath.Join(fixturesDirPath, "ad_mc_030_ref160.xml")
+	akkasahRepositoryNameFixturePath = filepath.Join(fixturesDirPath, "ad_mc_030_ref160-corrected-archdesc-level.xml")
 	eadIDTooLongFixturePath = filepath.Join(fixturesDirPath, "tam_647-eadid-too-long.xml")
+	invalidArchDescLevelFixturePath = filepath.Join(fixturesDirPath, "ad_mc_030_ref160-invalid-archdesc-level.xml")
 }
 
 func doTest(file string, expected []string, t *testing.T) {
@@ -273,6 +275,13 @@ func TestValidateEADIDTooLong(t *testing.T) {
 
 	doTest(eadIDTooLongFixturePath, expected, t)
 }
+func TestValidateArchDescLevel(t *testing.T) {
+	expected := []string{
+		makeInvalidArchDescLevelErrorMessage("series"),
+	}
+
+	doTest(invalidArchDescLevelFixturePath, expected, t)
+}
 
 func TestValidateEADValidEADNoErrors(t *testing.T) {
 	doTest(validEADFixturePath, []string{}, t)
@@ -280,5 +289,5 @@ func TestValidateEADValidEADNoErrors(t *testing.T) {
 }
 
 func TestValidateEADAkkasahTitleEADNoErrors(t *testing.T) {
-	doTest(akkasahIncorrectRepositoryNameFixturePath, []string{}, t)
+	doTest(akkasahRepositoryNameFixturePath, []string{}, t)
 }
