@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### v0.18.1
+  - security patch: upgrade `golang.org/x/net/http2` to `v0.7.0`
+
 #### v0.18.0
   - add `DAO.Width` and `DAO.Height`
 
