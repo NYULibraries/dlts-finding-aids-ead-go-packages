@@ -23,6 +23,7 @@ var validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath string
 var akkasahRepositoryNameFixturePath string
 var eadIDTooLongFixturePath string
 var invalidArchDescLevelFixturePath string
+var tooBigFileFixturePath string
 
 // Source: https://intellij-support.jetbrains.com/hc/en-us/community/posts/360009685279-Go-test-working-directory-keeps-changing-to-dir-of-the-test-file-instead-of-value-in-template?page=1#community_comment_360002183640
 func init() {
@@ -45,10 +46,29 @@ func init() {
 	akkasahRepositoryNameFixturePath = filepath.Join(fixturesDirPath, "ad_mc_030_ref160-corrected-archdesc-level.xml")
 	eadIDTooLongFixturePath = filepath.Join(fixturesDirPath, "tam_647-eadid-too-long.xml")
 	invalidArchDescLevelFixturePath = filepath.Join(fixturesDirPath, "ad_mc_030_ref160-invalid-archdesc-level.xml")
+	tooBigFileFixturePath = filepath.Join(fixturesDirPath, "b44d567a-95c1-4f0d-b16a-d9448cde1aa5.xml")
 }
 
 func doTest(file string, expected []string, t *testing.T) {
 	var validationErrors, err = ValidateEAD(getEADXML(file))
+	if err != nil {
+		t.Fatalf(fmt.Sprintf(`Unexpected runtime error: %s`, err))
+	}
+
+	if len(validationErrors) != len(expected) {
+		var message = getNumErrorsMismatchErrorMessage(expected, validationErrors)
+		t.Fatalf(message)
+	}
+
+	for idx, err := range validationErrors {
+		if err != expected[idx] {
+			t.Errorf(`Expected error %d to be "%s", got "%s"`, idx, expected[idx], err)
+		}
+	}
+}
+
+func doTestWithValidateEADFromFilePath(file string, expected []string, t *testing.T) {
+	var validationErrors, err = ValidateEADFromFilePath(file)
 	if err != nil {
 		t.Fatalf(fmt.Sprintf(`Unexpected runtime error: %s`, err))
 	}
@@ -290,4 +310,22 @@ func TestValidateEADValidEADNoErrors(t *testing.T) {
 
 func TestValidateEADAkkasahTitleEADNoErrors(t *testing.T) {
 	doTest(akkasahRepositoryNameFixturePath, []string{}, t)
+}
+
+func TestAssertMaxFileSize(t *testing.T) {
+	f, err := os.Create(tooBigFileFixturePath)
+	if err != nil {
+		t.Error("problem creating test file")
+	}
+
+	// https://stackoverflow.com/a/16806474
+	if err := f.Truncate(MAXIMUM_FILE_SIZE + 1); err != nil {
+		t.Error("problem truncating test file")
+	}
+	defer os.Remove(tooBigFileFixturePath)
+
+	expected := []string{
+		makeFileTooBigErrorMessage(tooBigFileFixturePath, MAXIMUM_FILE_SIZE+1),
+	}
+	doTestWithValidateEADFromFilePath(tooBigFileFixturePath, expected, t)
 }

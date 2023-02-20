@@ -6,12 +6,14 @@ import (
 	"encoding/xml"
 	"fmt"
 	"io"
+	"os"
 	"regexp"
 	"strings"
 	"unicode"
 
 	"github.com/lestrrat-go/libxml2/parser"
 	"github.com/lestrrat-go/libxml2/xsd"
+	"golang.org/x/text/message"
 
 	"github.com/nyulibraries/dlts-finding-aids-ead-go-packages/ead"
 )
@@ -21,6 +23,7 @@ var schemas embed.FS
 
 const ValidEADIDRegexpString = "^[a-z0-9]+(?:_[a-z0-9]+){1,}$"
 const MAXIMUM_EADID_LENGTH = 251
+const MAXIMUM_FILE_SIZE = 100_000_000 // 100 MB
 const ARCHDESC_REQUIRED_LEVEL = "collection"
 
 var ValidRepositoryNames = []string{
@@ -33,6 +36,28 @@ var ValidRepositoryNames = []string{
 	"Poly Archives at Bern Dibner Library of Science and Technology",
 	"Tamiment Library and Robert F. Wagner Labor Archives",
 	"Villa La Pietra",
+}
+
+// this function is required to perform file-level checks,
+// like maximum file size
+func ValidateEADFromFilePath(filepath string) ([]string, error) {
+	var validationErrors = []string{}
+
+	fileInfo, err := os.Stat(filepath)
+	if err != nil {
+		return validationErrors, err
+	}
+
+	if fileInfo.Size() > MAXIMUM_FILE_SIZE {
+		return append(validationErrors, makeFileTooBigErrorMessage(filepath, fileInfo.Size())), nil
+	}
+
+	EADXML, err := os.ReadFile(filepath)
+	if err != nil {
+		return validationErrors, err
+	}
+
+	return ValidateEAD(EADXML)
 }
 
 func ValidateEAD(data []byte) ([]string, error) {
@@ -105,6 +130,18 @@ func makeEADIDTooLongErrorMessage(eadid string) string {
 	The <eadid> value in this EAD "%s" is %d characters.
 	This exceeds the maximum allowed length of %d characters.`,
 		eadid, len(eadid), MAXIMUM_EADID_LENGTH)
+}
+
+func makeFileTooBigErrorMessage(filepath string, size int64) string {
+	// https://pkg.go.dev/golang.org/x/text/message
+	p := message.NewPrinter(message.MatchLanguage("en"))
+
+	return p.Sprintf(`ead file too big
+
+	The size of the EAD file "%s"
+	is %d bytes. The maximum allowed file size 
+	is %d bytes.`,
+		filepath, size, MAXIMUM_FILE_SIZE)
 }
 
 func makeInvalidRepositoryErrorMessage(repositoryName string) string {
