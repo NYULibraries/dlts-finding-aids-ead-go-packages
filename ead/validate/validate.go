@@ -11,7 +11,6 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/antchfx/xmlquery"
 	"github.com/lestrrat-go/libxml2/parser"
 	"github.com/lestrrat-go/libxml2/xsd"
 
@@ -78,12 +77,6 @@ func ValidateEAD(data []byte) ([]string, error) {
 
 	validationErrors = append(validationErrors, validateNoUnpublishedMaterialValidationErrors...)
 
-	validateRoleAttributesValidationErrors, err := validateRoleAttributes(data)
-	if err != nil {
-		return validationErrors, err
-	}
-	validationErrors = append(validationErrors, validateRoleAttributesValidationErrors...)
-
 	validationErrors = append(validationErrors, validateHREFs(ead)...)
 
 	return validationErrors, err
@@ -128,20 +121,6 @@ func makeInvalidXMLErrorMessage() string {
 
 func makeMissingRequiredElementErrorMessage(elementName string) string {
 	return fmt.Sprintf("Required element %s not found.", elementName)
-}
-
-func makeUnrecognizedRelatorCodesErrorMessage(unrecognizedRelatorCodes [][]string) string {
-	var unrecognizedRelatorCodeSlice []string
-	for _, elementAttributePair := range unrecognizedRelatorCodes {
-		unrecognizedRelatorCodeSlice = append(unrecognizedRelatorCodeSlice,
-			fmt.Sprintf(`%s has role="%s"`, elementAttributePair[0], elementAttributePair[1]))
-	}
-
-	return fmt.Sprintf(`Unrecognized relator codes
-
-The EAD file contains elements with role attributes containing unrecognized relator codes:
-
-%s`, strings.Join(unrecognizedRelatorCodeSlice, "\n"))
 }
 
 func validateEADID(ead ead.EAD) ([]string, error) {
@@ -252,6 +231,25 @@ func validateRepository(ead ead.EAD) []string {
 	return validationErrors
 }
 
+/*
+The validateRoleAttributes-related code was commented out because the
+"relator code value must be from a controlled vocabulary" criterion was
+removed from the EAD validation criteria as of 2023-02-17.
+
+func makeUnrecognizedRelatorCodesErrorMessage(unrecognizedRelatorCodes [][]string) string {
+	var unrecognizedRelatorCodeSlice []string
+	for _, elementAttributePair := range unrecognizedRelatorCodes {
+		unrecognizedRelatorCodeSlice = append(unrecognizedRelatorCodeSlice,
+			fmt.Sprintf(`%s has role="%s"`, elementAttributePair[0], elementAttributePair[1]))
+	}
+
+	return fmt.Sprintf(`Unrecognized relator codes
+
+The EAD file contains elements with role attributes containing unrecognized relator codes:
+
+%s`, strings.Join(unrecognizedRelatorCodeSlice, "\n"))
+}
+
 // See https://jira.nyu.edu/browse/FADESIGN-171.
 func validateRoleAttributes(data []byte) ([]string, error) {
 	var validationErrors = []string{}
@@ -325,6 +323,7 @@ func validateRoleAttributes(data []byte) ([]string, error) {
 
 	return validationErrors, nil
 }
+*/
 
 // The following comment and function validateXML() are from David Arjanik:
 // This is not so straightforward: https://stackoverflow.com/questions/53476012/how-to-validate-a-xml:

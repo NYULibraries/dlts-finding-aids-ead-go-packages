@@ -406,7 +406,8 @@ func getRelatorAuthoritativeLabel(relatorID string) (string, error) {
 	if authoritativeLabel, ok := RelatorAuthoritativeLabelMap[relatorID]; ok {
 		return authoritativeLabel, nil
 	} else {
-		return "", fmt.Errorf("unknown relator code \"%s\"", relatorID)
+		// if relator code is not recognized, trust the archivists and drop through
+		return relatorID, nil
 	}
 }
 

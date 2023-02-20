@@ -185,20 +185,6 @@ func TestValidateEADInvalidData(t *testing.T) {
 		makeInvalidEADIDErrorMessage("mc.100", []rune{'.'}),
 		makeInvalidRepositoryErrorMessage("NYU Archives"),
 		makeAudienceInternalErrorMessage([]string{"<bioghist>", "<processinfo>"}),
-		makeUnrecognizedRelatorCodesErrorMessage([][]string{
-			{"<controlaccess><corpname>Columbia University</corpname></controlaccess>", "orz"},
-			{"<controlaccess><corpname>The New School</corpname></controlaccess>", "cpr"},
-			{"<controlaccess><famname>Buell Family</famname></controlaccess>", "cpo"},
-			{"<controlaccess><famname>Lanier Family</famname></controlaccess>", "fdr"},
-			{"<controlaccess><persname>John Doe, 1800-1900</persname></controlaccess>", "clb"},
-			{"<controlaccess><persname>Jane Doe, 1800-1900</persname></controlaccess>", "grt"},
-			{"<origination><corpname>Queens College</corpname></origination>", "cpr"},
-			{"<origination><corpname>Hunter College</corpname></origination>", "orz"},
-			{"<origination><famname>Draper family</famname></origination>", "fro"},
-			{"<origination><persname>Daisy, Bert</persname></origination>", "clb"},
-			{"<origination><persname>Orchid, Ella</persname></origination>", "grt"},
-			{"<repository><corpname>NYU Archives</corpname></repository>", "grt"},
-		}),
 	}
 
 	doTest(invalidEadDataFixturePath, expected, t)
