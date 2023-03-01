@@ -120,6 +120,10 @@ type C struct {
 	UseRestrict       []*FormattedNoteWithHead `xml:"userestrict,omitempty" json:"userestrict,omitempty"`
 }
 
+type CDATA struct {
+	Value string `xml:",innerxml" json:"value,omitempty"`
+}
+
 type Change struct {
 	Date []*Date `xml:"date" json:"date,omitempty"`
 	Item []*Item `xml:"item" json:"item,omitempty"`
@@ -475,12 +479,12 @@ type TitleProper struct {
 
 type TitleStmt struct {
 	Author               FilteredString `xml:"author" json:"author,omitempty"`
-	Sponsor              FilteredString `xml:"sponsor" json:"sponsor,omitempty"`
+	Sponsor              CDATA          `xml:"sponsor" json:"-"`
+	FlattenedSponsor     FilteredString `xml:"-" json:"sponsor,omitempty"`
 	SubTitle             FilteredString `xml:"subtitle" json:"subtitle,omitempty"`
 	TitleProper          []*TitleProper `xml:"titleproper" json:"-"`
 	FlattenedTitleProper FilteredString `xml:"-" json:"titleproper,omitempty"`
 }
-
 type UnitDate struct {
 	Type FilteredString `xml:"type,attr" json:"type,omitempty"`
 
