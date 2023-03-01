@@ -11,7 +11,7 @@
         <titleproper>Guide to Megan O'Shea's <emph render="italic">One</emph> Resource to <lb/> Rule
           Them All <num>MOS.2021</num></titleproper>
           <subtitle>A Wicked Awesome Resource Record <emph render="bold">with embedded presentation elements!</emph></subtitle>
-          <author>Megan O'Shea</author>
+          <author>Megan <emph render="italic">O'Shea</emph></author>
 	  <sponsor><emph render="bold">This record group was processed as part of the 2015-2016 N-YHS Institutional Archives project, made possible by a generous grant from the Leon Levy Foundation. Support from the Leon Levy Foundation also made possible the digitization in 2019-2020 of select documents from this record group; these are available on-line through the <extref xlink:actuate="onRequest" xlink:href="http://digitalcollections.nyhistory.org/">Shelby White and Leon Levy Digital Library</extref>.</emph></sponsor>
       </titlestmt>
       <editionstmt>
