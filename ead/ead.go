@@ -5,7 +5,7 @@ package ead
 // Based on: "Data model for parsing EAD <archdesc> elements": https://jira.nyu.edu/jira/browse/FADESIGN-29.
 
 const (
-	Version = "v0.18.1-20230220T20_05"
+	Version = "v0.18.1-20230301T16_30"
 )
 
 type EAD struct {
@@ -118,6 +118,10 @@ type C struct {
 	ScopeContent      []*FormattedNoteWithHead `xml:"scopecontent,omitempty" json:"scopecontent,omitempty"`
 	SeparatedMaterial []*FormattedNoteWithHead `xml:"separatedmaterial" json:"separatedmaterial,omitempty"`
 	UseRestrict       []*FormattedNoteWithHead `xml:"userestrict,omitempty" json:"userestrict,omitempty"`
+}
+
+type CDATA struct {
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type Change struct {
@@ -474,13 +478,15 @@ type TitleProper struct {
 }
 
 type TitleStmt struct {
-	Author               FilteredString `xml:"author" json:"author,omitempty"`
-	Sponsor              FilteredString `xml:"sponsor" json:"sponsor,omitempty"`
-	SubTitle             FilteredString `xml:"subtitle" json:"subtitle,omitempty"`
+	Author               CDATA          `xml:"author" json:"-"`
+	FlattenedAuthor      FilteredString `xml:"-" json:"author,omitempty"`
+	Sponsor              CDATA          `xml:"sponsor" json:"-"`
+	FlattenedSponsor     FilteredString `xml:"-" json:"sponsor,omitempty"`
+	SubTitle             CDATA          `xml:"subtitle" json:"-"`
+	FlattenedSubTitle    FilteredString `xml:"-" json:"subtitle,omitempty"`
 	TitleProper          []*TitleProper `xml:"titleproper" json:"-"`
 	FlattenedTitleProper FilteredString `xml:"-" json:"titleproper,omitempty"`
 }
-
 type UnitDate struct {
 	Type FilteredString `xml:"type,attr" json:"type,omitempty"`
 

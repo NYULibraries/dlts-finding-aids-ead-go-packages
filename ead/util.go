@@ -524,6 +524,10 @@ func removeBracketedText(s string) string {
 	return result
 }
 
+func flattenCDATA(cdata CDATA) ([]byte, error) {
+	return getConvertedTextWithTags(cdata.Value)
+}
+
 func flattenTitleProper(titleProper []*TitleProper) ([]byte, error) {
 
 	var titleToFlatten *TitleProper

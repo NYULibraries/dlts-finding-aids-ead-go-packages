@@ -1,6 +1,11 @@
 # CHANGELOG
 
-#### v0.18.1-20230220T20_05
+#### v0.18.1-20230301T16_30
+  - Change parsing and JSON marshaling of `<titlestmt>` children
+    `<author>, <sponsor>, and <subtitle>`.  The new implementation
+    captures the `innerxml` for the child elements during parsing, and
+    flattens and converts any presentation elements in the `innerxml`
+    to `<span>` tags during JSON marshaling.
   - implement finalized EAD validation criteria:
 	- EADs must be valid XML
 	- EADs must pass validation against the EAD 2002 schema
