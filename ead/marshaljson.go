@@ -119,15 +119,20 @@ func (titleStmt *TitleStmt) MarshalJSON() ([]byte, error) {
 		return nil, err
 	}
 
+	flattenedSubTitle, err := flattenCDATA(titleStmt.SubTitle)
+	if err != nil {
+		return nil, err
+	}
+
 	return json.Marshal(&struct {
 		*TitleStmtAlias
 		FlattenedSponsor     FilteredString `json:"sponsor,omitempty"`
-		SubTitle             FilteredString `json:"subtitle,omitempty"`
+		FlattenedSubTitle    FilteredString `json:"subtitle,omitempty"`
 		FlattenedTitleProper FilteredString `json:"titleproper,omitempty"`
 	}{
 		TitleStmtAlias:       (*TitleStmtAlias)(titleStmt),
 		FlattenedSponsor:     FilteredString(flattenedSponsor),
-		SubTitle:             titleStmt.SubTitle,
+		FlattenedSubTitle:    FilteredString(flattenedSubTitle),
 		FlattenedTitleProper: FilteredString(flattenedTitleProper),
 	})
 }
