@@ -783,8 +783,8 @@ func TestInitPresentationContainersNoContainers(t *testing.T) {
 	})
 }
 
-func TestJSONMarshalingWithPresentationElementInSponsor(t *testing.T) {
-	t.Run("JSON Marshaling with Presentation Element In Sponor", func(t *testing.T) {
+func TestJSONMarshalingWithPresentationElementsInTitleStmtChildren(t *testing.T) {
+	t.Run("JSON Marshaling with Presentation Element In TitleStmt children", func(t *testing.T) {
 		ead := getPresentationElementInSponsorEAD(t, "mos_2021-with-presentation-element-in-sponsor.xml")
 
 		jsonData, err := json.MarshalIndent(ead, "", "    ")
