@@ -478,7 +478,8 @@ type TitleProper struct {
 }
 
 type TitleStmt struct {
-	Author               FilteredString `xml:"author" json:"author,omitempty"`
+	Author               CDATA          `xml:"author" json:"-"`
+	FlattenedAuthor      FilteredString `xml:"-" json:"author,omitempty"`
 	Sponsor              CDATA          `xml:"sponsor" json:"-"`
 	FlattenedSponsor     FilteredString `xml:"-" json:"sponsor,omitempty"`
 	SubTitle             CDATA          `xml:"subtitle" json:"-"`
