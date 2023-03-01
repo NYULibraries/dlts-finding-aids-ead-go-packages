@@ -128,6 +128,17 @@ func getPresentationContainerEAD(t *testing.T, filename string) EAD {
 	return ead
 }
 
+func getPresentationElementInSponsorEAD(t *testing.T, filename string) EAD {
+	EADXML, err := os.ReadFile(omegaTestFixturePath + "/" + filename)
+	failOnError(t, err, "Unexpected error")
+
+	var ead EAD
+	err = xml.Unmarshal([]byte(EADXML), &ead)
+	failOnError(t, err, "Unexpected error")
+
+	return ead
+}
+
 func TestXMLParsing(t *testing.T) {
 	t.Run("XML Parsing", func(t *testing.T) {
 		ead := getOmegaEAD(t)
@@ -768,6 +779,32 @@ func TestInitPresentationContainersNoContainers(t *testing.T) {
 
 		if nil != ead.ArchDesc.DSC.C {
 			t.Errorf("expected container list to still be empty after InitPresentationContainers()")
+		}
+	})
+}
+
+func TestJSONMarshalingWithPresentationElementInSponsor(t *testing.T) {
+	t.Run("JSON Marshaling with Presentation Element In Sponor", func(t *testing.T) {
+		ead := getPresentationElementInSponsorEAD(t, "mos_2021-with-presentation-element-in-sponsor.xml")
+
+		jsonData, err := json.MarshalIndent(ead, "", "    ")
+		failOnError(t, err, "Unexpected error marshaling JSON")
+
+		// reference file includes newline at end of file so
+		// add newline to jsonData
+		jsonData = append(jsonData, '\n')
+
+		referenceFile := omegaTestFixturePath + "/" + "mos_2021-with-presentation-element-in-sponsor.json"
+		referenceFileContents, err := os.ReadFile(referenceFile)
+		failOnError(t, err, "Unexpected error reading reference file")
+
+		if !bytes.Equal(referenceFileContents, jsonData) {
+			jsonFile := "./testdata/tmp/failing-with-presentation-element-in-sponsor.json"
+			err = os.WriteFile(jsonFile, []byte(jsonData), 0644)
+			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonFile))
+
+			errMsg := fmt.Sprintf("JSON Data does not match reference file.\ndiff %s %s", jsonFile, referenceFile)
+			t.Errorf(errMsg)
 		}
 	})
 }
