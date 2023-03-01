@@ -785,7 +785,7 @@ func TestInitPresentationContainersNoContainers(t *testing.T) {
 
 func TestJSONMarshalingWithPresentationElementsInTitleStmtChildren(t *testing.T) {
 	t.Run("JSON Marshaling with Presentation Element In TitleStmt children", func(t *testing.T) {
-		ead := getPresentationElementInSponsorEAD(t, "mos_2021-with-presentation-element-in-sponsor.xml")
+		ead := getPresentationElementInSponsorEAD(t, "mos_2021-with-presentation-elements-in-titlestmt-children.xml")
 
 		jsonData, err := json.MarshalIndent(ead, "", "    ")
 		failOnError(t, err, "Unexpected error marshaling JSON")
@@ -794,12 +794,12 @@ func TestJSONMarshalingWithPresentationElementsInTitleStmtChildren(t *testing.T)
 		// add newline to jsonData
 		jsonData = append(jsonData, '\n')
 
-		referenceFile := omegaTestFixturePath + "/" + "mos_2021-with-presentation-element-in-sponsor.json"
+		referenceFile := omegaTestFixturePath + "/" + "mos_2021-with-presentation-elements-in-titlestmt-children.json"
 		referenceFileContents, err := os.ReadFile(referenceFile)
 		failOnError(t, err, "Unexpected error reading reference file")
 
 		if !bytes.Equal(referenceFileContents, jsonData) {
-			jsonFile := "./testdata/tmp/failing-with-presentation-element-in-sponsor.json"
+			jsonFile := "./testdata/tmp/failing-with-presentation-elements-in-titlestmt-children.json"
 			err = os.WriteFile(jsonFile, []byte(jsonData), 0644)
 			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonFile))
 
