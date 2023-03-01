@@ -481,7 +481,8 @@ type TitleStmt struct {
 	Author               FilteredString `xml:"author" json:"author,omitempty"`
 	Sponsor              CDATA          `xml:"sponsor" json:"-"`
 	FlattenedSponsor     FilteredString `xml:"-" json:"sponsor,omitempty"`
-	SubTitle             FilteredString `xml:"subtitle" json:"subtitle,omitempty"`
+	SubTitle             CDATA          `xml:"subtitle" json:"-"`
+	FlattenedSubTitle    FilteredString `xml:"-" json:"subtitle,omitempty"`
 	TitleProper          []*TitleProper `xml:"titleproper" json:"-"`
 	FlattenedTitleProper FilteredString `xml:"-" json:"titleproper,omitempty"`
 }
