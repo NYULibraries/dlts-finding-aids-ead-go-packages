@@ -128,7 +128,7 @@ func getPresentationContainerEAD(t *testing.T, filename string) EAD {
 	return ead
 }
 
-func getPresentationElementInSponsorEAD(t *testing.T, filename string) EAD {
+func getPresentationElementInTitleStmtChildrenEAD(t *testing.T, filename string) EAD {
 	EADXML, err := os.ReadFile(omegaTestFixturePath + "/" + filename)
 	failOnError(t, err, "Unexpected error")
 
@@ -785,7 +785,7 @@ func TestInitPresentationContainersNoContainers(t *testing.T) {
 
 func TestJSONMarshalingWithPresentationElementsInTitleStmtChildren(t *testing.T) {
 	t.Run("JSON Marshaling with Presentation Element In TitleStmt children", func(t *testing.T) {
-		ead := getPresentationElementInSponsorEAD(t, "mos_2021-with-presentation-elements-in-titlestmt-children.xml")
+		ead := getPresentationElementInTitleStmtChildrenEAD(t, "mos_2021-with-presentation-elements-in-titlestmt-children.xml")
 
 		jsonData, err := json.MarshalIndent(ead, "", "    ")
 		failOnError(t, err, "Unexpected error marshaling JSON")
