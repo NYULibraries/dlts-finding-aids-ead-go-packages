@@ -469,31 +469,18 @@ New York University Archives<lb/> Elmer Holmes Bobst Library<lb/> 70 Washington 
 }
 
 func TestJSONMarshalingInitPresentationContainersNOOP(t *testing.T) {
-	t.Run("JSON Marshaling with call to InitPresentationContainers() NOOP", func(t *testing.T) {
-		ead := getOmegaEAD(t)
+	var params iJSONTestParams
 
-		ead.InitPresentationContainers()
+	params.TestName = "JSON Marshaling with call to InitPresentationContainers() NOOP"
+	params.EADFilePath = filepath.Join(omegaTestFixturePath, "Omega-EAD.xml")
+	params.JSONReferenceFilePath = filepath.Join(omegaTestFixturePath, "mos_2021.json")
+	params.JSONErrorFilePath = "./testdata/tmp/failing-marshal-with-presentation-containers-noop.json"
 
-		jsonData, err := json.MarshalIndent(ead, "", "    ")
-		failOnError(t, err, "Unexpected error marshaling JSON")
+	ead := getTestEAD(t, params.EADFilePath)
+	ead.InitPresentationContainers()
 
-		// reference file includes newline at end of file so
-		// add newline to jsonData
-		jsonData = append(jsonData, '\n')
-
-		referenceFile := omegaTestFixturePath + "/" + "mos_2021.json"
-		referenceFileContents, err := os.ReadFile(referenceFile)
-		failOnError(t, err, "Unexpected error reading reference file")
-
-		if !bytes.Equal(referenceFileContents, jsonData) {
-			jsonFile := "./testdata/tmp/failing-marshal-with-presentation-containers-noop.json"
-			err = os.WriteFile(jsonFile, []byte(jsonData), 0644)
-			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonFile))
-
-			errMsg := fmt.Sprintf("JSON Data does not match reference file.\ndiff %s %s", jsonFile, referenceFile)
-			t.Errorf(errMsg)
-		}
-	})
+	params.PrePopulatedEAD = ead
+	runiJSONComparisonTest(t, &params)
 }
 
 func TestJSONMarshalingInitPresentationContainers(t *testing.T) {
