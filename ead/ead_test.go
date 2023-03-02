@@ -21,6 +21,7 @@ type iJSONTestParams struct {
 
 var testFixturePath string = filepath.Join(".", "testdata")
 var akkasahTestFixturePath string = filepath.Join(testFixturePath, "akkasah")
+var cbhTestFixturePath string = filepath.Join(testFixturePath, "cbh")
 var falesTestFixturePath string = filepath.Join(testFixturePath, "fales")
 var nyuadTestFixturePath string = filepath.Join(testFixturePath, "nyuad")
 var nyhsTestFixturePath string = filepath.Join(testFixturePath, "nyhs")
@@ -313,6 +314,17 @@ func TestJSONMarshalingWithMultipleLanguages(t *testing.T) {
 	params.EADFilePath = filepath.Join(nyuadTestFixturePath, "ad_mc_019-edited.xml")
 	params.JSONReferenceFilePath = filepath.Join(nyuadTestFixturePath, "ad_mc_019-edited.json")
 	params.JSONErrorFilePath = "./testdata/tmp/failing-multiple-language-marshal.json"
+
+	runiJSONComparisonTest(t, &params)
+}
+
+func TestJSONMarshalingWithIndexEntryTitleAndRefChildren(t *testing.T) {
+	var params iJSONTestParams
+
+	params.TestName = "JSON Marshaling with <indexentry> <title> and <ref>"
+	params.EADFilePath = filepath.Join(cbhTestFixturePath, "arc_212_plymouth_beecher.xml")
+	params.JSONReferenceFilePath = filepath.Join(cbhTestFixturePath, "arc_212_plymouth_beecher.json")
+	params.JSONErrorFilePath = "./testdata/tmp/failing-indexentry-with-title-and-ref-children.json"
 
 	runiJSONComparisonTest(t, &params)
 }
