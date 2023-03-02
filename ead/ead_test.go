@@ -11,6 +11,14 @@ import (
 	"time"
 )
 
+type iJSONTestParams struct {
+	TestName              string
+	EADFilePath           string
+	JSONReferenceFilePath string
+	JSONErrorFilePath     string
+	PrePopulatedEAD       *EAD
+}
+
 var testFixturePath string = filepath.Join(".", "testdata")
 var omegaTestFixturePath string = filepath.Join(testFixturePath, "omega", "v0.1.5")
 var falesTestFixturePath string = filepath.Join(testFixturePath, "fales")
@@ -84,30 +92,8 @@ func getOmegaEAD(t *testing.T) EAD {
 	return ead
 }
 
-func getFalesMSS460EAD(t *testing.T) EAD {
-	EADXML, err := os.ReadFile(falesTestFixturePath + "/" + "mss_460.xml")
-	failOnError(t, err, "Unexpected error")
-
-	var ead EAD
-	err = xml.Unmarshal([]byte(EADXML), &ead)
-	failOnError(t, err, "Unexpected error")
-
-	return ead
-}
-
 func getNYHSFoundling(t *testing.T) EAD {
 	EADXML, err := os.ReadFile(nyhsTestFixturePath + "/" + "nyhs_foundling.xml")
-	failOnError(t, err, "Unexpected error")
-
-	var ead EAD
-	err = xml.Unmarshal([]byte(EADXML), &ead)
-	failOnError(t, err, "Unexpected error")
-
-	return ead
-}
-
-func getAkkasahADMC030REF184EAD(t *testing.T) EAD {
-	EADXML, err := os.ReadFile(akkasahTestFixturePath + "/" + "ad_mc_030_ref184.xml")
 	failOnError(t, err, "Unexpected error")
 
 	var ead EAD
@@ -128,7 +114,7 @@ func getPresentationContainerEAD(t *testing.T, filename string) EAD {
 	return ead
 }
 
-func getTestEAD(t *testing.T, eadPath string) EAD {
+func getTestEAD(t *testing.T, eadPath string) *EAD {
 	EADXML, err := os.ReadFile(eadPath)
 	failOnError(t, err, "Unexpected error")
 
@@ -136,7 +122,7 @@ func getTestEAD(t *testing.T, eadPath string) EAD {
 	err = xml.Unmarshal([]byte(EADXML), &ead)
 	failOnError(t, err, "Unexpected error")
 
-	return ead
+	return &ead
 }
 
 func TestXMLParsing(t *testing.T) {
@@ -564,31 +550,18 @@ func TestJSONMarshalingInitPresentationContainersNOOP(t *testing.T) {
 }
 
 func TestJSONMarshalingInitPresentationContainers(t *testing.T) {
-	t.Run("JSON Marshaling with call to InitPresentationContainers()", func(t *testing.T) {
-		ead := getAkkasahADMC030REF184EAD(t)
+	var params iJSONTestParams
 
-		ead.InitPresentationContainers()
+	params.TestName = "JSON Marshaling with call to InitPresentationContainers()"
+	params.EADFilePath = filepath.Join(akkasahTestFixturePath, "ad_mc_030_ref184.xml")
+	params.JSONReferenceFilePath = filepath.Join(akkasahTestFixturePath, "ad_mc_030_ref184.json")
+	params.JSONErrorFilePath = "./testdata/tmp/failing-marshal-with-presentation-containers.json"
 
-		jsonData, err := json.MarshalIndent(ead, "", "    ")
-		failOnError(t, err, "Unexpected error marshaling JSON")
+	ead := getTestEAD(t, params.EADFilePath)
+	ead.InitPresentationContainers()
 
-		// reference file includes newline at end of file so
-		// add newline to jsonData
-		jsonData = append(jsonData, '\n')
-
-		referenceFile := akkasahTestFixturePath + "/" + "ad_mc_030_ref184.json"
-		referenceFileContents, err := os.ReadFile(referenceFile)
-		failOnError(t, err, "Unexpected error reading reference file")
-
-		if !bytes.Equal(referenceFileContents, jsonData) {
-			jsonFile := "./testdata/tmp/failing-marshal-with-presentation-containers.json"
-			err = os.WriteFile(jsonFile, []byte(jsonData), 0644)
-			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonFile))
-
-			errMsg := fmt.Sprintf("JSON Data does not match reference file.\ndiff %s %s", jsonFile, referenceFile)
-			t.Errorf(errMsg)
-		}
-	})
+	params.PrePopulatedEAD = ead
+	runiJSONComparisonTest(t, &params)
 }
 
 func TestInitPresentationContainersC(t *testing.T) {
@@ -764,18 +737,15 @@ func TestJSONMarshalingWithPresentationElementsInTitleStmtChildren(t *testing.T)
 	runiJSONComparisonTest(t, &params)
 }
 
-type iJSONTestParams struct {
-	TestName              string
-	EADFilePath           string
-	JSONReferenceFilePath string
-	JSONErrorFilePath     string
-}
-
 func runiJSONComparisonTest(t *testing.T, params *iJSONTestParams) {
 
+	var ead *EAD
 	t.Run(params.TestName, func(t *testing.T) {
-		ead := getTestEAD(t, params.EADFilePath)
-
+		if params.PrePopulatedEAD == nil {
+			ead = getTestEAD(t, params.EADFilePath)
+		} else {
+			ead = params.PrePopulatedEAD
+		}
 		jsonData, err := json.MarshalIndent(ead, "", "    ")
 		failOnError(t, err, "Unexpected error marshaling JSON")
 
