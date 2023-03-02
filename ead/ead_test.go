@@ -128,18 +128,6 @@ func getPresentationContainerEAD(t *testing.T, filename string) EAD {
 	return ead
 }
 
-/*
-	 func getPresentationElementInTitleStmtChildrenEAD(t *testing.T, filename string) EAD {
-		EADXML, err := os.ReadFile(omegaTestFixturePath + "/" + filename)
-		failOnError(t, err, "Unexpected error")
-
-		var ead EAD
-		err = xml.Unmarshal([]byte(EADXML), &ead)
-		failOnError(t, err, "Unexpected error")
-
-		return ead
-	}
-*/
 func getTestEAD(t *testing.T, eadPath string) EAD {
 	EADXML, err := os.ReadFile(eadPath)
 	failOnError(t, err, "Unexpected error")
@@ -794,33 +782,6 @@ func TestInitPresentationContainersNoContainers(t *testing.T) {
 		}
 	})
 }
-
-/* func TestJSONMarshalingWithPresentationElementsInTitleStmtChildren(t *testing.T) {
-	t.Run("JSON Marshaling with Presentation Element In TitleStmt children", func(t *testing.T) {
-		ead := getPresentationElementInTitleStmtChildrenEAD(t, "mos_2021-with-presentation-elements-in-titlestmt-children.xml")
-
-		jsonData, err := json.MarshalIndent(ead, "", "    ")
-		failOnError(t, err, "Unexpected error marshaling JSON")
-
-		// reference file includes newline at end of file so
-		// add newline to jsonData
-		jsonData = append(jsonData, '\n')
-
-		referenceFile := omegaTestFixturePath + "/" + "mos_2021-with-presentation-elements-in-titlestmt-children.json"
-		referenceFileContents, err := os.ReadFile(referenceFile)
-		failOnError(t, err, "Unexpected error reading reference file")
-
-		if !bytes.Equal(referenceFileContents, jsonData) {
-			jsonFile := "./testdata/tmp/failing-with-presentation-elements-in-titlestmt-children.json"
-			err = os.WriteFile(jsonFile, []byte(jsonData), 0644)
-			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonFile))
-
-			errMsg := fmt.Sprintf("JSON Data does not match reference file.\ndiff %s %s", jsonFile, referenceFile)
-			t.Errorf(errMsg)
-		}
-	})
-}
-*/
 
 func TestJSONMarshalingWithPresentationElementsInTitleStmtChildren(t *testing.T) {
 	var params iJSONTestParams
