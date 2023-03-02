@@ -51,9 +51,10 @@
             ],
             "langmaterial": [
                 {
-                    "value": "\u003cspan class=\"ead-language\"\u003eEnglish\u003c/span\u003e .",
+                    "value": "\u003cspan class=\"ead-language\"\u003eEnglish\u003c/span\u003eand \u003cspan class=\"ead-language\"\u003eShyriiwook\u003c/span\u003e .",
                     "language": [
-                        "English"
+                        "English",
+                        "Shyriiwook"
                     ]
                 }
             ],
@@ -4756,9 +4757,10 @@
             },
             "descrules": "Anglo-American Cataloguing Rules",
             "langusage": {
-                "value": "Description is written in: \u003cspan class=\"ead-language\"\u003eEnglish, Latin script\u003c/span\u003e.",
+                "value": "Description is written in: \u003cspan class=\"ead-language\"\u003eEnglish, Latin script\u003c/span\u003e, and \u003cspan class=\"ead-language\"\u003eKlingon\u003c/span\u003e.",
                 "language": [
-                    "English, Latin script"
+                    "English, Latin script",
+                    "Klingon"
                 ]
             }
         }
