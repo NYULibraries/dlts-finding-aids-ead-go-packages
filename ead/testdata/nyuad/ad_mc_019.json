@@ -1,10 +1,8 @@
 {
     "runinfo": {
-        "libversion": "v0.18.0",
-        "appversion": "v0.16.0 (using EAD package v0.18.0)",
-        "timestamp": "2023-02-26T03:08:28.50345852-05:00",
-        "sourcefile": "/content/dev/jgp/fadesign-pub-test/findingaids_eads_test/nyuad/ad_mc_019.xml",
-        "sourcefilehash": "md5:8b917f0f40954655d5a5f8e6bb431afa"
+        "libversion": "",
+        "timestamp": "0001-01-01T00:00:00Z",
+        "sourcefile": ""
     },
     "pubinfo": {
         "themeid": "nyuad",
