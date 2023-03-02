@@ -144,6 +144,23 @@ func (titleStmt *TitleStmt) MarshalJSON() ([]byte, error) {
 	})
 }
 
+func (indexEntry *IndexEntry) MarshalJSON() ([]byte, error) {
+	type IndexEntryAlias IndexEntry
+
+	flattenedRef, err := flattenCDATA(indexEntry.Ref)
+	if err != nil {
+		return nil, err
+	}
+
+	return json.Marshal(&struct {
+		*IndexEntryAlias
+		FlattenedRef FilteredString `json:"ref,omitempty"`
+	}{
+		IndexEntryAlias: (*IndexEntryAlias)(indexEntry),
+		FlattenedRef:    FilteredString(flattenedRef),
+	})
+}
+
 // set blank DAO Role attributes to "external-link"
 func (dao *DAO) MarshalJSON() ([]byte, error) {
 	// if DAO Role is empty, set it to external link
