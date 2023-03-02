@@ -26,6 +26,37 @@ var nyhsTestFixturePath string = filepath.Join(testFixturePath, "nyhs")
 var akkasahTestFixturePath string = filepath.Join(testFixturePath, "akkasah")
 var presentationContainerPath string = filepath.Join(testFixturePath, "presentation-containers")
 
+func runiJSONComparisonTest(t *testing.T, params *iJSONTestParams) {
+
+	var ead *EAD
+	t.Run(params.TestName, func(t *testing.T) {
+		if params.PrePopulatedEAD == nil {
+			ead = getTestEAD(t, params.EADFilePath)
+		} else {
+			ead = params.PrePopulatedEAD
+		}
+		jsonData, err := json.MarshalIndent(ead, "", "    ")
+		failOnError(t, err, "Unexpected error marshaling JSON")
+
+		// reference file includes newline at end of file so
+		// add newline to jsonData
+		jsonData = append(jsonData, '\n')
+
+		referenceFile := params.JSONReferenceFilePath
+		referenceFileContents, err := os.ReadFile(referenceFile)
+		failOnError(t, err, "Unexpected error reading reference file")
+
+		if !bytes.Equal(referenceFileContents, jsonData) {
+			jsonErrorFile := params.JSONErrorFilePath
+			err = os.WriteFile(jsonErrorFile, []byte(jsonData), 0644)
+			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonErrorFile))
+
+			errMsg := fmt.Sprintf("JSON Data does not match reference file.\ndiff %s %s", jsonErrorFile, referenceFile)
+			t.Errorf(errMsg)
+		}
+	})
+}
+
 func testProcessDID(did *DID) {
 	daos := did.DAO
 	// populate digital object DOType and Count members
@@ -669,35 +700,4 @@ func TestJSONMarshalingWithPresentationElementsInTitleStmtChildren(t *testing.T)
 	params.JSONErrorFilePath = "./testdata/tmp/failing-with-presentation-elements-in-titlestmt-children.json"
 
 	runiJSONComparisonTest(t, &params)
-}
-
-func runiJSONComparisonTest(t *testing.T, params *iJSONTestParams) {
-
-	var ead *EAD
-	t.Run(params.TestName, func(t *testing.T) {
-		if params.PrePopulatedEAD == nil {
-			ead = getTestEAD(t, params.EADFilePath)
-		} else {
-			ead = params.PrePopulatedEAD
-		}
-		jsonData, err := json.MarshalIndent(ead, "", "    ")
-		failOnError(t, err, "Unexpected error marshaling JSON")
-
-		// reference file includes newline at end of file so
-		// add newline to jsonData
-		jsonData = append(jsonData, '\n')
-
-		referenceFile := params.JSONReferenceFilePath
-		referenceFileContents, err := os.ReadFile(referenceFile)
-		failOnError(t, err, "Unexpected error reading reference file")
-
-		if !bytes.Equal(referenceFileContents, jsonData) {
-			jsonErrorFile := params.JSONErrorFilePath
-			err = os.WriteFile(jsonErrorFile, []byte(jsonData), 0644)
-			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonErrorFile))
-
-			errMsg := fmt.Sprintf("JSON Data does not match reference file.\ndiff %s %s", jsonErrorFile, referenceFile)
-			t.Errorf(errMsg)
-		}
-	})
 }
