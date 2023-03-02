@@ -16062,6 +16062,855 @@
                 }
             ]
         },
+        "index": [
+            {
+                "id": "aspace_9c589bfb15cc5fd66c4f5f2cbabebbba",
+                "head": {
+                    "value": "Index to Henry Ward Beecher Sermons and Speeches"
+                },
+                "indexentry": [
+                    {
+                        "title": {
+                            "value": "Activity (undated)"
+                        },
+                        "ref": "B6-F8"
+                    },
+                    {
+                        "title": {
+                            "value": "Activity Indispensable to Normal Development (undated)"
+                        },
+                        "ref": "B6-F9"
+                    },
+                    {
+                        "title": {
+                            "value": "The Administration of Wealth (undated)"
+                        },
+                        "ref": "B6-F8"
+                    },
+                    {
+                        "title": {
+                            "value": "American Missionary Association (undated)"
+                        },
+                        "ref": "B6-F9"
+                    },
+                    {
+                        "title": {
+                            "value": "American Missionary Association (undated)"
+                        },
+                        "ref": "B6-F9"
+                    },
+                    {
+                        "title": {
+                            "value": "Be Conspicuous for Good Qualities (undated)"
+                        },
+                        "ref": "B6-F6"
+                    },
+                    {
+                        "title": {
+                            "value": "The Bible (March 26, 1980)"
+                        },
+                        "ref": "B3-F11"
+                    },
+                    {
+                        "title": {
+                            "value": "The Camp and Country (October 1861)"
+                        },
+                        "ref": "B2-F3"
+                    },
+                    {
+                        "title": {
+                            "value": "Caution Against Procrastination (undated)"
+                        },
+                        "ref": "B6-F6"
+                    },
+                    {
+                        "title": {
+                            "value": "Children of God Not to Crawl in His Presence (undated)"
+                        },
+                        "ref": "B6-F6"
+                    },
+                    {
+                        "title": {
+                            "value": "Christ's Personal Ministry (undated)"
+                        },
+                        "ref": "B6-F6"
+                    },
+                    {
+                        "title": {
+                            "value": "Church Worship (April 8, 1877)"
+                        },
+                        "ref": "B3-F9"
+                    },
+                    {
+                        "title": {
+                            "value": "A Circuit of the Continent (November 29, 1883)"
+                        },
+                        "ref": "B3-F17"
+                    },
+                    {
+                        "title": {
+                            "value": "Cleveland Letters (August 30 and September 8, 1866)"
+                        },
+                        "ref": "B2-F9"
+                    },
+                    {
+                        "title": {
+                            "value": "Comfort in Knowing the Worst (undated)"
+                        },
+                        "ref": "B6-F9"
+                    },
+                    {
+                        "title": {
+                            "value": "Commercial Wisdom of Religion (undated)"
+                        },
+                        "ref": "B6-F6"
+                    },
+                    {
+                        "title": {
+                            "value": "Consolation in Trouble (March 3, 1876)"
+                        },
+                        "ref": "B3-F10"
+                    },
+                    {
+                        "title": {
+                            "value": "Deterioration of Man (undated)"
+                        },
+                        "ref": "B6-F7"
+                    },
+                    {
+                        "title": {
+                            "value": "Disenchantment of Scripture Passages (undated)"
+                        },
+                        "ref": "B6-F6"
+                    },
+                    {
+                        "title": {
+                            "value": "Disinterested Benevolence (undated)"
+                        },
+                        "ref": "B6-F8"
+                    },
+                    {
+                        "title": {
+                            "value": "The Divine Government (undated)"
+                        },
+                        "ref": "B6-F6"
+                    },
+                    {
+                        "title": {
+                            "value": "Education of the Citizen (1860-1863)"
+                        },
+                        "ref": "B2-F4"
+                    },
+                    {
+                        "title": {
+                            "value": "England and the Civil War of America (June 7, 1861)"
+                        },
+                        "ref": "B2-F13"
+                    },
+                    {
+                        "title": {
+                            "value": "Eulogy on General Grant (October 22, 1885)"
+                        },
+                        "ref": "Box 5 (no folder)"
+                    },
+                    {
+                        "title": {
+                            "value": "Eve of Emancipation (December 31, 1863)"
+                        },
+                        "ref": "B2-F13"
+                    },
+                    {
+                        "title": {
+                            "value": "Extract from Lecture Room Talk (March 27, 1863)"
+                        },
+                        "ref": "B2-F13"
+                    },
+                    {
+                        "title": {
+                            "value": "The Faults of Character (undated)"
+                        },
+                        "ref": "B6-F9"
+                    },
+                    {
+                        "title": {
+                            "value": "Fruitfulness of the Human Mind (undated)"
+                        },
+                        "ref": "B6-F8"
+                    },
+                    {
+                        "title": {
+                            "value": "Generosity and Benevolence (undated)"
+                        },
+                        "ref": "B6-F8"
+                    },
+                    {
+                        "title": {
+                            "value": "Getting up in the Morning (undated)"
+                        },
+                        "ref": "B6-F2"
+                    },
+                    {
+                        "title": {
+                            "value": "God's Love and Presence (February 23, 1868)"
+                        },
+                        "ref": "B2-F13"
+                    },
+                    {
+                        "title": {
+                            "value": "God's Seal and Testimony (1858)"
+                        },
+                        "ref": "B1-F36"
+                    },
+                    {
+                        "title": {
+                            "value": "Happiness (1870-1871)"
+                        },
+                        "ref": "B2-F14"
+                    },
+                    {
+                        "title": {
+                            "value": "Heirship with Christ (February 14, 1886)"
+                        },
+                        "ref": "B5-F6"
+                    },
+                    {
+                        "title": {
+                            "value": "Henry Ward Beecher in the West (1877)"
+                        },
+                        "ref": "B3-F8"
+                    },
+                    {
+                        "title": {
+                            "value": "The Hidden Manna and the White Stone (July 1, 1866)"
+                        },
+                        "ref": "B2-F9"
+                    },
+                    {
+                        "title": {
+                            "value": "The Higher Christian Life (February 16, 1872)"
+                        },
+                        "ref": "B3-F10"
+                    },
+                    {
+                        "title": {
+                            "value": "The Household (1869-1871)"
+                        },
+                        "ref": "B2-F12"
+                    },
+                    {
+                        "title": {
+                            "value": "How to Labor for a Revival (undated)"
+                        },
+                        "ref": "B6-F6"
+                    },
+                    {
+                        "title": {
+                            "value": "The Human Body a Temple of the Holy Ghost (undated)"
+                        },
+                        "ref": "B6-F8"
+                    },
+                    {
+                        "title": {
+                            "value": "Humanity (February 28, 1866)"
+                        },
+                        "ref": "B5-F6"
+                    },
+                    {
+                        "title": {
+                            "value": "Inspiration of Scripture No. 1 (October 27, 1878)"
+                        },
+                        "ref": "B3-F10"
+                    },
+                    {
+                        "title": {
+                            "value": "Interpolation of the Scriptures (undated)"
+                        },
+                        "ref": "B6-F6"
+                    },
+                    {
+                        "title": {
+                            "value": "Is There a Devil? (February 25, 1883)"
+                        },
+                        "ref": "B3-F17"
+                    },
+                    {
+                        "title": {
+                            "value": "The Kingdom of Heaven (January 3, 1886)"
+                        },
+                        "ref": "B5-F6"
+                    },
+                    {
+                        "title": {
+                            "value": "A Knowledge of Doctrines Useful but Not Indispensable (undated)"
+                        },
+                        "ref": "B6-F7"
+                    },
+                    {
+                        "title": {
+                            "value": "The Law of Human Development (undated)"
+                        },
+                        "ref": "B6-F8"
+                    },
+                    {
+                        "title": {
+                            "value": "The Law of Sympathy (1858-1859)"
+                        },
+                        "ref": "B2-F1"
+                    },
+                    {
+                        "title": {
+                            "value": "Laws and their Penalties (undated)"
+                        },
+                        "ref": "B6-F7"
+                    },
+                    {
+                        "title": {
+                            "value": "Lecture (December 1, 1859)"
+                        },
+                        "ref": "B2-F1"
+                    },
+                    {
+                        "title": {
+                            "value": "Lecture Room Talk (January 1, 1863?)"
+                        },
+                        "ref": "B2-F13"
+                    },
+                    {
+                        "title": {
+                            "value": "Lecture Room Talk (May 21, 1875)"
+                        },
+                        "ref": "B3-F10"
+                    },
+                    {
+                        "title": {
+                            "value": "Lecture Room Talk (July 27, 1876)"
+                        },
+                        "ref": "B3-F10"
+                    },
+                    {
+                        "title": {
+                            "value": "Lecture Room Talk (March 1, 1878)"
+                        },
+                        "ref": "B3-F10"
+                    },
+                    {
+                        "title": {
+                            "value": "Lecture Room Talk: excerpt (December 29, 1876)"
+                        },
+                        "ref": "B3-F10"
+                    },
+                    {
+                        "title": {
+                            "value": "The Lord's Prayer No.2 (January 17, 1865)"
+                        },
+                        "ref": "B2-F6"
+                    },
+                    {
+                        "title": {
+                            "value": "The Lord's Prayer No.3 (undated)"
+                        },
+                        "ref": "B6-F13"
+                    },
+                    {
+                        "title": {
+                            "value": "Love for Southerners as well as Northerners (January 9, 1863)"
+                        },
+                        "ref": "B2-F13"
+                    },
+                    {
+                        "title": {
+                            "value": "The Love of Money (undated)"
+                        },
+                        "ref": "B6-F9"
+                    },
+                    {
+                        "title": {
+                            "value": "Lying Never Justifiable (undated)"
+                        },
+                        "ref": "B6-F6"
+                    },
+                    {
+                        "title": {
+                            "value": "Men's Plans in Life (undated)"
+                        },
+                        "ref": "B6-F9"
+                    },
+                    {
+                        "title": {
+                            "value": "Misconception of One's Duty as a Christian (June 15, 1877)"
+                        },
+                        "ref": "B3-F10"
+                    },
+                    {
+                        "title": {
+                            "value": "Mission of Christ (undated)"
+                        },
+                        "ref": "B6-F9"
+                    },
+                    {
+                        "title": {
+                            "value": "Money and Manhood: incomplete copy (1872-1873)"
+                        },
+                        "ref": "B3-F2"
+                    },
+                    {
+                        "title": {
+                            "value": "Motives for Action (undated)"
+                        },
+                        "ref": "B6-F7"
+                    },
+                    {
+                        "title": {
+                            "value": "Narrative on Trip to Ft. Sumter (April 12, 1865)"
+                        },
+                        "ref": "Box 3 (no folder)"
+                    },
+                    {
+                        "title": {
+                            "value": "Natural Laws Moral, and Moral Laws Natural (undated)"
+                        },
+                        "ref": "B6-F9"
+                    },
+                    {
+                        "title": {
+                            "value": "Old and New Ideas of Inspiration (undated)"
+                        },
+                        "ref": "B6-F6"
+                    },
+                    {
+                        "title": {
+                            "value": "Origin of the Bible (undated)"
+                        },
+                        "ref": "B6-F6"
+                    },
+                    {
+                        "title": {
+                            "value": "Patience (undated)"
+                        },
+                        "ref": "B6-F9"
+                    },
+                    {
+                        "title": {
+                            "value": "Patient Waiting (April 16, 1865)"
+                        },
+                        "ref": "Box 3 (no folder)"
+                    },
+                    {
+                        "title": {
+                            "value": "Patient Waiting (undated)"
+                        },
+                        "ref": "B6-F9"
+                    },
+                    {
+                        "title": {
+                            "value": "Personal Influence (undated)"
+                        },
+                        "ref": "B6-F7"
+                    },
+                    {
+                        "title": {
+                            "value": "Plymouth Church as a Pioneer in the Anti-Slavery Cause (May 25, 1870)"
+                        },
+                        "ref": "B3-F10"
+                    },
+                    {
+                        "title": {
+                            "value": "Premonitions of God's Coming (1865)"
+                        },
+                        "ref": "B2-F13"
+                    },
+                    {
+                        "title": {
+                            "value": "Professions of Faith (July 11, 1880)"
+                        },
+                        "ref": "B3-F12"
+                    },
+                    {
+                        "title": {
+                            "value": "The Progress of Thought in the Church (in North American Review) (August 1882)"
+                        },
+                        "ref": "B3-F14"
+                    },
+                    {
+                        "title": {
+                            "value": "Ready to Depart (December 31, 1863)"
+                        },
+                        "ref": "B2-F13"
+                    },
+                    {
+                        "title": {
+                            "value": "Regular Progress in the Gospel Representation of Christ's Life (undated)"
+                        },
+                        "ref": "B6-F6"
+                    },
+                    {
+                        "title": {
+                            "value": "Reign of the Common People (May 13, 1879)"
+                        },
+                        "ref": "B3-F9"
+                    },
+                    {
+                        "title": {
+                            "value": "Remarks at 1st Anniversary of Equal Rights Association (May 10, 1867)"
+                        },
+                        "ref": "B2-F10"
+                    },
+                    {
+                        "title": {
+                            "value": "Remote and Permanent Results (undated)"
+                        },
+                        "ref": "B6-F8"
+                    },
+                    {
+                        "title": {
+                            "value": "Retrospection (undated)"
+                        },
+                        "ref": "B6-F6"
+                    },
+                    {
+                        "title": {
+                            "value": "Riches (February 18, 1883)"
+                        },
+                        "ref": "B3-F17"
+                    },
+                    {
+                        "title": {
+                            "value": "Self- Government (undated)"
+                        },
+                        "ref": "B6-F9"
+                    },
+                    {
+                        "title": {
+                            "value": "Sepulcher in the Garden (March 26, 1880)"
+                        },
+                        "ref": "B3-F11"
+                    },
+                    {
+                        "title": {
+                            "value": "Paul and Silas in the Prison of Thyatira (September 20, 1873)"
+                        },
+                        "ref": "B2-F3"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermon: 1st Corinthians 1:28 (November 19, 1872)"
+                        },
+                        "ref": "B3-F1"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermon: 1st Corinthians 2:15 (October 1868)"
+                        },
+                        "ref": "B2-F11"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermon: Acts of the Apostles 16 (undated)"
+                        },
+                        "ref": "B6-F9"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermon: Deut 6:1, 6-12 (July 2, 1884)"
+                        },
+                        "ref": "B4-F1"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermon: Genesis 9:11-16 (December 7, 1865)"
+                        },
+                        "ref": "B2-F8"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermon: Hebrews 4:9 (October 11, 1874)"
+                        },
+                        "ref": "B3-F6"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermon: Isa 16:3 (November 28, 1869)"
+                        },
+                        "ref": "B2-F13"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermon: James (?) 46:5 (June 28, 1885)"
+                        },
+                        "ref": "B5-F2"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermon: John 11:44 (July 5, 1885)"
+                        },
+                        "ref": "B5-F3"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermon: Matthew 11: 1-12 (November 9, 1884)"
+                        },
+                        "ref": "B4-F2"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermon: Mathew 25:26 (December 19, 1875)"
+                        },
+                        "ref": "B3-F7"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermon: Romans 2:4,5 (undated)"
+                        },
+                        "ref": "B6-F3"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermon: Romans 8:14,16 (undated)"
+                        },
+                        "ref": "B6-F8"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermon: Romans 8:19-23 (June 14, 1885)"
+                        },
+                        "ref": "B5-F1"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermon extract (May 31, 1874)"
+                        },
+                        "ref": "B3-F10"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermon extract (February 28, 1875)"
+                        },
+                        "ref": "B3-F10"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermon extract (March 19, 1876)"
+                        },
+                        "ref": "B3-F10"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermon extract (April 15, 1877)"
+                        },
+                        "ref": "B3-F10"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermon extract (April 14, 1878)"
+                        },
+                        "ref": "B3-F10"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermon notes: Ephesians 4: 31-32 (December 28, 1873)"
+                        },
+                        "ref": "B3-F4"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermon notes: Hebrews 12:18 and Galatians 5:22 (undated)"
+                        },
+                        "ref": "B6-F14"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermon notes: Luke 14:10 (June 22, 1877)"
+                        },
+                        "ref": "B3-F9"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermon notes: Luke 16:4 (undated)"
+                        },
+                        "ref": "B6-F2"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermon: Peter 2:17 (January 17, 1864)"
+                        },
+                        "ref": "B2-F5"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermon notes: Phil 1:15-18 (February 21, 1886)"
+                        },
+                        "ref": "B5-F5"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermon notes: Romans 14:12 (undated)"
+                        },
+                        "ref": "B6-F2"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermons (Sepember 1882-March 1883)"
+                        },
+                        "ref": "B3-F16"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermons (April-October 1883)"
+                        },
+                        "ref": "Box 4 (no folder)"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermons (October 1883-April 1884)"
+                        },
+                        "ref": "Box 4 (no folder)"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermons (April-October 1884)"
+                        },
+                        "ref": "Box 5 (no folder)"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermons (October 5-November 2, 1884)"
+                        },
+                        "ref": "Box 5 (no folder)"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermons (1885-1886)"
+                        },
+                        "ref": "Box 5 (no folder)"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermons (1886-1887)"
+                        },
+                        "ref": "Box 5 (no folder)"
+                    },
+                    {
+                        "title": {
+                            "value": "Sermons: printed (circa 1887)"
+                        },
+                        "ref": "B6-F1"
+                    },
+                    {
+                        "title": {
+                            "value": "Shame (undated)"
+                        },
+                        "ref": "B6-F6"
+                    },
+                    {
+                        "title": {
+                            "value": "Significance of the Term Hatred as Used by Christ (January 10, 1886)"
+                        },
+                        "ref": "B5-F4"
+                    },
+                    {
+                        "title": {
+                            "value": "Signification of the Word 'Forty' in the Scriptures (undated)"
+                        },
+                        "ref": "B6-F6"
+                    },
+                    {
+                        "title": {
+                            "value": "Sorrow and Its Dangers (undated)"
+                        },
+                        "ref": "B6-F9"
+                    },
+                    {
+                        "title": {
+                            "value": "Thanksgiving Sermon (November 27, 1879)"
+                        },
+                        "ref": "B3-F10"
+                    },
+                    {
+                        "title": {
+                            "value": "The Threefold Man (undated)"
+                        },
+                        "ref": "B6-F7"
+                    },
+                    {
+                        "title": {
+                            "value": "Truths of Law Founded in Nature (undated)"
+                        },
+                        "ref": "B6-F6"
+                    },
+                    {
+                        "title": {
+                            "value": "Two Hundred and Forty Years Ago! (undated)"
+                        },
+                        "ref": "B6-F4"
+                    },
+                    {
+                        "title": {
+                            "value": "Unconscious Selfishness (undated)"
+                        },
+                        "ref": "B6-F9"
+                    },
+                    {
+                        "title": {
+                            "value": "The Unity of Christians by the Power of Love (July 11, 1886)"
+                        },
+                        "ref": "B5-F6"
+                    },
+                    {
+                        "title": {
+                            "value": "Upper and Under (circa 1874)"
+                        },
+                        "ref": "B3-F5"
+                    },
+                    {
+                        "title": {
+                            "value": "A Voice (undated)"
+                        },
+                        "ref": "B6-F9"
+                    },
+                    {
+                        "title": {
+                            "value": "The Vulgarity of Ignorance (undated)"
+                        },
+                        "ref": "B6-F6"
+                    },
+                    {
+                        "title": {
+                            "value": "Wants of Young Men (May 6, 1860)"
+                        },
+                        "ref": "B2-F2"
+                    },
+                    {
+                        "title": {
+                            "value": "What Men Believe Religion Can Do For Them (undated)"
+                        },
+                        "ref": "B6-F6"
+                    },
+                    {
+                        "title": {
+                            "value": "Works (undated)"
+                        },
+                        "ref": "B6-F8"
+                    },
+                    {
+                        "title": {
+                            "value": "The Worth of Man (January 1882)"
+                        },
+                        "ref": "B3-F13"
+                    },
+                    {
+                        "title": {
+                            "value": "Young America (undated)"
+                        },
+                        "ref": "B6-F5"
+                    }
+                ],
+                "p": [
+                    {
+                        "value": "Following is an index of the Beecher sermons and other remarks in the collection, ordered alphabetically by title. Following the title is the date delivered (if known) and the box number-folder number (B-F) in which the piece can be found."
+                    }
+                ]
+            }
+        ],
         "prefercite": [
             {
                 "id": "aspace_1e09e991537fd21d2f2deaa0b431184c",
