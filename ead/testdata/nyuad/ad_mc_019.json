@@ -5,8 +5,8 @@
         "sourcefile": ""
     },
     "pubinfo": {
-        "themeid": "nyuad",
-        "reposidentifier": "nyuad"
+        "themeid": "",
+        "reposidentifier": ""
     },
     "archdesc": {
         "level": "collection",
@@ -53,8 +53,8 @@
                 {
                     "value": "\u003cspan class=\"ead-language\"\u003eEnglish\u003c/span\u003e .",
                     "language": [
-			"English"
-			]
+                        "English"
+                    ]
                 }
             ],
             "repository": {
@@ -88,7 +88,7 @@
                             "did": {
                                 "physdesc": [
                                     {
-                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e\u003cspan class=\"ead-dimensions\"\u003e40 x 47 cm.\u003c/span\u003e",
+                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e \u003cspan class=\"ead-dimensions\"\u003e40 x 47 cm.\u003c/span\u003e",
                                         "altrender": "whole",
                                         "extent": [
                                             {
@@ -161,7 +161,7 @@
                             "did": {
                                 "physdesc": [
                                     {
-                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e\u003cspan class=\"ead-dimensions\"\u003e40 x 47 cm.\u003c/span\u003e",
+                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e \u003cspan class=\"ead-dimensions\"\u003e40 x 47 cm.\u003c/span\u003e",
                                         "altrender": "whole",
                                         "extent": [
                                             {
@@ -662,10 +662,9 @@
                             {
                                 "value": "\u003cspan class=\"ead-language\"\u003eEnglish\u003c/span\u003e, \u003cspan class=\"ead-language\"\u003eArabic\u003c/span\u003e.",
                                 "language": [
-				    "English",
-				    "Arabic"
-				]
-				    
+                                    "English",
+                                    "Arabic"
+                                ]
                             }
                         ],
                         "unitdate": [
@@ -705,7 +704,7 @@
                             "did": {
                                 "physdesc": [
                                     {
-                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e\u003cspan class=\"ead-dimensions\"\u003emeasuring 51 x 48 cm.\u003c/span\u003e",
+                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e \u003cspan class=\"ead-dimensions\"\u003emeasuring 51 x 48 cm.\u003c/span\u003e",
                                         "altrender": "whole",
                                         "extent": [
                                             {
@@ -778,7 +777,7 @@
                             "did": {
                                 "physdesc": [
                                     {
-                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e\u003cspan class=\"ead-dimensions\"\u003e22 x 28 cm.\u003c/span\u003e",
+                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e \u003cspan class=\"ead-dimensions\"\u003e22 x 28 cm.\u003c/span\u003e",
                                         "altrender": "whole",
                                         "extent": [
                                             {
@@ -851,7 +850,7 @@
                             "did": {
                                 "physdesc": [
                                     {
-                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e\u003cspan class=\"ead-dimensions\"\u003e32 x 38 cm.\u003c/span\u003e",
+                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e \u003cspan class=\"ead-dimensions\"\u003e32 x 38 cm.\u003c/span\u003e",
                                         "altrender": "whole",
                                         "extent": [
                                             {
@@ -1547,7 +1546,7 @@
                             "did": {
                                 "physdesc": [
                                     {
-                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e\u003cspan class=\"ead-dimensions\"\u003e39.5 x 43.5 cm.\u003c/span\u003e",
+                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e \u003cspan class=\"ead-dimensions\"\u003e39.5 x 43.5 cm.\u003c/span\u003e",
                                         "altrender": "whole",
                                         "extent": [
                                             {
@@ -1646,7 +1645,7 @@
                             "did": {
                                 "physdesc": [
                                     {
-                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e\u003cspan class=\"ead-dimensions\"\u003e106 x 64 cm.\u003c/span\u003e",
+                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e \u003cspan class=\"ead-dimensions\"\u003e106 x 64 cm.\u003c/span\u003e",
                                         "altrender": "whole",
                                         "extent": [
                                             {
@@ -1875,7 +1874,7 @@
                             "did": {
                                 "physdesc": [
                                     {
-                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e\u003cspan class=\"ead-dimensions\"\u003e39 x 52 cm.\u003c/span\u003e",
+                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e \u003cspan class=\"ead-dimensions\"\u003e39 x 52 cm.\u003c/span\u003e",
                                         "altrender": "whole",
                                         "extent": [
                                             {
@@ -2022,7 +2021,7 @@
                             "did": {
                                 "physdesc": [
                                     {
-                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e\u003cspan class=\"ead-dimensions\"\u003emeasured as 50 x 62 cm.\u003c/span\u003e",
+                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e \u003cspan class=\"ead-dimensions\"\u003emeasured as 50 x 62 cm.\u003c/span\u003e",
                                         "altrender": "whole",
                                         "extent": [
                                             {
@@ -2112,7 +2111,7 @@
                             "did": {
                                 "physdesc": [
                                     {
-                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e\u003cspan class=\"ead-dimensions\"\u003e23 x 30 cm.\u003c/span\u003e",
+                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e \u003cspan class=\"ead-dimensions\"\u003e23 x 30 cm.\u003c/span\u003e",
                                         "altrender": "whole",
                                         "extent": [
                                             {
@@ -2185,7 +2184,7 @@
                             "did": {
                                 "physdesc": [
                                     {
-                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e\u003cspan class=\"ead-dimensions\"\u003e39 x 47 cm.\u003c/span\u003e",
+                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e \u003cspan class=\"ead-dimensions\"\u003e39 x 47 cm.\u003c/span\u003e",
                                         "altrender": "whole",
                                         "extent": [
                                             {
@@ -2316,7 +2315,7 @@
                             "did": {
                                 "physdesc": [
                                     {
-                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e\u003cspan class=\"ead-dimensions\"\u003emeasuring 49 x 65 inches.\u003c/span\u003e",
+                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e \u003cspan class=\"ead-dimensions\"\u003emeasuring 49 x 65 inches.\u003c/span\u003e",
                                         "altrender": "whole",
                                         "extent": [
                                             {
@@ -2615,7 +2614,7 @@
                             "did": {
                                 "physdesc": [
                                     {
-                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e\u003cspan class=\"ead-extent\"\u003emeasuring xxxx\u003c/span\u003e",
+                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e \u003cspan class=\"ead-extent\"\u003emeasuring xxxx\u003c/span\u003e",
                                         "altrender": "whole",
                                         "extent": [
                                             {
@@ -2689,7 +2688,7 @@
                             "did": {
                                 "physdesc": [
                                     {
-                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e\u003cspan class=\"ead-dimensions\"\u003e39 x 47 cm.\u003c/span\u003e",
+                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e \u003cspan class=\"ead-dimensions\"\u003e39 x 47 cm.\u003c/span\u003e",
                                         "altrender": "whole",
                                         "extent": [
                                             {
@@ -2762,7 +2761,7 @@
                             "did": {
                                 "physdesc": [
                                     {
-                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e\u003cspan class=\"ead-dimensions\"\u003emeasuring 52 x 61 inches.\u003c/span\u003e",
+                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e \u003cspan class=\"ead-dimensions\"\u003emeasuring 52 x 61 inches.\u003c/span\u003e",
                                         "altrender": "whole",
                                         "extent": [
                                             {
@@ -2852,7 +2851,7 @@
                             "did": {
                                 "physdesc": [
                                     {
-                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e\u003cspan class=\"ead-dimensions\"\u003emeasuring 50 x 62 cm.\u003c/span\u003e",
+                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e \u003cspan class=\"ead-dimensions\"\u003emeasuring 50 x 62 cm.\u003c/span\u003e",
                                         "altrender": "whole",
                                         "extent": [
                                             {
@@ -2925,7 +2924,7 @@
                             "did": {
                                 "physdesc": [
                                     {
-                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e\u003cspan class=\"ead-dimensions\"\u003e45 x 60 cm.\u003c/span\u003e",
+                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e \u003cspan class=\"ead-dimensions\"\u003e45 x 60 cm.\u003c/span\u003e",
                                         "altrender": "whole",
                                         "extent": [
                                             {
@@ -2998,7 +2997,7 @@
                             "did": {
                                 "physdesc": [
                                     {
-                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e\u003cspan class=\"ead-dimensions\"\u003e25 x 43 cm.\u003c/span\u003e",
+                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e \u003cspan class=\"ead-dimensions\"\u003e25 x 43 cm.\u003c/span\u003e",
                                         "altrender": "whole",
                                         "extent": [
                                             {
@@ -3071,7 +3070,7 @@
                             "did": {
                                 "physdesc": [
                                     {
-                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e\u003cspan class=\"ead-dimensions\"\u003e44 x 53 cm.\u003c/span\u003e",
+                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e \u003cspan class=\"ead-dimensions\"\u003e44 x 53 cm.\u003c/span\u003e",
                                         "altrender": "whole",
                                         "extent": [
                                             {
@@ -3206,7 +3205,7 @@
                             "did": {
                                 "physdesc": [
                                     {
-                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e\u003cspan class=\"ead-dimensions\"\u003emeasuring 54 x 62 cm.\u003c/span\u003e",
+                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e \u003cspan class=\"ead-dimensions\"\u003emeasuring 54 x 62 cm.\u003c/span\u003e",
                                         "altrender": "whole",
                                         "extent": [
                                             {
@@ -3366,7 +3365,7 @@
                             "did": {
                                 "physdesc": [
                                     {
-                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e\u003cspan class=\"ead-dimensions\"\u003e25 x 37 cm.\u003c/span\u003e",
+                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e \u003cspan class=\"ead-dimensions\"\u003e25 x 37 cm.\u003c/span\u003e",
                                         "altrender": "whole",
                                         "extent": [
                                             {
@@ -3439,7 +3438,7 @@
                             "did": {
                                 "physdesc": [
                                     {
-                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e\u003cspan class=\"ead-dimensions\"\u003emeasuring 54 x 71 cm.\u003c/span\u003e",
+                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e \u003cspan class=\"ead-dimensions\"\u003emeasuring 54 x 71 cm.\u003c/span\u003e",
                                         "altrender": "whole",
                                         "extent": [
                                             {
@@ -4223,7 +4222,7 @@
                             "did": {
                                 "physdesc": [
                                     {
-                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e\u003cspan class=\"ead-dimensions\"\u003e23 x 29 cm.\u003c/span\u003e",
+                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e \u003cspan class=\"ead-dimensions\"\u003e23 x 29 cm.\u003c/span\u003e",
                                         "altrender": "whole",
                                         "extent": [
                                             {
@@ -4296,7 +4295,7 @@
                             "did": {
                                 "physdesc": [
                                     {
-                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e\u003cspan class=\"ead-dimensions\"\u003emeasured as 53 x 61 cm.\u003c/span\u003e",
+                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e \u003cspan class=\"ead-dimensions\"\u003emeasured as 53 x 61 cm.\u003c/span\u003e",
                                         "altrender": "whole",
                                         "extent": [
                                             {
@@ -4369,7 +4368,7 @@
                             "did": {
                                 "physdesc": [
                                     {
-                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e\u003cspan class=\"ead-dimensions\"\u003e39 x 47 cm.\u003c/span\u003e",
+                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e \u003cspan class=\"ead-dimensions\"\u003e39 x 47 cm.\u003c/span\u003e",
                                         "altrender": "whole",
                                         "extent": [
                                             {
@@ -4442,7 +4441,7 @@
                             "did": {
                                 "physdesc": [
                                     {
-                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e\u003cspan class=\"ead-dimensions\"\u003e55 x 71 cm.\u003c/span\u003e",
+                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e \u003cspan class=\"ead-dimensions\"\u003e55 x 71 cm.\u003c/span\u003e",
                                         "altrender": "whole",
                                         "extent": [
                                             {
@@ -4573,7 +4572,7 @@
                             "did": {
                                 "physdesc": [
                                     {
-                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e\u003cspan class=\"ead-dimensions\"\u003e56 x 69.5 cm.\u003c/span\u003e",
+                                        "value": "\u003cspan class=\"ead-extent\"\u003e1 Leaves\u003c/span\u003e \u003cspan class=\"ead-dimensions\"\u003e56 x 69.5 cm.\u003c/span\u003e",
                                         "altrender": "whole",
                                         "extent": [
                                             {
@@ -4758,7 +4757,9 @@
             "descrules": "Anglo-American Cataloguing Rules",
             "langusage": {
                 "value": "Description is written in: \u003cspan class=\"ead-language\"\u003eEnglish, Latin script\u003c/span\u003e.",
-                "language": "English, Latin script"
+                "language": [
+                    "English, Latin script"
+                ]
             }
         }
     }
