@@ -1,6 +1,8 @@
 # CHANGELOG
 
-#### v0.18.1-20230301T16_30
+#### v0.18.1-20230302T13_30
+  - Add support for multiple `<language>` child elements of
+    `<langmaterial>` and `<langusage>`
   - Change parsing and JSON marshaling of `<titlestmt>` children
     `<author>, <sponsor>, and <subtitle>`.  The new implementation
     captures the `innerxml` for the child elements during parsing, and
