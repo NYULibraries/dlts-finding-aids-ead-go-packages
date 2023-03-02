@@ -343,13 +343,13 @@ type Item struct {
 type LangMaterial struct {
 	ID FilteredString `xml:"id,attr" json:"id,omitempty"`
 
-	Language *FilteredString `xml:"language" json:"language,omitempty"`
+	Language *[]FilteredString `xml:"language" json:"language,omitempty"`
 
 	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type LangUsage struct {
-	Language FilteredString `xml:"language" json:"language,omitempty"`
+	Language *[]FilteredString `xml:"language" json:"language,omitempty"`
 
 	Value string `xml:",innerxml" json:"value,omitempty"`
 }
