@@ -150,29 +150,14 @@ func TestXMLParsing(t *testing.T) {
 }
 
 func TestJSONMarshaling(t *testing.T) {
-	t.Run("JSON Marshaling", func(t *testing.T) {
-		ead := getOmegaEAD(t)
+	var params iJSONTestParams
 
-		jsonData, err := json.MarshalIndent(ead, "", "    ")
-		failOnError(t, err, "Unexpected error marshaling JSON")
+	params.TestName = "JSON Marshaling"
+	params.EADFilePath = filepath.Join(omegaTestFixturePath, "Omega-EAD.xml")
+	params.JSONReferenceFilePath = filepath.Join(omegaTestFixturePath, "mos_2021.json")
+	params.JSONErrorFilePath = "./testdata/tmp/failing-marshal.json"
 
-		// reference file includes newline at end of file so
-		// add newline to jsonData
-		jsonData = append(jsonData, '\n')
-
-		referenceFile := omegaTestFixturePath + "/" + "mos_2021.json"
-		referenceFileContents, err := os.ReadFile(referenceFile)
-		failOnError(t, err, "Unexpected error reading reference file")
-
-		if !bytes.Equal(referenceFileContents, jsonData) {
-			jsonFile := "./testdata/tmp/failing-marshal.json"
-			err = os.WriteFile(jsonFile, []byte(jsonData), 0644)
-			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonFile))
-
-			errMsg := fmt.Sprintf("JSON Data does not match reference file.\ndiff %s %s", jsonFile, referenceFile)
-			t.Errorf(errMsg)
-		}
-	})
+	runiJSONComparisonTest(t, &params)
 }
 
 func TestUpdateRunInfo(t *testing.T) {
