@@ -1,14 +1,12 @@
 {
     "runinfo": {
-        "libversion": "v0.18.0",
-        "appversion": "v0.16.0 (using EAD package v0.18.0)",
-        "timestamp": "2023-02-26T00:55:52.699907329-05:00",
-        "sourcefile": "/content/dev/jgp/fadesign-pub-test/findingaids_eads_test/cbh/arc_212_plymouth_beecher.xml",
-        "sourcefilehash": "md5:07480e82e646f75a8b2afcabe948f124"
+        "libversion": "",
+        "timestamp": "0001-01-01T00:00:00Z",
+        "sourcefile": ""
     },
     "pubinfo": {
-        "themeid": "cbh",
-        "reposidentifier": "cbh"
+        "themeid": "",
+        "reposidentifier": ""
     },
     "archdesc": {
         "level": "collection",
@@ -5875,7 +5873,9 @@
                                         "langmaterial": [
                                             {
                                                 "value": "\u003cspan class=\"ead-language\"\u003eEnglish\u003c/span\u003e.",
-                                                "language": "English"
+                                                "language": [
+                                                    "English"
+                                                ]
                                             }
                                         ],
                                         "unitdate": [
@@ -7801,7 +7801,9 @@
                                         "langmaterial": [
                                             {
                                                 "value": "\u003cspan class=\"ead-language\"\u003eEnglish\u003c/span\u003e.",
-                                                "language": "English"
+                                                "language": [
+                                                    "English"
+                                                ]
                                             }
                                         ],
                                         "unitdate": [
@@ -16007,7 +16009,9 @@
                                 "langmaterial": [
                                     {
                                         "value": "\u003cspan class=\"ead-language\"\u003eEnglish\u003c/span\u003e.",
-                                        "language": "English"
+                                        "language": [
+                                            "English"
+                                        ]
                                     }
                                 ],
                                 "unittitle": {
