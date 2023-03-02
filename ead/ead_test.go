@@ -92,17 +92,6 @@ func getOmegaEAD(t *testing.T) EAD {
 	return ead
 }
 
-func getNYHSFoundling(t *testing.T) EAD {
-	EADXML, err := os.ReadFile(nyhsTestFixturePath + "/" + "nyhs_foundling.xml")
-	failOnError(t, err, "Unexpected error")
-
-	var ead EAD
-	err = xml.Unmarshal([]byte(EADXML), &ead)
-	failOnError(t, err, "Unexpected error")
-
-	return ead
-}
-
 func getPresentationContainerEAD(t *testing.T, filename string) EAD {
 	EADXML, err := os.ReadFile(presentationContainerPath + "/" + filename)
 	failOnError(t, err, "Unexpected error")
@@ -258,29 +247,14 @@ func TestJSONMarshalingWithDonors(t *testing.T) {
 }
 
 func TestJSONMarshalingWithEmptyDAORoles(t *testing.T) {
-	t.Run("JSON Marshaling with Empty DAO Roles", func(t *testing.T) {
-		ead := getNYHSFoundling(t)
+	var params iJSONTestParams
 
-		jsonData, err := json.MarshalIndent(ead, "", "    ")
-		failOnError(t, err, "Unexpected error marshaling JSON")
+	params.TestName = "JSON Marshaling with Empty DAO Roles"
+	params.EADFilePath = filepath.Join(nyhsTestFixturePath, "nyhs_foundling.xml")
+	params.JSONReferenceFilePath = filepath.Join(nyhsTestFixturePath, "nyhs_foundling.json")
+	params.JSONErrorFilePath = "./testdata/tmp/failing-empty-dao-role-marshal.json"
 
-		// reference file includes newline at end of file so
-		// add newline to jsonData
-		jsonData = append(jsonData, '\n')
-
-		referenceFile := nyhsTestFixturePath + "/" + "nyhs_foundling.json"
-		referenceFileContents, err := os.ReadFile(referenceFile)
-		failOnError(t, err, "Unexpected error reading reference file")
-
-		if !bytes.Equal(referenceFileContents, jsonData) {
-			jsonFile := "./testdata/tmp/failing-empty-role-marshal.json"
-			err = os.WriteFile(jsonFile, []byte(jsonData), 0644)
-			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonFile))
-
-			errMsg := fmt.Sprintf("JSON Data does not match reference file.\ndiff %s %s", jsonFile, referenceFile)
-			t.Errorf(errMsg)
-		}
-	})
+	runiJSONComparisonTest(t, &params)
 }
 
 func TestJSONMarshalingWithDonorsAndImageAndImageSets(t *testing.T) {
