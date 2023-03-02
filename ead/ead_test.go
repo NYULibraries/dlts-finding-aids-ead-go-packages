@@ -128,8 +128,20 @@ func getPresentationContainerEAD(t *testing.T, filename string) EAD {
 	return ead
 }
 
-func getPresentationElementInTitleStmtChildrenEAD(t *testing.T, filename string) EAD {
-	EADXML, err := os.ReadFile(omegaTestFixturePath + "/" + filename)
+/*
+	 func getPresentationElementInTitleStmtChildrenEAD(t *testing.T, filename string) EAD {
+		EADXML, err := os.ReadFile(omegaTestFixturePath + "/" + filename)
+		failOnError(t, err, "Unexpected error")
+
+		var ead EAD
+		err = xml.Unmarshal([]byte(EADXML), &ead)
+		failOnError(t, err, "Unexpected error")
+
+		return ead
+	}
+*/
+func getTestEAD(t *testing.T, eadPath string) EAD {
+	EADXML, err := os.ReadFile(eadPath)
 	failOnError(t, err, "Unexpected error")
 
 	var ead EAD
@@ -783,7 +795,7 @@ func TestInitPresentationContainersNoContainers(t *testing.T) {
 	})
 }
 
-func TestJSONMarshalingWithPresentationElementsInTitleStmtChildren(t *testing.T) {
+/* func TestJSONMarshalingWithPresentationElementsInTitleStmtChildren(t *testing.T) {
 	t.Run("JSON Marshaling with Presentation Element In TitleStmt children", func(t *testing.T) {
 		ead := getPresentationElementInTitleStmtChildrenEAD(t, "mos_2021-with-presentation-elements-in-titlestmt-children.xml")
 
@@ -804,6 +816,52 @@ func TestJSONMarshalingWithPresentationElementsInTitleStmtChildren(t *testing.T)
 			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonFile))
 
 			errMsg := fmt.Sprintf("JSON Data does not match reference file.\ndiff %s %s", jsonFile, referenceFile)
+			t.Errorf(errMsg)
+		}
+	})
+}
+*/
+
+func TestJSONMarshalingWithPresentationElementsInTitleStmtChildren(t *testing.T) {
+	var params iJSONTestParams
+
+	params.TestName = "JSON Marshaling with Presentation Element In TitleStmt children"
+	params.EADFilePath = filepath.Join(omegaTestFixturePath, "mos_2021-with-presentation-elements-in-titlestmt-children.xml")
+	params.JSONReferenceFilePath = filepath.Join(omegaTestFixturePath, "mos_2021-with-presentation-elements-in-titlestmt-children.json")
+	params.JSONErrorFilePath = "./testdata/tmp/failing-with-presentation-elements-in-titlestmt-children.json"
+
+	runiJSONComparisonTest(t, &params)
+}
+
+type iJSONTestParams struct {
+	TestName              string
+	EADFilePath           string
+	JSONReferenceFilePath string
+	JSONErrorFilePath     string
+}
+
+func runiJSONComparisonTest(t *testing.T, params *iJSONTestParams) {
+
+	t.Run(params.TestName, func(t *testing.T) {
+		ead := getTestEAD(t, params.EADFilePath)
+
+		jsonData, err := json.MarshalIndent(ead, "", "    ")
+		failOnError(t, err, "Unexpected error marshaling JSON")
+
+		// reference file includes newline at end of file so
+		// add newline to jsonData
+		jsonData = append(jsonData, '\n')
+
+		referenceFile := params.JSONReferenceFilePath
+		referenceFileContents, err := os.ReadFile(referenceFile)
+		failOnError(t, err, "Unexpected error reading reference file")
+
+		if !bytes.Equal(referenceFileContents, jsonData) {
+			jsonErrorFile := params.JSONErrorFilePath
+			err = os.WriteFile(jsonErrorFile, []byte(jsonData), 0644)
+			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonErrorFile))
+
+			errMsg := fmt.Sprintf("JSON Data does not match reference file.\ndiff %s %s", jsonErrorFile, referenceFile)
 			t.Errorf(errMsg)
 		}
 	})
