@@ -20,10 +20,11 @@ type iJSONTestParams struct {
 }
 
 var testFixturePath string = filepath.Join(".", "testdata")
-var omegaTestFixturePath string = filepath.Join(testFixturePath, "omega", "v0.1.5")
-var falesTestFixturePath string = filepath.Join(testFixturePath, "fales")
-var nyhsTestFixturePath string = filepath.Join(testFixturePath, "nyhs")
 var akkasahTestFixturePath string = filepath.Join(testFixturePath, "akkasah")
+var falesTestFixturePath string = filepath.Join(testFixturePath, "fales")
+var nyuadTestFixturePath string = filepath.Join(testFixturePath, "nyuad")
+var nyhsTestFixturePath string = filepath.Join(testFixturePath, "nyhs")
+var omegaTestFixturePath string = filepath.Join(testFixturePath, "omega", "v0.1.5")
 var presentationContainerPath string = filepath.Join(testFixturePath, "presentation-containers")
 
 func runiJSONComparisonTest(t *testing.T, params *iJSONTestParams) {
@@ -302,6 +303,17 @@ func TestJSONMarshalingWithDonorsAndImageAndImageSets(t *testing.T) {
 	testProcessCs(ead.ArchDesc.DSC.C)
 
 	params.PrePopulatedEAD = ead
+	runiJSONComparisonTest(t, &params)
+
+}
+func TestJSONMarshalingWithMultipleLanguages(t *testing.T) {
+	var params iJSONTestParams
+
+	params.TestName = "JSON Marshaling with Multiple Languages in <langmaterial> and <langusage>"
+	params.EADFilePath = filepath.Join(nyuadTestFixturePath, "ad_mc_019-edited.xml")
+	params.JSONReferenceFilePath = filepath.Join(nyuadTestFixturePath, "ad_mc_019-edited.json")
+	params.JSONErrorFilePath = "./testdata/tmp/failing-multiple-language-marshal.json"
+
 	runiJSONComparisonTest(t, &params)
 }
 

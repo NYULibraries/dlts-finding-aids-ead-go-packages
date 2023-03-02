@@ -1150,7 +1150,9 @@
                                                             {
                                                                 "value": "Level 6 \u003cspan class=\"ead-emph ead-emph-italic\"\u003eMaterials\u003c/span\u003e in \u003cspan class=\"ead-language\"\u003eEnglish\u003c/span\u003e.",
                                                                 "id": "aspace_ef9750889531488bd00e1945167928ff",
-                                                                "language": "English"
+                                                                "language": [
+                                                                    "English"
+                                                                ]
                                                             }
                                                         ],
                                                         "materialspec": [
@@ -1803,7 +1805,9 @@
                                                     {
                                                         "value": "Level 5 \u003cspan class=\"ead-emph ead-emph-italic\"\u003eMaterials\u003c/span\u003e are in \u003cspan class=\"ead-language\"\u003eEnglish\u003c/span\u003e.",
                                                         "id": "aspace_9b0efe097064eb3e852f801492847a37",
-                                                        "language": "English"
+                                                        "language": [
+                                                            "English"
+                                                        ]
                                                     }
                                                 ],
                                                 "materialspec": [
@@ -2456,7 +2460,9 @@
                                             {
                                                 "value": "Level 4 \u003cspan class=\"ead-emph ead-emph-bold\"\u003eMaterials\u003c/span\u003e in \u003cspan class=\"ead-language\"\u003eEnglish\u003c/span\u003e.",
                                                 "id": "aspace_e89995070ff1a0de51f06a08c03193c7",
-                                                "language": "English"
+                                                "language": [
+                                                    "English"
+                                                ]
                                             }
                                         ],
                                         "materialspec": [
@@ -3106,7 +3112,9 @@
                                     {
                                         "value": "Level 3 \u003cspan class=\"ead-emph ead-emph-italic\"\u003eMaterials\u003c/span\u003e are in \u003cspan class=\"ead-language\"\u003eEnglish\u003c/span\u003e.",
                                         "id": "aspace_1676961983c252b748ee5d2ed7bce91c",
-                                        "language": "English"
+                                        "language": [
+                                            "English"
+                                        ]
                                     }
                                 ],
                                 "materialspec": [
@@ -3905,7 +3913,9 @@
                             {
                                 "value": "Level 2 \u003cspan class=\"ead-emph ead-emph-italic\"\u003eMaterials\u003c/span\u003e are in \u003cspan class=\"ead-language\"\u003eEnglish\u003c/span\u003e.",
                                 "id": "aspace_d346225d0e8db11008a962db2f193951",
-                                "language": "English"
+                                "language": [
+                                    "English"
+                                ]
                             }
                         ],
                         "materialspec": [
@@ -4973,7 +4983,9 @@
             "descrules": "Describing Archives: A Content Standard",
             "langusage": {
                 "value": "Finding aid written in \u003cspan class=\"ead-language\"\u003eEnglish\u003c/span\u003e.",
-                "language": "English"
+                "language": [
+                    "English"
+                ]
             }
         },
         "revisiondesc": {

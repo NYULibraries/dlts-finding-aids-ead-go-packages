@@ -5,7 +5,7 @@ package ead
 // Based on: "Data model for parsing EAD <archdesc> elements": https://jira.nyu.edu/jira/browse/FADESIGN-29.
 
 const (
-	Version = "v0.18.1-20230301T16_30"
+	Version = "v0.18.1-20230302T13_30"
 )
 
 type EAD struct {
@@ -343,13 +343,13 @@ type Item struct {
 type LangMaterial struct {
 	ID FilteredString `xml:"id,attr" json:"id,omitempty"`
 
-	Language *FilteredString `xml:"language" json:"language,omitempty"`
+	Language *[]FilteredString `xml:"language" json:"language,omitempty"`
 
 	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type LangUsage struct {
-	Language FilteredString `xml:"language" json:"language,omitempty"`
+	Language *[]FilteredString `xml:"language" json:"language,omitempty"`
 
 	Value string `xml:",innerxml" json:"value,omitempty"`
 }

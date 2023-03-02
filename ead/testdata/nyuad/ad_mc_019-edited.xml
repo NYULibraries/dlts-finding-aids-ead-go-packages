@@ -23,7 +23,7 @@
     </filedesc>
     <profiledesc>
       <creation>This finding aid was produced using ArchivesSpace on <date>2022-07-25 21:52:23 +0400</date>.</creation>
-      <langusage>Description is written in: <language langcode="eng" scriptcode="Latn">English, Latin script</language>.</langusage>
+      <langusage>Description is written in: <language langcode="eng" scriptcode="Latn">English, Latin script</language>, and <language>Klingon</language>.</langusage>
       <descrules>Anglo-American Cataloguing Rules</descrules>
     </profiledesc>
   </eadheader>
@@ -39,7 +39,7 @@
         <extent altrender="carrier">in 2 boxes and 8 flat file drawers.</extent>
       </physdesc>
       <unitdate datechar="creation" normal="1561/2003" type="inclusive">1561-2003</unitdate>
-      <langmaterial><language langcode="eng">English</language>
+      <langmaterial><language langcode="eng">English</language>and <language>Shyriiwook</language>
 .    </langmaterial>
     </did>
     <scopecontent id="aspace_a6e0a2fe66ae5bfb15e73c113bc4914d">
