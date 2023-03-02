@@ -231,29 +231,14 @@ func TestUpdatePubInfo(t *testing.T) {
 }
 
 func TestBarcodeRemovalFromLabels(t *testing.T) {
-	t.Run("Barcode Removal from Labels", func(t *testing.T) {
-		ead := getFalesMSS460EAD(t)
+	var params iJSONTestParams
 
-		jsonData, err := json.MarshalIndent(ead, "", "    ")
-		failOnError(t, err, "Unexpected error marshaling JSON")
+	params.TestName = "Barcode Removal from Labels"
+	params.EADFilePath = filepath.Join(falesTestFixturePath, "mss_460.xml")
+	params.JSONReferenceFilePath = filepath.Join(falesTestFixturePath, "mss_460.json")
+	params.JSONErrorFilePath = "./testdata/tmp/failing-test-barcode-removal.json"
 
-		// reference file includes newline at end of file so
-		// add newline to jsonData
-		jsonData = append(jsonData, '\n')
-
-		referenceFile := falesTestFixturePath + "/mss_460.json"
-		referenceFileContents, err := os.ReadFile(referenceFile)
-		failOnError(t, err, "Unexpected error reading reference file")
-
-		if !bytes.Equal(referenceFileContents, jsonData) {
-			jsonFile := "./testdata/tmp/failing-test-barcode-removal.json"
-			err = os.WriteFile(jsonFile, []byte(jsonData), 0644)
-			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonFile))
-
-			errMsg := fmt.Sprintf("JSON Data does not match reference file.\ndiff %s %s", jsonFile, referenceFile)
-			t.Errorf(errMsg)
-		}
-	})
+	runiJSONComparisonTest(t, &params)
 }
 
 func TestUpdateDonors(t *testing.T) {
