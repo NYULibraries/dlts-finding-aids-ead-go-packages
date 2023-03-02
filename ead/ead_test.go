@@ -11,12 +11,51 @@ import (
 	"time"
 )
 
+type iJSONTestParams struct {
+	TestName              string
+	EADFilePath           string
+	JSONReferenceFilePath string
+	JSONErrorFilePath     string
+	PrePopulatedEAD       *EAD
+}
+
 var testFixturePath string = filepath.Join(".", "testdata")
 var omegaTestFixturePath string = filepath.Join(testFixturePath, "omega", "v0.1.5")
 var falesTestFixturePath string = filepath.Join(testFixturePath, "fales")
 var nyhsTestFixturePath string = filepath.Join(testFixturePath, "nyhs")
 var akkasahTestFixturePath string = filepath.Join(testFixturePath, "akkasah")
 var presentationContainerPath string = filepath.Join(testFixturePath, "presentation-containers")
+
+func runiJSONComparisonTest(t *testing.T, params *iJSONTestParams) {
+
+	var ead *EAD
+	t.Run(params.TestName, func(t *testing.T) {
+		if params.PrePopulatedEAD == nil {
+			ead = getTestEAD(t, params.EADFilePath)
+		} else {
+			ead = params.PrePopulatedEAD
+		}
+		jsonData, err := json.MarshalIndent(ead, "", "    ")
+		failOnError(t, err, "Unexpected error marshaling JSON")
+
+		// reference file includes newline at end of file so
+		// add newline to jsonData
+		jsonData = append(jsonData, '\n')
+
+		referenceFile := params.JSONReferenceFilePath
+		referenceFileContents, err := os.ReadFile(referenceFile)
+		failOnError(t, err, "Unexpected error reading reference file")
+
+		if !bytes.Equal(referenceFileContents, jsonData) {
+			jsonErrorFile := params.JSONErrorFilePath
+			err = os.WriteFile(jsonErrorFile, []byte(jsonData), 0644)
+			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonErrorFile))
+
+			errMsg := fmt.Sprintf("JSON Data does not match reference file.\ndiff %s %s", jsonErrorFile, referenceFile)
+			t.Errorf(errMsg)
+		}
+	})
+}
 
 func testProcessDID(did *DID) {
 	daos := did.DAO
@@ -84,39 +123,6 @@ func getOmegaEAD(t *testing.T) EAD {
 	return ead
 }
 
-func getFalesMSS460EAD(t *testing.T) EAD {
-	EADXML, err := os.ReadFile(falesTestFixturePath + "/" + "mss_460.xml")
-	failOnError(t, err, "Unexpected error")
-
-	var ead EAD
-	err = xml.Unmarshal([]byte(EADXML), &ead)
-	failOnError(t, err, "Unexpected error")
-
-	return ead
-}
-
-func getNYHSFoundling(t *testing.T) EAD {
-	EADXML, err := os.ReadFile(nyhsTestFixturePath + "/" + "nyhs_foundling.xml")
-	failOnError(t, err, "Unexpected error")
-
-	var ead EAD
-	err = xml.Unmarshal([]byte(EADXML), &ead)
-	failOnError(t, err, "Unexpected error")
-
-	return ead
-}
-
-func getAkkasahADMC030REF184EAD(t *testing.T) EAD {
-	EADXML, err := os.ReadFile(akkasahTestFixturePath + "/" + "ad_mc_030_ref184.xml")
-	failOnError(t, err, "Unexpected error")
-
-	var ead EAD
-	err = xml.Unmarshal([]byte(EADXML), &ead)
-	failOnError(t, err, "Unexpected error")
-
-	return ead
-}
-
 func getPresentationContainerEAD(t *testing.T, filename string) EAD {
 	EADXML, err := os.ReadFile(presentationContainerPath + "/" + filename)
 	failOnError(t, err, "Unexpected error")
@@ -128,15 +134,15 @@ func getPresentationContainerEAD(t *testing.T, filename string) EAD {
 	return ead
 }
 
-func getPresentationElementInSponsorEAD(t *testing.T, filename string) EAD {
-	EADXML, err := os.ReadFile(omegaTestFixturePath + "/" + filename)
+func getTestEAD(t *testing.T, eadPath string) *EAD {
+	EADXML, err := os.ReadFile(eadPath)
 	failOnError(t, err, "Unexpected error")
 
 	var ead EAD
 	err = xml.Unmarshal([]byte(EADXML), &ead)
 	failOnError(t, err, "Unexpected error")
 
-	return ead
+	return &ead
 }
 
 func TestXMLParsing(t *testing.T) {
@@ -150,29 +156,14 @@ func TestXMLParsing(t *testing.T) {
 }
 
 func TestJSONMarshaling(t *testing.T) {
-	t.Run("JSON Marshaling", func(t *testing.T) {
-		ead := getOmegaEAD(t)
+	var params iJSONTestParams
 
-		jsonData, err := json.MarshalIndent(ead, "", "    ")
-		failOnError(t, err, "Unexpected error marshaling JSON")
+	params.TestName = "JSON Marshaling"
+	params.EADFilePath = filepath.Join(omegaTestFixturePath, "Omega-EAD.xml")
+	params.JSONReferenceFilePath = filepath.Join(omegaTestFixturePath, "mos_2021.json")
+	params.JSONErrorFilePath = "./testdata/tmp/failing-marshal.json"
 
-		// reference file includes newline at end of file so
-		// add newline to jsonData
-		jsonData = append(jsonData, '\n')
-
-		referenceFile := omegaTestFixturePath + "/" + "mos_2021.json"
-		referenceFileContents, err := os.ReadFile(referenceFile)
-		failOnError(t, err, "Unexpected error reading reference file")
-
-		if !bytes.Equal(referenceFileContents, jsonData) {
-			jsonFile := "./testdata/tmp/failing-marshal.json"
-			err = os.WriteFile(jsonFile, []byte(jsonData), 0644)
-			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonFile))
-
-			errMsg := fmt.Sprintf("JSON Data does not match reference file.\ndiff %s %s", jsonFile, referenceFile)
-			t.Errorf(errMsg)
-		}
-	})
+	runiJSONComparisonTest(t, &params)
 }
 
 func TestUpdateRunInfo(t *testing.T) {
@@ -246,29 +237,14 @@ func TestUpdatePubInfo(t *testing.T) {
 }
 
 func TestBarcodeRemovalFromLabels(t *testing.T) {
-	t.Run("Barcode Removal from Labels", func(t *testing.T) {
-		ead := getFalesMSS460EAD(t)
+	var params iJSONTestParams
 
-		jsonData, err := json.MarshalIndent(ead, "", "    ")
-		failOnError(t, err, "Unexpected error marshaling JSON")
+	params.TestName = "Barcode Removal from Labels"
+	params.EADFilePath = filepath.Join(falesTestFixturePath, "mss_460.xml")
+	params.JSONReferenceFilePath = filepath.Join(falesTestFixturePath, "mss_460.json")
+	params.JSONErrorFilePath = "./testdata/tmp/failing-test-barcode-removal.json"
 
-		// reference file includes newline at end of file so
-		// add newline to jsonData
-		jsonData = append(jsonData, '\n')
-
-		referenceFile := falesTestFixturePath + "/mss_460.json"
-		referenceFileContents, err := os.ReadFile(referenceFile)
-		failOnError(t, err, "Unexpected error reading reference file")
-
-		if !bytes.Equal(referenceFileContents, jsonData) {
-			jsonFile := "./testdata/tmp/failing-test-barcode-removal.json"
-			err = os.WriteFile(jsonFile, []byte(jsonData), 0644)
-			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonFile))
-
-			errMsg := fmt.Sprintf("JSON Data does not match reference file.\ndiff %s %s", jsonFile, referenceFile)
-			t.Errorf(errMsg)
-		}
-	})
+	runiJSONComparisonTest(t, &params)
 }
 
 func TestUpdateDonors(t *testing.T) {
@@ -286,89 +262,47 @@ func TestUpdateDonors(t *testing.T) {
 		assertFilteredStringSlicesEqual(t, want, got, "Post-update ead.Donors")
 	})
 }
-
 func TestJSONMarshalingWithDonors(t *testing.T) {
-	t.Run("JSON Marshaling with Donors", func(t *testing.T) {
-		ead := getOmegaEAD(t)
+	var params iJSONTestParams
 
-		ead.Donors = []FilteredString{" a", "x ", " Q ", "d"}
-		jsonData, err := json.MarshalIndent(ead, "", "    ")
-		failOnError(t, err, "Unexpected error marshaling JSON")
+	params.TestName = "JSON Marshaling with Donors"
+	params.EADFilePath = filepath.Join(omegaTestFixturePath, "Omega-EAD.xml")
+	params.JSONReferenceFilePath = filepath.Join(omegaTestFixturePath, "mos_2021-with-donors.json")
+	params.JSONErrorFilePath = "./testdata/tmp/failing-donor-marshal.json"
 
-		// reference file includes newline at end of file so
-		// add newline to jsonData
-		jsonData = append(jsonData, '\n')
+	ead := getTestEAD(t, params.EADFilePath)
+	ead.Donors = []FilteredString{" a", "x ", " Q ", "d"}
 
-		referenceFile := omegaTestFixturePath + "/" + "mos_2021-with-donors.json"
-		referenceFileContents, err := os.ReadFile(referenceFile)
-		failOnError(t, err, "Unexpected error reading reference file")
-
-		if !bytes.Equal(referenceFileContents, jsonData) {
-			jsonFile := "./testdata/tmp/failing-donor-marshal.json"
-			err = os.WriteFile(jsonFile, []byte(jsonData), 0644)
-			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonFile))
-
-			errMsg := fmt.Sprintf("JSON Data does not match reference file.\ndiff %s %s", jsonFile, referenceFile)
-			t.Errorf(errMsg)
-		}
-	})
+	params.PrePopulatedEAD = ead
+	runiJSONComparisonTest(t, &params)
 }
 
 func TestJSONMarshalingWithEmptyDAORoles(t *testing.T) {
-	t.Run("JSON Marshaling with Empty DAO Roles", func(t *testing.T) {
-		ead := getNYHSFoundling(t)
+	var params iJSONTestParams
 
-		jsonData, err := json.MarshalIndent(ead, "", "    ")
-		failOnError(t, err, "Unexpected error marshaling JSON")
+	params.TestName = "JSON Marshaling with Empty DAO Roles"
+	params.EADFilePath = filepath.Join(nyhsTestFixturePath, "nyhs_foundling.xml")
+	params.JSONReferenceFilePath = filepath.Join(nyhsTestFixturePath, "nyhs_foundling.json")
+	params.JSONErrorFilePath = "./testdata/tmp/failing-empty-dao-role-marshal.json"
 
-		// reference file includes newline at end of file so
-		// add newline to jsonData
-		jsonData = append(jsonData, '\n')
-
-		referenceFile := nyhsTestFixturePath + "/" + "nyhs_foundling.json"
-		referenceFileContents, err := os.ReadFile(referenceFile)
-		failOnError(t, err, "Unexpected error reading reference file")
-
-		if !bytes.Equal(referenceFileContents, jsonData) {
-			jsonFile := "./testdata/tmp/failing-empty-role-marshal.json"
-			err = os.WriteFile(jsonFile, []byte(jsonData), 0644)
-			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonFile))
-
-			errMsg := fmt.Sprintf("JSON Data does not match reference file.\ndiff %s %s", jsonFile, referenceFile)
-			t.Errorf(errMsg)
-		}
-	})
+	runiJSONComparisonTest(t, &params)
 }
 
 func TestJSONMarshalingWithDonorsAndImageAndImageSets(t *testing.T) {
-	t.Run("JSON Marshaling with Donors", func(t *testing.T) {
-		ead := getOmegaEAD(t)
+	var params iJSONTestParams
 
-		ead.Donors = []FilteredString{" a", "x ", " Q ", "d"}
+	params.TestName = "JSON Marshaling with Donors and Image and Image Counts"
+	params.EADFilePath = filepath.Join(omegaTestFixturePath, "Omega-EAD.xml")
+	params.JSONReferenceFilePath = filepath.Join(omegaTestFixturePath, "mos_2021-with-donors-with-image-counts.json")
+	params.JSONErrorFilePath = "./testdata/tmp/failing-donors-with-image-counts-marshal.json"
 
-		testProcessDID(&ead.ArchDesc.DID)
-		testProcessCs(ead.ArchDesc.DSC.C)
+	ead := getTestEAD(t, params.EADFilePath)
+	ead.Donors = []FilteredString{" a", "x ", " Q ", "d"}
+	testProcessDID(&ead.ArchDesc.DID)
+	testProcessCs(ead.ArchDesc.DSC.C)
 
-		jsonData, err := json.MarshalIndent(ead, "", "    ")
-		failOnError(t, err, "Unexpected error marshaling JSON")
-
-		// reference file includes newline at end of file so
-		// add newline to jsonData
-		jsonData = append(jsonData, '\n')
-
-		referenceFile := omegaTestFixturePath + "/" + "mos_2021-with-donors-with-image-counts.json"
-		referenceFileContents, err := os.ReadFile(referenceFile)
-		failOnError(t, err, "Unexpected error reading reference file")
-
-		if !bytes.Equal(referenceFileContents, jsonData) {
-			jsonFile := "./testdata/tmp/failing-donors-with-image-counts-marshal.json"
-			err = os.WriteFile(jsonFile, []byte(jsonData), 0644)
-			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonFile))
-
-			errMsg := fmt.Sprintf("JSON Data does not match reference file.\ndiff %s %s", jsonFile, referenceFile)
-			t.Errorf(errMsg)
-		}
-	})
+	params.PrePopulatedEAD = ead
+	runiJSONComparisonTest(t, &params)
 }
 
 func TestGuideTitle(t *testing.T) {
@@ -566,59 +500,33 @@ New York University Archives<lb/> Elmer Holmes Bobst Library<lb/> 70 Washington 
 }
 
 func TestJSONMarshalingInitPresentationContainersNOOP(t *testing.T) {
-	t.Run("JSON Marshaling with call to InitPresentationContainers() NOOP", func(t *testing.T) {
-		ead := getOmegaEAD(t)
+	var params iJSONTestParams
 
-		ead.InitPresentationContainers()
+	params.TestName = "JSON Marshaling with call to InitPresentationContainers() NOOP"
+	params.EADFilePath = filepath.Join(omegaTestFixturePath, "Omega-EAD.xml")
+	params.JSONReferenceFilePath = filepath.Join(omegaTestFixturePath, "mos_2021.json")
+	params.JSONErrorFilePath = "./testdata/tmp/failing-marshal-with-presentation-containers-noop.json"
 
-		jsonData, err := json.MarshalIndent(ead, "", "    ")
-		failOnError(t, err, "Unexpected error marshaling JSON")
+	ead := getTestEAD(t, params.EADFilePath)
+	ead.InitPresentationContainers()
 
-		// reference file includes newline at end of file so
-		// add newline to jsonData
-		jsonData = append(jsonData, '\n')
-
-		referenceFile := omegaTestFixturePath + "/" + "mos_2021.json"
-		referenceFileContents, err := os.ReadFile(referenceFile)
-		failOnError(t, err, "Unexpected error reading reference file")
-
-		if !bytes.Equal(referenceFileContents, jsonData) {
-			jsonFile := "./testdata/tmp/failing-marshal-with-presentation-containers-noop.json"
-			err = os.WriteFile(jsonFile, []byte(jsonData), 0644)
-			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonFile))
-
-			errMsg := fmt.Sprintf("JSON Data does not match reference file.\ndiff %s %s", jsonFile, referenceFile)
-			t.Errorf(errMsg)
-		}
-	})
+	params.PrePopulatedEAD = ead
+	runiJSONComparisonTest(t, &params)
 }
 
 func TestJSONMarshalingInitPresentationContainers(t *testing.T) {
-	t.Run("JSON Marshaling with call to InitPresentationContainers()", func(t *testing.T) {
-		ead := getAkkasahADMC030REF184EAD(t)
+	var params iJSONTestParams
 
-		ead.InitPresentationContainers()
+	params.TestName = "JSON Marshaling with call to InitPresentationContainers()"
+	params.EADFilePath = filepath.Join(akkasahTestFixturePath, "ad_mc_030_ref184.xml")
+	params.JSONReferenceFilePath = filepath.Join(akkasahTestFixturePath, "ad_mc_030_ref184.json")
+	params.JSONErrorFilePath = "./testdata/tmp/failing-marshal-with-presentation-containers.json"
 
-		jsonData, err := json.MarshalIndent(ead, "", "    ")
-		failOnError(t, err, "Unexpected error marshaling JSON")
+	ead := getTestEAD(t, params.EADFilePath)
+	ead.InitPresentationContainers()
 
-		// reference file includes newline at end of file so
-		// add newline to jsonData
-		jsonData = append(jsonData, '\n')
-
-		referenceFile := akkasahTestFixturePath + "/" + "ad_mc_030_ref184.json"
-		referenceFileContents, err := os.ReadFile(referenceFile)
-		failOnError(t, err, "Unexpected error reading reference file")
-
-		if !bytes.Equal(referenceFileContents, jsonData) {
-			jsonFile := "./testdata/tmp/failing-marshal-with-presentation-containers.json"
-			err = os.WriteFile(jsonFile, []byte(jsonData), 0644)
-			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonFile))
-
-			errMsg := fmt.Sprintf("JSON Data does not match reference file.\ndiff %s %s", jsonFile, referenceFile)
-			t.Errorf(errMsg)
-		}
-	})
+	params.PrePopulatedEAD = ead
+	runiJSONComparisonTest(t, &params)
 }
 
 func TestInitPresentationContainersC(t *testing.T) {
@@ -784,27 +692,12 @@ func TestInitPresentationContainersNoContainers(t *testing.T) {
 }
 
 func TestJSONMarshalingWithPresentationElementsInTitleStmtChildren(t *testing.T) {
-	t.Run("JSON Marshaling with Presentation Element In TitleStmt children", func(t *testing.T) {
-		ead := getPresentationElementInSponsorEAD(t, "mos_2021-with-presentation-elements-in-titlestmt-children.xml")
+	var params iJSONTestParams
 
-		jsonData, err := json.MarshalIndent(ead, "", "    ")
-		failOnError(t, err, "Unexpected error marshaling JSON")
+	params.TestName = "JSON Marshaling with Presentation Element In TitleStmt children"
+	params.EADFilePath = filepath.Join(omegaTestFixturePath, "mos_2021-with-presentation-elements-in-titlestmt-children.xml")
+	params.JSONReferenceFilePath = filepath.Join(omegaTestFixturePath, "mos_2021-with-presentation-elements-in-titlestmt-children.json")
+	params.JSONErrorFilePath = "./testdata/tmp/failing-with-presentation-elements-in-titlestmt-children.json"
 
-		// reference file includes newline at end of file so
-		// add newline to jsonData
-		jsonData = append(jsonData, '\n')
-
-		referenceFile := omegaTestFixturePath + "/" + "mos_2021-with-presentation-elements-in-titlestmt-children.json"
-		referenceFileContents, err := os.ReadFile(referenceFile)
-		failOnError(t, err, "Unexpected error reading reference file")
-
-		if !bytes.Equal(referenceFileContents, jsonData) {
-			jsonFile := "./testdata/tmp/failing-with-presentation-elements-in-titlestmt-children.json"
-			err = os.WriteFile(jsonFile, []byte(jsonData), 0644)
-			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonFile))
-
-			errMsg := fmt.Sprintf("JSON Data does not match reference file.\ndiff %s %s", jsonFile, referenceFile)
-			t.Errorf(errMsg)
-		}
-	})
+	runiJSONComparisonTest(t, &params)
 }
