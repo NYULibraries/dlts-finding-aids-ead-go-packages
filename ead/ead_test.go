@@ -310,8 +310,8 @@ func TestJSONMarshalingWithMultipleLanguages(t *testing.T) {
 	var params iJSONTestParams
 
 	params.TestName = "JSON Marshaling with Multiple Languages in <langmaterial> and <langusage>"
-	params.EADFilePath = filepath.Join(nyuadTestFixturePath, "ad_mc_019.xml")
-	params.JSONReferenceFilePath = filepath.Join(nyuadTestFixturePath, "ad_mc_019.json")
+	params.EADFilePath = filepath.Join(nyuadTestFixturePath, "ad_mc_019-edited.xml")
+	params.JSONReferenceFilePath = filepath.Join(nyuadTestFixturePath, "ad_mc_019-edited.json")
 	params.JSONErrorFilePath = "./testdata/tmp/failing-multiple-language-marshal.json"
 
 	runiJSONComparisonTest(t, &params)
