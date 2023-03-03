@@ -1,0 +1,153 @@
+/*
+The validateRoleAttributes-related code was commented out because the
+"relator code value must be from a controlled vocabulary" criterion was
+removed from the EAD validation criteria as of 2023-02-17.
+
+func makeUnrecognizedRelatorCodesErrorMessage(unrecognizedRelatorCodes [][]string) string {
+	var unrecognizedRelatorCodeSlice []string
+	for _, elementAttributePair := range unrecognizedRelatorCodes {
+		unrecognizedRelatorCodeSlice = append(unrecognizedRelatorCodeSlice,
+			fmt.Sprintf(`%s has role="%s"`, elementAttributePair[0], elementAttributePair[1]))
+	}
+
+	return fmt.Sprintf(`Unrecognized relator codes
+
+The EAD file contains elements with role attributes containing unrecognized relator codes:
+
+%s`, strings.Join(unrecognizedRelatorCodeSlice, "\n"))
+}
+
+// See https://jira.nyu.edu/browse/FADESIGN-171.
+func validateRoleAttributes(data []byte) ([]string, error) {
+	var validationErrors = []string{}
+
+	// Parent elements
+	const controlAccessElementName = "controlaccess"
+	const originationElementName = "origination"
+	const repositoryElementName = "repository"
+
+	// Child elements with `role` attributes that we need to test (within the
+	// context of the above parent elements).
+	const corpnameElementName = "corpname"
+	const famnameElementName = "famname"
+	const persnameElementName = "persname"
+
+	// Note that we are testing role attributes only for very specific occurrences of
+	// the child elements, hence the need for this 2-dimensional slice of slices.
+	var elementsToTest = [][]string{
+		{controlAccessElementName, corpnameElementName},
+		{controlAccessElementName, famnameElementName},
+		{controlAccessElementName, persnameElementName},
+
+		{originationElementName, corpnameElementName},
+		{originationElementName, famnameElementName},
+		{originationElementName, persnameElementName},
+
+		{repositoryElementName, corpnameElementName},
+	}
+
+	doc, err := xmlquery.Parse(strings.NewReader(string(data)))
+	if err != nil {
+		return validationErrors, err
+	}
+
+	// Slice of string slices, where an inner slice element is of the form:
+	// {"<repository><corpname>NYU Archives</corpname></repository>", "grt"}.
+	var unrecognizedRelatorCodes [][]string
+	for _, elementToTest := range elementsToTest {
+		var parentElementName = elementToTest[0]
+		var childElementName = elementToTest[1]
+
+		roleAttributes, err := xmlquery.QueryAll(doc, fmt.Sprintf("//%s/%s/@role", parentElementName, childElementName))
+		if err != nil {
+			return validationErrors, err
+		}
+
+		for _, roleAttribute := range roleAttributes {
+			relatorCode := roleAttribute.FirstChild.Data
+			_, ok := ead.RelatorAuthoritativeLabelMap[relatorCode]
+			if !ok {
+				// Example: "<repository><corpname>NYU Archives</corpname></repository>"
+				elementDescription := fmt.Sprintf("<%s><%s>%s</%s></%s>",
+					parentElementName,
+					childElementName,
+					roleAttribute.Parent.FirstChild.Data,
+					childElementName,
+					parentElementName,
+				)
+
+				unrecognizedRelatorCodes = append(unrecognizedRelatorCodes, []string{
+					elementDescription,
+					relatorCode,
+				})
+			}
+		}
+	}
+
+	if len(unrecognizedRelatorCodes) > 0 {
+		validationErrors = append(validationErrors, makeUnrecognizedRelatorCodesErrorMessage(unrecognizedRelatorCodes))
+	}
+
+	return validationErrors, nil
+}
+*/
+
+/*
+The validateHREF-related code was commented out because the valid-HREF
+criterion was removed from the EAD validation criteria as of 2023-02-17.
+
+func validateHREFs(ead ead.EAD) []string {
+	var validationErrors = []string{}
+
+	// REQUIRED!
+	ead.InitDAOCounts()
+
+	for _, dao := range ead.DAOInfo.AllDAOs {
+		// https://golang.cafe/blog/how-to-validate-url-in-go.html
+		_, err := url.ParseRequestURI(string(dao.Href))
+		if err != nil {
+			validationErrors = append(validationErrors, fmt.Sprintf("Invalid HREF detected: '%s', Title: '%s'", []byte(dao.Href), dao.Title))
+		}
+	}
+
+	return validationErrors
+}
+*/
+
+/*
+The InvalidHREF-related code was commented out because the valid-HREF criterion was
+removed from the EAD validation criteria as of 2023-02-17.
+
+var invalidHREFFixturePath string
+invalidHREFFixturePath = filepath.Join(fixturesDirPath, "rg_6_0.xml")
+
+
+func TestValidateEADInvalidHREFs(t *testing.T) {
+	var expected = []string{
+		"Invalid HREF detected: 'RG 6.0.ref3020.1', Title: 'Letter from Martin L. Beck to Marcel Breuer'",
+		"Invalid HREF detected: 'RG 6.0.ref3021.1', Title: 'Letter from Martin L. Beck to Hamilton Smith'",
+		"Invalid HREF detected: 'RG 6.0.ref3022.1', Title: 'Letter from Martin L. Beck to Hamilton P. Smith'",
+		"Invalid HREF detected: 'RG 6.0.ref3023.1', Title: 'Letter from Martin L. Beck to Marcel Breuer'",
+		"Invalid HREF detected: 'RG 6.0.ref3024.1', Title: 'Letter from Marel Breuer to Chancellor Niles'",
+		"Invalid HREF detected: 'RG 6.0.ref3025.1', Title: 'Letter from Werner A. Baum to Marcel Breuer'",
+		"Invalid HREF detected: 'RG 6.0.ref3026.1', Title: 'Letter from Marcel Breuer to Werner A. Baum'",
+		"Invalid HREF detected: 'RG 6.0.ref3027.1', Title: 'Letter from Hamilton P. Smith to Martin L. Beck'",
+		"Invalid HREF detected: 'RG 6.0.ref3028.1', Title: 'Letter from Chancellor Russell D. Niles to Hamilton P. Smith'",
+		// the following line tests that the hrefs are not being filtered/stripped of blank space
+		"Invalid HREF detected: ' RG 6.0.ref3029.1 ', Title: 'Letter from Hamilton P. Smith to Chancellor Russell D. Niles'",
+		"Invalid HREF detected: 'RG 6.0.ref3030.1', Title: 'Letter from Hamilton P. Smith to Martin L. Beck'",
+		"Invalid HREF detected: 'RG 6.0.ref3031.1', Title: 'Letter from Hamilton P. Smith to Martin L. Beck'",
+		"Invalid HREF detected: 'RG 6.0.ref3032.1', Title: 'Letter from Russell D. Niles to Hamilton P. Smith'",
+		"Invalid HREF detected: 'RG 6.0.ref3033.1', Title: 'Letter from Hamilton P. Smith to Russell D. Niles'",
+		"Invalid HREF detected: 'RG 6.0.ref3034.1', Title: 'Photostat of Letter from Hamilton P. Smith to Martin L. Beck'",
+		"Invalid HREF detected: 'RG 6.0.ref3035.1', Title: 'Letter from John M. O'Mara to Hamilton Smith'",
+		"Invalid HREF detected: 'RG 6.0.ref3036.1', Title: 'Letter from Hamilton P. Smith to John O'Mara'",
+		"Invalid HREF detected: 'RG 6.0.ref3037.1', Title: 'Letter from Hamilton P. Smith to Russell D. Niles'",
+		"Invalid HREF detected: 'RG 6.0.ref3038.1', Title: 'Letter from Hamilton P. Smith to Russell D. Niles'",
+		"Invalid HREF detected: 'RG 6.0.ref3039.1', Title: 'Letter from Russell D. Niles to Hamilton P. Smith'",
+		"Invalid HREF detected: 'RG 6.0.ref3040.1', Title: 'Photostat of Letter from Hamilton P. Smith to Martin L. Beck'",
+	}
+
+	doTest(invalidHREFFixturePath, expected, t)
+}
+*/

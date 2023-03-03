@@ -5,7 +5,7 @@ package ead
 // Based on: "Data model for parsing EAD <archdesc> elements": https://jira.nyu.edu/jira/browse/FADESIGN-29.
 
 const (
-	Version = "v0.18.1"
+	Version = "v0.19.0"
 )
 
 type EAD struct {
@@ -57,6 +57,7 @@ type ArchDesc struct {
 	CustodHist        []*FormattedNoteWithHead `xml:"custodhist" json:"custodhist,omitempty"`
 	DID               DID                      `xml:"did" json:"did,omitempty"`
 	DSC               *DSC                     `xml:"dsc" json:"dsc,omitempty"`
+	Index             []*Index                 `xml:"index,omitempty" json:"index,omitempty"`
 	Odd               []*FormattedNoteWithHead `xml:"odd" json:"odd,omitempty"`
 	OtherFindAid      []*FormattedNoteWithHead `xml:"otherfindaid" json:"otherfindaid,omitempty"`
 	OriginalsLoc      []*FormattedNoteWithHead `xml:"originalsloc" json:"originalsloc,omitempty"`
@@ -118,6 +119,10 @@ type C struct {
 	ScopeContent      []*FormattedNoteWithHead `xml:"scopecontent,omitempty" json:"scopecontent,omitempty"`
 	SeparatedMaterial []*FormattedNoteWithHead `xml:"separatedmaterial" json:"separatedmaterial,omitempty"`
 	UseRestrict       []*FormattedNoteWithHead `xml:"userestrict,omitempty" json:"userestrict,omitempty"`
+}
+
+type CDATA struct {
+	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type Change struct {
@@ -320,9 +325,12 @@ type Index struct {
 }
 
 type IndexEntry struct {
-	CorpName []*AccessTermWithRole `xml:"corpname" json:"corpname,omitempty"`
-	Name     []*AccessTermWithRole `xml:"name" json:"name,omitempty"`
-	Subject  []*FilteredString     `xml:"subject" json:"subject,omitempty"`
+	CorpName     []*AccessTermWithRole `xml:"corpname" json:"corpname,omitempty"`
+	Name         []*AccessTermWithRole `xml:"name" json:"name,omitempty"`
+	Ref          CDATA                 `xml:"ref" json:"-"`
+	FlattenedRef FilteredString        `xml:"-" json:"ref,omitempty"`
+	Subject      []*FilteredString     `xml:"subject" json:"subject,omitempty"`
+	Title        *Title                `xml:"title" json:"title,omitempty"`
 }
 
 type Item struct {
@@ -339,13 +347,13 @@ type Item struct {
 type LangMaterial struct {
 	ID FilteredString `xml:"id,attr" json:"id,omitempty"`
 
-	Language *FilteredString `xml:"language" json:"language,omitempty"`
+	Language *[]FilteredString `xml:"language" json:"language,omitempty"`
 
 	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 
 type LangUsage struct {
-	Language FilteredString `xml:"language" json:"language,omitempty"`
+	Language *[]FilteredString `xml:"language" json:"language,omitempty"`
 
 	Value string `xml:",innerxml" json:"value,omitempty"`
 }
@@ -474,13 +482,15 @@ type TitleProper struct {
 }
 
 type TitleStmt struct {
-	Author               FilteredString `xml:"author" json:"author,omitempty"`
-	Sponsor              FilteredString `xml:"sponsor" json:"sponsor,omitempty"`
-	SubTitle             FilteredString `xml:"subtitle" json:"subtitle,omitempty"`
+	Author               CDATA          `xml:"author" json:"-"`
+	FlattenedAuthor      FilteredString `xml:"-" json:"author,omitempty"`
+	Sponsor              CDATA          `xml:"sponsor" json:"-"`
+	FlattenedSponsor     FilteredString `xml:"-" json:"sponsor,omitempty"`
+	SubTitle             CDATA          `xml:"subtitle" json:"-"`
+	FlattenedSubTitle    FilteredString `xml:"-" json:"subtitle,omitempty"`
 	TitleProper          []*TitleProper `xml:"titleproper" json:"-"`
 	FlattenedTitleProper FilteredString `xml:"-" json:"titleproper,omitempty"`
 }
-
 type UnitDate struct {
 	Type FilteredString `xml:"type,attr" json:"type,omitempty"`
 

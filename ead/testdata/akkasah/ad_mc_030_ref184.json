@@ -95,7 +95,9 @@
             "langmaterial": [
                 {
                     "value": "\u003cspan class=\"ead-language\"\u003eGerman\u003c/span\u003e .",
-                    "language": "German"
+                    "language": [
+                        "German"
+                    ]
                 }
             ],
             "origination": [
@@ -3976,7 +3978,9 @@
             },
             "langusage": {
                 "value": "Description is written in: \u003cspan class=\"ead-language\"\u003eEnglish, Latin script\u003c/span\u003e.",
-                "language": "English, Latin script"
+                "language": [
+                    "English, Latin script"
+                ]
             }
         }
     }
