@@ -1,5 +1,28 @@
 # CHANGELOG
 
+#### v0.19.0
+  - Add `ArchDesc.Index`, `IndexEntry.Title` and `IndexEntry.Ref`
+  - Add support for multiple `<language>` child elements of
+    `<langmaterial>` and `<langusage>`
+  - Change parsing and JSON marshaling of `<titlestmt>` children
+    `<author>, <sponsor>, and <subtitle>`.  The new implementation
+    captures the `innerxml` for the child elements during parsing, and
+    flattens and converts any presentation elements in the `innerxml`
+    to `<span>` tags during JSON marshaling.
+  - implement finalized EAD validation criteria:
+	- EADs must be valid XML
+	- EADs must pass validation against the EAD 2002 schema
+	- The EAD ID field must:
+	  - have at least two character groups, separated by an `_`
+	  - the characters in the groups must be from the set `0-9a-z`
+	  - the maximum length of an EAD ID is 251 characters
+    - the `<did><repository><corpname>` value must be from a
+      controlled vocabulary
+    - the EAD top level element must be `<archdesc level="collection">`
+    - the EAD must not contain any elements with the `@audience="internal"`
+    - the EAD file must be smaller than 100 MB in size
+  - add `ValidateEADFromFilePath()` to allow for EAD file-size checks
+
 #### v0.18.1
   - security patch: upgrade `golang.org/x/net/http2` to `v0.7.0`
 

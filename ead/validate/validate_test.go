@@ -20,8 +20,10 @@ var missingRequiredElementsEADIDAndRepositoryFixturePath string
 var missingRequiredElementsEADIDAndRepositoryCorpnameFixturePath string
 var validEADFixturePath string
 var validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath string
-var invalidHREFFixturePath string
-var akkasahIncorrectRepositoryNameFixturePath string
+var akkasahRepositoryNameFixturePath string
+var eadIDTooLongFixturePath string
+var invalidArchDescLevelFixturePath string
+var tooBigFileFixturePath string
 
 // Source: https://intellij-support.jetbrains.com/hc/en-us/community/posts/360009685279-Go-test-working-directory-keeps-changing-to-dir-of-the-test-file-instead-of-value-in-template?page=1#community_comment_360002183640
 func init() {
@@ -36,17 +38,37 @@ func init() {
 	invalidEadDataFixturePath = filepath.Join(fixturesDirPath, "mc_100-invalid-eadid-repository-role-relator-codes-unpublished-material.xml")
 	invalidXMLFixturePath = filepath.Join(fixturesDirPath, "invalid-xml.xml")
 	invalidEADFixturePath = filepath.Join(fixturesDirPath, "ad_rg_009_3_2_1.xml")
-	invalidHREFFixturePath = filepath.Join(fixturesDirPath, "rg_6_0.xml")
 	missingRequiredElementsEADIDAndArchDescFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-archdesc.xml")
 	missingRequiredElementsEADIDAndRepositoryFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-repository.xml")
 	missingRequiredElementsEADIDAndRepositoryCorpnameFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-repository-corpname.xml")
 	validEADFixturePath = filepath.Join(fixturesDirPath, "mc_100.xml")
 	validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath = filepath.Join(fixturesDirPath, "mc_100-valid-eadid-with-leading-and-trailing-spaces.xml")
-	akkasahIncorrectRepositoryNameFixturePath = filepath.Join(fixturesDirPath, "ad_mc_030_ref160.xml")
+	akkasahRepositoryNameFixturePath = filepath.Join(fixturesDirPath, "ad_mc_030_ref160-corrected-archdesc-level.xml")
+	eadIDTooLongFixturePath = filepath.Join(fixturesDirPath, "tam_647-eadid-too-long.xml")
+	invalidArchDescLevelFixturePath = filepath.Join(fixturesDirPath, "ad_mc_030_ref160-invalid-archdesc-level.xml")
+	tooBigFileFixturePath = filepath.Join(fixturesDirPath, "b44d567a-95c1-4f0d-b16a-d9448cde1aa5.xml")
 }
 
 func doTest(file string, expected []string, t *testing.T) {
 	var validationErrors, err = ValidateEAD(getEADXML(file))
+	if err != nil {
+		t.Fatalf(fmt.Sprintf(`Unexpected runtime error: %s`, err))
+	}
+
+	if len(validationErrors) != len(expected) {
+		var message = getNumErrorsMismatchErrorMessage(expected, validationErrors)
+		t.Fatalf(message)
+	}
+
+	for idx, err := range validationErrors {
+		if err != expected[idx] {
+			t.Errorf(`Expected error %d to be "%s", got "%s"`, idx, expected[idx], err)
+		}
+	}
+}
+
+func doTestWithValidateEADFromFilePath(file string, expected []string, t *testing.T) {
+	var validationErrors, err = ValidateEADFromFilePath(file)
 	if err != nil {
 		t.Fatalf(fmt.Sprintf(`Unexpected runtime error: %s`, err))
 	}
@@ -106,6 +128,7 @@ func TestValidEADIDRegexpString(t *testing.T) {
 		"a_b_c_d_e_f_g",
 		"a_b_c_d_e_f_g_h",
 		"0_1_2_3_4_5_6_7",
+		"a_b_c_d_e_f_g_h_i",
 		"abcdefghijklmnopqrstuvwzyz_0123456789_abcdefghijklmnopqrstuvwzyz_0123456789_abcdefghijklmnopqrstuvwzyz_0123456789_abcdefghijklmnopqrstuvwzyz_0123456789",
 		"1_abcdefghijklmnopqrstuvwzyz_0123456789_a",
 		"mss_417",
@@ -144,7 +167,6 @@ func TestValidEADIDRegexpString(t *testing.T) {
 		"a__b__c",
 		"a-b",
 		"a.b",
-		"a_b_c_d_e_f_g_h_i",
 		"a b c",
 		"a,b,c",
 		"a,b,c_abc",
@@ -183,20 +205,6 @@ func TestValidateEADInvalidData(t *testing.T) {
 		makeInvalidEADIDErrorMessage("mc.100", []rune{'.'}),
 		makeInvalidRepositoryErrorMessage("NYU Archives"),
 		makeAudienceInternalErrorMessage([]string{"<bioghist>", "<processinfo>"}),
-		makeUnrecognizedRelatorCodesErrorMessage([][]string{
-			{"<controlaccess><corpname>Columbia University</corpname></controlaccess>", "orz"},
-			{"<controlaccess><corpname>The New School</corpname></controlaccess>", "cpr"},
-			{"<controlaccess><famname>Buell Family</famname></controlaccess>", "cpo"},
-			{"<controlaccess><famname>Lanier Family</famname></controlaccess>", "fdr"},
-			{"<controlaccess><persname>John Doe, 1800-1900</persname></controlaccess>", "clb"},
-			{"<controlaccess><persname>Jane Doe, 1800-1900</persname></controlaccess>", "grt"},
-			{"<origination><corpname>Queens College</corpname></origination>", "cpr"},
-			{"<origination><corpname>Hunter College</corpname></origination>", "orz"},
-			{"<origination><famname>Draper family</famname></origination>", "fro"},
-			{"<origination><persname>Daisy, Bert</persname></origination>", "clb"},
-			{"<origination><persname>Orchid, Ella</persname></origination>", "grt"},
-			{"<repository><corpname>NYU Archives</corpname></repository>", "grt"},
-		}),
 	}
 
 	doTest(invalidEadDataFixturePath, expected, t)
@@ -280,6 +288,20 @@ func TestValidateEADInvalidEADActual(t *testing.T) {
 	doTest(validEADFixturePath, []string{}, t)
 	doTest(validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath, []string{}, t)
 }
+func TestValidateEADIDTooLong(t *testing.T) {
+	expected := []string{
+		makeEADIDTooLongErrorMessage("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii_iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"),
+	}
+
+	doTest(eadIDTooLongFixturePath, expected, t)
+}
+func TestValidateArchDescLevel(t *testing.T) {
+	expected := []string{
+		makeInvalidArchDescLevelErrorMessage("series"),
+	}
+
+	doTest(invalidArchDescLevelFixturePath, expected, t)
+}
 
 func TestValidateEADValidEADNoErrors(t *testing.T) {
 	doTest(validEADFixturePath, []string{}, t)
@@ -287,34 +309,23 @@ func TestValidateEADValidEADNoErrors(t *testing.T) {
 }
 
 func TestValidateEADAkkasahTitleEADNoErrors(t *testing.T) {
-	doTest(akkasahIncorrectRepositoryNameFixturePath, []string{}, t)
+	doTest(akkasahRepositoryNameFixturePath, []string{}, t)
 }
 
-func TestValidateEADInvalidHREFs(t *testing.T) {
-	var expected = []string{
-		"Invalid HREF detected: 'RG 6.0.ref3020.1', Title: 'Letter from Martin L. Beck to Marcel Breuer'",
-		"Invalid HREF detected: 'RG 6.0.ref3021.1', Title: 'Letter from Martin L. Beck to Hamilton Smith'",
-		"Invalid HREF detected: 'RG 6.0.ref3022.1', Title: 'Letter from Martin L. Beck to Hamilton P. Smith'",
-		"Invalid HREF detected: 'RG 6.0.ref3023.1', Title: 'Letter from Martin L. Beck to Marcel Breuer'",
-		"Invalid HREF detected: 'RG 6.0.ref3024.1', Title: 'Letter from Marel Breuer to Chancellor Niles'",
-		"Invalid HREF detected: 'RG 6.0.ref3025.1', Title: 'Letter from Werner A. Baum to Marcel Breuer'",
-		"Invalid HREF detected: 'RG 6.0.ref3026.1', Title: 'Letter from Marcel Breuer to Werner A. Baum'",
-		"Invalid HREF detected: 'RG 6.0.ref3027.1', Title: 'Letter from Hamilton P. Smith to Martin L. Beck'",
-		"Invalid HREF detected: 'RG 6.0.ref3028.1', Title: 'Letter from Chancellor Russell D. Niles to Hamilton P. Smith'",
-		// the following line tests that the hrefs are not being filtered/stripped of blank space
-		"Invalid HREF detected: ' RG 6.0.ref3029.1 ', Title: 'Letter from Hamilton P. Smith to Chancellor Russell D. Niles'",
-		"Invalid HREF detected: 'RG 6.0.ref3030.1', Title: 'Letter from Hamilton P. Smith to Martin L. Beck'",
-		"Invalid HREF detected: 'RG 6.0.ref3031.1', Title: 'Letter from Hamilton P. Smith to Martin L. Beck'",
-		"Invalid HREF detected: 'RG 6.0.ref3032.1', Title: 'Letter from Russell D. Niles to Hamilton P. Smith'",
-		"Invalid HREF detected: 'RG 6.0.ref3033.1', Title: 'Letter from Hamilton P. Smith to Russell D. Niles'",
-		"Invalid HREF detected: 'RG 6.0.ref3034.1', Title: 'Photostat of Letter from Hamilton P. Smith to Martin L. Beck'",
-		"Invalid HREF detected: 'RG 6.0.ref3035.1', Title: 'Letter from John M. O'Mara to Hamilton Smith'",
-		"Invalid HREF detected: 'RG 6.0.ref3036.1', Title: 'Letter from Hamilton P. Smith to John O'Mara'",
-		"Invalid HREF detected: 'RG 6.0.ref3037.1', Title: 'Letter from Hamilton P. Smith to Russell D. Niles'",
-		"Invalid HREF detected: 'RG 6.0.ref3038.1', Title: 'Letter from Hamilton P. Smith to Russell D. Niles'",
-		"Invalid HREF detected: 'RG 6.0.ref3039.1', Title: 'Letter from Russell D. Niles to Hamilton P. Smith'",
-		"Invalid HREF detected: 'RG 6.0.ref3040.1', Title: 'Photostat of Letter from Hamilton P. Smith to Martin L. Beck'",
+func TestAssertMaxFileSize(t *testing.T) {
+	f, err := os.Create(tooBigFileFixturePath)
+	if err != nil {
+		t.Error("problem creating test file")
 	}
 
-	doTest(invalidHREFFixturePath, expected, t)
+	// https://stackoverflow.com/a/16806474
+	if err := f.Truncate(MAXIMUM_FILE_SIZE + 1); err != nil {
+		t.Error("problem truncating test file")
+	}
+	defer os.Remove(tooBigFileFixturePath)
+
+	expected := []string{
+		makeFileTooBigErrorMessage(tooBigFileFixturePath, MAXIMUM_FILE_SIZE+1),
+	}
+	doTestWithValidateEADFromFilePath(tooBigFileFixturePath, expected, t)
 }

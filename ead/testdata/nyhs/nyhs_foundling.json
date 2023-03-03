@@ -539,7 +539,9 @@
             "langmaterial": [
                 {
                     "value": "\u003cspan class=\"ead-language\"\u003eEnglish\u003c/span\u003e .",
-                    "language": "English"
+                    "language": [
+                        "English"
+                    ]
                 }
             ],
             "origination": [

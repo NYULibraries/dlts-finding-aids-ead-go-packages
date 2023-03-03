@@ -6,14 +6,14 @@ import (
 	"encoding/xml"
 	"fmt"
 	"io"
-	"net/url"
+	"os"
 	"regexp"
 	"strings"
 	"unicode"
 
-	"github.com/antchfx/xmlquery"
 	"github.com/lestrrat-go/libxml2/parser"
 	"github.com/lestrrat-go/libxml2/xsd"
+	"golang.org/x/text/message"
 
 	"github.com/nyulibraries/dlts-finding-aids-ead-go-packages/ead"
 )
@@ -21,7 +21,10 @@ import (
 //go:embed schema
 var schemas embed.FS
 
-const ValidEADIDRegexpString = "^[a-z0-9]+(?:_[a-z0-9]+){1,7}$"
+const ValidEADIDRegexpString = "^[a-z0-9]+(?:_[a-z0-9]+){1,}$"
+const MAXIMUM_EADID_LENGTH = 251
+const MAXIMUM_FILE_SIZE = 100_000_000 // 100 MB
+const ARCHDESC_REQUIRED_LEVEL = "collection"
 
 var ValidRepositoryNames = []string{
 	"Akkasah: Photography Archive (NYU Abu Dhabi)",
@@ -33,6 +36,28 @@ var ValidRepositoryNames = []string{
 	"Poly Archives at Bern Dibner Library of Science and Technology",
 	"Tamiment Library and Robert F. Wagner Labor Archives",
 	"Villa La Pietra",
+}
+
+// this function is required to perform file-level checks,
+// like maximum file size
+func ValidateEADFromFilePath(filepath string) ([]string, error) {
+	var validationErrors = []string{}
+
+	fileInfo, err := os.Stat(filepath)
+	if err != nil {
+		return validationErrors, err
+	}
+
+	if fileInfo.Size() > MAXIMUM_FILE_SIZE {
+		return append(validationErrors, makeFileTooBigErrorMessage(filepath, fileInfo.Size())), nil
+	}
+
+	EADXML, err := os.ReadFile(filepath)
+	if err != nil {
+		return validationErrors, err
+	}
+
+	return ValidateEAD(EADXML)
 }
 
 func ValidateEAD(data []byte) ([]string, error) {
@@ -67,8 +92,8 @@ func ValidateEAD(data []byte) ([]string, error) {
 		return validationErrors, err
 	}
 	validationErrors = append(validationErrors, validateEADIDValidationErrors...)
-
 	validationErrors = append(validationErrors, validateRepository(ead)...)
+	validationErrors = append(validationErrors, validateArchDescLevel(ead)...)
 
 	validateNoUnpublishedMaterialValidationErrors, err := validateNoUnpublishedMaterial(data)
 	if err != nil {
@@ -76,14 +101,6 @@ func ValidateEAD(data []byte) ([]string, error) {
 	}
 
 	validationErrors = append(validationErrors, validateNoUnpublishedMaterialValidationErrors...)
-
-	validateRoleAttributesValidationErrors, err := validateRoleAttributes(data)
-	if err != nil {
-		return validationErrors, err
-	}
-	validationErrors = append(validationErrors, validateRoleAttributesValidationErrors...)
-
-	validationErrors = append(validationErrors, validateHREFs(ead)...)
 
 	return validationErrors, err
 }
@@ -100,9 +117,31 @@ func makeInvalidEADIDErrorMessage(eadid string, invalidCharacters []rune) string
 	return fmt.Sprintf(`Invalid <eadid>
 
 <eadid> value "%s" does not conform to the Finding Aids specification.
-There must be between 2 to 8 character groups joined by underscores.
+There must be a minimum of 2 character groups joined by an underscore.
+There is no maximum number of character groups, however, the <eadid>
+value must have at most "%d" characters.
 The following characters are not allowed in character groups: %s
-`, eadid, string(invalidCharacters))
+`, eadid, MAXIMUM_EADID_LENGTH, string(invalidCharacters))
+}
+
+func makeEADIDTooLongErrorMessage(eadid string) string {
+	return fmt.Sprintf(`<eadid> length too long
+
+	The <eadid> value in this EAD "%s" is %d characters.
+	This exceeds the maximum allowed length of %d characters.`,
+		eadid, len(eadid), MAXIMUM_EADID_LENGTH)
+}
+
+func makeFileTooBigErrorMessage(filepath string, size int64) string {
+	// https://pkg.go.dev/golang.org/x/text/message
+	p := message.NewPrinter(message.MatchLanguage("en"))
+
+	return p.Sprintf(`ead file too big
+
+	The size of the EAD file "%s"
+	is %d bytes. The maximum allowed file size 
+	is %d bytes.`,
+		filepath, size, MAXIMUM_FILE_SIZE)
 }
 
 func makeInvalidRepositoryErrorMessage(repositoryName string) string {
@@ -123,18 +162,12 @@ func makeMissingRequiredElementErrorMessage(elementName string) string {
 	return fmt.Sprintf("Required element %s not found.", elementName)
 }
 
-func makeUnrecognizedRelatorCodesErrorMessage(unrecognizedRelatorCodes [][]string) string {
-	var unrecognizedRelatorCodeSlice []string
-	for _, elementAttributePair := range unrecognizedRelatorCodes {
-		unrecognizedRelatorCodeSlice = append(unrecognizedRelatorCodeSlice,
-			fmt.Sprintf(`%s has role="%s"`, elementAttributePair[0], elementAttributePair[1]))
-	}
+func makeInvalidArchDescLevelErrorMessage(level string) string {
+	return fmt.Sprintf(`Invalid <archdesc> level
 
-	return fmt.Sprintf(`Unrecognized relator codes
-
-The EAD file contains elements with role attributes containing unrecognized relator codes:
-
-%s`, strings.Join(unrecognizedRelatorCodeSlice, "\n"))
+	The archdesc level attribute must be set to "%s".
+	This EAD's archdesc level attribute is set to "%s"`,
+		ARCHDESC_REQUIRED_LEVEL, level)
 }
 
 func validateEADID(ead ead.EAD) ([]string, error) {
@@ -163,6 +196,10 @@ func validateEADID(ead ead.EAD) ([]string, error) {
 				}
 			}
 			validationErrors = append(validationErrors, makeInvalidEADIDErrorMessage(EADID, invalidCharacters))
+		}
+
+		if len(trimmedEADID) > MAXIMUM_EADID_LENGTH {
+			validationErrors = append(validationErrors, makeEADIDTooLongErrorMessage(trimmedEADID))
 		}
 	} else {
 		validationErrors = append(validationErrors,
@@ -241,78 +278,16 @@ func validateRepository(ead ead.EAD) []string {
 	return validationErrors
 }
 
-// See https://jira.nyu.edu/browse/FADESIGN-171.
-func validateRoleAttributes(data []byte) ([]string, error) {
+func validateArchDescLevel(ead ead.EAD) []string {
 	var validationErrors = []string{}
 
-	// Parent elements
-	const controlAccessElementName = "controlaccess"
-	const originationElementName = "origination"
-	const repositoryElementName = "repository"
-
-	// Child elements with `role` attributes that we need to test (within the
-	// context of the above parent elements).
-	const corpnameElementName = "corpname"
-	const famnameElementName = "famname"
-	const persnameElementName = "persname"
-
-	// Note that we are testing role attributes only for very specific occurrences of
-	// the child elements, hence the need for this 2-dimensional slice of slices.
-	var elementsToTest = [][]string{
-		{controlAccessElementName, corpnameElementName},
-		{controlAccessElementName, famnameElementName},
-		{controlAccessElementName, persnameElementName},
-
-		{originationElementName, corpnameElementName},
-		{originationElementName, famnameElementName},
-		{originationElementName, persnameElementName},
-
-		{repositoryElementName, corpnameElementName},
-	}
-
-	doc, err := xmlquery.Parse(strings.NewReader(string(data)))
-	if err != nil {
-		return validationErrors, err
-	}
-
-	// Slice of string slices, where an inner slice element is of the form:
-	// {"<repository><corpname>NYU Archives</corpname></repository>", "grt"}.
-	var unrecognizedRelatorCodes [][]string
-	for _, elementToTest := range elementsToTest {
-		var parentElementName = elementToTest[0]
-		var childElementName = elementToTest[1]
-
-		roleAttributes, err := xmlquery.QueryAll(doc, fmt.Sprintf("//%s/%s/@role", parentElementName, childElementName))
-		if err != nil {
-			return validationErrors, err
-		}
-
-		for _, roleAttribute := range roleAttributes {
-			relatorCode := roleAttribute.FirstChild.Data
-			_, ok := ead.RelatorAuthoritativeLabelMap[relatorCode]
-			if !ok {
-				// Example: "<repository><corpname>NYU Archives</corpname></repository>"
-				elementDescription := fmt.Sprintf("<%s><%s>%s</%s></%s>",
-					parentElementName,
-					childElementName,
-					roleAttribute.Parent.FirstChild.Data,
-					childElementName,
-					parentElementName,
-				)
-
-				unrecognizedRelatorCodes = append(unrecognizedRelatorCodes, []string{
-					elementDescription,
-					relatorCode,
-				})
-			}
+	if ead.ArchDesc != nil {
+		level := string(ead.ArchDesc.Level)
+		if level != ARCHDESC_REQUIRED_LEVEL {
+			return append(validationErrors, makeInvalidArchDescLevelErrorMessage(level))
 		}
 	}
-
-	if len(unrecognizedRelatorCodes) > 0 {
-		validationErrors = append(validationErrors, makeUnrecognizedRelatorCodesErrorMessage(unrecognizedRelatorCodes))
-	}
-
-	return validationErrors, nil
+	return validationErrors
 }
 
 // The following comment and function validateXML() are from David Arjanik:
@@ -399,21 +374,4 @@ func validateEADAgainstSchema(data []byte) []string {
 
 	// all ok, return empty slice
 	return []string{}
-}
-
-func validateHREFs(ead ead.EAD) []string {
-	var validationErrors = []string{}
-
-	// REQUIRED!
-	ead.InitDAOCounts()
-
-	for _, dao := range ead.DAOInfo.AllDAOs {
-		// https://golang.cafe/blog/how-to-validate-url-in-go.html
-		_, err := url.ParseRequestURI(string(dao.Href))
-		if err != nil {
-			validationErrors = append(validationErrors, fmt.Sprintf("Invalid HREF detected: '%s', Title: '%s'", []byte(dao.Href), dao.Title))
-		}
-	}
-
-	return validationErrors
 }

@@ -8,12 +8,6 @@
         "themeid": "",
         "reposidentifier": ""
     },
-    "donors": [
-        "a",
-        "x",
-        "Q",
-        "d"
-    ],
     "archdesc": {
         "level": "collection",
         "accessrestrict": [
@@ -4976,15 +4970,15 @@
                 "publisher": "Tamiment Library and Robert F. Wagner Labor Archives"
             },
             "titlestmt": {
-                "author": "Megan O'Shea",
-                "sponsor": "Creation of this finding aid funded by New York University Libraries.",
-                "subtitle": "A Wicked Awesome Resource Record",
+                "author": "Megan \u003cspan class=\"ead-emph ead-emph-italic\"\u003eO'Shea\u003c/span\u003e",
+                "sponsor": "\u003cspan class=\"ead-emph ead-emph-bold\"\u003eThis record group was processed as part of the 2015-2016 N-YHS Institutional Archives project, made possible by a generous grant from the Leon Levy Foundation. Support from the Leon Levy Foundation also made possible the digitization in 2019-2020 of select documents from this record group; these are available on-line through the \u003ca class=\"ead-extref\" href=\"http://digitalcollections.nyhistory.org/\" target=\"\"\u003eShelby White and Leon Levy Digital Library\u003c/a\u003e.\u003c/span\u003e",
+                "subtitle": "A Wicked Awesome Resource Record \u003cspan class=\"ead-emph ead-emph-bold\"\u003ewith embedded presentation elements!\u003c/span\u003e",
                 "titleproper": "Guide to Megan O'Shea's \u003cspan class=\"ead-emph ead-emph-italic\"\u003eOne\u003c/span\u003e Resource to \u003cspan class=\"ead-lb\"\u003e\u003c/span\u003e Rule Them All \u003cspan class=\"ead-num\"\u003eMOS.2021\u003c/span\u003e"
             }
         },
         "profiledesc": {
             "creation": {
-                "value": "This finding aid was produced using ArchivesSpace on \u003cspan class=\"ead-date\"\u003e2021-04-14 18:28:52 -0400\u003c/span\u003e."
+                "value": "This finding aid was manually edited on \u003cspan class=\"ead-date\"\u003e2023-02-24 09:39:52 -0500\u003c/span\u003e."
             },
             "descrules": "Describing Archives: A Content Standard",
             "langusage": {

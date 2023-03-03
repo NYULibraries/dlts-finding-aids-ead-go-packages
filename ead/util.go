@@ -406,7 +406,8 @@ func getRelatorAuthoritativeLabel(relatorID string) (string, error) {
 	if authoritativeLabel, ok := RelatorAuthoritativeLabelMap[relatorID]; ok {
 		return authoritativeLabel, nil
 	} else {
-		return "", fmt.Errorf("unknown relator code \"%s\"", relatorID)
+		// if relator code is not recognized, trust the archivists and drop through
+		return relatorID, nil
 	}
 }
 
@@ -521,6 +522,10 @@ func removeBracketedText(s string) string {
 	// remove occurences
 	result := re.ReplaceAllString(s, "")
 	return result
+}
+
+func flattenCDATA(cdata CDATA) ([]byte, error) {
+	return getConvertedTextWithTags(cdata.Value)
 }
 
 func flattenTitleProper(titleProper []*TitleProper) ([]byte, error) {

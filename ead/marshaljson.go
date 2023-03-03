@@ -109,6 +109,21 @@ func (titleproper *TitleProper) MarshalJSON() ([]byte, error) {
 func (titleStmt *TitleStmt) MarshalJSON() ([]byte, error) {
 	type TitleStmtAlias TitleStmt
 
+	flattenedAuthor, err := flattenCDATA(titleStmt.Author)
+	if err != nil {
+		return nil, err
+	}
+
+	flattenedSponsor, err := flattenCDATA(titleStmt.Sponsor)
+	if err != nil {
+		return nil, err
+	}
+
+	flattenedSubTitle, err := flattenCDATA(titleStmt.SubTitle)
+	if err != nil {
+		return nil, err
+	}
+
 	flattenedTitleProper, err := flattenTitleProper(titleStmt.TitleProper)
 	if err != nil {
 		return nil, err
@@ -116,10 +131,33 @@ func (titleStmt *TitleStmt) MarshalJSON() ([]byte, error) {
 
 	return json.Marshal(&struct {
 		*TitleStmtAlias
+		FlattenedAuthor      FilteredString `json:"author,omitempty"`
+		FlattenedSponsor     FilteredString `json:"sponsor,omitempty"`
+		FlattenedSubTitle    FilteredString `json:"subtitle,omitempty"`
 		FlattenedTitleProper FilteredString `json:"titleproper,omitempty"`
 	}{
 		TitleStmtAlias:       (*TitleStmtAlias)(titleStmt),
+		FlattenedAuthor:      FilteredString(flattenedAuthor),
+		FlattenedSponsor:     FilteredString(flattenedSponsor),
+		FlattenedSubTitle:    FilteredString(flattenedSubTitle),
 		FlattenedTitleProper: FilteredString(flattenedTitleProper),
+	})
+}
+
+func (indexEntry *IndexEntry) MarshalJSON() ([]byte, error) {
+	type IndexEntryAlias IndexEntry
+
+	flattenedRef, err := flattenCDATA(indexEntry.Ref)
+	if err != nil {
+		return nil, err
+	}
+
+	return json.Marshal(&struct {
+		*IndexEntryAlias
+		FlattenedRef FilteredString `json:"ref,omitempty"`
+	}{
+		IndexEntryAlias: (*IndexEntryAlias)(indexEntry),
+		FlattenedRef:    FilteredString(flattenedRef),
 	})
 }
 
