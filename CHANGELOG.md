@@ -1,6 +1,6 @@
 # CHANGELOG
 
-#### v0.18.1-20230302T17_00
+#### v0.19.0
   - Add `ArchDesc.Index`, `IndexEntry.Title` and `IndexEntry.Ref`
   - Add support for multiple `<language>` child elements of
     `<langmaterial>` and `<langusage>`
