@@ -119,8 +119,9 @@ func makeInvalidEADIDErrorMessage(eadid string, invalidCharacters []rune) string
 <eadid> value "%s" does not conform to the Finding Aids specification.
 There must be a minimum of 2 character groups joined by an underscore.
 There is no maximum number of character groups, however, the <eadid>
-value must have at most "%d" characters.
-The following characters are not allowed in character groups: %s
+value must have at most %d characters.
+The following characters found in the eadid value are not allowed in
+character groups: "%s"
 `, eadid, MAXIMUM_EADID_LENGTH, string(invalidCharacters))
 }
 
