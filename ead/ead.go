@@ -303,10 +303,22 @@ type FileDesc struct {
 	TitleStmt       *TitleStmt      `xml:"titlestmt" json:"titlestmt,omitempty"`
 }
 
+// FormattedNoteWithHead:
+//
+//	The Emph and Lb string slices below are used to facilitate stream parsing.
+//	In EAD 2002, the <emph> and <lb> XML tags are used as formatting directives within
+//	regular XML element values. This messes up the stream parsing of elements that
+//	contain these embedded formatting tags.  By capturing the inner XML, and providing
+//	a destination for the <emph> and <lb> XML tags, parsing can complete successfully.
+//	This strategy, in conjuction with a custom JSON marshaling function, outputs
+//	the desired JSON.
 type FormattedNoteWithHead struct {
 	ID     FilteredString `xml:"id,attr" json:"id,omitempty"`
 	ExtRef []*ExtRef      `xml:"extref" json:"extref,omitempty"`
 	Head   *Head          `xml:"head" json:"head,omitempty"`
+	Value  string         `xml:",innerxml" json:"-"`
+	Emph   []string       `xml:"emph" json:"-"`
+	Lb     []string       `xml:"lb" json:"-"`
 
 	// adding Don Mennerich's approach here...
 	Children []*EADChild `xml:",any" json:"children,omitempty"`
