@@ -207,3 +207,33 @@ func (extent *Extent) MarshalJSON() ([]byte, error) {
 
 	return jsonData, nil
 }
+
+func (fnwh *FormattedNoteWithHead) MarshalJSON() ([]byte, error) {
+	type FormattedNoteWithHeadAlias FormattedNoteWithHead
+
+	// logic here:
+	// if there are no children then render the innerXML
+
+	if len(fnwh.Children) > 0 {
+		// default marshaling
+		return json.Marshal(&struct {
+			*FormattedNoteWithHeadAlias
+		}{
+			FormattedNoteWithHeadAlias: (*FormattedNoteWithHeadAlias)(fnwh),
+		})
+	}
+
+	// Children array is empty, therefore flatten innerXML and marshal JSON
+	flattenedValue, err := getConvertedTextWithTags(fnwh.Value)
+	if err != nil {
+		return nil, err
+	}
+
+	return json.Marshal(&struct {
+		*FormattedNoteWithHeadAlias
+		Value FilteredString `json:"value,omitempty"`
+	}{
+		FormattedNoteWithHeadAlias: (*FormattedNoteWithHeadAlias)(fnwh),
+		Value:                      FilteredString(flattenedValue),
+	})
+}
