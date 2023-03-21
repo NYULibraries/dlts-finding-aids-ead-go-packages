@@ -1,8 +1,10 @@
 package ead
 
 import (
+	"bytes"
 	"encoding/json"
 	"encoding/xml"
+	"fmt"
 	"os"
 	"path/filepath"
 	"testing"
@@ -11,21 +13,14 @@ import (
 var testFixtureDataPath = filepath.Join("testdata", "xmlorder")
 
 func TestNoteChildOrder(t *testing.T) {
+	var params iJSONTestParams
 
-	t.Run("Test Marshal JSON", func(t *testing.T) {
-		ead := getOrderXMLOmega(t)
-		jsonData, err := json.MarshalIndent(ead, "", "    ")
-		if err != nil {
-			t.Error(err)
-		}
+	params.TestName = "Test Marshal JSON"
+	params.EADFilePath = filepath.Join(testFixtureDataPath, "Omega-EAD.xml")
+	params.JSONReferenceFilePath = filepath.Join(testFixtureDataPath, "omega-ead-test-order.json")
+	params.JSONErrorFilePath = filepath.Join(testFixtureDataPath, "tmp", "failing-test-marshal.json")
 
-		// reference file includes newline at end of file so
-		// add newline to jsonData
-		jsonData = append(jsonData, '\n')
-		if err := os.WriteFile(filepath.Join(testFixtureDataPath, "omega-ead-test-order.json"), jsonData, 0755); err != nil {
-			t.Error(err)
-		}
-	})
+	runiJSONComparisonTest(t, &params)
 }
 
 func TestMinimalStreamParsingEmbeddedPresentationElements(t *testing.T) {
@@ -37,66 +32,37 @@ func TestMinimalStreamParsingEmbeddedPresentationElements(t *testing.T) {
 		}
 		var child EADChild
 		err = xml.Unmarshal([]byte(xmlSnippet), &child)
-		if err != nil {
-			t.Error(err)
-		}
+		failOnError(t, err, "Unexpected error unmarshaling XML")
 
 		jsonData, err := json.MarshalIndent(child, "", "    ")
-		if err != nil {
-			t.Error(err)
-		}
+		failOnError(t, err, "Unexpected error marshaling JSON")
 
 		// reference file includes newline at end of file so
 		// add newline to jsonData
 		jsonData = append(jsonData, '\n')
-		if err := os.WriteFile(filepath.Join(testFixtureDataPath, "minimal-stream-parsing-with-embedded-presentation-elements.json"), jsonData, 0755); err != nil {
-			t.Error(err)
+
+		referenceFile := filepath.Join(testFixtureDataPath, "minimal-stream-parsing-with-embedded-presentation-elements.json")
+		referenceFileContents, err := os.ReadFile(referenceFile)
+		failOnError(t, err, "Unexpected error reading reference file")
+
+		if !bytes.Equal(referenceFileContents, jsonData) {
+			jsonErrorFile := filepath.Join(testFixtureDataPath, "tmp", "failing-minimal-stream-parsing-with-embedded-presentation-elements.json")
+			err = os.WriteFile(jsonErrorFile, []byte(jsonData), 0644)
+			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", jsonErrorFile))
+
+			errMsg := fmt.Sprintf("JSON Data does not match reference file.\ndiff %s %s", jsonErrorFile, referenceFile)
+			t.Errorf(errMsg)
 		}
 	})
 }
 
 func TestStreamParsingEmbeddedPresentationElements(t *testing.T) {
-	t.Run("Test Stream-Parsing and JSON Marshaling Embedded Presentation Elements", func(t *testing.T) {
-		ead := getEmbeddedPresentationElementsEAD(t)
-		//ead := getOrderXMLOmega(t)
-		jsonData, err := json.MarshalIndent(ead, "", "    ")
-		if err != nil {
-			t.Error(err)
-		}
+	var params iJSONTestParams
 
-		// reference file includes newline at end of file so
-		// add newline to jsonData
-		jsonData = append(jsonData, '\n')
-		if err := os.WriteFile(filepath.Join(testFixtureDataPath, "embedded-presentation-elements.json"), jsonData, 0755); err != nil {
-			t.Error(err)
-		}
-	})
-}
+	params.TestName = "Test Stream-Parsing and JSON Marshaling Embedded Presentation Elements"
+	params.EADFilePath = filepath.Join(testFixtureDataPath, "mss_293.xml")
+	params.JSONReferenceFilePath = filepath.Join(testFixtureDataPath, "embedded-presentation-elements.json")
+	params.JSONErrorFilePath = filepath.Join(testFixtureDataPath, "tmp", "failing-embedded-presentation-elements.json")
 
-func getOrderXMLOmega(t *testing.T) EAD {
-	EADXML, err := os.ReadFile(filepath.Join(testFixtureDataPath, "Omega-EAD.xml"))
-	if err != nil {
-		t.Error(err)
-	}
-
-	var ead EAD
-	err = xml.Unmarshal([]byte(EADXML), &ead)
-	if err != nil {
-		t.Error(err)
-	}
-	return ead
-}
-
-func getEmbeddedPresentationElementsEAD(t *testing.T) EAD {
-	EADXML, err := os.ReadFile(filepath.Join(testFixtureDataPath, "mss_293.xml"))
-	if err != nil {
-		t.Error(err)
-	}
-
-	var ead EAD
-	err = xml.Unmarshal([]byte(EADXML), &ead)
-	if err != nil {
-		t.Error(err)
-	}
-	return ead
+	runiJSONComparisonTest(t, &params)
 }
