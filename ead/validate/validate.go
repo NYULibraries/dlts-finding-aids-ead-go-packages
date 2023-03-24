@@ -33,7 +33,7 @@ var ValidRepositoryNames = []string{
 	"NYU Abu Dhabi, Archives and Special Collections",
 	"New York University Archives",
 	"New-York Historical Society",
-	"Poly Archives at Bern Dibner Library of Science and Technology",
+	"Poly Archives at the Bern Dibner Library of Science and Technology, NYU Libraries",
 	"Tamiment Library and Robert F. Wagner Labor Archives",
 	"Villa La Pietra",
 }
