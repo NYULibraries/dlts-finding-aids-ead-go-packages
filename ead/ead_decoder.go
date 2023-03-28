@@ -5,6 +5,11 @@ import (
 	"fmt"
 )
 
+// The following code was developed by Don Mennerich
+// some references:
+// 	https://stackoverflow.com/a/38850984
+// 	https://go.dev/play/p/fzsUPPS7py
+
 type EADChild struct {
 	Name  string      `json:"name"`
 	Value interface{} `json:"value,omitempty"`
@@ -14,7 +19,7 @@ func (eadChild *EADChild) UnmarshalXML(d *xml.Decoder, start xml.StartElement) e
 	name := start.Name.Local
 	switch name {
 	case "accessrestrict", "accruals", "acqinfo", "altformavail", "appraisal", "arrangement", "bioghist",
-		"custodhist", "odd", "otherfindaid", "originalsloc", "phystech", "prefercite",
+		"custodhist", "fileplan", "materialspec", "odd", "originalsloc", "otherfindaid", "phystech", "prefercite",
 		"processinfo", "relatedmaterial", "scopecontent", "separatedmaterial", "userestrict":
 		e := FormattedNoteWithHead{}
 		return decodeElement(eadChild, &e, d, start)
