@@ -1,6 +1,6 @@
 # CHANGELOG
 
-#### v0.20.0-pre-2023-03-27T2238
+#### v0.20.0
   - Update `FormattedNoteWithHead` data type to better support stream
     parsing when there are presentation elements, (e.g., `<emph>`, `<lb>`), 
 	embedded in regular XML element values.
