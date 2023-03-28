@@ -1163,7 +1163,15 @@
                                                         ],
                                                         "materialspec": [
                                                             {
-                                                                "id": "aspace_d2c9a336620616b40793ea4442da9568"
+                                                                "id": "aspace_d2c9a336620616b40793ea4442da9568",
+                                                                "children": [
+                                                                    {
+                                                                        "name": "div",
+                                                                        "value": {
+                                                                            "value": "Level 6 This is the Materials Specific Details note."
+                                                                        }
+                                                                    }
+                                                                ]
                                                             }
                                                         ],
                                                         "origination": [
@@ -1818,7 +1826,15 @@
                                                 ],
                                                 "materialspec": [
                                                     {
-                                                        "id": "aspace_ed591019ee2e31b0ed6321587349ae04"
+                                                        "id": "aspace_ed591019ee2e31b0ed6321587349ae04",
+                                                        "children": [
+                                                            {
+                                                                "name": "div",
+                                                                "value": {
+                                                                    "value": "Level 5 This is the Materials Specific Details note."
+                                                                }
+                                                            }
+                                                        ]
                                                     }
                                                 ],
                                                 "origination": [
@@ -2473,7 +2489,15 @@
                                         ],
                                         "materialspec": [
                                             {
-                                                "id": "aspace_bb766f2f7183c55973b1b8097f44002f"
+                                                "id": "aspace_bb766f2f7183c55973b1b8097f44002f",
+                                                "children": [
+                                                    {
+                                                        "name": "div",
+                                                        "value": {
+                                                            "value": "Level 4 This is the Materials Specific Details note."
+                                                        }
+                                                    }
+                                                ]
                                             }
                                         ],
                                         "origination": [
@@ -3125,7 +3149,15 @@
                                 ],
                                 "materialspec": [
                                     {
-                                        "id": "aspace_90c738fbc387b6372a896966a814da87"
+                                        "id": "aspace_90c738fbc387b6372a896966a814da87",
+                                        "children": [
+                                            {
+                                                "name": "div",
+                                                "value": {
+                                                    "value": "Level 3 This is the Materials Specific Details note."
+                                                }
+                                            }
+                                        ]
                                     }
                                 ],
                                 "origination": [
@@ -3926,7 +3958,15 @@
                         ],
                         "materialspec": [
                             {
-                                "id": "aspace_8ec8f4ba4cc227c264b552803da8dd5b"
+                                "id": "aspace_8ec8f4ba4cc227c264b552803da8dd5b",
+                                "children": [
+                                    {
+                                        "name": "div",
+                                        "value": {
+                                            "value": "Level 2 This is the Materials Specific Details."
+                                        }
+                                    }
+                                ]
                             }
                         ],
                         "origination": [
