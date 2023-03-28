@@ -1,15 +1,16 @@
 # CHANGELOG
 
-#### v0.20.0-pre-2023-03-20T2130
+#### v0.20.0-pre-2023-03-27T2238
   - Update `FormattedNoteWithHead` data type to better support stream
     parsing when there are presentation elements, (e.g., `<emph>`, `<lb>`), 
 	embedded in regular XML element values.
+  - Tweak EADID-validation error message
   - Add custom `MarshalJSON()` function for `FormattedNoteWithHead` type.
 	If a `FormattedNoteWithHead` variable has `Children`, then the variable
 	will be marshaled as usual. If the `Children` slice is empty, then the 
-	`innerxml` captured during parsing will be flattened/stringified and 
-	marshaled into a `"value"` key/value pair.
-  - Tweak EADID-validation error message
+	`innerxml` captured during parsing will be flattend/stringified, loaded
+	into an `EADChild` variable, and added to the `FormattedNoteWithHead`
+	`Children` slice.  This updated variable is then marshaled as usual.
 
 #### v0.19.0
   - Add `ArchDesc.Index`, `IndexEntry.Title` and `IndexEntry.Ref`
