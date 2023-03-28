@@ -2,6 +2,13 @@
     "name": "materialspec",
     "value": {
         "id": "aspace_c47621efd8908c8b2ba70bef9d685c22",
-        "value": "In \u003cspan class=\"ead-emph ead-emph-italic\"\u003eARTnews\u003c/span\u003e."
+        "children": [
+            {
+                "name": "div",
+                "value": {
+                    "value": "In \u003cspan class=\"ead-emph ead-emph-italic\"\u003eARTnews\u003c/span\u003e."
+                }
+            }
+        ]
     }
 }
