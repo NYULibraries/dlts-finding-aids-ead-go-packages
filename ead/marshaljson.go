@@ -211,29 +211,30 @@ func (extent *Extent) MarshalJSON() ([]byte, error) {
 func (fnwh *FormattedNoteWithHead) MarshalJSON() ([]byte, error) {
 	type FormattedNoteWithHeadAlias FormattedNoteWithHead
 
-	// logic here:
-	// if there are no children then render the innerXML
+	// if there are no children then create a child from innerxml...
+	if len(fnwh.Children) == 0 {
+		// Children array is empty, therefore flatten innerXML
+		flattenedValue, err := getConvertedTextWithTags(fnwh.Value)
+		if err != nil {
+			return nil, err
+		}
 
-	if len(fnwh.Children) > 0 {
-		// default marshaling
-		return json.Marshal(&struct {
-			*FormattedNoteWithHeadAlias
+		// create and add child element
+		// the nesting of "value": is for consistency with the marshaled
+		// JSON of regular stream-parsed children
+		child := EADChild{}
+		child.Name = "div"
+		child.Value = &struct {
+			Value FilteredString `json:"value,omitempty"`
 		}{
-			FormattedNoteWithHeadAlias: (*FormattedNoteWithHeadAlias)(fnwh),
-		})
-	}
-
-	// Children array is empty, therefore flatten innerXML and marshal JSON
-	flattenedValue, err := getConvertedTextWithTags(fnwh.Value)
-	if err != nil {
-		return nil, err
+			Value: FilteredString(flattenedValue),
+		}
+		fnwh.Children = append(fnwh.Children, &child)
 	}
 
 	return json.Marshal(&struct {
 		*FormattedNoteWithHeadAlias
-		Value FilteredString `json:"value,omitempty"`
 	}{
 		FormattedNoteWithHeadAlias: (*FormattedNoteWithHeadAlias)(fnwh),
-		Value:                      FilteredString(flattenedValue),
 	})
 }
