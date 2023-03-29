@@ -161,7 +161,7 @@ type ControlAccess struct {
 	Occupation []*AccessTermWithRole `xml:"occupation" json:"occupation,omitempty"`
 	PersName   []*AccessTermWithRole `xml:"persname" json:"persname,omitempty"`
 	Subject    []*AccessTermWithRole `xml:"subject" json:"subject,omitempty"`
-	Title      []*AccessTermWithRole `xml:"title" json:"title,omitempty"`
+	Title      []*Title              `xml:"title" json:"title,omitempty"`
 }
 
 type Creation struct {

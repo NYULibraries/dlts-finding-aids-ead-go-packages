@@ -325,7 +325,8 @@
                 ],
                 "title": [
                     {
-                        "value": "New York Nichibei."
+                        "value": "New York Nichibei.",
+                        "source": "local"
                     }
                 ]
             }
