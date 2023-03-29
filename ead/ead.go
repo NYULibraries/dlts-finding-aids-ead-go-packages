@@ -166,7 +166,7 @@ type ControlAccess struct {
 
 type Creation struct {
 	Date  []*Date `xml:"date" json:"date,omitempty"`
-	Value string `xml:",innerxml" json:"value,omitempty"`
+	Value string  `xml:",innerxml" json:"value,omitempty"`
 }
 
 type DAO struct {
@@ -290,11 +290,13 @@ type ExtPtr struct {
 }
 
 type ExtRef struct {
-	Actuate FilteredString `xml:"actuate,attr" json:"actuate,omitempty"`
-	Href    FilteredString `xml:"href,attr" json:"href,omitempty"`
-	Show    FilteredString `xml:"show,attr" json:"show,omitempty"`
-	Title   FilteredString `xml:"title,attr" json:"title,omitempty"`
-	Type    FilteredString `xml:"type,attr" json:"type,omitempty"`
+	Actuate    FilteredString `xml:"actuate,attr" json:"actuate,omitempty"`
+	Href       FilteredString `xml:"href,attr" json:"href,omitempty"`
+	Show       FilteredString `xml:"show,attr" json:"show,omitempty"`
+	Title      FilteredString `xml:"title,attr" json:"title,omitempty"`
+	Type       FilteredString `xml:"type,attr" json:"type,omitempty"`
+	ArchRef    []*ArchRef     `xml:"archref" json:"archref,omitempty"`
+	TitleValue []*Title       `xml:"title" json:"titlevalue,omitempty"`
 }
 
 type FileDesc struct {
