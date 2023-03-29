@@ -5019,7 +5019,12 @@
         },
         "profiledesc": {
             "creation": {
-                "value": "This finding aid was manually edited on \u003cspan class=\"ead-date\"\u003e2023-02-24 09:39:52 -0500\u003c/span\u003e."
+                "value": "This finding aid was manually edited on \u003cspan class=\"ead-date\"\u003e2023-02-24 09:39:52 -0500\u003c/span\u003e.",
+                "date": [
+                    {
+                        "value": "2023-02-24 09:39:52 -0500"
+                    }
+                ]
             },
             "descrules": "Describing Archives: A Content Standard",
             "langusage": {

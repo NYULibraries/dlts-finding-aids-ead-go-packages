@@ -165,6 +165,7 @@ type ControlAccess struct {
 }
 
 type Creation struct {
+	Date  []*Date `xml:"date" json:"date,omitempty"`
 	Value string `xml:",innerxml" json:"value,omitempty"`
 }
 

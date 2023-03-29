@@ -3974,7 +3974,12 @@
         },
         "profiledesc": {
             "creation": {
-                "value": "This finding aid was produced using ArchivesSpace on \u003cspan class=\"ead-date\"\u003e2022-07-25 22:03:02 +0400\u003c/span\u003e."
+                "value": "This finding aid was produced using ArchivesSpace on \u003cspan class=\"ead-date\"\u003e2022-07-25 22:03:02 +0400\u003c/span\u003e.",
+                "date": [
+                    {
+                        "value": "2022-07-25 22:03:02 +0400"
+                    }
+                ]
             },
             "langusage": {
                 "value": "Description is written in: \u003cspan class=\"ead-language\"\u003eEnglish, Latin script\u003c/span\u003e.",
