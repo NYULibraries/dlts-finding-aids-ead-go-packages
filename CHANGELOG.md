@@ -1,5 +1,11 @@
 # CHANGELOG
 
+#### v0.21.0
+  - add `ArchRef` and `TitleValue` to `ExtRef` type
+  - add `Date` to `Creation` type to align with [FADESIGN-29 data model](https://github.com/nyudlts/fadesign_29-data-model/blob/main/models.csv)
+  - convert `ControlAccess.Title` to `[]*Title` instead of `[]*AccessTermWithRole`
+  - add `DateChar` to `UnitDate`
+
 #### v0.20.0
   - Update `FormattedNoteWithHead` data type to better support stream
     parsing when there are presentation elements, (e.g., `<emph>`, `<lb>`), 
