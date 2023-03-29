@@ -1857,7 +1857,8 @@
                 ],
                 "title": [
                     {
-                        "value": "Plymouth chimes (Brooklyn, New York, N.Y.)"
+                        "value": "Plymouth chimes (Brooklyn, New York, N.Y.)",
+                        "source": "local"
                     }
                 ]
             }
@@ -17345,7 +17346,12 @@
         },
         "profiledesc": {
             "creation": {
-                "value": "This finding aid was produced using ArchivesSpace on \u003cspan class=\"ead-date\"\u003e2021-08-25 13:46:02 +0000\u003c/span\u003e."
+                "value": "This finding aid was produced using ArchivesSpace on \u003cspan class=\"ead-date\"\u003e2021-08-25 13:46:02 +0000\u003c/span\u003e.",
+                "date": [
+                    {
+                        "value": "2021-08-25 13:46:02 +0000"
+                    }
+                ]
             },
             "descrules": "Describing Archives: A Content Standard",
             "langusage": {
