@@ -3162,7 +3162,12 @@
         },
         "profiledesc": {
             "creation": {
-                "value": "This finding aid was produced using ArchivesSpace on \u003cspan class=\"ead-date\"\u003e2021-01-21 15:13:30 -0500\u003c/span\u003e."
+                "value": "This finding aid was produced using ArchivesSpace on \u003cspan class=\"ead-date\"\u003e2021-01-21 15:13:30 -0500\u003c/span\u003e.",
+                "date": [
+                    {
+                        "value": "2021-01-21 15:13:30 -0500"
+                    }
+                ]
             },
             "descrules": "Describing Archives: A Content Standard",
             "langusage": {

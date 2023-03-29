@@ -158,10 +158,12 @@
             "unitdate": [
                 {
                     "value": "Circa 1884-1888",
-                    "type": "inclusive"
+                    "type": "inclusive",
+                    "datechar": "creation"
                 },
                 {
-                    "value": "1888"
+                    "value": "1888",
+                    "datechar": "publication"
                 }
             ],
             "unitid": "AD.MC.030_ref184",
@@ -282,7 +284,8 @@
                                 "unitdate": [
                                     {
                                         "value": "Circa 1884 - 1888",
-                                        "type": "inclusive"
+                                        "type": "inclusive",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000001",
@@ -413,7 +416,8 @@
                                 "unitdate": [
                                     {
                                         "value": "Circa 1884 - 1888",
-                                        "type": "inclusive"
+                                        "type": "inclusive",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000002",
@@ -542,7 +546,8 @@
                                 "unitdate": [
                                     {
                                         "value": "Circa 1884 - 1888",
-                                        "type": "inclusive"
+                                        "type": "inclusive",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000003",
@@ -653,7 +658,8 @@
                                 "unitdate": [
                                     {
                                         "value": "Circa 1884 - 1888",
-                                        "type": "inclusive"
+                                        "type": "inclusive",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000004",
@@ -777,7 +783,8 @@
                                 ],
                                 "unitdate": [
                                     {
-                                        "value": "Circa 1881"
+                                        "value": "Circa 1881",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000005",
@@ -922,7 +929,8 @@
                                 "unitdate": [
                                     {
                                         "value": "Circa 1884 - 1888",
-                                        "type": "inclusive"
+                                        "type": "inclusive",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000006",
@@ -1061,7 +1069,8 @@
                                 "unitdate": [
                                     {
                                         "value": "Circa 1884 - 1888",
-                                        "type": "inclusive"
+                                        "type": "inclusive",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000007",
@@ -1195,7 +1204,8 @@
                                 "unitdate": [
                                     {
                                         "value": "Circa 1884 - 1888",
-                                        "type": "inclusive"
+                                        "type": "inclusive",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000008",
@@ -1314,7 +1324,8 @@
                                 "unitdate": [
                                     {
                                         "value": "Circa 1884 - 1888",
-                                        "type": "inclusive"
+                                        "type": "inclusive",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000009",
@@ -1465,7 +1476,8 @@
                                 "unitdate": [
                                     {
                                         "value": "Circa 1884 - 1888",
-                                        "type": "inclusive"
+                                        "type": "inclusive",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000010",
@@ -1590,7 +1602,8 @@
                                 "unitdate": [
                                     {
                                         "value": "Circa 1884 - 1888",
-                                        "type": "inclusive"
+                                        "type": "inclusive",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000011",
@@ -1730,7 +1743,8 @@
                                 "unitdate": [
                                     {
                                         "value": "Circa 1884 - 1888",
-                                        "type": "inclusive"
+                                        "type": "inclusive",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000012",
@@ -1861,7 +1875,8 @@
                                 "unitdate": [
                                     {
                                         "value": "Circa 1884 - 1888",
-                                        "type": "inclusive"
+                                        "type": "inclusive",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000013",
@@ -1998,7 +2013,8 @@
                                 "unitdate": [
                                     {
                                         "value": "Circa 1884 - 1888",
-                                        "type": "inclusive"
+                                        "type": "inclusive",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000014",
@@ -2138,7 +2154,8 @@
                                 "unitdate": [
                                     {
                                         "value": "Circa 1884 - 1888",
-                                        "type": "inclusive"
+                                        "type": "inclusive",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000015",
@@ -2280,7 +2297,8 @@
                                 "unitdate": [
                                     {
                                         "value": "Circa 1884 - 1888",
-                                        "type": "inclusive"
+                                        "type": "inclusive",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000016",
@@ -2408,7 +2426,8 @@
                                 "unitdate": [
                                     {
                                         "value": "Circa 1884 - 1888",
-                                        "type": "inclusive"
+                                        "type": "inclusive",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000017",
@@ -2542,7 +2561,8 @@
                                 "unitdate": [
                                     {
                                         "value": "Circa 1884 - 1888",
-                                        "type": "inclusive"
+                                        "type": "inclusive",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000018",
@@ -2641,7 +2661,8 @@
                                 "unitdate": [
                                     {
                                         "value": "Circa 1884 - 1888",
-                                        "type": "inclusive"
+                                        "type": "inclusive",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000019",
@@ -2724,7 +2745,8 @@
                                 "unitdate": [
                                     {
                                         "value": "Circa 1884 - 1888",
-                                        "type": "inclusive"
+                                        "type": "inclusive",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000020",
@@ -2807,7 +2829,8 @@
                                 "unitdate": [
                                     {
                                         "value": "Circa 1884 - 1888",
-                                        "type": "inclusive"
+                                        "type": "inclusive",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000021",
@@ -2919,7 +2942,8 @@
                                 ],
                                 "unitdate": [
                                     {
-                                        "value": "1900"
+                                        "value": "1900",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000027",
@@ -3020,7 +3044,8 @@
                                 ],
                                 "unitdate": [
                                     {
-                                        "value": "1900"
+                                        "value": "1900",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000028",
@@ -3118,7 +3143,8 @@
                                 ],
                                 "unitdate": [
                                     {
-                                        "value": "1900"
+                                        "value": "1900",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000029",
@@ -3222,7 +3248,8 @@
                                 ],
                                 "unitdate": [
                                     {
-                                        "value": "1900"
+                                        "value": "1900",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000030",
@@ -3323,7 +3350,8 @@
                                 ],
                                 "unitdate": [
                                     {
-                                        "value": "1900"
+                                        "value": "1900",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000031",
@@ -3461,7 +3489,8 @@
                                 ],
                                 "unitdate": [
                                     {
-                                        "value": "15 March 1937"
+                                        "value": "15 March 1937",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000032",
@@ -3588,7 +3617,8 @@
                                 ],
                                 "unitdate": [
                                     {
-                                        "value": "15 March 1937"
+                                        "value": "15 March 1937",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000034",
@@ -3736,7 +3766,8 @@
                                 ],
                                 "unitdate": [
                                     {
-                                        "value": "15 March 1937"
+                                        "value": "15 March 1937",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000035",
@@ -3881,7 +3912,8 @@
                                 ],
                                 "unitdate": [
                                     {
-                                        "value": "15 March 1937"
+                                        "value": "15 March 1937",
+                                        "datechar": "creation"
                                     }
                                 ],
                                 "unitid": "ref184_000036",
@@ -3974,7 +4006,12 @@
         },
         "profiledesc": {
             "creation": {
-                "value": "This finding aid was produced using ArchivesSpace on \u003cspan class=\"ead-date\"\u003e2022-07-25 22:03:02 +0400\u003c/span\u003e."
+                "value": "This finding aid was produced using ArchivesSpace on \u003cspan class=\"ead-date\"\u003e2022-07-25 22:03:02 +0400\u003c/span\u003e.",
+                "date": [
+                    {
+                        "value": "2022-07-25 22:03:02 +0400"
+                    }
+                ]
             },
             "langusage": {
                 "value": "Description is written in: \u003cspan class=\"ead-language\"\u003eEnglish, Latin script\u003c/span\u003e.",

@@ -5,7 +5,7 @@ package ead
 // Based on: "Data model for parsing EAD <archdesc> elements": https://jira.nyu.edu/jira/browse/FADESIGN-29.
 
 const (
-	Version = "v0.20.0"
+	Version = "v0.21.0"
 )
 
 type EAD struct {
@@ -161,11 +161,12 @@ type ControlAccess struct {
 	Occupation []*AccessTermWithRole `xml:"occupation" json:"occupation,omitempty"`
 	PersName   []*AccessTermWithRole `xml:"persname" json:"persname,omitempty"`
 	Subject    []*AccessTermWithRole `xml:"subject" json:"subject,omitempty"`
-	Title      []*AccessTermWithRole `xml:"title" json:"title,omitempty"`
+	Title      []*Title              `xml:"title" json:"title,omitempty"`
 }
 
 type Creation struct {
-	Value string `xml:",innerxml" json:"value,omitempty"`
+	Date  []*Date `xml:"date" json:"date,omitempty"`
+	Value string  `xml:",innerxml" json:"value,omitempty"`
 }
 
 type DAO struct {
@@ -289,11 +290,13 @@ type ExtPtr struct {
 }
 
 type ExtRef struct {
-	Actuate FilteredString `xml:"actuate,attr" json:"actuate,omitempty"`
-	Href    FilteredString `xml:"href,attr" json:"href,omitempty"`
-	Show    FilteredString `xml:"show,attr" json:"show,omitempty"`
-	Title   FilteredString `xml:"title,attr" json:"title,omitempty"`
-	Type    FilteredString `xml:"type,attr" json:"type,omitempty"`
+	Actuate    FilteredString `xml:"actuate,attr" json:"actuate,omitempty"`
+	Href       FilteredString `xml:"href,attr" json:"href,omitempty"`
+	Show       FilteredString `xml:"show,attr" json:"show,omitempty"`
+	Title      FilteredString `xml:"title,attr" json:"title,omitempty"`
+	Type       FilteredString `xml:"type,attr" json:"type,omitempty"`
+	ArchRef    []*ArchRef     `xml:"archref" json:"archref,omitempty"`
+	TitleValue []*Title       `xml:"title" json:"titlevalue,omitempty"`
 }
 
 type FileDesc struct {
@@ -504,7 +507,8 @@ type TitleStmt struct {
 	FlattenedTitleProper FilteredString `xml:"-" json:"titleproper,omitempty"`
 }
 type UnitDate struct {
-	Type FilteredString `xml:"type,attr" json:"type,omitempty"`
+	Type     FilteredString `xml:"type,attr" json:"type,omitempty"`
+	DateChar FilteredString `xml:"datechar,attr" json:"datechar,omitempty"`
 
 	Value string `xml:",innerxml" json:"value,omitempty"`
 }

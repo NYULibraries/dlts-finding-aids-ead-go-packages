@@ -27,6 +27,7 @@ var nyuadTestFixturePath string = filepath.Join(testFixturePath, "nyuad")
 var nyhsTestFixturePath string = filepath.Join(testFixturePath, "nyhs")
 var omegaTestFixturePath string = filepath.Join(testFixturePath, "omega", "v0.1.5")
 var presentationContainerPath string = filepath.Join(testFixturePath, "presentation-containers")
+var tamwagTestFixturePath string = filepath.Join(testFixturePath, "tamwag")
 
 func runiJSONComparisonTest(t *testing.T, params *iJSONTestParams) {
 
@@ -314,6 +315,17 @@ func TestJSONMarshalingWithMultipleLanguages(t *testing.T) {
 	params.EADFilePath = filepath.Join(nyuadTestFixturePath, "ad_mc_019-edited.xml")
 	params.JSONReferenceFilePath = filepath.Join(nyuadTestFixturePath, "ad_mc_019-edited.json")
 	params.JSONErrorFilePath = "./testdata/tmp/failing-multiple-language-marshal.json"
+
+	runiJSONComparisonTest(t, &params)
+}
+
+func TestJSONMarshalingWithExtRefTitle(t *testing.T) {
+	var params iJSONTestParams
+
+	params.TestName = "JSON Marshaling with ExtRef Title"
+	params.EADFilePath = filepath.Join(tamwagTestFixturePath, "tam_143.xml")
+	params.JSONReferenceFilePath = filepath.Join(tamwagTestFixturePath, "tam_143.json")
+	params.JSONErrorFilePath = "./testdata/tmp/failing-extref-with-title.json"
 
 	runiJSONComparisonTest(t, &params)
 }
