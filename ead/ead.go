@@ -507,7 +507,8 @@ type TitleStmt struct {
 	FlattenedTitleProper FilteredString `xml:"-" json:"titleproper,omitempty"`
 }
 type UnitDate struct {
-	Type FilteredString `xml:"type,attr" json:"type,omitempty"`
+	Type     FilteredString `xml:"type,attr" json:"type,omitempty"`
+	DateChar FilteredString `xml:"datechar,attr" json:"datechar,omitempty"`
 
 	Value string `xml:",innerxml" json:"value,omitempty"`
 }
