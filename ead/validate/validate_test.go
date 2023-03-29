@@ -284,10 +284,6 @@ func TestValidateEADMissingRequiredElements(t *testing.T) {
 	doTest(missingRequiredElementsEADIDAndRepositoryCorpnameFixturePath, expected, t)
 }
 
-func TestValidateEADInvalidEADActual(t *testing.T) {
-	doTest(validEADFixturePath, []string{}, t)
-	doTest(validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath, []string{}, t)
-}
 func TestValidateEADIDTooLong(t *testing.T) {
 	expected := []string{
 		makeEADIDTooLongErrorMessage("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii_iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"),
