@@ -24,6 +24,7 @@ var akkasahRepositoryNameFixturePath string
 var eadIDTooLongFixturePath string
 var invalidArchDescLevelFixturePath string
 var tooBigFileFixturePath string
+var invalidEADWithNamespaceErrorsFixturePath string
 
 // Source: https://intellij-support.jetbrains.com/hc/en-us/community/posts/360009685279-Go-test-working-directory-keeps-changing-to-dir-of-the-test-file-instead-of-value-in-template?page=1#community_comment_360002183640
 func init() {
@@ -38,6 +39,7 @@ func init() {
 	invalidEadDataFixturePath = filepath.Join(fixturesDirPath, "mc_100-invalid-eadid-repository-role-relator-codes-unpublished-material.xml")
 	invalidXMLFixturePath = filepath.Join(fixturesDirPath, "invalid-xml.xml")
 	invalidEADFixturePath = filepath.Join(fixturesDirPath, "ad_rg_009_3_2_1.xml")
+	invalidEADWithNamespaceErrorsFixturePath = filepath.Join(fixturesDirPath, "bcms_0011-namespace-errors.xml")
 	missingRequiredElementsEADIDAndArchDescFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-archdesc.xml")
 	missingRequiredElementsEADIDAndRepositoryFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-repository.xml")
 	missingRequiredElementsEADIDAndRepositoryCorpnameFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-repository-corpname.xml")
@@ -255,6 +257,26 @@ func TestValidateEADInvalidEAD(t *testing.T) {
 	}
 
 	doTest(invalidEADFixturePath, expected, t)
+}
+
+func TestValidateEADInvalidEADNamespaceErrors(t *testing.T) {
+	var expected = []string{
+		makeInvalidXMLErrorMessage(),
+		"schema validation failed",
+		"Element '{urn:isbn:1-931666-22-9}extref', attribute 'ns2:href': The attribute 'ns2:href' is not allowed.",
+		"Element '{urn:isbn:1-931666-22-9}extref', attribute 'ns2:href': The attribute 'ns2:href' is not allowed.",
+		"Element '{urn:isbn:1-931666-22-9}extref', attribute 'ns2:href': The attribute 'ns2:href' is not allowed.",
+		"Element '{urn:isbn:1-931666-22-9}extref', attribute 'ns2:href': The attribute 'ns2:href' is not allowed.",
+		"Element '{urn:isbn:1-931666-22-9}extref', attribute 'ns2:href': The attribute 'ns2:href' is not allowed.",
+		"Element '{urn:isbn:1-931666-22-9}extref', attribute 'ns2:href': The attribute 'ns2:href' is not allowed.",
+		"Element '{urn:isbn:1-931666-22-9}extref', attribute 'ns2:href': The attribute 'ns2:href' is not allowed.",
+		"Element '{urn:isbn:1-931666-22-9}extref', attribute 'ns2:href': The attribute 'ns2:href' is not allowed.",
+		"Element '{urn:isbn:1-931666-22-9}extref', attribute 'ns2:href': The attribute 'ns2:href' is not allowed.",
+		"Element '{urn:isbn:1-931666-22-9}extref', attribute 'ns2:href': The attribute 'ns2:href' is not allowed.",
+		"Element '{urn:isbn:1-931666-22-9}extref', attribute 'ns2:href': The attribute 'ns2:href' is not allowed.",
+	}
+
+	doTest(invalidEADWithNamespaceErrorsFixturePath, expected, t)
 }
 
 func TestValidateEADMissingRequiredElements(t *testing.T) {
