@@ -459,11 +459,13 @@
             "unitdate": [
                 {
                     "value": "2016-2021, undated",
-                    "type": "inclusive"
+                    "type": "inclusive",
+                    "normal": "2016/2021"
                 },
                 {
                     "value": "2020-2021, undated",
-                    "type": "bulk"
+                    "type": "bulk",
+                    "normal": "2020/2021"
                 }
             ],
             "unitid": "MOS.2021",
@@ -979,7 +981,8 @@
                                                             "did": {
                                                                 "unitdate": [
                                                                     {
-                                                                        "value": "1981-08-31"
+                                                                        "value": "1981-08-31",
+                                                                        "normal": "1981-08-31/1981-08-31"
                                                                     }
                                                                 ],
                                                                 "unittitle": {
@@ -1208,7 +1211,8 @@
                                                         "unitdate": [
                                                             {
                                                                 "value": "2020",
-                                                                "type": "inclusive"
+                                                                "type": "inclusive",
+                                                                "normal": "2020/2020"
                                                             }
                                                         ],
                                                         "unitid": "mos_2021_6",
@@ -1871,7 +1875,8 @@
                                                 "unitdate": [
                                                     {
                                                         "value": "2015-2019",
-                                                        "type": "inclusive"
+                                                        "type": "inclusive",
+                                                        "normal": "2015/2019"
                                                     }
                                                 ],
                                                 "unitid": "mos_2021_5",
@@ -2534,7 +2539,8 @@
                                         "unitdate": [
                                             {
                                                 "value": "2017-2019",
-                                                "type": "inclusive"
+                                                "type": "inclusive",
+                                                "normal": "2017/2019"
                                             }
                                         ],
                                         "unitid": "mos_2021_4",
@@ -3194,7 +3200,8 @@
                                 "unitdate": [
                                     {
                                         "value": "2021",
-                                        "type": "inclusive"
+                                        "type": "inclusive",
+                                        "normal": "2021/2021"
                                     }
                                 ],
                                 "unitid": "mos_2021_3",
@@ -3782,7 +3789,8 @@
                                 ],
                                 "unitdate": [
                                     {
-                                        "value": "1981-09-02"
+                                        "value": "1981-09-02",
+                                        "normal": "1981-09-02/1981-09-02"
                                     }
                                 ],
                                 "unittitle": {
@@ -4003,7 +4011,8 @@
                         "unitdate": [
                             {
                                 "value": "2015-2016",
-                                "type": "inclusive"
+                                "type": "inclusive",
+                                "normal": "2015/2016"
                             }
                         ],
                         "unitid": "mos_2021_2",

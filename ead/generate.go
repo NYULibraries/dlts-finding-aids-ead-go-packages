@@ -116,11 +116,14 @@ func writeConvertTextWithTagsCodeToBuffer(w *bytes.Buffer) {
 		"ChronItem":   "getConvertedTextWithTags",
 		"Container":   "getConvertedTextWithTags",
 		"Creation":    "getConvertedTextWithTags",
-		"Date":        "getConvertedTextWithTags",
-		"Dimensions":  "getConvertedTextWithTags",
-		"Event":       "getConvertedTextWithTags",
+		// Do not add DAO because it requires custom marshaling.
+		"Date": "getConvertedTextWithTags",
+		// Do not add DID because it requires custom marshaling.
+		"Dimensions": "getConvertedTextWithTags",
+		"Event":      "getConvertedTextWithTags",
 		// Extent has custom marshaling requirements and is therefore not generated.
-		"Head":         "getConvertedTextWithTags",
+		"Head": "getConvertedTextWithTags",
+		// Do not add IndexEntry because it requires custom marshaling.
 		"Item":         "getConvertedTextWithTags",
 		"LangMaterial": "getConvertedTextWithTags",
 		"LangUsage":    "getConvertedTextWithTags",
@@ -134,7 +137,8 @@ func writeConvertTextWithTagsCodeToBuffer(w *bytes.Buffer) {
 		"Repository": "getConvertedTextWithTags",
 		"Title":      "getConvertedTextWithTagsNoLBConversion",
 		// Do not add TitleProper because it requires custom marshaling.
-		"UnitDate":  "getConvertedTextWithTags",
+		// Do not add TitleStmt   because it requires custom marshaling.
+		// Do not add UnitDate    because it requires custom marshaling.
 		"UnitTitle": "getConvertedTextWithTags",
 	}
 

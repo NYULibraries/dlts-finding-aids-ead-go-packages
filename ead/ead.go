@@ -5,7 +5,7 @@ package ead
 // Based on: "Data model for parsing EAD <archdesc> elements": https://jira.nyu.edu/jira/browse/FADESIGN-29.
 
 const (
-	Version = "v0.21.0"
+	Version = "v0.22.0"
 )
 
 type EAD struct {
@@ -509,6 +509,7 @@ type TitleStmt struct {
 type UnitDate struct {
 	Type     FilteredString `xml:"type,attr" json:"type,omitempty"`
 	DateChar FilteredString `xml:"datechar,attr" json:"datechar,omitempty"`
+	Normal   FilteredString `xml:"normal,attr" json:"normal,omitempty"`
 
 	Value string `xml:",innerxml" json:"value,omitempty"`
 }

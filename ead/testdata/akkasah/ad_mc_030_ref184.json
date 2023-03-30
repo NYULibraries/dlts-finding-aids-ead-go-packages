@@ -159,7 +159,8 @@
                 {
                     "value": "Circa 1884-1888",
                     "type": "inclusive",
-                    "datechar": "creation"
+                    "datechar": "creation",
+                    "normal": "1884/1888"
                 },
                 {
                     "value": "1888",
@@ -285,7 +286,8 @@
                                     {
                                         "value": "Circa 1884 - 1888",
                                         "type": "inclusive",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1884/1888"
                                     }
                                 ],
                                 "unitid": "ref184_000001",
@@ -417,7 +419,8 @@
                                     {
                                         "value": "Circa 1884 - 1888",
                                         "type": "inclusive",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1884/1888"
                                     }
                                 ],
                                 "unitid": "ref184_000002",
@@ -547,7 +550,8 @@
                                     {
                                         "value": "Circa 1884 - 1888",
                                         "type": "inclusive",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1884/1888"
                                     }
                                 ],
                                 "unitid": "ref184_000003",
@@ -659,7 +663,8 @@
                                     {
                                         "value": "Circa 1884 - 1888",
                                         "type": "inclusive",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1884/1888"
                                     }
                                 ],
                                 "unitid": "ref184_000004",
@@ -784,7 +789,8 @@
                                 "unitdate": [
                                     {
                                         "value": "Circa 1881",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1881/1881"
                                     }
                                 ],
                                 "unitid": "ref184_000005",
@@ -930,7 +936,8 @@
                                     {
                                         "value": "Circa 1884 - 1888",
                                         "type": "inclusive",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1884/1888"
                                     }
                                 ],
                                 "unitid": "ref184_000006",
@@ -1070,7 +1077,8 @@
                                     {
                                         "value": "Circa 1884 - 1888",
                                         "type": "inclusive",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1884/1888"
                                     }
                                 ],
                                 "unitid": "ref184_000007",
@@ -1205,7 +1213,8 @@
                                     {
                                         "value": "Circa 1884 - 1888",
                                         "type": "inclusive",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1884/1888"
                                     }
                                 ],
                                 "unitid": "ref184_000008",
@@ -1325,7 +1334,8 @@
                                     {
                                         "value": "Circa 1884 - 1888",
                                         "type": "inclusive",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1884/1888"
                                     }
                                 ],
                                 "unitid": "ref184_000009",
@@ -1477,7 +1487,8 @@
                                     {
                                         "value": "Circa 1884 - 1888",
                                         "type": "inclusive",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1884/1888"
                                     }
                                 ],
                                 "unitid": "ref184_000010",
@@ -1603,7 +1614,8 @@
                                     {
                                         "value": "Circa 1884 - 1888",
                                         "type": "inclusive",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1884/1888"
                                     }
                                 ],
                                 "unitid": "ref184_000011",
@@ -1744,7 +1756,8 @@
                                     {
                                         "value": "Circa 1884 - 1888",
                                         "type": "inclusive",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1884/1888"
                                     }
                                 ],
                                 "unitid": "ref184_000012",
@@ -1876,7 +1889,8 @@
                                     {
                                         "value": "Circa 1884 - 1888",
                                         "type": "inclusive",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1884/1888"
                                     }
                                 ],
                                 "unitid": "ref184_000013",
@@ -2014,7 +2028,8 @@
                                     {
                                         "value": "Circa 1884 - 1888",
                                         "type": "inclusive",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1884/1888"
                                     }
                                 ],
                                 "unitid": "ref184_000014",
@@ -2155,7 +2170,8 @@
                                     {
                                         "value": "Circa 1884 - 1888",
                                         "type": "inclusive",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1884/1888"
                                     }
                                 ],
                                 "unitid": "ref184_000015",
@@ -2298,7 +2314,8 @@
                                     {
                                         "value": "Circa 1884 - 1888",
                                         "type": "inclusive",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1884/1888"
                                     }
                                 ],
                                 "unitid": "ref184_000016",
@@ -2427,7 +2444,8 @@
                                     {
                                         "value": "Circa 1884 - 1888",
                                         "type": "inclusive",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1884/1888"
                                     }
                                 ],
                                 "unitid": "ref184_000017",
@@ -2562,7 +2580,8 @@
                                     {
                                         "value": "Circa 1884 - 1888",
                                         "type": "inclusive",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1884/1888"
                                     }
                                 ],
                                 "unitid": "ref184_000018",
@@ -2662,7 +2681,8 @@
                                     {
                                         "value": "Circa 1884 - 1888",
                                         "type": "inclusive",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1884/1888"
                                     }
                                 ],
                                 "unitid": "ref184_000019",
@@ -2746,7 +2766,8 @@
                                     {
                                         "value": "Circa 1884 - 1888",
                                         "type": "inclusive",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1884/1888"
                                     }
                                 ],
                                 "unitid": "ref184_000020",
@@ -2830,7 +2851,8 @@
                                     {
                                         "value": "Circa 1884 - 1888",
                                         "type": "inclusive",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1884/1888"
                                     }
                                 ],
                                 "unitid": "ref184_000021",

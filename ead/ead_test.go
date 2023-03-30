@@ -737,3 +737,14 @@ func TestJSONMarshalingWithPresentationElementsInTitleStmtChildren(t *testing.T)
 
 	runiJSONComparisonTest(t, &params)
 }
+
+func TestUnitDateProcessing(t *testing.T) {
+	var params iJSONTestParams
+
+	params.TestName = "UnitDate processing"
+	params.EADFilePath = filepath.Join(tamwagTestFixturePath, "mos_2021-with-test-unitdates.xml")
+	params.JSONReferenceFilePath = filepath.Join(tamwagTestFixturePath, "mos_2021.json")
+	params.JSONErrorFilePath = "./testdata/tmp/failing-unitdate-processing.json"
+
+	runiJSONComparisonTest(t, &params)
+}
