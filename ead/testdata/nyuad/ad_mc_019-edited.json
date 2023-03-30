@@ -70,7 +70,8 @@
                 {
                     "value": "1561-2003",
                     "type": "inclusive",
-                    "datechar": "creation"
+                    "datechar": "creation",
+                    "normal": "1561/2003"
                 }
             ],
             "unitid": "AD.MC.019",
@@ -120,7 +121,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1856",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1856/1856"
                                     }
                                 ],
                                 "unittitle": {
@@ -194,7 +196,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1855",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1855/1855"
                                     }
                                 ],
                                 "unittitle": {
@@ -238,7 +241,8 @@
                             {
                                 "value": "1855-1856",
                                 "type": "inclusive",
-                                "datechar": "creation"
+                                "datechar": "creation",
+                                "normal": "1855/1856"
                             }
                         ],
                         "unittitle": {
@@ -271,7 +275,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1968",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1968/1968"
                                     }
                                 ],
                                 "unittitle": {
@@ -328,7 +333,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1945",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1945/1945"
                                     }
                                 ],
                                 "unittitle": {
@@ -424,7 +430,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1939",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1939/1939"
                                     }
                                 ],
                                 "unittitle": {
@@ -469,7 +476,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1973",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1973/1973"
                                     }
                                 ],
                                 "unittitle": {
@@ -528,7 +536,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1993",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1993/1993"
                                     }
                                 ],
                                 "unittitle": {
@@ -585,7 +594,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1947",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1947/1947"
                                     }
                                 ],
                                 "unittitle": {
@@ -644,7 +654,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1950",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1950/1950"
                                     }
                                 ],
                                 "unittitle": {
@@ -683,7 +694,8 @@
                             {
                                 "value": "1939-1993",
                                 "type": "inclusive",
-                                "datechar": "creation"
+                                "datechar": "creation",
+                                "normal": "1939/1993"
                             }
                         ],
                         "unittitle": {
@@ -747,7 +759,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1925",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1925/1925"
                                     }
                                 ],
                                 "unittitle": {
@@ -821,7 +834,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1561",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1561/1561"
                                     }
                                 ],
                                 "unittitle": {
@@ -895,7 +909,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1614",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1614/1614"
                                     }
                                 ],
                                 "unittitle": {
@@ -952,7 +967,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1925",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1925/1925"
                                     }
                                 ],
                                 "unittitle": {
@@ -1025,7 +1041,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1872",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1872/1872"
                                     }
                                 ],
                                 "unittitle": {
@@ -1082,7 +1099,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1654",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1654/1654"
                                     }
                                 ],
                                 "unittitle": {
@@ -1125,7 +1143,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1907",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1907/1907"
                                     }
                                 ],
                                 "unittitle": {
@@ -1184,7 +1203,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1821",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1821/1821"
                                     }
                                 ],
                                 "unittitle": {
@@ -1229,7 +1249,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1960",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1960/1960"
                                     }
                                 ],
                                 "unittitle": {
@@ -1258,7 +1279,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1977",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1977/1977"
                                     }
                                 ],
                                 "unittitle": {
@@ -1287,7 +1309,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1977",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1977/1977"
                                     }
                                 ],
                                 "unittitle": {
@@ -1316,7 +1339,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1977",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1977/1977"
                                     }
                                 ],
                                 "unittitle": {
@@ -1345,7 +1369,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1977",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1977/1977"
                                     }
                                 ],
                                 "unittitle": {
@@ -1374,7 +1399,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1977",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1977/1977"
                                     }
                                 ],
                                 "unittitle": {
@@ -1403,7 +1429,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1977",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1977/1977"
                                     }
                                 ],
                                 "unittitle": {
@@ -1432,7 +1459,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1977",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1977/1977"
                                     }
                                 ],
                                 "unittitle": {
@@ -1461,7 +1489,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1977",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1977/1977"
                                     }
                                 ],
                                 "unittitle": {
@@ -1475,7 +1504,8 @@
                             {
                                 "value": "1561-1977",
                                 "type": "inclusive",
-                                "datechar": "creation"
+                                "datechar": "creation",
+                                "normal": "1561/1977"
                             }
                         ],
                         "unittitle": {
@@ -1506,7 +1536,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1861",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1861/1861"
                                     }
                                 ],
                                 "unittitle": {
@@ -1549,7 +1580,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1925",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1925/1925"
                                     }
                                 ],
                                 "unittitle": {
@@ -1609,7 +1641,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1601",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1601/1601"
                                     }
                                 ],
                                 "unittitle": {
@@ -1666,7 +1699,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1878",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1878/1878"
                                     }
                                 ],
                                 "unittitle": {
@@ -1696,7 +1730,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1956",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1956/1956"
                                     }
                                 ],
                                 "unittitle": {
@@ -1753,7 +1788,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1624 [?]",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1624/1624"
                                     }
                                 ],
                                 "unittitle": {
@@ -1824,7 +1860,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1776",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1776/1776"
                                     }
                                 ],
                                 "unittitle": {
@@ -1869,7 +1906,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1776",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1776/1776"
                                     }
                                 ],
                                 "unittitle": {
@@ -1943,7 +1981,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1598",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1598/1598"
                                     }
                                 ],
                                 "unittitle": {
@@ -2016,7 +2055,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1922",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1922/1922"
                                     }
                                 ],
                                 "unittitle": {
@@ -2092,7 +2132,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1662 (?)",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1662/1662"
                                     }
                                 ],
                                 "unittitle": {
@@ -2136,7 +2177,8 @@
                             {
                                 "value": "1598-1956",
                                 "type": "inclusive",
-                                "datechar": "creation"
+                                "datechar": "creation",
+                                "normal": "1598/1956"
                             }
                         ],
                         "unittitle": {
@@ -2184,7 +2226,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1835",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1835/1835"
                                     }
                                 ],
                                 "unittitle": {
@@ -2258,7 +2301,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1855",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1855/1855"
                                     }
                                 ],
                                 "unittitle": {
@@ -2317,7 +2361,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1593",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1593/1593"
                                     }
                                 ],
                                 "unittitle": {
@@ -2391,7 +2436,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1701",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1701/1701"
                                     }
                                 ],
                                 "unittitle": {
@@ -2462,7 +2508,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1918",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1918/1918"
                                     }
                                 ],
                                 "unittitle": {
@@ -2519,7 +2566,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1918",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1918/1918"
                                     }
                                 ],
                                 "unittitle": {
@@ -2576,7 +2624,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1917",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1917/1917"
                                     }
                                 ],
                                 "unittitle": {
@@ -2621,7 +2670,8 @@
                                 "unitdate": [
                                     {
                                         "value": "circa 1723",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1723/1723"
                                     }
                                 ],
                                 "unittitle": {
@@ -2696,7 +2746,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1626",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1626/1626"
                                     }
                                 ],
                                 "unittitle": {
@@ -2770,7 +2821,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1702",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1702/1702"
                                     }
                                 ],
                                 "unittitle": {
@@ -2844,7 +2896,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1686?",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1686/1686"
                                     }
                                 ],
                                 "unittitle": {
@@ -2888,7 +2941,8 @@
                             {
                                 "value": "1593-1918",
                                 "type": "inclusive",
-                                "datechar": "creation"
+                                "datechar": "creation",
+                                "normal": "1593/1918"
                             }
                         ],
                         "unittitle": {
@@ -2936,7 +2990,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1779",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1779/1779"
                                     }
                                 ],
                                 "unittitle": {
@@ -3010,7 +3065,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1634",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1634/1634"
                                     }
                                 ],
                                 "unittitle": {
@@ -3084,7 +3140,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1782",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1782/1782"
                                     }
                                 ],
                                 "unittitle": {
@@ -3158,7 +3215,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1613",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1613/1613"
                                     }
                                 ],
                                 "unittitle": {
@@ -3229,7 +3287,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1974",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1974/1974"
                                     }
                                 ],
                                 "unittitle": {
@@ -3295,7 +3354,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1740?",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1740/1740"
                                     }
                                 ],
                                 "unittitle": {
@@ -3366,7 +3426,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1626",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1626/1626"
                                     }
                                 ],
                                 "unittitle": {
@@ -3410,7 +3471,8 @@
                             {
                                 "value": "1613-1974",
                                 "type": "inclusive",
-                                "datechar": "creation"
+                                "datechar": "creation",
+                                "normal": "1613/1974"
                             }
                         ],
                         "unittitle": {
@@ -3458,7 +3520,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1740",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1740/1740"
                                     }
                                 ],
                                 "unittitle": {
@@ -3532,7 +3595,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1817",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1817/1817"
                                     }
                                 ],
                                 "unittitle": {
@@ -3576,7 +3640,8 @@
                             {
                                 "value": "1740-1817",
                                 "type": "inclusive",
-                                "datechar": "creation"
+                                "datechar": "creation",
+                                "normal": "1740/1817"
                             }
                         ],
                         "unittitle": {
@@ -3609,7 +3674,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1994",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1994/1994"
                                     }
                                 ],
                                 "unittitle": {
@@ -3638,7 +3704,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1994",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1994/1994"
                                     }
                                 ],
                                 "unittitle": {
@@ -3667,7 +3734,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1994",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1994/1994"
                                     }
                                 ],
                                 "unittitle": {
@@ -3696,7 +3764,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1994",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1994/1994"
                                     }
                                 ],
                                 "unittitle": {
@@ -3725,7 +3794,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1994",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1994/1994"
                                     }
                                 ],
                                 "unittitle": {
@@ -3754,7 +3824,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1994",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1994/1994"
                                     }
                                 ],
                                 "unittitle": {
@@ -3783,7 +3854,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1994",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1994/1994"
                                     }
                                 ],
                                 "unittitle": {
@@ -3812,7 +3884,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1994",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1994/1994"
                                     }
                                 ],
                                 "unittitle": {
@@ -3841,7 +3914,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1994",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1994/1994"
                                     }
                                 ],
                                 "unittitle": {
@@ -3870,7 +3944,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1994",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1994/1994"
                                     }
                                 ],
                                 "unittitle": {
@@ -3899,7 +3974,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1994",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1994/1994"
                                     }
                                 ],
                                 "unittitle": {
@@ -3928,7 +4004,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1994",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1994/1994"
                                     }
                                 ],
                                 "unittitle": {
@@ -3957,7 +4034,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1994",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1994/1994"
                                     }
                                 ],
                                 "unittitle": {
@@ -3986,7 +4064,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1994",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1994/1994"
                                     }
                                 ],
                                 "unittitle": {
@@ -4015,7 +4094,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1995",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1995/1995"
                                     }
                                 ],
                                 "unittitle": {
@@ -4044,7 +4124,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1995",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1995/1995"
                                     }
                                 ],
                                 "unittitle": {
@@ -4073,7 +4154,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1996",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1996/1996"
                                     }
                                 ],
                                 "unittitle": {
@@ -4102,7 +4184,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1997",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1997/1997"
                                     }
                                 ],
                                 "unittitle": {
@@ -4131,7 +4214,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1998",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1998/1998"
                                     }
                                 ],
                                 "unittitle": {
@@ -4160,7 +4244,8 @@
                                 "unitdate": [
                                     {
                                         "value": "2000",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "2000/2000"
                                     }
                                 ],
                                 "unittitle": {
@@ -4190,7 +4275,8 @@
                                     {
                                         "value": "2001-2003",
                                         "type": "inclusive",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "2001/2003"
                                     }
                                 ],
                                 "unittitle": {
@@ -4204,7 +4290,8 @@
                             {
                                 "value": "1994-2003",
                                 "type": "inclusive",
-                                "datechar": "creation"
+                                "datechar": "creation",
+                                "normal": "1994/2003"
                             }
                         ],
                         "unittitle": {
@@ -4267,7 +4354,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1751",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1751/1751"
                                     }
                                 ],
                                 "unittitle": {
@@ -4341,7 +4429,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1835",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1835/1835"
                                     }
                                 ],
                                 "unittitle": {
@@ -4415,7 +4504,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1719",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1719/1719"
                                     }
                                 ],
                                 "unittitle": {
@@ -4489,7 +4579,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1856",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1856/1856"
                                     }
                                 ],
                                 "unittitle": {
@@ -4563,7 +4654,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1795",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1795/1795"
                                     }
                                 ],
                                 "unittitle": {
@@ -4622,7 +4714,8 @@
                                 "unitdate": [
                                     {
                                         "value": "circa 1820",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1820/1820"
                                     }
                                 ],
                                 "unittitle": {
@@ -4682,7 +4775,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1877",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1877/1877"
                                     }
                                 ],
                                 "unittitle": {
@@ -4713,7 +4807,8 @@
                                 "unitdate": [
                                     {
                                         "value": "1937",
-                                        "datechar": "creation"
+                                        "datechar": "creation",
+                                        "normal": "1937/1937"
                                     }
                                 ],
                                 "unittitle": {
@@ -4743,7 +4838,8 @@
                             {
                                 "value": "1719-1937",
                                 "type": "inclusive",
-                                "datechar": "creation"
+                                "datechar": "creation",
+                                "normal": "1719/1937"
                             }
                         ],
                         "unittitle": {

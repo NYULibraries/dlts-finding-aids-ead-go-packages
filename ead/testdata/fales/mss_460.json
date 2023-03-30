@@ -232,7 +232,8 @@
             "unitdate": [
                 {
                     "value": "2015-2016",
-                    "type": "inclusive"
+                    "type": "inclusive",
+                    "normal": "2015/2016"
                 }
             ],
             "unitid": "MSS.460",
@@ -321,7 +322,8 @@
                                         "unitdate": [
                                             {
                                                 "value": "2016",
-                                                "type": "inclusive"
+                                                "type": "inclusive",
+                                                "normal": "2016/2016"
                                             }
                                         ],
                                         "unitid": "cuid5743",
@@ -384,7 +386,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2016"
+                                                "value": "2016",
+                                                "normal": "2016/2016"
                                             }
                                         ],
                                         "unitid": "cuid5744",
@@ -406,7 +409,8 @@
                                 ],
                                 "unitdate": [
                                     {
-                                        "value": "2016"
+                                        "value": "2016",
+                                        "normal": "2016/2016"
                                     }
                                 ],
                                 "unittitle": {
@@ -462,7 +466,8 @@
                                 ],
                                 "unitdate": [
                                     {
-                                        "value": "2017-ongoing"
+                                        "value": "2017-ongoing",
+                                        "normal": "2017/2017"
                                     }
                                 ],
                                 "unitid": "cuid7032",
@@ -577,7 +582,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2016"
+                                                "value": "2016",
+                                                "normal": "2016/2016"
                                             }
                                         ],
                                         "unitid": "cuid5746",
@@ -656,7 +662,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2016"
+                                                "value": "2016",
+                                                "normal": "2016/2016"
                                             }
                                         ],
                                         "unitid": "cuid5745",
@@ -719,7 +726,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2016"
+                                                "value": "2016",
+                                                "normal": "2016/2016"
                                             }
                                         ],
                                         "unitid": "cuid7033",
@@ -741,7 +749,8 @@
                                 ],
                                 "unitdate": [
                                     {
-                                        "value": "2016"
+                                        "value": "2016",
+                                        "normal": "2016/2016"
                                     }
                                 ],
                                 "unittitle": {
@@ -823,7 +832,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2016"
+                                                "value": "2016",
+                                                "normal": "2016/2016"
                                             }
                                         ],
                                         "unitid": "cuid5749",
@@ -902,7 +912,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2016"
+                                                "value": "2016",
+                                                "normal": "2016/2016"
                                             }
                                         ],
                                         "unitid": "cuid5748",
@@ -965,7 +976,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2015"
+                                                "value": "2015",
+                                                "normal": "2015/2015"
                                             }
                                         ],
                                         "unitid": "cuid5750",
@@ -988,7 +1000,8 @@
                                 "unitdate": [
                                     {
                                         "value": "2015-2016",
-                                        "type": "inclusive"
+                                        "type": "inclusive",
+                                        "normal": "2015/2016"
                                     }
                                 ],
                                 "unittitle": {
@@ -1050,7 +1063,8 @@
                                 ],
                                 "unitdate": [
                                     {
-                                        "value": "2016"
+                                        "value": "2016",
+                                        "normal": "2016/2016"
                                     }
                                 ],
                                 "unitid": "cuid7031",
@@ -1133,7 +1147,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2016"
+                                                "value": "2016",
+                                                "normal": "2016/2016"
                                             }
                                         ],
                                         "unitid": "cuid5752",
@@ -1212,7 +1227,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2016"
+                                                "value": "2016",
+                                                "normal": "2016/2016"
                                             }
                                         ],
                                         "unitid": "cuid5751",
@@ -1275,7 +1291,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2016"
+                                                "value": "2016",
+                                                "normal": "2016/2016"
                                             }
                                         ],
                                         "unitid": "cuid5753",
@@ -1297,7 +1314,8 @@
                                 ],
                                 "unitdate": [
                                     {
-                                        "value": "2016"
+                                        "value": "2016",
+                                        "normal": "2016/2016"
                                     }
                                 ],
                                 "unittitle": {
@@ -1379,7 +1397,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2016"
+                                                "value": "2016",
+                                                "normal": "2016/2016"
                                             }
                                         ],
                                         "unitid": "cuid5755",
@@ -1458,7 +1477,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2016"
+                                                "value": "2016",
+                                                "normal": "2016/2016"
                                             }
                                         ],
                                         "unitid": "cuid5754",
@@ -1521,7 +1541,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2016"
+                                                "value": "2016",
+                                                "normal": "2016/2016"
                                             }
                                         ],
                                         "unitid": "cuid5756",
@@ -1543,7 +1564,8 @@
                                 ],
                                 "unitdate": [
                                     {
-                                        "value": "2016"
+                                        "value": "2016",
+                                        "normal": "2016/2016"
                                     }
                                 ],
                                 "unittitle": {
@@ -1625,7 +1647,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2015"
+                                                "value": "2015",
+                                                "normal": "2015/2015"
                                             }
                                         ],
                                         "unitid": "cuid5758",
@@ -1704,7 +1727,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2015"
+                                                "value": "2015",
+                                                "normal": "2015/2015"
                                             }
                                         ],
                                         "unitid": "cuid5757",
@@ -1767,7 +1791,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2015"
+                                                "value": "2015",
+                                                "normal": "2015/2015"
                                             }
                                         ],
                                         "unitid": "cuid5759",
@@ -1789,7 +1814,8 @@
                                 ],
                                 "unitdate": [
                                     {
-                                        "value": "2015"
+                                        "value": "2015",
+                                        "normal": "2015/2015"
                                     }
                                 ],
                                 "unittitle": {
@@ -1871,7 +1897,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2016"
+                                                "value": "2016",
+                                                "normal": "2016/2016"
                                             }
                                         ],
                                         "unitid": "cuid5761",
@@ -1950,7 +1977,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2016"
+                                                "value": "2016",
+                                                "normal": "2016/2016"
                                             }
                                         ],
                                         "unitid": "cuid5760",
@@ -2013,7 +2041,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2016"
+                                                "value": "2016",
+                                                "normal": "2016/2016"
                                             }
                                         ],
                                         "unitid": "cuid5762",
@@ -2035,7 +2064,8 @@
                                 ],
                                 "unitdate": [
                                     {
-                                        "value": "2016"
+                                        "value": "2016",
+                                        "normal": "2016/2016"
                                     }
                                 ],
                                 "unittitle": {
@@ -2117,7 +2147,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2016"
+                                                "value": "2016",
+                                                "normal": "2016/2016"
                                             }
                                         ],
                                         "unitid": "cuid5764",
@@ -2196,7 +2227,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2016"
+                                                "value": "2016",
+                                                "normal": "2016/2016"
                                             }
                                         ],
                                         "unitid": "cuid5763",
@@ -2259,7 +2291,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2015"
+                                                "value": "2015",
+                                                "normal": "2015/2015"
                                             }
                                         ],
                                         "unitid": "cuid5765",
@@ -2282,7 +2315,8 @@
                                 "unitdate": [
                                     {
                                         "value": "2015-2016",
-                                        "type": "inclusive"
+                                        "type": "inclusive",
+                                        "normal": "2015/2016"
                                     }
                                 ],
                                 "unittitle": {
@@ -2364,7 +2398,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2016"
+                                                "value": "2016",
+                                                "normal": "2016/2016"
                                             }
                                         ],
                                         "unitid": "cuid5767",
@@ -2443,7 +2478,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2016"
+                                                "value": "2016",
+                                                "normal": "2016/2016"
                                             }
                                         ],
                                         "unitid": "cuid5766",
@@ -2506,7 +2542,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2016"
+                                                "value": "2016",
+                                                "normal": "2016/2016"
                                             }
                                         ],
                                         "unitid": "cuid5768",
@@ -2528,7 +2565,8 @@
                                 ],
                                 "unitdate": [
                                     {
-                                        "value": "2016"
+                                        "value": "2016",
+                                        "normal": "2016/2016"
                                     }
                                 ],
                                 "unittitle": {
@@ -2610,7 +2648,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2016"
+                                                "value": "2016",
+                                                "normal": "2016/2016"
                                             }
                                         ],
                                         "unitid": "cuid5770",
@@ -2689,7 +2728,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2016"
+                                                "value": "2016",
+                                                "normal": "2016/2016"
                                             }
                                         ],
                                         "unitid": "cuid5769",
@@ -2752,7 +2792,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2016"
+                                                "value": "2016",
+                                                "normal": "2016/2016"
                                             }
                                         ],
                                         "unitid": "cuid5771",
@@ -2774,7 +2815,8 @@
                                 ],
                                 "unitdate": [
                                     {
-                                        "value": "2016"
+                                        "value": "2016",
+                                        "normal": "2016/2016"
                                     }
                                 ],
                                 "unittitle": {
@@ -2856,7 +2898,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2015"
+                                                "value": "2015",
+                                                "normal": "2015/2015"
                                             }
                                         ],
                                         "unitid": "cuid5773",
@@ -2935,7 +2978,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2015"
+                                                "value": "2015",
+                                                "normal": "2015/2015"
                                             }
                                         ],
                                         "unitid": "cuid5772",
@@ -2998,7 +3042,8 @@
                                         ],
                                         "unitdate": [
                                             {
-                                                "value": "2015"
+                                                "value": "2015",
+                                                "normal": "2015/2015"
                                             }
                                         ],
                                         "unitid": "cuid5774",
@@ -3020,7 +3065,8 @@
                                 ],
                                 "unitdate": [
                                     {
-                                        "value": "2015"
+                                        "value": "2015",
+                                        "normal": "2015/2015"
                                     }
                                 ],
                                 "unittitle": {
