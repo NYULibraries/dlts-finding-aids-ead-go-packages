@@ -239,10 +239,10 @@ func TestUpdatePubInfo(t *testing.T) {
 	})
 }
 
-func TestBarcodeRemovalFromLabels(t *testing.T) {
+func TestBarcodeRemovalFromLabelsAndNonURLRole(t *testing.T) {
 	var params iJSONTestParams
 
-	params.TestName = "Barcode Removal from Labels"
+	params.TestName = "Barcode Removal from Labels and Non-URL Role"
 	params.EADFilePath = filepath.Join(falesTestFixturePath, "mss_460.xml")
 	params.JSONReferenceFilePath = filepath.Join(falesTestFixturePath, "mss_460.json")
 	params.JSONErrorFilePath = "./testdata/tmp/failing-test-barcode-removal.json"
