@@ -138,7 +138,7 @@ func writeConvertTextWithTagsCodeToBuffer(w *bytes.Buffer) {
 		"Title":      "getConvertedTextWithTagsNoLBConversion",
 		// Do not add TitleProper because it requires custom marshaling.
 		// Do not add TitleStmt   because it requires custom marshaling.
-		// Do not add UnitDate    because it requires custom marshaling.
+		"UnitDate":  "getConvertedTextWithTags",
 		"UnitTitle": "getConvertedTextWithTags",
 	}
 
