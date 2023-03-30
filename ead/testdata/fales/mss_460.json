@@ -1048,7 +1048,7 @@
                                     {
                                         "actuate": "onRequest",
                                         "href": "FA_MSS_460_ER_9",
-                                        "role": "external-link",
+                                        "role": "non-url",
                                         "show": "new",
                                         "title": "Inventories",
                                         "type": "simple",
