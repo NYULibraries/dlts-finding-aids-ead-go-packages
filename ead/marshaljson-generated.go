@@ -469,28 +469,6 @@ func (title *Title) MarshalJSON() ([]byte, error) {
 	return jsonData, nil
 }
 
-func (unitdate *UnitDate) MarshalJSON() ([]byte, error) {
-	type UnitDateWithTags UnitDate
-
-	result, err := getConvertedTextWithTags(unitdate.Value)
-	if err != nil {
-		return nil, err
-	}
-
-	jsonData, err := json.Marshal(&struct {
-		Value string `json:"value,omitempty"`
-		*UnitDateWithTags
-	}{
-		Value:            string(result),
-		UnitDateWithTags: (*UnitDateWithTags)(unitdate),
-	})
-	if err != nil {
-		return nil, err
-	}
-
-	return jsonData, nil
-}
-
 func (unittitle *UnitTitle) MarshalJSON() ([]byte, error) {
 	type UnitTitleWithTags UnitTitle
 
