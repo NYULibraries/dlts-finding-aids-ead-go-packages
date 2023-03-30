@@ -509,6 +509,7 @@ type TitleStmt struct {
 type UnitDate struct {
 	Type     FilteredString `xml:"type,attr" json:"type,omitempty"`
 	DateChar FilteredString `xml:"datechar,attr" json:"datechar,omitempty"`
+	Normal   FilteredString `xml:"normal,attr" json:"normal,omitempty"`
 
 	Value string `xml:",innerxml" json:"value,omitempty"`
 }
