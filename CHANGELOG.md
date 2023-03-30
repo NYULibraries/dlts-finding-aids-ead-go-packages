@@ -1,5 +1,15 @@
 # CHANGELOG
 
+#### v0.22.0
+  - add `Normal` to `UnitDate`
+  - add custom marshaling for `UnitDate` using the following logic:
+    - if there is a `Value`, then output the `Value`  
+	  else if the `<unitdate @normal>` attribute is populated,   
+	  then use the `@normal` attribute value converted as follows:  
+      `@normal="dateA/dateB"`  
+        if `dateA == dateB` then `Value = "dateA"`  
+        if `dateA != dateB` then `Value = "dateA-dateB"`
+
 #### v0.21.0
   - add `ArchRef` and `TitleValue` to `ExtRef` type
   - add `Date` to `Creation` type to align with [FADESIGN-29 data model](https://github.com/nyudlts/fadesign_29-data-model/blob/main/models.csv)
