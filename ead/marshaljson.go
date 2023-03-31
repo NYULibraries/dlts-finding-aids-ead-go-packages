@@ -2,7 +2,7 @@ package ead
 
 import (
 	"encoding/json"
-//	"fmt"
+	//	"fmt"
 	"net/url"
 	"regexp"
 	"strings"
@@ -167,17 +167,19 @@ func (indexEntry *IndexEntry) MarshalJSON() ([]byte, error) {
 }
 
 // set blank DAO Role attributes to "external-link"
-// if a DAO has a non-URL HREF, then set the role to "non-url"
+// if a DAO does not have a role, and has a non-URL HREF, then set the role to "non-url"
 func (dao *DAO) MarshalJSON() ([]byte, error) {
-	// if DAO Role is empty, set it to external link
 	type DAOAlias DAO
+
+	// if DAO Role is empty,
+	//    and DAO.Href is a valid URL then role = "external-link"
+	//    and DAO.Href is NOT a valid URL then role = "non-url"
 	if len(strings.TrimSpace(string(dao.Role))) == 0 {
 		dao.Role = "external-link"
-	}
-
-	_, err := url.ParseRequestURI(string(dao.Href))
-	if err != nil {
-		dao.Role = "non-url"
+		_, err := url.ParseRequestURI(string(dao.Href))
+		if err != nil {
+			dao.Role = "non-url"
+		}
 	}
 
 	return json.Marshal(&struct {
