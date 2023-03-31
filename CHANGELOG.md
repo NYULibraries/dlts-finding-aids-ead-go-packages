@@ -1,5 +1,16 @@
 # CHANGELOG
 
+#### v0.23.0
+  - Update `DAO MarshalJSON()` as follows:
+     if `DAO.Role` is empty,
+       and `DAO.Href` IS     a valid URL then `role = "external-link"`
+       and `DAO.Href` IS NOT a valid URL then `role = "non-url"`
+
+  - remove UnitDate custom marshaling
+    Remove custom marshaling of UnitDate because the functionality  
+      required to properly process the UnitDate values is better  
+      performed in the FASB.
+
 #### v0.22.0
   - add `Normal` to `UnitDate`
   - add custom marshaling for `UnitDate` using the following logic:
