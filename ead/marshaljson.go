@@ -2,13 +2,14 @@ package ead
 
 import (
 	"encoding/json"
-	"fmt"
+	//	"fmt"
+	"net/url"
 	"regexp"
 	"strings"
 )
 
-var unitDateNormalRegexp = regexp.MustCompile(`(.+)/(.+)`)
-var unitDateNormalExpectedStringSubmatchCount = 3
+// var unitDateNormalRegexp = regexp.MustCompile(`(.+)/(.+)`)
+// var unitDateNormalExpectedStringSubmatchCount = 3
 
 // Note that this custom marshalling for DID will prevent PhysDesc from having a Value field
 // that is all whitespace if Extent is nil, but won't prevent PhysDesc from having
@@ -166,11 +167,19 @@ func (indexEntry *IndexEntry) MarshalJSON() ([]byte, error) {
 }
 
 // set blank DAO Role attributes to "external-link"
+// if a DAO does not have a role, and has a non-URL HREF, then set the role to "non-url"
 func (dao *DAO) MarshalJSON() ([]byte, error) {
-	// if DAO Role is empty, set it to external link
 	type DAOAlias DAO
+
+	// if DAO Role is empty,
+	//    and DAO.Href is a valid URL then role = "external-link"
+	//    and DAO.Href is NOT a valid URL then role = "non-url"
 	if len(strings.TrimSpace(string(dao.Role))) == 0 {
 		dao.Role = "external-link"
+		_, err := url.ParseRequestURI(string(dao.Href))
+		if err != nil {
+			dao.Role = "non-url"
+		}
 	}
 
 	return json.Marshal(&struct {
@@ -243,53 +252,53 @@ func (fnwh *FormattedNoteWithHead) MarshalJSON() ([]byte, error) {
 	})
 }
 
-func (unitdate *UnitDate) MarshalJSON() ([]byte, error) {
-	type UnitDateWithTags UnitDate
+// func (unitdate *UnitDate) MarshalJSON() ([]byte, error) {
+// 	type UnitDateWithTags UnitDate
 
-	result, err := getConvertedTextWithTags(unitdate.Value)
-	if err != nil {
-		return nil, err
-	}
+// 	result, err := getConvertedTextWithTags(unitdate.Value)
+// 	if err != nil {
+// 		return nil, err
+// 	}
 
-	// clean up any blank space
-	result = []byte(strings.TrimSpace(string(result)))
+// 	// clean up any blank space
+// 	result = []byte(strings.TrimSpace(string(result)))
 
-	// if result is empty...
-	if len(result) == 0 {
-		// check if we have a date value in Normal
-		if len(strings.TrimSpace(string(unitdate.Normal))) == 0 {
-			// nothing here, so omit this unitdate by setting the
-			// unitdate variable to an empty struct, which will
-			// be omitted during marshaling
-			unitdate = &UnitDate{}
-		} else {
-			// ok, we found something. Let's convert the value...
-			matches := unitDateNormalRegexp.FindStringSubmatch(string(unitdate.Normal))
+// 	// if result is empty...
+// 	if len(result) == 0 {
+// 		// check if we have a date value in Normal
+// 		if len(strings.TrimSpace(string(unitdate.Normal))) == 0 {
+// 			// nothing here, so omit this unitdate by setting the
+// 			// unitdate variable to an empty struct, which will
+// 			// be omitted during marshaling
+// 			unitdate = &UnitDate{}
+// 		} else {
+// 			// ok, we found something. Let's convert the value...
+// 			matches := unitDateNormalRegexp.FindStringSubmatch(string(unitdate.Normal))
 
-			if len(matches) < unitDateNormalExpectedStringSubmatchCount {
-				return nil, fmt.Errorf("problem parsing UnitDate.Normal")
-			}
-			// extract the values and configure result accordingly
-			dateA := matches[1]
-			dateB := matches[2]
+// 			if len(matches) < unitDateNormalExpectedStringSubmatchCount {
+// 				return nil, fmt.Errorf("problem parsing UnitDate.Normal")
+// 			}
+// 			// extract the values and configure result accordingly
+// 			dateA := matches[1]
+// 			dateB := matches[2]
 
-			if dateA == dateB {
-				result = []byte(dateA)
-			} else {
-				result = []byte(dateA + "-" + dateB)
-			}
-		}
-	}
-	jsonData, err := json.Marshal(&struct {
-		Value string `json:"value,omitempty"`
-		*UnitDateWithTags
-	}{
-		Value:            string(result),
-		UnitDateWithTags: (*UnitDateWithTags)(unitdate),
-	})
-	if err != nil {
-		return nil, err
-	}
+// 			if dateA == dateB {
+// 				result = []byte(dateA)
+// 			} else {
+// 				result = []byte(dateA + "-" + dateB)
+// 			}
+// 		}
+// 	}
+// 	jsonData, err := json.Marshal(&struct {
+// 		Value string `json:"value,omitempty"`
+// 		*UnitDateWithTags
+// 	}{
+// 		Value:            string(result),
+// 		UnitDateWithTags: (*UnitDateWithTags)(unitdate),
+// 	})
+// 	if err != nil {
+// 		return nil, err
+// 	}
 
-	return jsonData, nil
-}
+// 	return jsonData, nil
+// }
