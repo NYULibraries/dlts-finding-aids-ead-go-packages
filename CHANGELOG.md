@@ -1,10 +1,14 @@
 # CHANGELOG
 
+#### v0.23.1
+  - Remove unneeded `UnitDate` code after successfully moving  
+    the functionality to the `FASB`
+
 #### v0.23.0
-  - Update `DAO MarshalJSON()` as follows:
-     if `DAO.Role` is empty,
-       and `DAO.Href` IS     a valid URL then `role = "external-link"`
-       and `DAO.Href` IS NOT a valid URL then `role = "non-url"`
+  - Update `DAO MarshalJSON()` as follows:  
+     if `DAO.Role` is empty,  
+       and `DAO.Href` IS     a valid URL then `role = "external-link"`  
+       and `DAO.Href` IS NOT a valid URL then `role = "non-url"`  
 
   - remove `UnitDate` custom marshaling  
     Remove custom marshaling of `UnitDate` because the functionality  
