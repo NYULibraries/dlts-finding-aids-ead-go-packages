@@ -1,5 +1,10 @@
 # CHANGELOG
 
+#### v0.23.2
+  - Replace xlink.xsd `schemaLocation` URL with a DLTS-managed HTTP  
+    handle.  HTTP is required because the `libxml2` library does   
+	not support importing external schema over HTTPS.  
+    
 #### v0.23.1
   - Remove unneeded `UnitDate` code after successfully moving  
     the functionality to the `FASB`
