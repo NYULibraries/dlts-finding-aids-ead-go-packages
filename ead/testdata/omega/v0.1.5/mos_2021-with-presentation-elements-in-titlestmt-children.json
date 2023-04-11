@@ -3660,7 +3660,6 @@
                                     {
                                         "actuate": "onRequest",
                                         "href": "https://aeon.library.nyu.edu/remoteauth/aeon.dll?Logon\u0026Action=10\u0026Form=31\u0026Value=http://dlib.nyu.edu/findingaids/ead/tamwag/mos_2021.xml\u0026view=xml",
-                                        "role": "external-link",
                                         "show": "new",
                                         "title": "This is a digital object",
                                         "type": "simple",

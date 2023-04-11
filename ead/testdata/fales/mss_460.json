@@ -451,7 +451,6 @@
                                     {
                                         "actuate": "onRequest",
                                         "href": "https://wayback.archive-it.org/7872/*/http://www.bitrosie.com",
-                                        "role": "external-link",
                                         "show": "new",
                                         "title": "Archived Bit Rosie Website",
                                         "type": "simple",
@@ -1048,7 +1047,6 @@
                                     {
                                         "actuate": "onRequest",
                                         "href": "FA_MSS_460_ER_9",
-                                        "role": "non-url",
                                         "show": "new",
                                         "title": "Inventories",
                                         "type": "simple",
