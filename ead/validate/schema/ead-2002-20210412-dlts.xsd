@@ -70,7 +70,7 @@
 	xmlns="urn:isbn:1-931666-22-9" xmlns:xlink="http://www.w3.org/1999/xlink"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema">
 	<xs:import namespace="http://www.w3.org/1999/xlink"
-		schemaLocation="http://hdl.handle.net/2333.1/cz8w9pwp"/>
+		schemaLocation="http://dlts-support-files.s3.amazonaws.com/findingaids/xsd/xlink.xsd"/>
 	<xs:attributeGroup name="am.date.normal">
 		<xs:attribute name="normal">
 			<xs:simpleType>
