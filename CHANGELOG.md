@@ -1,9 +1,11 @@
 # CHANGELOG
 
-#### v0.23.2
+#### v0.23.2-2023-04-11T15_10
   - Replace xlink.xsd `schemaLocation` URL with a DLTS-managed HTTP  
     handle.  HTTP is required because the `libxml2` library does   
 	not support importing external schema over HTTPS.  
+  - DISABLED DAO role assignment to `external-link` when no role present  
+    This functionality was moved to the FASB.  
     
 #### v0.23.1
   - Remove unneeded `UnitDate` code after successfully moving  
