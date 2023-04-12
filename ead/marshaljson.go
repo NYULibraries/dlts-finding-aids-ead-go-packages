@@ -3,9 +3,8 @@ package ead
 import (
 	"encoding/json"
 	//	"fmt"
-	"net/url"
+
 	"regexp"
-	"strings"
 )
 
 // Note that this custom marshalling for DID will prevent PhysDesc from having a Value field
@@ -163,9 +162,24 @@ func (indexEntry *IndexEntry) MarshalJSON() ([]byte, error) {
 	})
 }
 
+/* // set blank DAO Role attributes to "external-link"
+func (dao *DAO) MarshalJSON() ([]byte, error) {
+	// if DAO Role is empty, set it to external link
+	type DAOAlias DAO
+	if len(strings.TrimSpace(string(dao.Role))) == 0 {
+		dao.Role = "external-link"
+	}
+
+	return json.Marshal(&struct {
+		*DAOAlias
+	}{
+		DAOAlias: (*DAOAlias)(dao),
+	})
+}
+*/
 // set blank DAO Role attributes to "external-link"
 // if a DAO does not have a role, and has a non-URL HREF, then set the role to "non-url"
-func (dao *DAO) MarshalJSON() ([]byte, error) {
+/* func (dao *DAO) MarshalJSON() ([]byte, error) {
 	type DAOAlias DAO
 
 	// if DAO Role is empty,
@@ -185,7 +199,7 @@ func (dao *DAO) MarshalJSON() ([]byte, error) {
 		DAOAlias: (*DAOAlias)(dao),
 	})
 }
-
+*/
 func (extent *Extent) MarshalJSON() ([]byte, error) {
 	type ExtentWithTags Extent
 
@@ -248,4 +262,3 @@ func (fnwh *FormattedNoteWithHead) MarshalJSON() ([]byte, error) {
 		FormattedNoteWithHeadAlias: (*FormattedNoteWithHeadAlias)(fnwh),
 	})
 }
-
