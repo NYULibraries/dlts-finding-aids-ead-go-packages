@@ -25,6 +25,9 @@ var eadIDTooLongFixturePath string
 var invalidArchDescLevelFixturePath string
 var tooBigFileFixturePath string
 var invalidEADWithNamespaceErrorsFixturePath string
+var cbhValidEADFixturePath string
+var bcValidEADFixturePath string
+var bhsValidEADFixturePath string
 
 // Source: https://intellij-support.jetbrains.com/hc/en-us/community/posts/360009685279-Go-test-working-directory-keeps-changing-to-dir-of-the-test-file-instead-of-value-in-template?page=1#community_comment_360002183640
 func init() {
@@ -49,6 +52,9 @@ func init() {
 	eadIDTooLongFixturePath = filepath.Join(fixturesDirPath, "tam_647-eadid-too-long.xml")
 	invalidArchDescLevelFixturePath = filepath.Join(fixturesDirPath, "ad_mc_030_ref160-invalid-archdesc-level.xml")
 	tooBigFileFixturePath = filepath.Join(fixturesDirPath, "b44d567a-95c1-4f0d-b16a-d9448cde1aa5.xml")
+	cbhValidEADFixturePath = filepath.Join(fixturesDirPath, "cbhm_0002.xml")
+	bcValidEADFixturePath = filepath.Join(fixturesDirPath, "bcms_0001.xml")
+	bhsValidEADFixturePath = filepath.Join(fixturesDirPath, "arc_061_meeker.xml")
 }
 
 func doTest(file string, expected []string, t *testing.T) {
@@ -346,4 +352,16 @@ func TestAssertMaxFileSize(t *testing.T) {
 		makeFileTooBigErrorMessage(tooBigFileFixturePath, MAXIMUM_FILE_SIZE+1),
 	}
 	doTestWithValidateEADFromFilePath(tooBigFileFixturePath, expected, t)
+}
+
+func TestValidateEADValidCBHCenterForBrooklynHistory(t *testing.T) {
+	doTest(cbhValidEADFixturePath, []string{}, t)
+}
+
+func TestValidateEADValidCBHBrooklynCollection(t *testing.T) {
+	doTest(bcValidEADFixturePath, []string{}, t)
+}
+
+func TestValidateEADValidCBHBrooklynHistoricalSociety(t *testing.T) {
+	doTest(bhsValidEADFixturePath, []string{}, t)
 }
