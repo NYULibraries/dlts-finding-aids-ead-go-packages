@@ -791,7 +791,7 @@ func addPresentationContainers(csp *[]*C) []*C {
 				pc.Level = "dl-presentation"
 				pcCount += 1
 				pc.ID = FilteredString(fmt.Sprintf("items%03d", pcCount))
-				pc.DID.UnitTitle = &UnitTitle{Value: "View Items"}
+				pc.DID.UnitTitle = &UnitTitle{Value: "View Inventory"}
 				pc.C = cs[collapseStartIdx:collapseEndIdx]
 				keepStartIdx = collapseEndIdx
 				collapsedCs = append(collapsedCs, pc)
@@ -806,7 +806,7 @@ func addPresentationContainers(csp *[]*C) []*C {
 		pc.Level = "dl-presentation"
 		pcCount += 1
 		pc.ID = FilteredString(fmt.Sprintf("items%03d", pcCount))
-		pc.DID.UnitTitle = &UnitTitle{Value: "View Items"}
+		pc.DID.UnitTitle = &UnitTitle{Value: "View Inventory"}
 		pc.C = cs[collapseStartIdx:] // to the end of the slice because we ended on a run
 		collapsedCs = append(collapsedCs, pc)
 	} else {

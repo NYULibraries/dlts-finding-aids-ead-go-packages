@@ -1,5 +1,13 @@
 # CHANGELOG
 
+#### v0.24.0
+  - Change presentation container title from "View Items" to  
+    "View Inventory".  
+  - Added two additional valid `<repository><corpname>` values for  
+    the `Center for Brooklyn History` archival repository:  
+	* `Brooklyn Collection`  
+	* `Brooklyn Historical Society`  
+
 #### v0.23.2
   - Replace xlink.xsd `schemaLocation` URL with an S3 HTTP URL.  
     HTTP is required because the `libxml2` library does not  

@@ -28,6 +28,8 @@ const ARCHDESC_REQUIRED_LEVEL = "collection"
 
 var ValidRepositoryNames = []string{
 	"Akkasah: Photography Archive (NYU Abu Dhabi)",
+	"Brooklyn Collection",
+	"Brooklyn Historical Society",
 	"Center for Brooklyn History",
 	"Fales Library and Special Collections",
 	"NYU Abu Dhabi, Archives and Special Collections",
