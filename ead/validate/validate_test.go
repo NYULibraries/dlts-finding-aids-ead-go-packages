@@ -18,6 +18,7 @@ var invalidEADFixturePath string
 var missingRequiredElementsEADIDAndArchDescFixturePath string
 var missingRequiredElementsEADIDAndRepositoryFixturePath string
 var missingRequiredElementsEADIDAndRepositoryCorpnameFixturePath string
+var invalidEADTrailingSpaceInEADIDFixturePath string
 var validEADFixturePath string
 var validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath string
 var akkasahRepositoryNameFixturePath string
@@ -46,6 +47,7 @@ func init() {
 	missingRequiredElementsEADIDAndArchDescFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-archdesc.xml")
 	missingRequiredElementsEADIDAndRepositoryFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-repository.xml")
 	missingRequiredElementsEADIDAndRepositoryCorpnameFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-repository-corpname.xml")
+	invalidEADTrailingSpaceInEADIDFixturePath = filepath.Join(fixturesDirPath, "mc_100-space-in-eadid.xml")
 	validEADFixturePath = filepath.Join(fixturesDirPath, "mc_100.xml")
 	validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath = filepath.Join(fixturesDirPath, "mc_100-valid-eadid-with-leading-and-trailing-spaces.xml")
 	akkasahRepositoryNameFixturePath = filepath.Join(fixturesDirPath, "ad_mc_030_ref160-corrected-archdesc-level.xml")
@@ -191,6 +193,8 @@ func TestValidEADIDRegexpString(t *testing.T) {
 		"PHOTOS_220",
 		"rg-2-2-7",
 		"Rg_38_0_1_2",
+		"mc_100 ",
+		" mc_100",
 	}
 
 	for _, eadid := range validEADIDs {
@@ -364,4 +368,12 @@ func TestValidateEADValidCBHBrooklynCollection(t *testing.T) {
 
 func TestValidateEADValidCBHBrooklynHistoricalSociety(t *testing.T) {
 	doTest(bhsValidEADFixturePath, []string{}, t)
+}
+
+func TestValidateEADIDWithSpace(t *testing.T) {
+	expected := []string{
+		makeInvalidXMLErrorMessage(),
+	}
+
+	doTest(invalidEADTrailingSpaceInEADIDFixturePath, expected, t)
 }
