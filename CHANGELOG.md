@@ -7,11 +7,11 @@
       and trailing blank space from the EADID value. Now the EADID validation  
       function checks the untrimmed EADID value.  
     
-    Tweak the `makeInvalidEADIDErrorMessage()` function to sort the invalid  
+  - Tweak the `makeInvalidEADIDErrorMessage()` function to sort the invalid  
       characters before generating the error string. This leads to  
       deterministic output, which is useful during testing.  
     
-    Tweak the invalid character output format: each invalid character is  
+  - Tweak the invalid character output format: each invalid character is  
       wrapped in single quotes and delimited by a comma and space.  
 
 #### v0.24.0
