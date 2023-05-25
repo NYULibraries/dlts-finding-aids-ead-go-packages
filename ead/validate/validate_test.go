@@ -19,8 +19,10 @@ var missingRequiredElementsEADIDAndArchDescFixturePath string
 var missingRequiredElementsEADIDAndRepositoryFixturePath string
 var missingRequiredElementsEADIDAndRepositoryCorpnameFixturePath string
 var invalidEADTrailingSpaceInEADIDFixturePath string
+var invalidEADLeadingSpaceInEADIDFixturePath string
+var invalidEADWithEADIDLeadingAndTrailingWhitespaceFixturePath string
+var invalidEADSpaceOnlyInEADIDFixturePath string
 var validEADFixturePath string
-var validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath string
 var akkasahRepositoryNameFixturePath string
 var eadIDTooLongFixturePath string
 var invalidArchDescLevelFixturePath string
@@ -47,9 +49,11 @@ func init() {
 	missingRequiredElementsEADIDAndArchDescFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-archdesc.xml")
 	missingRequiredElementsEADIDAndRepositoryFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-repository.xml")
 	missingRequiredElementsEADIDAndRepositoryCorpnameFixturePath = filepath.Join(fixturesDirPath, "mc_100-missing-eadid-and-repository-corpname.xml")
-	invalidEADTrailingSpaceInEADIDFixturePath = filepath.Join(fixturesDirPath, "mc_100-space-in-eadid.xml")
+	invalidEADLeadingSpaceInEADIDFixturePath = filepath.Join(fixturesDirPath, "mc_100-leading-space-in-eadid.xml")
+	invalidEADTrailingSpaceInEADIDFixturePath = filepath.Join(fixturesDirPath, "mc_100-trailing-space-in-eadid.xml")
+	invalidEADSpaceOnlyInEADIDFixturePath = filepath.Join(fixturesDirPath, "space-only-eadid.xml")
+	invalidEADWithEADIDLeadingAndTrailingWhitespaceFixturePath = filepath.Join(fixturesDirPath, "mc_100-invalid-eadid-with-leading-and-trailing-spaces.xml")
 	validEADFixturePath = filepath.Join(fixturesDirPath, "mc_100.xml")
-	validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath = filepath.Join(fixturesDirPath, "mc_100-valid-eadid-with-leading-and-trailing-spaces.xml")
 	akkasahRepositoryNameFixturePath = filepath.Join(fixturesDirPath, "ad_mc_030_ref160-corrected-archdesc-level.xml")
 	eadIDTooLongFixturePath = filepath.Join(fixturesDirPath, "tam_647-eadid-too-long.xml")
 	invalidArchDescLevelFixturePath = filepath.Join(fixturesDirPath, "ad_mc_030_ref160-invalid-archdesc-level.xml")
@@ -333,7 +337,6 @@ func TestValidateArchDescLevel(t *testing.T) {
 
 func TestValidateEADValidEADNoErrors(t *testing.T) {
 	doTest(validEADFixturePath, []string{}, t)
-	doTest(validEADWithEADIDLeadingAndTrailingWhitespaceFixturePath, []string{}, t)
 }
 
 func TestValidateEADAkkasahTitleEADNoErrors(t *testing.T) {
@@ -370,10 +373,33 @@ func TestValidateEADValidCBHBrooklynHistoricalSociety(t *testing.T) {
 	doTest(bhsValidEADFixturePath, []string{}, t)
 }
 
-func TestValidateEADIDWithSpace(t *testing.T) {
+func TestValidateEADIDWithTrailingSpace(t *testing.T) {
 	expected := []string{
-		makeInvalidXMLErrorMessage(),
+		makeInvalidEADIDErrorMessage("mc_100 ", []rune{' '}),
 	}
 
 	doTest(invalidEADTrailingSpaceInEADIDFixturePath, expected, t)
+}
+
+func TestValidateEADIDWithLeadingAndTrailingSpace(t *testing.T) {
+	invalidRunes := []rune("\n ")
+	expected := []string{
+		makeInvalidEADIDErrorMessage(" mc_100\n ", invalidRunes),
+	}
+
+	doTest(invalidEADWithEADIDLeadingAndTrailingWhitespaceFixturePath, expected, t)
+}
+
+func TestValidateEADIDWithLeadingSpace(t *testing.T) {
+	expected := []string{
+		makeInvalidEADIDErrorMessage(" mc_100", []rune{' '}),
+	}
+
+	doTest(invalidEADLeadingSpaceInEADIDFixturePath, expected, t)
+}
+
+func TestValidateEADIDWithSpaceOnly(t *testing.T) {
+	expected := []string{makeMissingRequiredElementErrorMessage("<eadid>")}
+
+	doTest(invalidEADSpaceOnlyInEADIDFixturePath, expected, t)
 }
