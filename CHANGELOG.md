@@ -1,5 +1,20 @@
 # CHANGELOG
 
+#### v0.24.1
+  - Tighten EADID blank-space validation criterion to align with finalized  
+      validation criteria.  No blank spaces are allowed in or around the  
+      EADID.  The previous version of the validation code trimmed leading  
+      and trailing blank space from the EADID value, which was  
+	  inconsistent with the finalized validation criteria.  
+      Now the EADID validation checks the untrimmed EADID value.  
+    
+    Tweak makeInvalidEADIDErrorMessage() function to sort the invalid  
+      characters before generating the error string. This leads to  
+      deterministic output, which is useful during testing.  
+    
+    Tweaked the invalid character output format: each invalid character is  
+      wrapped in single quotes and delimited by a comma and space.  
+
 #### v0.24.0
   - Change presentation container title from "View Items" to  
     "View Inventory".  
