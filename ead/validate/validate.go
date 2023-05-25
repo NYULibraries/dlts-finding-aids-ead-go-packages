@@ -8,6 +8,7 @@ import (
 	"io"
 	"os"
 	"regexp"
+	"sort"
 	"strings"
 	"unicode"
 
@@ -115,6 +116,20 @@ The EAD file contains unpublished material.  The following EAD elements have att
 %s`, strings.Join(elementsAudienceInternal, "\n"))
 }
 
+func invalidCharactersToString(invalidCharacters []rune) string {
+	// sort runes for deterministic output
+	// https://stackoverflow.com/a/65013200
+	sort.Slice(invalidCharacters, func(i, j int) bool {
+		return invalidCharacters[i] < invalidCharacters[j]
+	})
+
+	var s []string
+	for _, r := range invalidCharacters {
+		s = append(s, fmt.Sprintf("'%s'", string(r)))
+	}
+	return strings.Join(s, ", ")
+}
+
 func makeInvalidEADIDErrorMessage(eadid string, invalidCharacters []rune) string {
 	return fmt.Sprintf(`Invalid <eadid>
 
@@ -123,8 +138,8 @@ There must be a minimum of 2 character groups joined by an underscore.
 There is no maximum number of character groups, however, the <eadid>
 value must have at most %d characters.
 The following characters found in the eadid value are not allowed in
-character groups: "%s"
-`, eadid, MAXIMUM_EADID_LENGTH, string(invalidCharacters))
+character groups: %s
+`, eadid, MAXIMUM_EADID_LENGTH, invalidCharactersToString(invalidCharacters))
 }
 
 func makeEADIDTooLongErrorMessage(eadid string) string {
@@ -180,9 +195,14 @@ func validateEADID(ead ead.EAD) ([]string, error) {
 
 	// Even if the file contains only "<ead></ead>", ead.EADHeader.EADID.Value will
 	// be not empty.  Test for empty string.
-	if EADID != "" {
-		trimmedEADID := strings.TrimSpace(EADID)
-		match, err := regexp.Match(ValidEADIDRegexpString, []byte(trimmedEADID))
+	if EADID == "" || (len(strings.TrimSpace(EADID)) == 0) {
+		// empty EADID or EADID value is made up of blank space
+		validationErrors = append(validationErrors,
+			makeMissingRequiredElementErrorMessage("<eadid>"))
+
+	} else {
+		// EADID is not empty
+		match, err := regexp.Match(ValidEADIDRegexpString, []byte(EADID))
 		if err != nil {
 			return validationErrors, err
 		}
@@ -201,12 +221,9 @@ func validateEADID(ead ead.EAD) ([]string, error) {
 			validationErrors = append(validationErrors, makeInvalidEADIDErrorMessage(EADID, invalidCharacters))
 		}
 
-		if len(trimmedEADID) > MAXIMUM_EADID_LENGTH {
-			validationErrors = append(validationErrors, makeEADIDTooLongErrorMessage(trimmedEADID))
+		if len(EADID) > MAXIMUM_EADID_LENGTH {
+			validationErrors = append(validationErrors, makeEADIDTooLongErrorMessage(EADID))
 		}
-	} else {
-		validationErrors = append(validationErrors,
-			makeMissingRequiredElementErrorMessage("<eadid>"))
 	}
 
 	return validationErrors, nil
