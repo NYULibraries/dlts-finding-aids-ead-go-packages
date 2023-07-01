@@ -66,20 +66,28 @@ func ValidateEADFromFilePath(filepath string) ([]string, error) {
 func ValidateEAD(data []byte) ([]string, error) {
 	var validationErrors = []string{}
 
-	// Performing a two stage validation here:
-	// 1.) validateXML is just making sure that we have a valid XML document
-	// 2.) validateEADAgainstSchema is confirming that the document conforms
-	//     to the EAD schema
+	// Performing a multi-stage validation.
+	// * assert that the EAD contains valid XML
+	// * assert that the EAD was not exported using the ASpace EAD plugin
+	// * assert that the EAD is valid per the EAD schema
+	// * assert that the EAD complies with FADESIGN-specific validation criteria
 	//
 	// This approach avoids unwanted libxml2 output when the data is not XML
+	
 	validationErrors = append(validationErrors, validateXML(data)...)
 	// If the data is not valid XML there is no point doing any more checks.
 	if len(validationErrors) > 0 {
 		return validationErrors, nil
 	}
 
+	validationErrors = append(validationErrors, validateEADNotExportedWithPlugin(data)...)
+	// If the EAD was exported with the plugin enabled, there is no point doing any more checks.
+	if len(validationErrors) > 0 {
+		return validationErrors, nil
+	}
+
 	validationErrors = append(validationErrors, validateEADAgainstSchema(data)...)
-	// If the data is not valid XML there is no point doing any more checks.
+	// If the data is not a valid EAD there is no point doing any more checks.
 	if len(validationErrors) > 0 {
 		return validationErrors, nil
 	}
@@ -135,6 +143,7 @@ func makeInvalidEADIDErrorMessage(eadid string, invalidCharacters []rune) string
 
 <eadid> value "%s" does not conform to the Finding Aids specification.
 There must be a minimum of 2 character groups joined by an underscore.
+A character group consists of lowercase letters (a-z) and/or numbers (0-9).
 There is no maximum number of character groups, however, the <eadid>
 value must have at most %d characters.
 The following characters found in the eadid value are not allowed in
@@ -174,6 +183,10 @@ The repository name must match a value from this list:
 
 func makeInvalidXMLErrorMessage() string {
 	return "The XML in this file is not valid.  Please check it using an XML validator."
+}
+
+func makeExportedWithEADPluginErrorMessage() string {
+	return "This EAD appears to have been exported with the ArchivesSpace EAD plugin enabled. Rejecting EAD."
 }
 
 func makeMissingRequiredElementErrorMessage(elementName string) string {
@@ -389,6 +402,40 @@ func validateEADAgainstSchema(data []byte) []string {
 		for _, e := range err.(xsd.SchemaValidationError).Errors() {
 			validationErrors = append(validationErrors, e.Error())
 		}
+		return validationErrors
+	}
+
+	// all ok, return empty slice
+	return []string{}
+}
+
+// Validate that the EAD was NOT exported using the ASpace EAD plugin
+// https://guides.nyu.edu/archivesspace/development
+// https://github.com/NYULibraries/nyu_ead_export_plugin
+func validateEADNotExportedWithPlugin(data []byte) []string {
+	var validationErrors = []string{}
+
+	p := parser.New()
+	doc, err := p.Parse(data)
+	if err != nil {
+		validationErrors = append(validationErrors, "Unable to parse XML file")
+		return append(validationErrors, err.Error())
+	}
+	defer doc.Free()
+
+	root, err := doc.DocumentElement()
+	if err != nil {
+		validationErrors = append(validationErrors, "Failed to fetch document root element")
+		return append(validationErrors, err.Error())
+	}
+
+	// check if ns2 namespace is defined.
+	// If so, EAD was exported with the ArchivesSpace EAD plugin enabled.
+	// LookupNamespaceURI() returns an error if the namespace is not found.
+	_, err = root.LookupNamespaceURI("ns2")
+	if err == nil {
+		// ns2 namespace was found
+		validationErrors = append(validationErrors, makeExportedWithEADPluginErrorMessage())
 		return validationErrors
 	}
 
