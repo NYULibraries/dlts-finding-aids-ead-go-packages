@@ -162,44 +162,6 @@ func (indexEntry *IndexEntry) MarshalJSON() ([]byte, error) {
 	})
 }
 
-/* // set blank DAO Role attributes to "external-link"
-func (dao *DAO) MarshalJSON() ([]byte, error) {
-	// if DAO Role is empty, set it to external link
-	type DAOAlias DAO
-	if len(strings.TrimSpace(string(dao.Role))) == 0 {
-		dao.Role = "external-link"
-	}
-
-	return json.Marshal(&struct {
-		*DAOAlias
-	}{
-		DAOAlias: (*DAOAlias)(dao),
-	})
-}
-*/
-// set blank DAO Role attributes to "external-link"
-// if a DAO does not have a role, and has a non-URL HREF, then set the role to "non-url"
-/* func (dao *DAO) MarshalJSON() ([]byte, error) {
-	type DAOAlias DAO
-
-	// if DAO Role is empty,
-	//    and DAO.Href is a valid URL then role = "external-link"
-	//    and DAO.Href is NOT a valid URL then role = "non-url"
-	if len(strings.TrimSpace(string(dao.Role))) == 0 {
-		dao.Role = "external-link"
-		_, err := url.ParseRequestURI(string(dao.Href))
-		if err != nil {
-			dao.Role = "non-url"
-		}
-	}
-
-	return json.Marshal(&struct {
-		*DAOAlias
-	}{
-		DAOAlias: (*DAOAlias)(dao),
-	})
-}
-*/
 func (extent *Extent) MarshalJSON() ([]byte, error) {
 	type ExtentWithTags Extent
 
