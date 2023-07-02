@@ -411,29 +411,6 @@ func getRelatorAuthoritativeLabel(relatorID string) (string, error) {
 	}
 }
 
-/*
-	 func regexpReplaceAllLiteralStringInAccessTermSourceSlice(accessTermWithRoleSlice []AccessTermWithRole, re *regexp.Regexp, replacementString string) {
-		accessTermWithRoleSliceWithSubfieldDelimitersConverted := accessTermWithRoleSlice[:0]
-		for _, accessTermWithRole := range accessTermWithRoleSlice {
-			accessTermWithRole.Value = re.ReplaceAllLiteralString(accessTermWithRole.Value, replacementString)
-			accessTermWithRoleSliceWithSubfieldDelimitersConverted = append(
-				accessTermWithRoleSliceWithSubfieldDelimitersConverted,
-				accessTermWithRole,
-			)
-		}
-	}
-
-	func regexpReplaceAllLiteralStringInTextSlice(textSlice []string, re *regexp.Regexp, replacementString string) {
-	accessTermSWithRoleliceWithSubfieldDelimitersConverted := textSlice[:0]
-	for _, text := range textSlice {
-		accessTermSWithRoleliceWithSubfieldDelimitersConverted = append(
-			accessTermSWithRoleliceWithSubfieldDelimitersConverted,
-			re.ReplaceAllLiteralString(text, replacementString),
-		)
-	}
-}
-*/
-
 // RunInfo stores data related to the parsing/JSON generation process
 type RunInfo struct {
 	PkgVersion     string    `json:"libversion"`
