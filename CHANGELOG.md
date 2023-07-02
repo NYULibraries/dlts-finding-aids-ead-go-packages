@@ -1,5 +1,11 @@
 # CHANGELOG
 
+#### v0.25.0
+  - Update EAD validation to assert that an EAD was exported without  
+    the ASpace EAD plugin  
+  
+  - Add valid character information to the invalid EADID error message
+    
 #### v0.24.1
   - Tighten EADID blank-space validation criterion to align with finalized  
       EAD validation criteria.  No blank spaces are allowed in or around the  
