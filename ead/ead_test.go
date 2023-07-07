@@ -26,7 +26,7 @@ var falesTestFixturePath string = filepath.Join(testFixturePath, "fales")
 var nyuadTestFixturePath string = filepath.Join(testFixturePath, "nyuad")
 var nyhsTestFixturePath string = filepath.Join(testFixturePath, "nyhs")
 var omegaTestFixturePath string = filepath.Join(testFixturePath, "omega", "v0.1.5")
-var presentationContainerPath string = filepath.Join(testFixturePath, "presentation-containers")
+var presentationComponentPath string = filepath.Join(testFixturePath, "presentation-components")
 var tamwagTestFixturePath string = filepath.Join(testFixturePath, "tamwag")
 
 func runiJSONComparisonTest(t *testing.T, params *iJSONTestParams) {
@@ -126,8 +126,8 @@ func getOmegaEAD(t *testing.T) EAD {
 	return ead
 }
 
-func getPresentationContainerEAD(t *testing.T, filename string) EAD {
-	EADXML, err := os.ReadFile(presentationContainerPath + "/" + filename)
+func getPresentationComponentEAD(t *testing.T, filename string) EAD {
+	EADXML, err := os.ReadFile(presentationComponentPath + "/" + filename)
 	failOnError(t, err, "Unexpected error")
 
 	var ead EAD
@@ -535,194 +535,194 @@ New York University Archives<lb/> Elmer Holmes Bobst Library<lb/> 70 Washington 
 	})
 }
 
-func TestJSONMarshalingInitPresentationContainersNOOP(t *testing.T) {
+func TestJSONMarshalingInitPresentationComponentsNOOP(t *testing.T) {
 	var params iJSONTestParams
 
-	params.TestName = "JSON Marshaling with call to InitPresentationContainers() NOOP"
+	params.TestName = "JSON Marshaling with call to InitPresentationComponents() NOOP"
 	params.EADFilePath = filepath.Join(omegaTestFixturePath, "Omega-EAD.xml")
 	params.JSONReferenceFilePath = filepath.Join(omegaTestFixturePath, "mos_2021.json")
-	params.JSONErrorFilePath = "./testdata/tmp/failing-marshal-with-presentation-containers-noop.json"
+	params.JSONErrorFilePath = "./testdata/tmp/failing-marshal-with-presentation-components-noop.json"
 
 	ead := getTestEAD(t, params.EADFilePath)
-	ead.InitPresentationContainers()
+	ead.InitPresentationComponents()
 
 	params.PrePopulatedEAD = ead
 	runiJSONComparisonTest(t, &params)
 }
 
-func TestJSONMarshalingInitPresentationContainers(t *testing.T) {
+func TestJSONMarshalingInitPresentationComponents(t *testing.T) {
 	var params iJSONTestParams
 
-	params.TestName = "JSON Marshaling with call to InitPresentationContainers()"
+	params.TestName = "JSON Marshaling with call to InitPresentationComponents()"
 	params.EADFilePath = filepath.Join(akkasahTestFixturePath, "ad_mc_030_ref184.xml")
 	params.JSONReferenceFilePath = filepath.Join(akkasahTestFixturePath, "ad_mc_030_ref184.json")
-	params.JSONErrorFilePath = "./testdata/tmp/failing-marshal-with-presentation-containers.json"
+	params.JSONErrorFilePath = "./testdata/tmp/failing-marshal-with-presentation-components.json"
 
 	ead := getTestEAD(t, params.EADFilePath)
-	ead.InitPresentationContainers()
+	ead.InitPresentationComponents()
 
 	params.PrePopulatedEAD = ead
 	runiJSONComparisonTest(t, &params)
 }
 
-func TestInitPresentationContainersC(t *testing.T) {
-	t.Run("InitPresentationContainers() Collapse All Containers", func(t *testing.T) {
-		ead := getPresentationContainerEAD(t, "pc-c.xml")
+func TestInitPresentationComponentsC(t *testing.T) {
+	t.Run("InitPresentationComponents() Collapse All Components", func(t *testing.T) {
+		ead := getPresentationComponentEAD(t, "pc-c.xml")
 
-		assertEqual(t, "file-001", string(ead.ArchDesc.DSC.C[0].ID), "initial container ID")
-		assertEqual(t, "file-002", string(ead.ArchDesc.DSC.C[1].ID), "initial container ID")
-		assertEqual(t, "file-003", string(ead.ArchDesc.DSC.C[2].ID), "initial container ID")
-		assertEqual(t, "file-004", string(ead.ArchDesc.DSC.C[3].ID), "initial container ID")
-		assertEqual(t, "file-005", string(ead.ArchDesc.DSC.C[4].ID), "initial container ID")
-		assertEqual(t, "file-006", string(ead.ArchDesc.DSC.C[5].ID), "initial container ID")
+		assertEqual(t, "file-001", string(ead.ArchDesc.DSC.C[0].ID), "initial component ID")
+		assertEqual(t, "file-002", string(ead.ArchDesc.DSC.C[1].ID), "initial component ID")
+		assertEqual(t, "file-003", string(ead.ArchDesc.DSC.C[2].ID), "initial component ID")
+		assertEqual(t, "file-004", string(ead.ArchDesc.DSC.C[3].ID), "initial component ID")
+		assertEqual(t, "file-005", string(ead.ArchDesc.DSC.C[4].ID), "initial component ID")
+		assertEqual(t, "file-006", string(ead.ArchDesc.DSC.C[5].ID), "initial component ID")
 
-		ead.InitPresentationContainers()
+		ead.InitPresentationComponents()
 
-		assertEqual(t, "items001", string(ead.ArchDesc.DSC.C[0].ID), "presentation container ID")
-		assertEqual(t, "file-001", string(ead.ArchDesc.DSC.C[0].C[0].ID), "collapsed container ID")
-		assertEqual(t, "file-002", string(ead.ArchDesc.DSC.C[0].C[1].ID), "collapsed container ID")
-		assertEqual(t, "file-003", string(ead.ArchDesc.DSC.C[0].C[2].ID), "collapsed container ID")
-		assertEqual(t, "file-004", string(ead.ArchDesc.DSC.C[0].C[3].ID), "collapsed container ID")
-		assertEqual(t, "file-005", string(ead.ArchDesc.DSC.C[0].C[4].ID), "collapsed container ID")
-		assertEqual(t, "file-006", string(ead.ArchDesc.DSC.C[0].C[5].ID), "collapsed container ID")
+		assertEqual(t, "items001", string(ead.ArchDesc.DSC.C[0].ID), "presentation component ID")
+		assertEqual(t, "file-001", string(ead.ArchDesc.DSC.C[0].C[0].ID), "collapsed component ID")
+		assertEqual(t, "file-002", string(ead.ArchDesc.DSC.C[0].C[1].ID), "collapsed component ID")
+		assertEqual(t, "file-003", string(ead.ArchDesc.DSC.C[0].C[2].ID), "collapsed component ID")
+		assertEqual(t, "file-004", string(ead.ArchDesc.DSC.C[0].C[3].ID), "collapsed component ID")
+		assertEqual(t, "file-005", string(ead.ArchDesc.DSC.C[0].C[4].ID), "collapsed component ID")
+		assertEqual(t, "file-006", string(ead.ArchDesc.DSC.C[0].C[5].ID), "collapsed component ID")
 
-		assertEqual(t, "View Inventory", string(ead.ArchDesc.DSC.C[0].DID.UnitTitle.Value), "presentation container UnitTitle")
-		assertEqual(t, "dl-presentation", string(ead.ArchDesc.DSC.C[0].Level), "presentation container Level")
+		assertEqual(t, "View Inventory", string(ead.ArchDesc.DSC.C[0].DID.UnitTitle.Value), "presentation component UnitTitle")
+		assertEqual(t, "dl-presentation", string(ead.ArchDesc.DSC.C[0].Level), "presentation component Level")
 	})
 }
 
-func TestInitPresentationContainersCK(t *testing.T) {
-	t.Run("InitPresentationContainers() Collapse First Containers", func(t *testing.T) {
-		ead := getPresentationContainerEAD(t, "pc-c-k.xml")
+func TestInitPresentationComponentsCK(t *testing.T) {
+	t.Run("InitPresentationComponents() Collapse First Components", func(t *testing.T) {
+		ead := getPresentationComponentEAD(t, "pc-c-k.xml")
 
-		assertEqual(t, "file-001", string(ead.ArchDesc.DSC.C[0].ID), "initial container ID")
-		assertEqual(t, "file-002", string(ead.ArchDesc.DSC.C[1].ID), "initial container ID")
-		assertEqual(t, "file-003", string(ead.ArchDesc.DSC.C[2].ID), "initial container ID")
-		assertEqual(t, "series-001", string(ead.ArchDesc.DSC.C[3].ID), "initial container ID")
-		assertEqual(t, "otherlevel-001", string(ead.ArchDesc.DSC.C[4].ID), "initial container ID")
-		assertEqual(t, "recordgrp-001", string(ead.ArchDesc.DSC.C[5].ID), "initial container ID")
+		assertEqual(t, "file-001", string(ead.ArchDesc.DSC.C[0].ID), "initial component ID")
+		assertEqual(t, "file-002", string(ead.ArchDesc.DSC.C[1].ID), "initial component ID")
+		assertEqual(t, "file-003", string(ead.ArchDesc.DSC.C[2].ID), "initial component ID")
+		assertEqual(t, "series-001", string(ead.ArchDesc.DSC.C[3].ID), "initial component ID")
+		assertEqual(t, "otherlevel-001", string(ead.ArchDesc.DSC.C[4].ID), "initial component ID")
+		assertEqual(t, "recordgrp-001", string(ead.ArchDesc.DSC.C[5].ID), "initial component ID")
 
-		ead.InitPresentationContainers()
+		ead.InitPresentationComponents()
 
-		assertEqual(t, "items001", string(ead.ArchDesc.DSC.C[0].ID), "presentation container ID")
-		assertEqual(t, "file-001", string(ead.ArchDesc.DSC.C[0].C[0].ID), "collapsed container ID")
-		assertEqual(t, "file-002", string(ead.ArchDesc.DSC.C[0].C[1].ID), "collapsed container ID")
-		assertEqual(t, "file-003", string(ead.ArchDesc.DSC.C[0].C[2].ID), "collapsed container ID")
-		assertEqual(t, "series-001", string(ead.ArchDesc.DSC.C[1].ID), "kept container ID")
-		assertEqual(t, "otherlevel-001", string(ead.ArchDesc.DSC.C[2].ID), "kept container ID")
-		assertEqual(t, "recordgrp-001", string(ead.ArchDesc.DSC.C[3].ID), "kept container ID")
+		assertEqual(t, "items001", string(ead.ArchDesc.DSC.C[0].ID), "presentation component ID")
+		assertEqual(t, "file-001", string(ead.ArchDesc.DSC.C[0].C[0].ID), "collapsed component ID")
+		assertEqual(t, "file-002", string(ead.ArchDesc.DSC.C[0].C[1].ID), "collapsed component ID")
+		assertEqual(t, "file-003", string(ead.ArchDesc.DSC.C[0].C[2].ID), "collapsed component ID")
+		assertEqual(t, "series-001", string(ead.ArchDesc.DSC.C[1].ID), "kept component ID")
+		assertEqual(t, "otherlevel-001", string(ead.ArchDesc.DSC.C[2].ID), "kept component ID")
+		assertEqual(t, "recordgrp-001", string(ead.ArchDesc.DSC.C[3].ID), "kept component ID")
 
-		assertEqual(t, "View Inventory", string(ead.ArchDesc.DSC.C[0].DID.UnitTitle.Value), "presentation container UnitTitle")
-		assertEqual(t, "dl-presentation", string(ead.ArchDesc.DSC.C[0].Level), "presentation container Level")
+		assertEqual(t, "View Inventory", string(ead.ArchDesc.DSC.C[0].DID.UnitTitle.Value), "presentation component UnitTitle")
+		assertEqual(t, "dl-presentation", string(ead.ArchDesc.DSC.C[0].Level), "presentation component Level")
 	})
 }
 
-func TestInitPresentationContainersKC(t *testing.T) {
-	t.Run("InitPresentationContainers() Collapse Last Containers", func(t *testing.T) {
-		ead := getPresentationContainerEAD(t, "pc-k-c.xml")
+func TestInitPresentationComponentsKC(t *testing.T) {
+	t.Run("InitPresentationComponents() Collapse Last Components", func(t *testing.T) {
+		ead := getPresentationComponentEAD(t, "pc-k-c.xml")
 
-		assertEqual(t, "series-001", string(ead.ArchDesc.DSC.C[0].ID), "initial container ID")
-		assertEqual(t, "otherlevel-001", string(ead.ArchDesc.DSC.C[1].ID), "initial container ID")
-		assertEqual(t, "recordgrp-001", string(ead.ArchDesc.DSC.C[2].ID), "initial container ID")
-		assertEqual(t, "file-001", string(ead.ArchDesc.DSC.C[3].ID), "initial container ID")
-		assertEqual(t, "file-002", string(ead.ArchDesc.DSC.C[4].ID), "initial container ID")
-		assertEqual(t, "file-003", string(ead.ArchDesc.DSC.C[5].ID), "initial container ID")
+		assertEqual(t, "series-001", string(ead.ArchDesc.DSC.C[0].ID), "initial component ID")
+		assertEqual(t, "otherlevel-001", string(ead.ArchDesc.DSC.C[1].ID), "initial component ID")
+		assertEqual(t, "recordgrp-001", string(ead.ArchDesc.DSC.C[2].ID), "initial component ID")
+		assertEqual(t, "file-001", string(ead.ArchDesc.DSC.C[3].ID), "initial component ID")
+		assertEqual(t, "file-002", string(ead.ArchDesc.DSC.C[4].ID), "initial component ID")
+		assertEqual(t, "file-003", string(ead.ArchDesc.DSC.C[5].ID), "initial component ID")
 
-		ead.InitPresentationContainers()
+		ead.InitPresentationComponents()
 
-		assertEqual(t, "series-001", string(ead.ArchDesc.DSC.C[0].ID), "collapsed container ID")
-		assertEqual(t, "otherlevel-001", string(ead.ArchDesc.DSC.C[1].ID), "collapsed container ID")
-		assertEqual(t, "recordgrp-001", string(ead.ArchDesc.DSC.C[2].ID), "collapsed container ID")
-		assertEqual(t, "items001", string(ead.ArchDesc.DSC.C[3].ID), "presentation container ID")
-		assertEqual(t, "file-001", string(ead.ArchDesc.DSC.C[3].C[0].ID), "collapsed container ID")
-		assertEqual(t, "file-002", string(ead.ArchDesc.DSC.C[3].C[1].ID), "collapsed container ID")
-		assertEqual(t, "file-003", string(ead.ArchDesc.DSC.C[3].C[2].ID), "collapsed container ID")
+		assertEqual(t, "series-001", string(ead.ArchDesc.DSC.C[0].ID), "collapsed component ID")
+		assertEqual(t, "otherlevel-001", string(ead.ArchDesc.DSC.C[1].ID), "collapsed component ID")
+		assertEqual(t, "recordgrp-001", string(ead.ArchDesc.DSC.C[2].ID), "collapsed component ID")
+		assertEqual(t, "items001", string(ead.ArchDesc.DSC.C[3].ID), "presentation component ID")
+		assertEqual(t, "file-001", string(ead.ArchDesc.DSC.C[3].C[0].ID), "collapsed component ID")
+		assertEqual(t, "file-002", string(ead.ArchDesc.DSC.C[3].C[1].ID), "collapsed component ID")
+		assertEqual(t, "file-003", string(ead.ArchDesc.DSC.C[3].C[2].ID), "collapsed component ID")
 
-		assertEqual(t, "View Inventory", string(ead.ArchDesc.DSC.C[3].DID.UnitTitle.Value), "presentation container UnitTitle")
-		assertEqual(t, "dl-presentation", string(ead.ArchDesc.DSC.C[3].Level), "presentation container Level")
+		assertEqual(t, "View Inventory", string(ead.ArchDesc.DSC.C[3].DID.UnitTitle.Value), "presentation component UnitTitle")
+		assertEqual(t, "dl-presentation", string(ead.ArchDesc.DSC.C[3].Level), "presentation component Level")
 	})
 }
 
-func TestInitPresentationContainersCKC(t *testing.T) {
-	t.Run("InitPresentationContainers() Collapse First and Last Containers", func(t *testing.T) {
-		ead := getPresentationContainerEAD(t, "pc-c-k-c.xml")
+func TestInitPresentationComponentsCKC(t *testing.T) {
+	t.Run("InitPresentationComponents() Collapse First and Last Components", func(t *testing.T) {
+		ead := getPresentationComponentEAD(t, "pc-c-k-c.xml")
 
-		assertEqual(t, "file-001", string(ead.ArchDesc.DSC.C[0].ID), "initial container ID")
-		assertEqual(t, "file-002", string(ead.ArchDesc.DSC.C[1].ID), "initial container ID")
-		assertEqual(t, "file-003", string(ead.ArchDesc.DSC.C[2].ID), "initial container ID")
-		assertEqual(t, "series-001", string(ead.ArchDesc.DSC.C[3].ID), "initial container ID")
-		assertEqual(t, "otherlevel-001", string(ead.ArchDesc.DSC.C[4].ID), "initial container ID")
-		assertEqual(t, "recordgrp-001", string(ead.ArchDesc.DSC.C[5].ID), "initial container ID")
-		assertEqual(t, "file-004", string(ead.ArchDesc.DSC.C[6].ID), "initial container ID")
-		assertEqual(t, "file-005", string(ead.ArchDesc.DSC.C[7].ID), "initial container ID")
-		assertEqual(t, "file-006", string(ead.ArchDesc.DSC.C[8].ID), "initial container ID")
+		assertEqual(t, "file-001", string(ead.ArchDesc.DSC.C[0].ID), "initial component ID")
+		assertEqual(t, "file-002", string(ead.ArchDesc.DSC.C[1].ID), "initial component ID")
+		assertEqual(t, "file-003", string(ead.ArchDesc.DSC.C[2].ID), "initial component ID")
+		assertEqual(t, "series-001", string(ead.ArchDesc.DSC.C[3].ID), "initial component ID")
+		assertEqual(t, "otherlevel-001", string(ead.ArchDesc.DSC.C[4].ID), "initial component ID")
+		assertEqual(t, "recordgrp-001", string(ead.ArchDesc.DSC.C[5].ID), "initial component ID")
+		assertEqual(t, "file-004", string(ead.ArchDesc.DSC.C[6].ID), "initial component ID")
+		assertEqual(t, "file-005", string(ead.ArchDesc.DSC.C[7].ID), "initial component ID")
+		assertEqual(t, "file-006", string(ead.ArchDesc.DSC.C[8].ID), "initial component ID")
 
-		ead.InitPresentationContainers()
+		ead.InitPresentationComponents()
 
-		assertEqual(t, "items001", string(ead.ArchDesc.DSC.C[0].ID), "presentation container ID")
-		assertEqual(t, "file-001", string(ead.ArchDesc.DSC.C[0].C[0].ID), "collapsed container ID")
-		assertEqual(t, "file-002", string(ead.ArchDesc.DSC.C[0].C[1].ID), "collapsed container ID")
-		assertEqual(t, "file-003", string(ead.ArchDesc.DSC.C[0].C[2].ID), "collapsed container ID")
-		assertEqual(t, "series-001", string(ead.ArchDesc.DSC.C[1].ID), "collapsed container ID")
-		assertEqual(t, "otherlevel-001", string(ead.ArchDesc.DSC.C[2].ID), "collapsed container ID")
-		assertEqual(t, "recordgrp-001", string(ead.ArchDesc.DSC.C[3].ID), "collapsed container ID")
-		assertEqual(t, "items002", string(ead.ArchDesc.DSC.C[4].ID), "presentation container ID")
-		assertEqual(t, "file-004", string(ead.ArchDesc.DSC.C[4].C[0].ID), "collapsed container ID")
-		assertEqual(t, "file-005", string(ead.ArchDesc.DSC.C[4].C[1].ID), "collapsed container ID")
-		assertEqual(t, "file-006", string(ead.ArchDesc.DSC.C[4].C[2].ID), "collapsed container ID")
+		assertEqual(t, "items001", string(ead.ArchDesc.DSC.C[0].ID), "presentation component ID")
+		assertEqual(t, "file-001", string(ead.ArchDesc.DSC.C[0].C[0].ID), "collapsed component ID")
+		assertEqual(t, "file-002", string(ead.ArchDesc.DSC.C[0].C[1].ID), "collapsed component ID")
+		assertEqual(t, "file-003", string(ead.ArchDesc.DSC.C[0].C[2].ID), "collapsed component ID")
+		assertEqual(t, "series-001", string(ead.ArchDesc.DSC.C[1].ID), "collapsed component ID")
+		assertEqual(t, "otherlevel-001", string(ead.ArchDesc.DSC.C[2].ID), "collapsed component ID")
+		assertEqual(t, "recordgrp-001", string(ead.ArchDesc.DSC.C[3].ID), "collapsed component ID")
+		assertEqual(t, "items002", string(ead.ArchDesc.DSC.C[4].ID), "presentation component ID")
+		assertEqual(t, "file-004", string(ead.ArchDesc.DSC.C[4].C[0].ID), "collapsed component ID")
+		assertEqual(t, "file-005", string(ead.ArchDesc.DSC.C[4].C[1].ID), "collapsed component ID")
+		assertEqual(t, "file-006", string(ead.ArchDesc.DSC.C[4].C[2].ID), "collapsed component ID")
 
-		assertEqual(t, "View Inventory", string(ead.ArchDesc.DSC.C[0].DID.UnitTitle.Value), "presentation container UnitTitle")
-		assertEqual(t, "dl-presentation", string(ead.ArchDesc.DSC.C[0].Level), "presentation container Level")
+		assertEqual(t, "View Inventory", string(ead.ArchDesc.DSC.C[0].DID.UnitTitle.Value), "presentation component UnitTitle")
+		assertEqual(t, "dl-presentation", string(ead.ArchDesc.DSC.C[0].Level), "presentation component Level")
 
-		assertEqual(t, "View Inventory", string(ead.ArchDesc.DSC.C[4].DID.UnitTitle.Value), "presentation container UnitTitle")
-		assertEqual(t, "dl-presentation", string(ead.ArchDesc.DSC.C[4].Level), "presentation container Level")
+		assertEqual(t, "View Inventory", string(ead.ArchDesc.DSC.C[4].DID.UnitTitle.Value), "presentation component UnitTitle")
+		assertEqual(t, "dl-presentation", string(ead.ArchDesc.DSC.C[4].Level), "presentation component Level")
 	})
 }
 
-func TestInitPresentationContainersKCK(t *testing.T) {
-	t.Run("InitPresentationContainers() Collapse Middle Containers", func(t *testing.T) {
-		ead := getPresentationContainerEAD(t, "pc-k-c-k.xml")
+func TestInitPresentationComponentsKCK(t *testing.T) {
+	t.Run("InitPresentationComponents() Collapse Middle Components", func(t *testing.T) {
+		ead := getPresentationComponentEAD(t, "pc-k-c-k.xml")
 
-		assertEqual(t, "series-001", string(ead.ArchDesc.DSC.C[0].ID), "initial container ID")
-		assertEqual(t, "otherlevel-001", string(ead.ArchDesc.DSC.C[1].ID), "initial container ID")
-		assertEqual(t, "recordgrp-001", string(ead.ArchDesc.DSC.C[2].ID), "initial container ID")
-		assertEqual(t, "file-001", string(ead.ArchDesc.DSC.C[3].ID), "initial container ID")
-		assertEqual(t, "file-002", string(ead.ArchDesc.DSC.C[4].ID), "initial container ID")
-		assertEqual(t, "file-003", string(ead.ArchDesc.DSC.C[5].ID), "initial container ID")
-		assertEqual(t, "series-002", string(ead.ArchDesc.DSC.C[6].ID), "initial container ID")
-		assertEqual(t, "otherlevel-002", string(ead.ArchDesc.DSC.C[7].ID), "initial container ID")
-		assertEqual(t, "recordgrp-002", string(ead.ArchDesc.DSC.C[8].ID), "initial container ID")
+		assertEqual(t, "series-001", string(ead.ArchDesc.DSC.C[0].ID), "initial component ID")
+		assertEqual(t, "otherlevel-001", string(ead.ArchDesc.DSC.C[1].ID), "initial component ID")
+		assertEqual(t, "recordgrp-001", string(ead.ArchDesc.DSC.C[2].ID), "initial component ID")
+		assertEqual(t, "file-001", string(ead.ArchDesc.DSC.C[3].ID), "initial component ID")
+		assertEqual(t, "file-002", string(ead.ArchDesc.DSC.C[4].ID), "initial component ID")
+		assertEqual(t, "file-003", string(ead.ArchDesc.DSC.C[5].ID), "initial component ID")
+		assertEqual(t, "series-002", string(ead.ArchDesc.DSC.C[6].ID), "initial component ID")
+		assertEqual(t, "otherlevel-002", string(ead.ArchDesc.DSC.C[7].ID), "initial component ID")
+		assertEqual(t, "recordgrp-002", string(ead.ArchDesc.DSC.C[8].ID), "initial component ID")
 
-		ead.InitPresentationContainers()
+		ead.InitPresentationComponents()
 
-		assertEqual(t, "series-001", string(ead.ArchDesc.DSC.C[0].ID), "kept container ID")
-		assertEqual(t, "otherlevel-001", string(ead.ArchDesc.DSC.C[1].ID), "kept container ID")
-		assertEqual(t, "recordgrp-001", string(ead.ArchDesc.DSC.C[2].ID), "kept container ID")
-		assertEqual(t, "items001", string(ead.ArchDesc.DSC.C[3].ID), "presentation container ID")
-		assertEqual(t, "file-001", string(ead.ArchDesc.DSC.C[3].C[0].ID), "collapsed container ID")
-		assertEqual(t, "file-002", string(ead.ArchDesc.DSC.C[3].C[1].ID), "collapsed container ID")
-		assertEqual(t, "file-003", string(ead.ArchDesc.DSC.C[3].C[2].ID), "collapsed container ID")
-		assertEqual(t, "series-002", string(ead.ArchDesc.DSC.C[4].ID), "kept container ID")
-		assertEqual(t, "otherlevel-002", string(ead.ArchDesc.DSC.C[5].ID), "kept container ID")
-		assertEqual(t, "recordgrp-002", string(ead.ArchDesc.DSC.C[6].ID), "kept container ID")
+		assertEqual(t, "series-001", string(ead.ArchDesc.DSC.C[0].ID), "kept component ID")
+		assertEqual(t, "otherlevel-001", string(ead.ArchDesc.DSC.C[1].ID), "kept component ID")
+		assertEqual(t, "recordgrp-001", string(ead.ArchDesc.DSC.C[2].ID), "kept component ID")
+		assertEqual(t, "items001", string(ead.ArchDesc.DSC.C[3].ID), "presentation component ID")
+		assertEqual(t, "file-001", string(ead.ArchDesc.DSC.C[3].C[0].ID), "collapsed component ID")
+		assertEqual(t, "file-002", string(ead.ArchDesc.DSC.C[3].C[1].ID), "collapsed component ID")
+		assertEqual(t, "file-003", string(ead.ArchDesc.DSC.C[3].C[2].ID), "collapsed component ID")
+		assertEqual(t, "series-002", string(ead.ArchDesc.DSC.C[4].ID), "kept component ID")
+		assertEqual(t, "otherlevel-002", string(ead.ArchDesc.DSC.C[5].ID), "kept component ID")
+		assertEqual(t, "recordgrp-002", string(ead.ArchDesc.DSC.C[6].ID), "kept component ID")
 
-		assertEqual(t, "View Inventory", string(ead.ArchDesc.DSC.C[3].DID.UnitTitle.Value), "presentation container UnitTitle")
-		assertEqual(t, "dl-presentation", string(ead.ArchDesc.DSC.C[3].Level), "presentation container Level")
+		assertEqual(t, "View Inventory", string(ead.ArchDesc.DSC.C[3].DID.UnitTitle.Value), "presentation component UnitTitle")
+		assertEqual(t, "dl-presentation", string(ead.ArchDesc.DSC.C[3].Level), "presentation component Level")
 	})
 }
 
-func TestInitPresentationContainersNoContainers(t *testing.T) {
-	t.Run("InitPresentationContainers() Collapse All Containers", func(t *testing.T) {
-		ead := getPresentationContainerEAD(t, "pc-no-containers.xml")
+func TestInitPresentationComponentsNoComponents(t *testing.T) {
+	t.Run("InitPresentationComponents() Collapse All Components", func(t *testing.T) {
+		ead := getPresentationComponentEAD(t, "pc-no-components.xml")
 
 		if nil != ead.ArchDesc.DSC.C {
-			t.Errorf("expected initial container list to be empty")
+			t.Errorf("expected initial component list to be empty")
 		}
 
-		ead.InitPresentationContainers()
+		ead.InitPresentationComponents()
 
 		if nil != ead.ArchDesc.DSC.C {
-			t.Errorf("expected container list to still be empty after InitPresentationContainers()")
+			t.Errorf("expected component list to still be empty after InitPresentationComponents()")
 		}
 	})
 }
