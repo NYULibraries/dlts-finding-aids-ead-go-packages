@@ -552,14 +552,14 @@ func (e *EAD) EADID() string {
 	return e.EADHeader.EADID.Value
 }
 
-// process an array of containers
+// process an array of components
 func CountCsDAOs(cs []*C, daoInfo *DAOInfo) {
 	for _, c := range cs {
 		CountCDAOs(c, daoInfo)
 	}
 }
 
-// process a container
+// process a component
 func CountCDAOs(c *C, daoInfo *DAOInfo) {
 	// configured to perform a breadth-first aggregation.
 	// switch the CountDIDDAOs/CountCsDAOs order if you want to do
@@ -660,14 +660,14 @@ func CountDAOGrps(daoGrps []*DAOGrp, daoGrpInfo *DAOGrpInfo) {
 	}
 }
 
-// process an array of containers
+// process an array of components
 func CountCsDAOGrps(cs []*C, daoGrpInfo *DAOGrpInfo) {
 	for _, c := range cs {
 		countCDAOGrps(c, daoGrpInfo)
 	}
 }
 
-// process a container
+// process a component
 func countCDAOGrps(c *C, daoGrpInfo *DAOGrpInfo) {
 	CountCsDAOGrps(c.C, daoGrpInfo)
 	CountDAOGrps(c.DID.DAOGrp, daoGrpInfo)
@@ -705,15 +705,15 @@ func (dgi *DAOGrpInfo) Clear() {
 	dgi.AllDAOGrps = nil
 }
 
-func (e *EAD) InitPresentationContainers() {
-	e.ArchDesc.DSC.C = addPresentationContainers(&e.ArchDesc.DSC.C)
+func (e *EAD) InitPresentationComponents() {
+	e.ArchDesc.DSC.C = addPresentationComponents(&e.ArchDesc.DSC.C)
 }
 
-func addPresentationContainers(csp *[]*C) []*C {
+func addPresentationComponents(csp *[]*C) []*C {
 
 	cs := *csp
 
-	// return immediately if there aren't any containers
+	// return immediately if there aren't any components
 	if len(cs) == 0 {
 		return cs
 	}
@@ -721,7 +721,7 @@ func addPresentationContainers(csp *[]*C) []*C {
 	var collapsedCs []*C
 
 	// inRun            : currently in a run of Cs to collapse
-	// pcCount          : presentation container count, used to init the presentation container IDs
+	// pcCount          : presentation component count, used to init the presentation component IDs
 	// keepStartIdx     : the starting index of elements to keep
 	// collapseStartIdx : the starting index of elements to collapse
 	// collapseEndIdx   : the ending   index of elements to collapse
@@ -735,16 +735,16 @@ func addPresentationContainers(csp *[]*C) []*C {
 	for idx, c := range cs {
 
 		//DEBUG fmt.Printf("idx: %03d, len: %03d\n", idx, len(collapsedCs))
-		// is this a container to collapse?
-		if shouldCollapseContainer(c) {
-			//DEBUG fmt.Println("we shouldCollapseContainer")
-			// are we already in a run of containers to collapse?
+		// is this a component to collapse?
+		if shouldCollapseComponent(c) {
+			//DEBUG fmt.Println("we shouldCollapseComponent")
+			// are we already in a run of components to collapse?
 			if !inRun {
 				//DEBUG fmt.Println("---> not in a run")
 				// now we're in a run
 				inRun = true
 				collapseStartIdx = idx
-				// if this run comes after some containers to keep...
+				// if this run comes after some components to keep...
 				if keepStartIdx != -1 {
 					//DEBUG fmt.Printf("------> keepStartIdx != -1")
 					// need to append all of the known Cs since the last collapse
@@ -753,8 +753,8 @@ func addPresentationContainers(csp *[]*C) []*C {
 			}
 
 		} else {
-			// this is a container to keep
-			// have we already seen a container to keep?
+			// this is a component to keep
+			// have we already seen a component to keep?
 			if keepStartIdx == -1 {
 				// if not, store the index
 				keepStartIdx = idx
@@ -774,7 +774,7 @@ func addPresentationContainers(csp *[]*C) []*C {
 				collapsedCs = append(collapsedCs, pc)
 			}
 		}
-	} // end of container loop
+	} // end of component loop
 
 	if inRun {
 		// if we ended on a run, then we need to finish the collapse operation
@@ -796,7 +796,7 @@ func addPresentationContainers(csp *[]*C) []*C {
 	return collapsedCs
 }
 
-func shouldCollapseContainer(c *C) bool {
+func shouldCollapseComponent(c *C) bool {
 	switch c.Level {
 	case "series", "otherlevel", "recordgrp", "dl-presentation":
 		return false

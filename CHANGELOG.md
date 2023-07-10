@@ -1,5 +1,10 @@
 # CHANGELOG
 
+#### v0.26.0
+  - Correct misnomer: `presentation container` --> `presentation component`  
+  - Package API impact: 
+    - `InitPresentationContainers()` --> `InitPresentationComponents()`
+    
 #### v0.25.0
   - Update EAD validation to assert that an EAD was exported without  
     the ASpace EAD plugin  
