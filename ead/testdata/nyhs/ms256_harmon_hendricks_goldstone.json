@@ -3300,7 +3300,7 @@
                     "did": {
                         "physloc": [
                             {
-                                "value": "The Oversized Material series is located with the \u003ca class=\"ead-ref\" href=\"http://dlib.nyu.edu/findingaids/html/nyhs/oversize/index.html\" target=\"\"\u003eOversize Manuscripts Collection, 1648-1998.\u003c/span\u003e",
+                                "value": "The Oversized Material series is located with the \u003ca class=\"ead-ref\" href=\"http://dlib.nyu.edu/findingaids/html/nyhs/oversize/index.html\" target=\"\"\u003eOversize Manuscripts Collection, 1648-1998.\u003c/a\u003e",
                                 "id": "aspace_5dab79b54ee9a63f6c6fd42268e9656e"
                             }
                         ],
@@ -3324,7 +3324,7 @@
                                 {
                                     "name": "p",
                                     "value": {
-                                        "value": "The Oversized Material series is located with the \u003ca class=\"ead-ref\" href=\"http://dlib.nyu.edu/findingaids/html/nyhs/oversize/index.html\" target=\"\"\u003eOversize Manuscripts Collection, 1648-1998.\u003c/span\u003e"
+                                        "value": "The Oversized Material series is located with the \u003ca class=\"ead-ref\" href=\"http://dlib.nyu.edu/findingaids/html/nyhs/oversize/index.html\" target=\"\"\u003eOversize Manuscripts Collection, 1648-1998.\u003c/a\u003e"
                                     }
                                 }
                             ]
@@ -3359,7 +3359,7 @@
                     {
                         "name": "p",
                         "value": {
-                            "value": "The N-YHS Library has other manuscript collections relating to historic preservation in New York including the \u003ca class=\"ead-ref\" href=\"http://dlib.nyu.edu/findingaids/html/nyhs/gayle/\" target=\"\"\u003eMargot Gayle Papers,\u003c/span\u003e\u003ca class=\"ead-ref\" href=\"http://dlib.nyu.edu/findingaids/html/nyhs/hayes/\" target=\"\"\u003ethe Shirley Hayes Papers,\u003c/span\u003e and the Carolyn Kent Papers."
+                            "value": "The N-YHS Library has other manuscript collections relating to historic preservation in New York including the \u003ca class=\"ead-ref\" href=\"http://dlib.nyu.edu/findingaids/html/nyhs/gayle/\" target=\"\"\u003eMargot Gayle Papers,\u003c/a\u003e\u003ca class=\"ead-ref\" href=\"http://dlib.nyu.edu/findingaids/html/nyhs/hayes/\" target=\"\"\u003ethe Shirley Hayes Papers,\u003c/a\u003e and the Carolyn Kent Papers."
                         }
                     },
                     {
