@@ -398,6 +398,11 @@ func _getConvertedTextWithTags(text string, convertLBTags bool) ([]byte, error) 
 				needClosingTag = false
 			}
 
+			if token.Name.Local == "ref" {
+				result += "</a>"
+				needClosingTag = false
+			}
+
 			if needClosingTag {
 				result += "</span>"
 			} else {
