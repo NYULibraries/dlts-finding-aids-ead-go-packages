@@ -341,6 +341,17 @@ func TestJSONMarshalingWithIndexEntryTitleAndRefChildren(t *testing.T) {
 	runiJSONComparisonTest(t, &params)
 }
 
+func TestJSONMarshalingWithEmbeddedRefElements(t *testing.T) {
+	var params iJSONTestParams
+
+	params.TestName = "JSON Marshaling with embedded <ref>"
+	params.EADFilePath = filepath.Join(nyhsTestFixturePath, "ms256_harmon_hendricks_goldstone.xml")
+	params.JSONReferenceFilePath = filepath.Join(nyhsTestFixturePath, "ms256_harmon_hendricks_goldstone.json")
+	params.JSONErrorFilePath = "./testdata/tmp/failing-embeedded-ref.json"
+
+	runiJSONComparisonTest(t, &params)
+}
+
 func TestGuideTitle(t *testing.T) {
 	t.Run("GuideTitle()", func(t *testing.T) {
 		sut := getOmegaEAD(t)

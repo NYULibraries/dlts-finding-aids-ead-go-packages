@@ -366,6 +366,21 @@ func _getConvertedTextWithTags(text string, convertLBTags bool) ([]byte, error) 
 					}
 					result += fmt.Sprintf("<a class=\"%s\" href=\"%s\" target=\"%s\">", "ead-extref", href, target)
 				}
+			case "ref":
+				{
+					var href string
+					var target string
+
+					for i := range token.Attr {
+						if token.Attr[i].Name.Local == "href" {
+							href = token.Attr[i].Value
+						}
+						if token.Attr[i].Name.Local == "show" {
+							target = token.Attr[i].Value
+						}
+					}
+					result += fmt.Sprintf("<a class=\"%s\" href=\"%s\" target=\"%s\">", "ead-ref", href, target)
+				}
 			}
 
 		case xml.EndElement:

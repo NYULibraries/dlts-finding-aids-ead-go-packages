@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### v0.27.0
+  - Add support for `<ref>` elements  
+    
 #### v0.26.0
   - Correct misnomer: `presentation container` --> `presentation component`  
   - Package API impact: 
