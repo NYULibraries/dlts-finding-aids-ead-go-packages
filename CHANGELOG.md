@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### v0.27.1
+  - Bug Fix: Add closing `</a>` for `<ref>` elements  
+    
 #### v0.27.0
   - Add support for `<ref>` elements  
     
