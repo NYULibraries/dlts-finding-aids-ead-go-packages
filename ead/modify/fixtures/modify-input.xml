@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ead xmlns="urn:isbn:1-931666-22-9" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:isbn:1-931666-22-9 http://www.loc.gov/ead/ead.xsd">
+  <c id="aspace_ref16" level="file">
+    <did>
+      <unittitle>Aerial Views, 1890s</unittitle>
+      <unitdate datechar="creation" normal="1850/2001" type="inclusive">1890-1899 , 2001 , undated</unitdate>
+      <langmaterial><language langcode="eng">English</language>.</langmaterial>
+      <container altrender="Flat Box - 12 x 15.25" id="aspace_3b1ec30bfc7f3455316d405605bfe303" label="Mixed Materials [31142063058930]" type="Box">206</container>
+      <container id="aspace_423901a5de1ff5152438565f43c9f801" parent="aspace_3b1ec30bfc7f3455316d405605bfe303" type="Folder">1</container>
+    </did>
+    <c id="aspace_ref17" level="item">
+      <did>
+        <unittitle>Washington Square Park, Aerial View</unittitle>
+        <unitid>wsp_av_1_1_01</unitid>
+        <unitdate datechar="creation" normal="1907/1907" type="inclusive">1907</unitdate>
+        <physdesc id="aspace_720ce09e99123aae8840dc08e9cb2092" label="General Physical Description note">black-and-white print (photograph), 8 x 10 inches</physdesc>
+        <langmaterial><language langcode="eng">English</language>.</langmaterial>
+        <container altrender="Flat Box - 12 x 15.25" id="aspace_d45fb5866416f6abe8d7cc4b5c188899" label="Graphic Materials [31142063058930]" type="Box">206</container>
+        <container id="aspace_c38d5030fc74088dd151722f57673091" parent="aspace_d45fb5866416f6abe8d7cc4b5c188899" type="Folder">1</container>
+        <container id="aspace_d81b063bae88d0ab34f91a2a8a371802" parent="aspace_c38d5030fc74088dd151722f57673091" type="Item">1</container>
+        <dao xlink:actuate="onRequest" xlink:href="https://hdl.handle.net/2333.1/15dv41w7" xlink:role="image-service" xlink:show="new" xlink:title="Washington Square Park, Aerial View" xlink:type="simple">
+          <daodesc>
+            <p>Washington Square Park, Aerial View: 1907</p>
+          </daodesc>
+        </dao>
+      </did>
+    </c>
+    <c id="aspace_ref23" level="item">
+      <did>
+        <unittitle>Washington Square Park, Aerial View, Looking South</unittitle>
+        <unitid>wsp_av_1_1_02</unitid>
+        <unitdate datechar="creation">circa 1890</unitdate>
+        <physdesc id="aspace_503cf2f14dca90b0fee8f2b8570a92bb" label="General Physical Description note">black-and-white print (photograph), 8 x 10 inches</physdesc>
+        <langmaterial><language langcode="eng">English</language>.</langmaterial>
+        <container altrender="Flat Box - 12 x 15.25" id="aspace_ae6126b6c3b7cc2aa97a2bcd6b088b86" label="Graphic Materials [31142063058930]" type="Box">206</container>
+        <container id="aspace_f4b53c9ff6253672bc79a0777c6eec70" parent="aspace_ae6126b6c3b7cc2aa97a2bcd6b088b86" type="Folder">1</container>
+        <container id="aspace_eb5593a4e7e48793384cd55a5d4ef82c" parent="aspace_f4b53c9ff6253672bc79a0777c6eec70" type="Item">2</container>
+        <dao xlink:actuate="onRequest" xlink:href="https://hdl.handle.net/2333.1/wdbrv1kd" xlink:role="image-service" xlink:show="new" xlink:title="Washington Square Park, Aerial View, Looking South" xlink:type="simple">
+          <daodesc>
+            <p>Washington Square Park, Aerial View, Looking South: circa 1890</p>
+          </daodesc>
+        </dao>
+      </did>
+      <controlaccess>
+        <geogname source="lcsh">Washington Square (New York, N.Y.)</geogname>
+      </controlaccess>
+    </c>
+    <c id="aspace_ref29" level="item">
+      <did>
+        <unittitle>Washington Square Park, Aerial View, Looking North</unittitle>
+        <unitid>wsp_av_1_1_03</unitid>
+        <unitdate datechar="creation">circa 1890</unitdate>
+        <physdesc id="aspace_3fcdacef6378418652e21465c2b61e5b" label="General Physical Description note">black-and-white print (photograph), 8 x 10 inches</physdesc>
+        <langmaterial><language langcode="eng">English</language>.</langmaterial>
+        <container altrender="Flat Box - 12 x 15.25" id="aspace_f43cf2f2e8ff7b73cad0506095b81e17" label="Graphic Materials [31142063058930]" type="Box">206</container>
+        <container id="aspace_96ebacb0ac22e63ddaab6c102e519dfe" parent="aspace_f43cf2f2e8ff7b73cad0506095b81e17" type="Folder">1</container>
+        <container id="aspace_40c000e749542274273fb16da15af4e4" parent="aspace_96ebacb0ac22e63ddaab6c102e519dfe" type="Item">3</container>
+        <dao xlink:actuate="onRequest" xlink:href="https://hdl.handle.net/2333.1/rn8pk128" xlink:role="image-service" xlink:show="new" xlink:title="Washington Square Park, Aerial View, Looking North" xlink:type="simple">
+          <daodesc>
+            <p>Washington Square Park, Aerial View, Looking North: circa 1890</p>
+          </daodesc>
+        </dao>
+      </did>
+      <controlaccess>
+        <geogname source="lcsh">Washington Square (New York, N.Y.)</geogname>
+      </controlaccess>
+    </c>
+  </c>
+</ead>
