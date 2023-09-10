@@ -7,12 +7,12 @@ import (
 	"github.com/lestrrat-go/libxml2/xpath"
 )
 
-func ModifyEAD(data *[]byte) (string, []string) {
+func FABifyEAD(data []byte) (string, []string) {
 
 	var errors = []string{}
 
 	p := parser.New()
-	doc, err := p.Parse(*data)
+	doc, err := p.Parse(data)
 	if err != nil {
 		errors = append(errors, "Unable to parse XML file")
 		return "", append(errors, err.Error())
@@ -45,14 +45,11 @@ func ModifyEAD(data *[]byte) (string, []string) {
 		n.SetNodeValue("creator")
 	}
 
-	//	exprString = `//_:container`
-	//	exprString = `//_:container[@id and @parent]`
 	exprString = `//_:container[@id and not(@parent)]/@id`
 	nodes = xpath.NodeList(ctx.Find(exprString))
 
 	for _, n := range nodes {
 		rootID := n.NodeValue()
-		fmt.Printf("root: %s\n", rootID)
 		updateSubContainer(ctx, rootID, rootID)
 	}
 
