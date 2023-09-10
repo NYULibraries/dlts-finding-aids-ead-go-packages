@@ -42,7 +42,7 @@ func TestFABifyEAD(t *testing.T) {
 			err = os.WriteFile(errTmpFile, got, 0644)
 			failOnError(t, err, fmt.Sprintf("Unexpected error writing %s", errTmpFile))
 
-			errMsg := fmt.Sprintf("Intermediate JSON file does not match reference file.\ndiff %s %s", errTmpFile, referenceFile)
+			errMsg := fmt.Sprintf("The modified EAD does not match the reference file.\ndiff %s %s", errTmpFile, referenceFile)
 			t.Errorf(errMsg)
 		}
 	})
