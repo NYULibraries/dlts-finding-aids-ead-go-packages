@@ -1,13 +1,13 @@
 # CHANGELOG
 
-#### v0.28.0
+#### v0.28.0-pre
   - Add `ead/modify` package 
   - Add `modify.FABifyEAD()` function that modifies an incoming EAD  
     so that it can be indexed by the [Finding Aids Bridge (FAB) discovery system](https://github.com/NYULibraries/specialcollections).  
     - **Please note:**  
-    Due to a limitation of the [`lestrrat-go/libxml2`](https://github.com/lestrrat-go/libxml2/) package,  
-    `FABified` EADs still require a processing step to delete subcontainer  
-    `@id` attributes.
+      Due to a limitation of the [`lestrrat-go/libxml2`](https://github.com/lestrrat-go/libxml2/) package,  
+      `FABified` EADs still require a processing step to delete subcontainer  
+      `@id` attributes.
   - Add stringification of `<title @render=...>` attribute
   - Fix bug in stringification of `<emph>` elements that do not have a `@render` attribute
   
