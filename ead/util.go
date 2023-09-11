@@ -327,6 +327,7 @@ func _getConvertedTextWithTags(text string, convertLBTags bool) ([]byte, error) 
 							break
 						}
 					}
+
 					result += fmt.Sprintf("<span class=\"%s\">", "ead-emph ead-emph-"+render)
 				}
 			case "lb":
@@ -380,6 +381,21 @@ func _getConvertedTextWithTags(text string, convertLBTags bool) ([]byte, error) 
 						}
 					}
 					result += fmt.Sprintf("<a class=\"%s\" href=\"%s\" target=\"%s\">", "ead-ref", href, target)
+				}
+			case "title":
+				{
+					var render string
+					for i := range token.Attr {
+						if token.Attr[i].Name.Local == "render" {
+							render = token.Attr[i].Value
+							break
+						}
+					}
+					if render == "" {
+						result += fmt.Sprintf("<span class=\"%s\">", "ead-title")
+					} else {
+						result += fmt.Sprintf("<span class=\"%s\">", "ead-title ead-title-"+render)
+					}
 				}
 			}
 
