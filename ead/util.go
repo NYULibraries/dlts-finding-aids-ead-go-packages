@@ -328,7 +328,11 @@ func _getConvertedTextWithTags(text string, convertLBTags bool) ([]byte, error) 
 						}
 					}
 
-					result += fmt.Sprintf("<span class=\"%s\">", "ead-emph ead-emph-"+render)
+					if render == "" {
+						result += fmt.Sprintf("<span class=\"%s\">", "ead-emph")
+					} else {
+						result += fmt.Sprintf("<span class=\"%s\">", "ead-emph ead-emph-"+render)
+					}
 				}
 			case "lb":
 				{
