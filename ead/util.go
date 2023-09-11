@@ -398,7 +398,9 @@ func _getConvertedTextWithTags(text string, convertLBTags bool) ([]byte, error) 
 					if render == "" {
 						result += fmt.Sprintf("<span class=\"%s\">", "ead-title")
 					} else {
-						result += fmt.Sprintf("<span class=\"%s\">", "ead-title ead-title-"+render)
+						// NOTE: the use of ead-emph-"+render below is INTENTIONAL
+						// This eliminates the need for per-element selectors for the render attribute
+						result += fmt.Sprintf("<span class=\"%s\">", "ead-title ead-emph-"+render)
 					}
 				}
 			}
