@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/lestrrat-go/libxml2/parser"
+	"github.com/lestrrat-go/libxml2/types"
 	"github.com/lestrrat-go/libxml2/xpath"
 )
 
@@ -78,29 +79,38 @@ func FABifyEAD(data []byte) (string, []string) {
 	nodes = xpath.NodeList(ctx.Find(exprString))
 	for _, n := range nodes {
 		rootID := n.NodeValue()
-		updateSubContainer(ctx, rootID, rootID)
+		err := updateSubContainer(ctx, rootID, rootID)
+		if err != nil {
+			errors = append(errors, "problem processing subcontainers")
+			return "", append(errors, err.Error())
+		}
 	}
 
 	return doc.String(), errors
 }
 
-func updateSubContainer(ctx *xpath.Context, parentID string, rootID string) {
+func updateSubContainer(ctx *xpath.Context, parentID string, rootID string) error {
 	// find the ID nodes of all containers whose @parent attribute value == parentID
-	exprString := fmt.Sprintf("//_:container[@parent = \"%s\"]/@id", parentID)
-	nodes := xpath.NodeList(ctx.Find(exprString))
+	exprString := fmt.Sprintf("//_:container[@parent = \"%s\"]", parentID)
+	containerNodes := xpath.NodeList(ctx.Find(exprString))
 
 	// recursively process all containers
-	for _, n := range nodes {
-		// get the value of this @id node
-		id := n.NodeValue()
+	for _, containerNode := range containerNodes {
+		// get the value of this container's @id attribute
+		idAttr, err := containerNode.(types.Element).GetAttribute("id")
+		if err != nil {
+			return fmt.Errorf("problem accessing @id attribute for subcontainers of parent \"%s\": %s", parentID, err)
+		}
+
+		id := idAttr.NodeValue()
+
 		// update any subcontainers for whom this container is a parent
 		updateSubContainer(ctx, id, rootID)
 
 		// recursive calls are complete
 		// update this node
-		containerNode, _ := n.ParentNode()
-		parentAttributeNode, _ := containerNode.Find(`./@parent`)
-		// set the parent attribute to the rootID value
-		parentAttributeNode.NodeList().First().SetNodeValue(rootID)
+		containerNode.(types.Element).SetAttribute("parent", rootID)
+		containerNode.(types.Element).RemoveAttribute("id")
 	}
+	return nil
 }
