@@ -13,20 +13,13 @@ import (
 // so that it is more compatible with the NYU Libraries Finding Aids Bridge (FAB)
 // discovery system (https://github.com/NYULibraries/specialcollections).
 //
-// Please note:
-// This function returns an EAD with subcontainers that have @id and @parent
-// attributes.  To be FAB-compatible, the @id attribute must be deleted from the
-// subcontainers. (The current lestrrat-go/libxml2 package does not support
-// AttributeNode deletion.)
+// Those modifications are:
+// 1.) change <origination label="Creator">
+//     to     <origination label="creator">
 //
-// For example:
-// <container @id="please-delete-me" @parent="some-aspace-id" @type="Folder">
-// still needs to be converted to:
-// <container @parent="some-aspace-id" @type="Folder">
-//
-// The subcontainer @id attributes can be deleted with a tool like XMLStarlet:
-// https://xmlstar.sourceforge.net/
-// $ xmlstarlet ed -L -d '//_:container[@parent]/@id' my_ead.xml
+// 2.) for <container> hierarchies, set all subcontainer @parent
+//     attribute values = to the @id of the root container
+//     and delete the @id attribute from all subcontainers
 func FABifyEAD(data []byte) (string, []string) {
 
 	var errors = []string{}
