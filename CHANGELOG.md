@@ -1,5 +1,12 @@
 # CHANGELOG
 
+#### v0.28.0
+  - Add the `ead/modify` package 
+  - Add the `modify.FABifyEAD()` function that modifies an incoming EAD  
+    so that it is compatible with the [Finding Aids Bridge (FAB) discovery system](https://github.com/NYULibraries/specialcollections) indexer.
+  - Add stringification of the `<title @render=...>` attribute
+  - Fix a bug in the stringification of `<emph>` elements that do not have a `@render` attribute
+    
 #### v0.27.1
   - Bug Fix: Add closing `</a>` for `<ref>` elements  
     
