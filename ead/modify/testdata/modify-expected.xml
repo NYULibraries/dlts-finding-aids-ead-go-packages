@@ -65,5 +65,26 @@
         <geogname source="lcsh">Washington Square (New York, N.Y.)</geogname>
       </controlaccess>
     </c>
+    <c id="aspace_ref98" level="item">
+      <did>
+        <unittitle>Manhattan Skyline and Washington Square Park, Aerial View</unittitle>
+        <unitid>wsp_av_1_4_02</unitid>
+        <origination label="creator">
+          <corpname authfilenumber="(lccn)n82093643" rules="dacs" source="naf">Fairchild Aerial Surveys, inc.</corpname>
+        </origination>
+        <unitdate datechar="creation" normal="1934/1934" type="inclusive">1934</unitdate>
+        <physdesc id="aspace_f2bad1206c57e9847dd6ceb425d25170" label="General Physical Description note">black-and-white print (photograph), 8 x 10 inches</physdesc>
+        <langmaterial><language langcode="eng">English</language>.</langmaterial>
+        <container altrender="Flat Box - 12 x 15.25" id="aspace_943e06f6695b6b58bd806a053a57de51" label="Graphic Materials [31142063058930]" type="Box">206</container>
+        <dao xlink:actuate="onRequest" xlink:href="https://hdl.handle.net/2333.1/bcc2fr87" xlink:role="image-service" xlink:show="new" xlink:title="Manhattan Skyline and Washington Square Park, Aerial View" xlink:type="simple">
+          <daodesc>
+            <p>Manhattan Skyline and Washington Square Park, Aerial View: 1934</p>
+          </daodesc>
+        </dao>
+      </did>
+      <controlaccess>
+        <geogname source="lcsh">Washington Square (New York, N.Y.)</geogname>
+      </controlaccess>
+    </c>
   </c>
 </ead>
