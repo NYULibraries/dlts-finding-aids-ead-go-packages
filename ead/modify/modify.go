@@ -15,11 +15,13 @@ import (
 //
 // Those modifications are:
 // 1.) change <origination label="Creator">
-//     to     <origination label="creator">
+//
+//	to     <origination label="creator">
 //
 // 2.) for <container> hierarchies, set all subcontainer @parent
-//     attribute values = to the @id of the root container
-//     and delete the @id attribute from all subcontainers
+//
+//	attribute values = to the @id of the root container
+//	and delete the @id attribute from all subcontainers
 func FABifyEAD(data []byte) (string, []string) {
 
 	var errors = []string{}
@@ -61,20 +63,46 @@ func FABifyEAD(data []byte) (string, []string) {
 		n.SetNodeValue("creator")
 	}
 
-	// find all container nodes that may be the root of a container hierarchy
-	// e.g., Box --> Folder --> Item
-	//
-	// The root of a container hierarchy does not have a @parent attribute.
-	// Subcontainers are containers that *do* have a @parent attribute.
-	// The FAB requires all subcontainers to have the @parent attribute value
-	// set to the @id of the root container.
-	exprString = `//_:container[@id and not(@parent)]/@id`
-	nodes = xpath.NodeList(ctx.Find(exprString))
-	for _, n := range nodes {
-		rootID := n.NodeValue()
-		err := updateSubContainer(ctx, rootID, rootID)
+	// rootIDs is a slice of strings containing the @id attribute values for all root containers
+	var rootIDs []string
+
+	// subContainers is a map keyed by the @parent attribute values of subcontainers
+	subContainers := make(map[string]types.Node)
+
+	// find all containers and divide them between root containers and subcontainers
+	exprString = `//_:container`
+	containerNodes := xpath.NodeList(ctx.Find(exprString))
+	for _, containerNode := range containerNodes {
+
+		// if a containerNode has a @parent attribute, then it is a subcontainer node
+		// otherwise it is a root container node
+		parentAttributeNode, err := containerNode.(types.Element).GetAttribute("parent")
+
+		if err == nil {
+			// subcontainer branch
+			parentID := parentAttributeNode.NodeValue()
+			if subContainers[parentID] != nil {
+				errors = append(errors, fmt.Sprintf("error: detected multiple subcontainers with the same parentID: %s", parentID))
+				errors = append(errors, "check if this EAD has already been \"FABified\"")
+				return "", append(errors, err.Error())
+			}
+			subContainers[parentID] = containerNode
+		} else {
+			// root container branch
+			idAttributeNode, err := containerNode.(types.Element).GetAttribute("id")
+			if err != nil {
+				errors = append(errors, "error: root container @id attribute is missing")
+				return "", append(errors, err.Error())
+			}
+			rootIDs = append(rootIDs, idAttributeNode.NodeValue())
+		}
+	}
+
+	// process all subcontainer hierarchies
+	for _, rootID := range rootIDs {
+		err := updateSubContainersUsingMap(subContainers, rootID, rootID)
 		if err != nil {
-			errors = append(errors, "problem processing subcontainers")
+			errors = append(errors, "error updating subcontainers of root container with @id=\"%s\"", rootID)
 			return "", append(errors, err.Error())
 		}
 	}
@@ -82,28 +110,28 @@ func FABifyEAD(data []byte) (string, []string) {
 	return doc.String(), errors
 }
 
-func updateSubContainer(ctx *xpath.Context, parentID string, rootID string) error {
-	// find the ID nodes of all containers whose @parent attribute value == parentID
-	exprString := fmt.Sprintf("//_:container[@parent = \"%s\"]", parentID)
-	containerNodes := xpath.NodeList(ctx.Find(exprString))
+func updateSubContainersUsingMap(subContainers map[string]types.Node, parentID string, rootID string) error {
+	// find the subcontainer whose parent == parentID
+	// if there are no subcontainers we are at the end of the hierarchy, so return nil
+	// otherwise, update this node and recursively call this function to process any children
 
-	// recursively process all containers
-	for _, containerNode := range containerNodes {
-		// get the value of this container's @id attribute
-		idAttr, err := containerNode.(types.Element).GetAttribute("id")
-		if err != nil {
-			return fmt.Errorf("problem accessing @id attribute for subcontainers of parent \"%s\": %s", parentID, err)
-		}
-
-		id := idAttr.NodeValue()
-
-		// update any subcontainers for whom this container is a parent
-		updateSubContainer(ctx, id, rootID)
-
-		// recursive calls are complete
-		// update this node
-		containerNode.(types.Element).SetAttribute("parent", rootID)
-		containerNode.(types.Element).RemoveAttribute("id")
+	containerNode := subContainers[parentID]
+	if containerNode == nil {
+		return nil
 	}
-	return nil
+
+	idAttributeNode, err := containerNode.(types.Element).GetAttribute("id")
+	if err != nil {
+		return fmt.Errorf("problem accessing @id attribute for children of container with @id=\"%s\": %s", parentID, err)
+	}
+
+	// save this container's @id attribute value before deleting the idAttributeNode
+	id := idAttributeNode.NodeValue()
+
+	// FABify this container
+	containerNode.(types.Element).SetAttribute("parent", rootID)
+	containerNode.(types.Element).RemoveAttribute("id")
+
+	err = updateSubContainersUsingMap(subContainers, id, rootID)
+	return err
 }
