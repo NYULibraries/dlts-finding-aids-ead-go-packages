@@ -1,5 +1,12 @@
 # CHANGELOG
 
+#### v0.29.0
+  - Add code to support EADs with multiple `<unitid>` elements per `<did>`  
+    - Add `UnitID` type, (`UnitID`s had previously been represented as a `FilteredString`)  
+	- Update `DID` `UnitID` member variable to be a slice of type `UnitID`  
+	- Update `DID` JSON marshaling to output the value of the first  
+    `<unitid>` element with an empty `@type` attribute  
+    
 #### v0.28.0
   - Add the `ead/modify` package 
   - Add the `modify.FABifyEAD()` function that modifies an incoming EAD  
