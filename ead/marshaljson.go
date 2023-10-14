@@ -24,6 +24,13 @@ func (did *DID) MarshalJSON() ([]byte, error) {
 		}
 	}
 
+	for _, unitID := range did.UnitID {
+		if unitID.Type == "" {
+			did.FilteredUnitID = unitID.Value
+			break
+		}
+	}
+
 	var jsonData []byte
 	var err error
 	if physDescNoEmpties != nil {
@@ -165,7 +172,7 @@ func (indexEntry *IndexEntry) MarshalJSON() ([]byte, error) {
 func (extent *Extent) MarshalJSON() ([]byte, error) {
 	type ExtentWithTags Extent
 
-	// this code tempararily adds the unit string, if present
+	// this code temporarily adds the unit string, if present
 	// to the extent.Value for Marshaling
 	valueSave := extent.Value
 	if extent.Unit != "" {
