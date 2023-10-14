@@ -5,7 +5,7 @@ package ead
 // Based on: "Data model for parsing EAD <archdesc> elements": https://jira.nyu.edu/jira/browse/FADESIGN-29.
 
 const (
-	Version = "v0.28.0"
+	Version = "v0.29.0"
 )
 
 type EAD struct {
@@ -216,19 +216,20 @@ type DefItem struct {
 }
 
 type DID struct {
-	Abstract     []*Abstract              `xml:"abstract" json:"abstract,omitempty"`
-	Container    []*Container             `xml:"container" json:"container,omitempty"`
-	DAO          []*DAO                   `xml:"dao" json:"dao,omitempty"`
-	DAOGrp       []*DAOGrp                `xml:"daogrp" json:"daogrp,omitempty"`
-	LangMaterial []*LangMaterial          `xml:"langmaterial" json:"langmaterial,omitempty"`
-	MaterialSpec []*FormattedNoteWithHead `xml:"materialspec" json:"materialspec,omitempty"`
-	Origination  []*Origination           `xml:"origination" json:"origination,omitempty"`
-	PhysDesc     []*PhysDesc              `xml:"physdesc" json:"physdesc,omitempty"`
-	PhysLoc      []*PhysLoc               `xml:"physloc" json:"physloc,omitempty"`
-	Repository   *Repository              `xml:"repository" json:"repository,omitempty"`
-	UnitDate     []*UnitDate              `xml:"unitdate" json:"unitdate,omitempty"`
-	UnitID       FilteredString           `xml:"unitid" json:"unitid,omitempty"`
-	UnitTitle    *UnitTitle               `xml:"unittitle" json:"unittitle,omitempty"`
+	Abstract       []*Abstract              `xml:"abstract" json:"abstract,omitempty"`
+	Container      []*Container             `xml:"container" json:"container,omitempty"`
+	DAO            []*DAO                   `xml:"dao" json:"dao,omitempty"`
+	DAOGrp         []*DAOGrp                `xml:"daogrp" json:"daogrp,omitempty"`
+	LangMaterial   []*LangMaterial          `xml:"langmaterial" json:"langmaterial,omitempty"`
+	MaterialSpec   []*FormattedNoteWithHead `xml:"materialspec" json:"materialspec,omitempty"`
+	Origination    []*Origination           `xml:"origination" json:"origination,omitempty"`
+	PhysDesc       []*PhysDesc              `xml:"physdesc" json:"physdesc,omitempty"`
+	PhysLoc        []*PhysLoc               `xml:"physloc" json:"physloc,omitempty"`
+	Repository     *Repository              `xml:"repository" json:"repository,omitempty"`
+	UnitDate       []*UnitDate              `xml:"unitdate" json:"unitdate,omitempty"`
+	UnitID         []*UnitID                `xml:"unitid" json:"-"`
+	FilteredUnitID FilteredString           `xml:"-" json:"unitid,omitempty"`
+	UnitTitle      *UnitTitle               `xml:"unittitle" json:"unittitle,omitempty"`
 }
 
 type Dimensions struct {
@@ -512,6 +513,13 @@ type UnitDate struct {
 	Normal   FilteredString `xml:"normal,attr" json:"normal,omitempty"`
 
 	Value string `xml:",innerxml" json:"value,omitempty"`
+}
+
+// UnitID does not have any JSON tags because UnitID only appears as part of a DID
+// During DID marshaling, the UnitIDs are reduced to a single string
+type UnitID struct {
+	Type  string         `xml:"type,attr" json:"-"`
+	Value FilteredString `xml:",innerxml" json:"-"`
 }
 
 type UnitTitle struct {

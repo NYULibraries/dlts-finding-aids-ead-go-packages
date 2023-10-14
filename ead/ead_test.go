@@ -513,8 +513,8 @@ func TestDAOParentDID(t *testing.T) {
 		sut := getOmegaEAD(t)
 		sut.InitDAOCounts()
 
-		assertEqual(t, "mos_2021_2", string(sut.DAOInfo.AllDAOs[0].ParentDID.UnitID), "Test DAO ParentDID UnitID Level 2")
-		assertEqual(t, "mos_2021_3", string(sut.DAOInfo.AllDAOs[1].ParentDID.UnitID), "Test DAO ParentDID UnitID Level 3")
+		assertEqual(t, "mos_2021_2", string(sut.DAOInfo.AllDAOs[0].ParentDID.UnitID[0].Value.String()), "Test DAO ParentDID UnitID Level 2")
+		assertEqual(t, "mos_2021_3", string(sut.DAOInfo.AllDAOs[1].ParentDID.UnitID[0].Value.String()), "Test DAO ParentDID UnitID Level 3")
 	})
 }
 
@@ -756,6 +756,17 @@ func TestUnitDateProcessing(t *testing.T) {
 	params.EADFilePath = filepath.Join(tamwagTestFixturePath, "mos_2021-with-test-unitdates.xml")
 	params.JSONReferenceFilePath = filepath.Join(tamwagTestFixturePath, "mos_2021.json")
 	params.JSONErrorFilePath = "./testdata/tmp/failing-unitdate-processing.json"
+
+	runiJSONComparisonTest(t, &params)
+}
+
+func TestJSONMarshalingWithMultipleUnitIDs(t *testing.T) {
+	var params iJSONTestParams
+
+	params.TestName = "JSON Marshaling with multiple UnitIDs"
+	params.EADFilePath = filepath.Join(falesTestFixturePath, "mss_420_aspace_4_2_1.xml")
+	params.JSONReferenceFilePath = filepath.Join(falesTestFixturePath, "mss_420_aspace_4_2_1.json")
+	params.JSONErrorFilePath = "./testdata/tmp/failing-mss_420_aspace_4_2_1.json"
 
 	runiJSONComparisonTest(t, &params)
 }
