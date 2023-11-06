@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### v0.29.1
+  - Update documentation
+
 #### v0.29.0
   - Add code to support EADs with multiple `<unitid>` elements per `<did>`:  
     - Add `UnitID` type, (`UnitID`s had previously been represented as a `FilteredString`) 
