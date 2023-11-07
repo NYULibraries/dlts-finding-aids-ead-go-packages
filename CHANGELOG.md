@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### v0.30.0
+  - Add `al Mawrid Arab Art Archive, NYU Abu Dhabi` as a valid repository name
+
 #### v0.29.1
   - Update documentation
 
