@@ -29,6 +29,7 @@ const ARCHDESC_REQUIRED_LEVEL = "collection"
 
 var ValidRepositoryNames = []string{
 	"Akkasah: Photography Archive (NYU Abu Dhabi)",
+	"al Mawrid Arab Art Archive, NYU Abu Dhabi",
 	"Brooklyn Collection",
 	"Brooklyn Historical Society",
 	"Center for Brooklyn History",
@@ -73,7 +74,7 @@ func ValidateEAD(data []byte) ([]string, error) {
 	// * assert that the EAD complies with FADESIGN-specific validation criteria
 	//
 	// This approach avoids unwanted libxml2 output when the data is not XML
-	
+
 	validationErrors = append(validationErrors, validateXML(data)...)
 	// If the data is not valid XML there is no point doing any more checks.
 	if len(validationErrors) > 0 {
