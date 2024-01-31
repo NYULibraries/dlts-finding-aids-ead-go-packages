@@ -36,6 +36,7 @@
         <persname source="naf">Pollock, Thomas Clark, 1902-1988</persname>
       </origination>
       <unitid>MC.109</unitid>
+      
       <physdesc altrender="whole">
         <extent altrender="materialtype spaceoccupied">0.25 Linear Feet</extent>
         <extent altrender="carrier">in one half manuscript box</extent>
@@ -95,7 +96,7 @@
       <c id="aspace_ref8" level="file">
         <did>
           <unittitle>New York University in the Nineteenth Century</unittitle>
-          <unitid type="aspace_uri">/repositories/6/archival_objects/594304</unitid>
+          
           <unitdate datechar="creation" normal="1969/1969" type="inclusive">1969</unitdate>
           <langmaterial><language langcode="eng">English</language>.</langmaterial>
           <container altrender="Manuscript box - Letter" id="aspace_9d7cb82870151a6bd11084a1e5284d15" label="Mixed Materials [31142063040987]" type="Box">1</container>
@@ -105,7 +106,7 @@
       <c id="aspace_ref9" level="file">
         <did>
           <unittitle>Correspondence</unittitle>
-          <unitid type="aspace_uri">/repositories/6/archival_objects/594305</unitid>
+          
           <unitdate datechar="creation" normal="1966/1971" type="inclusive">1966-1971</unitdate>
           <langmaterial><language langcode="eng">English</language>.</langmaterial>
           <container altrender="Manuscript box - Letter" id="aspace_f762ef7b3b6f5b4a43b066e01bca7cfd" label="Mixed Materials [31142063040987]" type="Box">1</container>
@@ -115,7 +116,7 @@
       <c id="aspace_ref10" level="file">
         <did>
           <unittitle>Duplicates of items in folders 1 and 4</unittitle>
-          <unitid type="aspace_uri">/repositories/6/archival_objects/594306</unitid>
+          
           <unitdate datechar="creation" normal="1963/1969" type="inclusive">1963-1969</unitdate>
           <langmaterial><language langcode="eng" scriptcode="Latn">English</language>.</langmaterial>
           <container altrender="Manuscript box - Letter" id="aspace_edbab98ed95b8bdca0d8d7242adda487" label="Mixed Materials [31142063040987]" type="Box">1</container>
@@ -125,7 +126,7 @@
       <c id="aspace_ref11" level="file">
         <did>
           <unittitle>Plans and research for a History of New York University </unittitle>
-          <unitid type="aspace_uri">/repositories/6/archival_objects/594307</unitid>
+          
           <unitdate datechar="creation" normal="1963/1969" type="inclusive">1963-1969</unitdate>
           <langmaterial><language langcode="eng" scriptcode="Latn">English</language>.</langmaterial>
           <container altrender="Manuscript box - Letter" id="aspace_870e47ca566b9f03ed773a0f18edfeda" label="Mixed Materials [31142063040987]" type="Box">1</container>
