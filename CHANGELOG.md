@@ -1,6 +1,6 @@
 # CHANGELOG
 
-#### v0.31.0-20240131T2126Z
+#### v0.31.0-pre+001
   - Update `modify.FABifyEAD` code to remove the
 	`<ead><archdesc><did><unitid @type="aspace_uri">` element from the
 	EAD.  This is required because the FAB is currently appending the
