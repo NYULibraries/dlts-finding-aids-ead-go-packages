@@ -1,5 +1,12 @@
 # CHANGELOG
 
+#### v0.31.0
+  - Update `modify.FABifyEAD` code to remove the
+	`<ead><archdesc><did><unitid @type="aspace_uri">` element from the
+	EAD.  This is required because the FAB is currently appending the
+	`aspace_uri` value to the `Collection call no:` result, e.g.,
+	`Collection call no: MC.109/repositories/6/resources/1930`
+
 #### v0.30.0
   - Add `al Mawrid Arab Art Archive, NYU Abu Dhabi` as a valid repository name
 
