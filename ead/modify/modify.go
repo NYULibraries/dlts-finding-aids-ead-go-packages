@@ -183,7 +183,7 @@ func updateContainerHierarchies(ctx *xpath.Context) []string {
 	for _, rootID := range rootIDs {
 		err := updateSubContainersUsingMap(subContainers, rootID, rootID)
 		if err != nil {
-			errors = append(errors, "error updating subcontainers of root container with @id=\"%s\"", rootID)
+			errors = append(errors, fmt.Sprintf("error updating subcontainers of root container with @id=\"%s\"", rootID))
 			return append(errors, err.Error())
 		}
 	}
