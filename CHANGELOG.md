@@ -1,5 +1,14 @@
 # CHANGELOG
 
+#### v0.32.0
+  - Remove the network dependency on S3 for EAD schema validation:
+    - Embed `xlink.xsd` alongside the EAD schema in `ead/validate/schema/`
+    - Replace `ead-2002-20210412-dlts.xsd` with `ead-2002-20261007-dlts.xsd`,
+      which imports `xlink.xsd` via a relative path instead of an S3 URL
+  - Parse the EAD schema once per process and reuse it for subsequent
+    validations, improving performance when validating multiple files
+  - Guard against a panic when schema validation returns an unexpected error type
+
 #### v0.31.0
   - Update `modify.FABifyEAD` code to remove the
 	`<ead><archdesc><did><unitid @type="aspace_uri">` element from the
