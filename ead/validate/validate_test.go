@@ -343,6 +343,24 @@ func TestValidateEADValidEADNoErrors(t *testing.T) {
 	doTest(validEADFixturePath, []string{}, t)
 }
 
+func TestValidateEADReusesCachedSchema(t *testing.T) {
+	first, err := loadEADSchema()
+	if err != nil {
+		t.Fatalf("unable to load EAD schema: %s", err)
+	}
+
+	doTest(validEADFixturePath, []string{}, t)
+	doTest(cbhValidEADFixturePath, []string{}, t)
+
+	second, err := loadEADSchema()
+	if err != nil {
+		t.Fatalf("unable to load EAD schema: %s", err)
+	}
+	if first != second {
+		t.Errorf("expected cached EAD schema to be reused")
+	}
+}
+
 func TestValidateEADAkkasahTitleEADNoErrors(t *testing.T) {
 	doTest(akkasahRepositoryNameFixturePath, []string{}, t)
 }
@@ -415,5 +433,5 @@ func TestValidateEADExportedWithASpacePlugin(t *testing.T) {
 }
 
 func TestValidateEADValidArabArtArchivee(t *testing.T) {
-        doTest(arabartarchiveValidEADFixturePath, []string{}, t)
+	doTest(arabartarchiveValidEADFixturePath, []string{}, t)
 }
