@@ -176,3 +176,14 @@ func validateEADAgainstSchema(data []byte) []string {
 **One final Git-bash tip for Windows:** If you ever find that `libxml2` is being stubborn about finding the files in a Temp directory, you can set the `XML_CATALOG_FILES` environment variable in your `.bashrc` or directly in the Go code to point specifically to your schema directory.
 
 How does that look for your current project—ready to pull the trigger on deleting that S3 bucket?
+
+A Technical Suggestion for your "Win"
+Since you mentioned you're not sure if the approach is feasible:
+
+You can actually achieve that "win" (embedding both) by using an XML Catalog as a []byte.
+
+Embed ead.xsd, xlink.xsd, and a catalog.xml.
+
+Pass the ead.xsd as a byte-slice (as you are now).
+
+Use libxml2.SetEntityLoader (if your wrapper supports it) to intercept the call for xlink.xsd and hand it the byte-slice you've already loaded from embed.FS.
