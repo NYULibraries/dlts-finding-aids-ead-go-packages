@@ -7,9 +7,11 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"path/filepath"
 	"regexp"
 	"sort"
 	"strings"
+	"sync"
 	"unicode"
 
 	"github.com/lestrrat-go/libxml2/parser"
@@ -21,6 +23,16 @@ import (
 
 //go:embed schema
 var schemas embed.FS
+
+const eadSchemaFile = "ead-2002-20261007-dlts.xsd"
+
+var schemaFiles = []string{eadSchemaFile, "xlink.xsd"}
+
+var (
+	eadSchemaOnce sync.Once
+	eadSchema     *xsd.Schema
+	eadSchemaErr  error
+)
 
 const ValidEADIDRegexpString = "^[a-z0-9]+(?:_[a-z0-9]+){1,}$"
 const MAXIMUM_EADID_LENGTH = 251
@@ -365,6 +377,36 @@ func validateXML(data []byte) []string {
 	return validationErrors
 }
 
+// loadEADSchema parses the embedded schemas once per process and caches the result.
+// libxml2 needs real files to resolve the relative xlink.xsd import, so the
+// schemas are written to a temp dir that is removed once parsing completes.
+func loadEADSchema() (*xsd.Schema, error) {
+	eadSchemaOnce.Do(func() {
+		eadSchema, eadSchemaErr = parseEmbeddedSchema()
+	})
+	return eadSchema, eadSchemaErr
+}
+
+func parseEmbeddedSchema() (*xsd.Schema, error) {
+	tmpDir, err := os.MkdirTemp("", "ead-validator-*")
+	if err != nil {
+		return nil, fmt.Errorf("unable to create temp directory for EAD schema: %w", err)
+	}
+	defer os.RemoveAll(tmpDir)
+
+	for _, name := range schemaFiles {
+		content, err := schemas.ReadFile("schema/" + name)
+		if err != nil {
+			return nil, fmt.Errorf("unable to read embedded schema %s: %w", name, err)
+		}
+		if err := os.WriteFile(filepath.Join(tmpDir, name), content, 0o644); err != nil {
+			return nil, fmt.Errorf("unable to write schema %s: %w", name, err)
+		}
+	}
+
+	return xsd.ParseFromFile(filepath.Join(tmpDir, eadSchemaFile))
+}
+
 // This function is largely borrowed from Don Mennerich's go-aspace package
 // https://github.com/nyudlts/go-aspace
 func validateEADAgainstSchema(data []byte) []string {
@@ -373,16 +415,10 @@ func validateEADAgainstSchema(data []byte) []string {
 	// initialize with a default error message
 	validationErrors = append(validationErrors, makeInvalidXMLErrorMessage())
 
-	schema, err := schemas.ReadFile("schema/ead-2002-20210412-dlts.xsd")
+	eadxsd, err := loadEADSchema()
 	if err != nil {
 		return append(validationErrors, err.Error())
 	}
-
-	eadxsd, err := xsd.Parse(schema)
-	if err != nil {
-		return append(validationErrors, err.Error())
-	}
-	defer eadxsd.Free()
 
 	p := parser.New()
 	doc, err := p.Parse(data)
@@ -400,8 +436,10 @@ func validateEADAgainstSchema(data []byte) []string {
 		// capture the detailed error info:
 		// the Validate function returns an xsd.SchemaValidationError that
 		// has an underlying Errors() method with more detailed errors
-		for _, e := range err.(xsd.SchemaValidationError).Errors() {
-			validationErrors = append(validationErrors, e.Error())
+		if schemaErr, ok := err.(xsd.SchemaValidationError); ok {
+			for _, e := range schemaErr.Errors() {
+				validationErrors = append(validationErrors, e.Error())
+			}
 		}
 		return validationErrors
 	}
