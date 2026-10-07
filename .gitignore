@@ -3,4 +3,6 @@
 *~
 **/tmp/*
 !**/tmp/.keep
-.vscode/*coverage.out
+.vscode/*
+coverage.out
+
