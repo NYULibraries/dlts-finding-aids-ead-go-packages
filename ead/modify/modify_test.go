@@ -17,6 +17,29 @@ func failOnError(t *testing.T, err error, label string) {
 }
 
 func TestFABifyEAD(t *testing.T) {
+	t.Run("duplicate container parent IDs return an error without panicking", func(t *testing.T) {
+		input := []byte(`<ead xmlns="urn:isbn:1-931666-22-9">
+			<archdesc>
+				<did><container id="root">Box 1</container></did>
+				<dsc><c><did>
+					<container id="child1" parent="root">Folder 1</container>
+					<container id="child2" parent="root">Folder 2</container>
+				</did></c></dsc>
+			</archdesc>
+		</ead>`)
+
+		defer func() {
+			if recovered := recover(); recovered != nil {
+				t.Fatalf("FABifyEAD panicked for duplicate container parent IDs: %v", recovered)
+			}
+		}()
+
+		_, errors := FABifyEAD(input)
+		if !strings.Contains(strings.Join(errors, "\n"), "multiple subcontainers with the same parentID: root") {
+			t.Fatalf("expected duplicate-parent error, got %v", errors)
+		}
+	})
+
 	t.Run("Modify EAD For Discovery System (FAB): creator, location", func(t *testing.T) {
 
 		testFixturePath := filepath.Join(".", "testdata")
