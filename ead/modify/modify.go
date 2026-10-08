@@ -165,7 +165,7 @@ func updateContainerHierarchies(ctx *xpath.Context) []string {
 			if subContainers[parentID] != nil {
 				errors = append(errors, fmt.Sprintf("error: detected multiple subcontainers with the same parentID: %s", parentID))
 				errors = append(errors, "check if this EAD has already been \"FABified\"")
-				return append(errors, err.Error())
+				return errors
 			}
 			subContainers[parentID] = containerNode
 		} else {
