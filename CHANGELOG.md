@@ -1,5 +1,10 @@
 # CHANGELOG
 
+#### v0.32.1
+  - Fix a panic when multiple subcontainers have the same parent ID; return
+    the validation errors instead
+  - Add a regression test for duplicate container parent IDs
+
 #### v0.32.0
   - Remove the network dependency on S3 for EAD schema validation:
     - Embed `xlink.xsd` alongside the EAD schema in `ead/validate/schema/`
