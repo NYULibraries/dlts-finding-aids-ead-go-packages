@@ -319,6 +319,48 @@ func TestJSONMarshalingWithMultipleLanguages(t *testing.T) {
 	runiJSONComparisonTest(t, &params)
 }
 
+func TestLangMaterialMarshalJSONSeparatesAdjacentLanguages(t *testing.T) {
+	languages := []FilteredString{"Chinese", "English"}
+	langMaterial := LangMaterial{
+		Language: &languages,
+		Value:    "<language langcode=\"chi\">Chinese</language>\n  <language langcode=\"eng\">English</language>",
+	}
+
+	jsonData, err := json.Marshal(&langMaterial)
+	failOnError(t, err, "Unexpected error marshaling LangMaterial")
+
+	var got struct {
+		Value    string           `json:"value"`
+		Language []FilteredString `json:"language"`
+	}
+	failOnError(t, json.Unmarshal(jsonData, &got), "Unexpected error unmarshaling LangMaterial JSON")
+
+	if got.Value != `<span class="ead-language">Chinese</span>, <span class="ead-language">English</span>` {
+		t.Errorf("Unexpected LangMaterial value: %q", got.Value)
+	}
+	if len(got.Language) != len(languages) {
+		t.Errorf("Unexpected LangMaterial languages: got %v, want %v", got.Language, languages)
+	} else {
+		for i := range languages {
+			if got.Language[i] != languages[i] {
+				t.Errorf("Unexpected LangMaterial languages: got %v, want %v", got.Language, languages)
+				break
+			}
+		}
+	}
+}
+
+func TestJSONMarshalingWithMultipleLanguagesPartDeux(t *testing.T) {
+	var params iJSONTestParams
+
+	params.TestName = "JSON Marshaling with Multiple Languages in <langmaterial> and <langusage> part deux"
+	params.EADFilePath = filepath.Join(tamwagTestFixturePath, "tam_416.xml")
+	params.JSONReferenceFilePath = filepath.Join(tamwagTestFixturePath, "tam_416.json")
+	params.JSONErrorFilePath = "./testdata/tmp/failing-multiple-language-marshal.json"
+
+	runiJSONComparisonTest(t, &params)
+}
+
 func TestJSONMarshalingWithExtRefTitle(t *testing.T) {
 	var params iJSONTestParams
 

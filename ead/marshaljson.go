@@ -7,6 +7,23 @@ import (
 	"regexp"
 )
 
+func (langmaterial *LangMaterial) MarshalJSON() ([]byte, error) {
+	type LangMaterialWithTags LangMaterial
+
+	result, err := getConvertedTextWithLanguageSeparator(langmaterial.Value, ", ")
+	if err != nil {
+		return nil, err
+	}
+
+	return json.Marshal(&struct {
+		Value string `json:"value,omitempty"`
+		*LangMaterialWithTags
+	}{
+		Value:                string(result),
+		LangMaterialWithTags: (*LangMaterialWithTags)(langmaterial),
+	})
+}
+
 // Note that this custom marshalling for DID will prevent PhysDesc from having a Value field
 // that is all whitespace if Extent is nil, but won't prevent PhysDesc from having
 // a Value field that is all whitespace if Extent is not nil.

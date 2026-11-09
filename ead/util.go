@@ -288,20 +288,25 @@ func GetConvertedTextWithTags(text string) ([]byte, error) {
 	return getConvertedTextWithTags(text)
 }
 func getConvertedTextWithTags(text string) ([]byte, error) {
-	return _getConvertedTextWithTags(text, true)
+	return _getConvertedTextWithTags(text, true, "")
+}
+func getConvertedTextWithLanguageSeparator(text, separator string) ([]byte, error) {
+	return _getConvertedTextWithTags(text, true, separator)
 }
 
 func GetConvertedTextWithTagsNoLBConversion(text string) ([]byte, error) {
 	return getConvertedTextWithTagsNoLBConversion(text)
 }
 func getConvertedTextWithTagsNoLBConversion(text string) ([]byte, error) {
-	return _getConvertedTextWithTags(text, false)
+	return _getConvertedTextWithTags(text, false, "")
 }
 
-func _getConvertedTextWithTags(text string, convertLBTags bool) ([]byte, error) {
+func _getConvertedTextWithTags(text string, convertLBTags bool, languageSeparator string) ([]byte, error) {
 	decoder := xml.NewDecoder(strings.NewReader(text))
 
 	var result string
+	var pendingLanguageWhitespace string
+	languageEndPending := false
 	needClosingTag := true
 	unit := ""
 	for {
@@ -315,6 +320,16 @@ func _getConvertedTextWithTags(text string, convertLBTags bool) ([]byte, error) 
 
 		switch token := token.(type) {
 		case xml.StartElement:
+			if languageEndPending {
+				if token.Name.Local == "language" {
+					result += languageSeparator
+				} else {
+					result += pendingLanguageWhitespace
+				}
+				pendingLanguageWhitespace = ""
+				languageEndPending = false
+			}
+
 			switch token.Name.Local {
 			default:
 				result += _getConvertedTextWithTagsDefault(token.Name.Local)
@@ -406,6 +421,12 @@ func _getConvertedTextWithTags(text string, convertLBTags bool) ([]byte, error) 
 			}
 
 		case xml.EndElement:
+			if languageEndPending {
+				result += pendingLanguageWhitespace
+				pendingLanguageWhitespace = ""
+				languageEndPending = false
+			}
+
 			// Add "unit" attribute value to extent if present
 			if token.Name.Local == "extent" {
 				if unit != "" {
@@ -432,8 +453,19 @@ func _getConvertedTextWithTags(text string, convertLBTags bool) ([]byte, error) 
 				needClosingTag = true
 			}
 
+			if languageSeparator != "" && token.Name.Local == "language" {
+				languageEndPending = true
+			}
+
 		case xml.CharData:
-			result += strings.ReplaceAll(string(token), "\n", " ")
+			text := strings.ReplaceAll(string(token), "\n", " ")
+			if languageEndPending && strings.TrimSpace(text) == "" {
+				pendingLanguageWhitespace += text
+			} else {
+				result += pendingLanguageWhitespace + text
+				pendingLanguageWhitespace = ""
+				languageEndPending = false
+			}
 		}
 	}
 

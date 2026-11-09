@@ -125,7 +125,7 @@ func writeConvertTextWithTagsCodeToBuffer(w *bytes.Buffer) {
 		"Head": "getConvertedTextWithTags",
 		// Do not add IndexEntry because it requires custom marshaling.
 		"Item":         "getConvertedTextWithTags",
-		"LangMaterial": "getConvertedTextWithTags",
+	        // Do not add LangMaterial because it requires custom marshaling.
 		"LangUsage":    "getConvertedTextWithTags",
 		"LegalStatus":  "getConvertedTextWithTags",
 		"Num":          "getConvertedTextWithTags",
