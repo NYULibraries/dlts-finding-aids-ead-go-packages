@@ -1,8 +1,8 @@
 # CHANGELOG
 
 #### v0.33.0
-  - Add support for multiple languages in `<langmaterial>` and `<langusage>`
-    values when marshaling EADs to JSON
+  - Add `, ` between multiple language values in `<langmaterial>` and `<langusage>`
+    when marshaling EADs to JSON
 
 #### v0.32.1
   - Fix a panic when multiple subcontainers have the same parent ID; return
